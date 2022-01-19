@@ -5,14 +5,19 @@ using UnityEngine.InputSystem;
 
 public class PlayerScript : MonoBehaviour
 {
-    int gunId;
-    [SerializeField] GameObject bullet;
+    int _gunId;
+    [SerializeField] GameObject _bullet;
+    [SerializeField] Transform _attach;
+    float _force = 100f;
     //[SerializeField] GameObject whatgun;
 
     public void OnFire()
     {
         Debug.Log("Pew PEw");
-        Instantiate(bullet, transform.position, transform.rotation);
+        Rigidbody rb = Instantiate(_bullet, _attach.position,_attach.rotation).GetComponent<Rigidbody>();
+        rb.AddForce(_attach.forward * _force);
+
+
         /*switch (gunId)
         {
             case 0: //pistol
