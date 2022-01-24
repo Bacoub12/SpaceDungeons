@@ -13,9 +13,10 @@ public class PlayerScript : MonoBehaviour
 
     public void OnFire()
     {
-        Debug.Log("Pew PEw");
+        //Debug.Log("Pew PEw");
         Rigidbody rb = Instantiate(_bullet, _attach.position,_attach.rotation).GetComponent<Rigidbody>();
         rb.AddForce(_attach.forward * _force);
+
 
 
         /*switch (gunId)

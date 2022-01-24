@@ -4,10 +4,24 @@ using UnityEngine;
 
 public class bulletScript : MonoBehaviour
 {
-    float timeBeforeDestroy = 1f;
+    float timeBeforeDestroy = 3f;
 
     void Start()
     {
-        Destroy(this, timeBeforeDestroy);
+        Destroy(gameObject, timeBeforeDestroy);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag != "Player")
+        {
+            Debug.Log("tag : " + other.gameObject.tag);
+            Destroy(gameObject);
+        }
+        else
+        {
+            Debug.Log("tag : " + other.gameObject.tag);
+            Destroy(gameObject);
+        }
     }
 }
