@@ -246,11 +246,6 @@ Transform:
   m_Father: {fileID: 1995259019}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &467372927 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4135013735270702856, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-  m_PrefabInstance: {fileID: 487897942}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &487897942
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -260,12 +255,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 179799152, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 678993996, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: _force
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 678993996, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: _attach
       value: 
-      objectReference: {fileID: 467372927}
+      objectReference: {fileID: 1431051024}
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Name
       value: PlayerCapsule
@@ -460,6 +459,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1431051024 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 179799153, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+  m_PrefabInstance: {fileID: 487897942}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1844740481
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class PlayerScript : MonoBehaviour
     int _gunId;
     [SerializeField] GameObject _bullet;
     [SerializeField] Transform _attach;
-    float _force = 100f;
+    [SerializeField] float _force = 300f;
     //[SerializeField] GameObject whatgun;
 
     public void OnFire()

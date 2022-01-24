@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class bulletScript : MonoBehaviour
 {
-    float timeBeforeDestroy = 5f;
+    float timeBeforeDestroy = 1f;
 
     void Start()
     {
