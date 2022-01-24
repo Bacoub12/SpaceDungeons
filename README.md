@@ -1,2 +1,2 @@
 # SpaceDungeons
-A space dungeons rogue like.
+A space dungeons roguelike.
