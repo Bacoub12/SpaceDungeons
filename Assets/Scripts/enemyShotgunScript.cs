@@ -83,7 +83,7 @@ public class enemyShotgunScript : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
         /*
         Gizmos.color = Color.green;

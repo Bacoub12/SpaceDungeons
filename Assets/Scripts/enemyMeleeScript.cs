@@ -42,7 +42,7 @@ public class enemyMeleeScript : MonoBehaviour
                 if (canAttack)
                 {
                     AttackTarget(direction);
-                    StartCoroutine(shotCooldown());
+                    StartCoroutine(strikeCooldown());
                 }
             }
         }
@@ -65,7 +65,7 @@ public class enemyMeleeScript : MonoBehaviour
         }
     }
 
-    IEnumerator shotCooldown()
+    IEnumerator strikeCooldown()
     {
         canAttack = false;
         yield return new WaitForSeconds(cooldownLength);
@@ -74,9 +74,9 @@ public class enemyMeleeScript : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, lookRadius); 
         Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, lookRadius); 
+        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
         /*
         Gizmos.color = Color.green;
