@@ -31,7 +31,10 @@ public class shotgunEnemyScript : MonoBehaviour
         {
             agent.SetDestination(target.position);
 
-            Vector3 direction = ((target.position + new Vector3(1.5f, 3f, 0f)) - shootPoint.position).normalized;
+            Vector3 to = target.position + new Vector3(0f, 1f, 0f);
+            Vector3 from = shootPoint.position;
+            Vector3 direction = (to - from).normalized;
+            Debug.DrawLine(from, to);
 
             if (distance <= agent.stoppingDistance)
             {
@@ -49,18 +52,22 @@ public class shotgunEnemyScript : MonoBehaviour
 
     private void FaceTarget(Vector3 _direction)
     {
+        /*
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(_direction.x, 0, _direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        */
+
+        transform.LookAt(target);
     }
 
     private void AttackTarget(Vector3 _direction)
     {
         //NOT SHOTGUN-LIKE YET
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 40; i++)
         {
-            float randomX = Random.Range(0f, 20f);
-            float randomY = Random.Range(0f, 20f);
-            float randomZ = Random.Range(0f, 20f);
+            float randomX = Random.Range(-20f, 20f);
+            float randomY = Random.Range(-20f, 20f);
+            float randomZ = Random.Range(-20f, 20f);
             Rigidbody rb = Instantiate(bullet, shootPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
             rb.transform.forward = _direction;
             rb.transform.Rotate(randomX, randomY, randomZ);
