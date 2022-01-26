@@ -15,12 +15,12 @@ public class bulletScript : MonoBehaviour
     {
         if (other.gameObject.tag != "Player")
         {
-            Debug.Log("tag : " + other.gameObject.tag);
+            //Debug.Log("tag : " + other.gameObject.tag);
             Destroy(gameObject);
         }
         else
         {
-            Debug.Log("tag : " + other.gameObject.tag);
+            //Debug.Log("tag : " + other.gameObject.tag);
             Destroy(gameObject);
         }
     }
