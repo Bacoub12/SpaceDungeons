@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3252308925183335847}
   - component: {fileID: 3252308925183335846}
   - component: {fileID: 3252308925183335845}
-  - component: {fileID: -1432715177259878323}
   m_Layer: 11
   m_Name: SwordDashAttackZone
   m_TagString: Untagged
@@ -96,15 +95,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-1432715177259878323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3252308925183335844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6103c7a1dc9a7a345a29bcaeddeddd17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

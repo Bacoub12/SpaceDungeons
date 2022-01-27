@@ -6,6 +6,8 @@ TagManager:
   tags:
   - CinemachineTarget
   - cube
+  - Summoner
+  - Summoned
   layers:
   - Default
   - TransparentFX

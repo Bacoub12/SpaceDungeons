@@ -71,12 +71,13 @@ public class enemySwordDashScript : MonoBehaviour
         //spawn prospective attack zone
         Vector3 centerShift = transform.forward * (attackDistance / 2);
         Vector3 downShift = new Vector3(0f, -1f, 0f);
-        Instantiate(dashAttackZone, transform.position + centerShift + downShift, transform.rotation);
+        GameObject zone = Instantiate(dashAttackZone, transform.position + centerShift + downShift, transform.rotation);
 
         //wait
         yield return new WaitForSeconds(2f);
 
         //attack, teleport to end of strike (deal damage to player eventually)
+        Destroy(zone);
         transform.position = transform.position + (transform.forward * attackDistance);
         Debug.Log("attack");
 
