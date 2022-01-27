@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class enemyRifleScript : MonoBehaviour
+public class enemyIllusionistScript : MonoBehaviour
 {
     public GameObject bullet;
     public Transform shootPoint;
+    public GameObject illusion;
 
     float lookRadius = 20f;
     Transform target;
     NavMeshAgent agent;
     bool canShoot;
-    float cooldownLength;
+    float shotCooldownLength = 1f;
+    bool canIllus;
+    float illusionCooldownLength = 2f;
+    float illusionRadius = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +24,7 @@ public class enemyRifleScript : MonoBehaviour
         target = GameObject.Find("PlayerCapsule").transform;
         agent = GetComponent<NavMeshAgent>();
         canShoot = true;
-        cooldownLength = Random.Range(1f, 3f);
+        canIllus = true;
     }
 
     // Update is called once per frame
@@ -47,6 +51,12 @@ public class enemyRifleScript : MonoBehaviour
                     AttackTarget(direction);
                     StartCoroutine(shotCooldown());
                 }
+
+                if (canIllus)
+                {
+                    CreateIllusion();
+                    StartCoroutine(illusCooldown());
+                }
             }
         }
     }
@@ -63,14 +73,45 @@ public class enemyRifleScript : MonoBehaviour
     {
         Rigidbody rb = Instantiate(bullet, shootPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
         rb.transform.forward = _direction;
-        rb.AddForce(rb.transform.forward * 1000f);
+        rb.AddForce(rb.transform.forward * 750f);
+    }
+
+    private void CreateIllusion()
+    {
+        //coin flip as to whether the original changes place or not
+        int teleport = Random.Range(0, 2); //0 ou 1
+
+        if (teleport == 0) //no tp
+        {
+            Vector3 randomPos = new Vector3(
+                transform.position.x + Random.Range(-illusionRadius, illusionRadius),
+                transform.position.y,
+                transform.position.z + Random.Range(-illusionRadius, illusionRadius));
+            Instantiate(illusion, randomPos, Quaternion.identity);
+        } else if (teleport == 1) //tp
+        {
+            Vector3 oldPos = transform.position;
+            Vector3 randomPos = new Vector3(
+                transform.position.x + Random.Range(-illusionRadius, illusionRadius),
+                transform.position.y,
+                transform.position.z + Random.Range(-illusionRadius, illusionRadius));
+            transform.position = randomPos;
+            Instantiate(illusion, oldPos, Quaternion.identity);
+        }
     }
 
     IEnumerator shotCooldown()
     {
         canShoot = false;
-        yield return new WaitForSeconds(cooldownLength);
+        yield return new WaitForSeconds(shotCooldownLength);
         canShoot = true;
+    }
+
+    IEnumerator illusCooldown()
+    {
+        canIllus = false;
+        yield return new WaitForSeconds(illusionCooldownLength);
+        canIllus = true;
     }
 
     private void OnDrawGizmosSelected()

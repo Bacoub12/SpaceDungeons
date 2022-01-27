@@ -45,7 +45,11 @@ public class enemyConjurerScript : MonoBehaviour
 
     private void setNewDest()
     {
-        Vector3 newDest = new Vector3(Random.Range(-walkRadius, walkRadius), transform.position.y, Random.Range(-walkRadius, walkRadius));
+        Vector3 newDest = new Vector3(
+            transform.position.x + Random.Range(-walkRadius, walkRadius), 
+            transform.position.y, 
+            transform.position.z + Random.Range(-walkRadius, walkRadius));
+
         if (Vector3.Distance(transform.position, newDest) > minimumWalkDistance)
             agent.SetDestination(newDest);
     }
