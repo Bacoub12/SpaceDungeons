@@ -5,6 +5,7 @@ using UnityEngine;
 public class bulletScript : MonoBehaviour
 {
     float timeBeforeDestroy = 3f;
+    [SerializeField] private ParticleSystem particules;
 
     void Start()
     {
@@ -16,12 +17,14 @@ public class bulletScript : MonoBehaviour
         if (other.gameObject.tag != "Player")
         {
             //Debug.Log("tag : " + other.gameObject.tag);
+            Instantiate(particules, gameObject.transform.position, Quaternion.identity);
+            //Destroy(particules, timeBeforeDestroy);
             Destroy(gameObject);
         }
         else
         {
-            //Debug.Log("tag : " + other.gameObject.tag);
-            Destroy(gameObject);
+            Debug.Log("tag else : " + other.gameObject.tag);
+            //Destroy(gameObject);
         }
     }
 }

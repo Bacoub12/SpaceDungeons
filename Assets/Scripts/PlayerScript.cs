@@ -10,11 +10,10 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] GameObject _interact;
     [SerializeField] GameObject _bullet;
     [SerializeField] Transform _attach;
-    [SerializeField] float _force = 300f;
+    [SerializeField] float _force = 100f;
 
     public LayerMask interactableLayerMask = 10;
     [SerializeField] private Camera camera;
-    //private Interactable onInteract;
     private Interactable interactable;
 
     //[SerializeField] GameObject whatgun;
@@ -39,21 +38,10 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        /*//Debug.Log("tset");
-        if (other.gameObject.layer == 10)
-        {
-            //Debug.Log("Collectable detecter");
-            _interact.SetActive(true);
-            
-        }
-        else
-        {
-            _interact.SetActive(false);
-            //Debug.Log("Layer + " + other.gameObject.layer);
-        }*/
+        
     }
 
-    void Update()
+    void Update() ////// faire que le hit revienne après avoir regarder ailleur, même s'il est pas venu en contact avec d'autre object
     {
         RaycastHit hit;
         if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, 2, interactableLayerMask))
