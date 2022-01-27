@@ -11,6 +11,7 @@ public class gameManager : MonoBehaviour
         Physics.IgnoreLayerCollision(6, 11); //empecher le joueur et les visuals de se frapper
         Physics.IgnoreLayerCollision(7, 11); //empecher les ennemis et les visuals de se frapper
         Physics.IgnoreLayerCollision(9, 11); //empecher les enemybullet et les visuals de se frapper
+        Physics.IgnoreLayerCollision(9, 7); //empecher les enemybullet et les ennemis de se frapper
     }
 
     // Update is called once per frame
