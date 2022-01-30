@@ -17,6 +17,7 @@ public class enemyIllusionistScript : MonoBehaviour
     bool canIllus;
     float illusionCooldownLength = 2f;
     float illusionRadius = 5f;
+    int maxIllusionsPerIllusionist = 4;
 
     // Start is called before the first frame update
     void Start()
@@ -54,8 +55,15 @@ public class enemyIllusionistScript : MonoBehaviour
 
                 if (canIllus)
                 {
-                    CreateIllusion();
-                    StartCoroutine(illusCooldown());
+                    GameObject[] illusionists = GameObject.FindGameObjectsWithTag("Illusionist");
+                    GameObject[] illusions = GameObject.FindGameObjectsWithTag("Illusion");
+                    int totalMaxIllusions = illusionists.Length * maxIllusionsPerIllusionist;
+
+                    if (illusions.Length < totalMaxIllusions)
+                    {
+                        CreateIllusion();
+                        StartCoroutine(illusCooldown());
+                    }
                 }
             }
         }

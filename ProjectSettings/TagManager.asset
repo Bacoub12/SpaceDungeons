@@ -8,6 +8,8 @@ TagManager:
   - cube
   - Summoner
   - Summoned
+  - Illusionist
+  - Illusion
   layers:
   - Default
   - TransparentFX
