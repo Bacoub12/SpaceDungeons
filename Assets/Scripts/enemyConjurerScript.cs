@@ -7,6 +7,7 @@ public class enemyConjurerScript : MonoBehaviour
 {
     public GameObject summonedEnemy;
     public GameObject summonZone;
+    public Animator anim;
 
     NavMeshAgent agent;
     float walkRadius = 7f;
@@ -53,7 +54,10 @@ public class enemyConjurerScript : MonoBehaviour
             transform.position.z + Random.Range(-walkRadius, walkRadius));
 
         if (Vector3.Distance(transform.position, newDest) > minimumWalkDistance)
+        {
             agent.SetDestination(newDest);
+            anim.SetBool("Walk_Anim", true);
+        }
     }
 
     IEnumerator summon()
@@ -61,10 +65,10 @@ public class enemyConjurerScript : MonoBehaviour
         canSummon = false;
         //when this starts, conjurer has reached destination
         agent.SetDestination(transform.position);
+        anim.SetBool("Walk_Anim", false);
 
         //starts conjuring, takes 2 seconds, put an effect where the summoning takes place
-        Vector3 downShift = new Vector3(0f, -1f, 0f);
-        Vector3 summonLocation = transform.position + (transform.forward * 2f) + downShift;
+        Vector3 summonLocation = transform.position + (transform.forward * 2f);
         GameObject zone = Instantiate(summonZone, summonLocation, Quaternion.identity);
         yield return new WaitForSeconds(2f);
 
@@ -80,6 +84,7 @@ public class enemyConjurerScript : MonoBehaviour
 
     IEnumerator onHold()
     {
+        anim.SetBool("Walk_Anim", false);
         yield return new WaitForSeconds(1f);
         setNewDest();
     }
