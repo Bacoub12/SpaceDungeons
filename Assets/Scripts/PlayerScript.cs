@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class PlayerScript : MonoBehaviour
 {
     int _gunId;
-    [SerializeField] GameObject _interact;
     [SerializeField] GameObject _bullet;
     [SerializeField] GameObject UIManager;
     [SerializeField] Transform _attach;
@@ -22,7 +21,7 @@ public class PlayerScript : MonoBehaviour
 
     public void OnFire()
     {
-        if (!pause)
+        if (!UIManager.GetComponent<UIManager>().getPause())
         {
             //Debug.Log("Pew PEw");
             Rigidbody rb = Instantiate(_bullet, _attach.position, _attach.rotation).GetComponent<Rigidbody>();
@@ -53,8 +52,7 @@ public class PlayerScript : MonoBehaviour
         {
             if (hit.collider.GetComponent<Interactable>() != false)
             {
-                _interact.SetActive(true);
-
+                UIManager.GetComponent<UIManager>().Interactive(true);
                 if (interactable == null || interactable.ID != hit.collider.GetComponent<Interactable>().ID)
                 {
                     interactable = hit.collider.GetComponent<Interactable>();
@@ -64,7 +62,7 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            _interact.SetActive(false);
+            UIManager.GetComponent<UIManager>().Interactive(false);
         }
     }
     public void OnInteract() // le boutons
