@@ -67,7 +67,7 @@ public class PlayerScript : MonoBehaviour
     }
     public void OnInteract() // le boutons
     {
-        interactable.onInteract.Invoke();
+        interactable.onInteract.Invoke();  // peut causé des crashs, mais incapable de reproduire...
     }
 
     public void OnPause()
