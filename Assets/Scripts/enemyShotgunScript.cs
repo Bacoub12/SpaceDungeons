@@ -13,6 +13,8 @@ public class enemyShotgunScript : MonoBehaviour
     NavMeshAgent agent;
     bool canShoot;
     float cooldownLength = 3f;
+    float health = 120f;
+    bool dead;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +22,7 @@ public class enemyShotgunScript : MonoBehaviour
         target = GameObject.Find("PlayerCapsule").transform;
         agent = GetComponent<NavMeshAgent>();
         canShoot = true;
+        dead = false;
     }
 
     // Update is called once per frame
@@ -79,6 +82,42 @@ public class enemyShotgunScript : MonoBehaviour
         canShoot = false;
         yield return new WaitForSeconds(cooldownLength);
         canShoot = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Bullet(Clone)")
+        {
+            TakeDamage(24); //5 shots to kill
+            if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
+            {
+                agent.SetDestination(target.position);
+            }
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
+        {
+            dead = true;
+            gameObject.GetComponent<NavMeshAgent>().enabled = false;
+
+            //Invoke(nameof(DestroyThis), 3f);
+            DestroyThis();
+        }
+    }
+
+    public bool checkIfDead()
+    {
+        return dead;
+    }
+
+    private void DestroyThis()
+    {
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmosSelected()

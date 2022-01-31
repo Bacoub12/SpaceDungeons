@@ -7,12 +7,15 @@ public class enemyRifleScript : MonoBehaviour
 {
     public GameObject bullet;
     public Transform shootPoint;
+    public string guyType;
 
     float lookRadius = 20f;
     Transform target;
     NavMeshAgent agent;
     bool canShoot;
     float cooldownLength;
+    bool dead;
+    float health = 120f;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +23,7 @@ public class enemyRifleScript : MonoBehaviour
         target = GameObject.Find("PlayerCapsule").transform;
         agent = GetComponent<NavMeshAgent>();
         canShoot = true;
+        dead = false;
         cooldownLength = Random.Range(1f, 3f);
     }
 
@@ -71,6 +75,50 @@ public class enemyRifleScript : MonoBehaviour
         canShoot = false;
         yield return new WaitForSeconds(cooldownLength);
         canShoot = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Bullet(Clone)")
+        {
+            switch (guyType)
+            {
+                case "Rifle":
+                    TakeDamage(24); //5 shots to kill
+                    break;
+                case "Illusion":
+                    TakeDamage(60); //2 shots to kill
+                    break;
+            }
+            if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
+            {
+                agent.SetDestination(target.position);
+            }
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
+        {
+            dead = true;
+            gameObject.GetComponent<NavMeshAgent>().enabled = false;
+
+            //Invoke(nameof(DestroyThis), 3f);
+            DestroyThis();
+        }
+    }
+
+    public bool checkIfDead()
+    {
+        return dead;
+    }
+
+    private void DestroyThis()
+    {
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmosSelected()

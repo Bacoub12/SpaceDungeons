@@ -18,6 +18,8 @@ public class enemyIllusionistScript : MonoBehaviour
     float illusionCooldownLength = 2f;
     float illusionRadius = 5f;
     int maxIllusionsPerIllusionist = 4;
+    bool dead;
+    float health = 120f;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +28,7 @@ public class enemyIllusionistScript : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         canShoot = true;
         canIllus = true;
+        dead = false;
     }
 
     // Update is called once per frame
@@ -120,6 +123,42 @@ public class enemyIllusionistScript : MonoBehaviour
         canIllus = false;
         yield return new WaitForSeconds(illusionCooldownLength);
         canIllus = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Bullet(Clone)")
+        {
+            TakeDamage(24); //5 shots to kill
+            if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
+            {
+                agent.SetDestination(target.position);
+            }
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
+        {
+            dead = true;
+            gameObject.GetComponent<NavMeshAgent>().enabled = false;
+
+            //Invoke(nameof(DestroyThis), 3f);
+            DestroyThis();
+        }
+    }
+
+    public bool checkIfDead()
+    {
+        return dead;
+    }
+
+    private void DestroyThis()
+    {
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmosSelected()

@@ -11,6 +11,8 @@ public class enemyMeleeScript : MonoBehaviour
     bool canAttack;
     float cooldownLength = 1f;
     float attackRange = 3f;
+    bool dead;
+    float health = 120f;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +20,7 @@ public class enemyMeleeScript : MonoBehaviour
         target = GameObject.Find("PlayerCapsule").transform;
         agent = GetComponent<NavMeshAgent>();
         canAttack = true;
+        dead = false;
     }
 
     // Update is called once per frame
@@ -70,6 +73,42 @@ public class enemyMeleeScript : MonoBehaviour
         canAttack = false;
         yield return new WaitForSeconds(cooldownLength);
         canAttack = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Bullet(Clone)")
+        {
+            TakeDamage(24); //5 shots to kill
+            if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
+            {
+                agent.SetDestination(target.position);
+            }
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
+        {
+            dead = true;
+            gameObject.GetComponent<NavMeshAgent>().enabled = false;
+
+            //Invoke(nameof(DestroyThis), 3f);
+            DestroyThis();
+        }
+    }
+
+    public bool checkIfDead()
+    {
+        return dead;
+    }
+
+    private void DestroyThis()
+    {
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmosSelected()

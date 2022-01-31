@@ -135,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 6505536793000633759, guid: 5fde640bce8b6ec4ab1c75e7d85bf86d, type: 3}
   shootPoint: {fileID: 3137136962556404457}
+  guyType: Illusion
 --- !u!1 &4612074330686017328
 GameObject:
   m_ObjectHideFlags: 0

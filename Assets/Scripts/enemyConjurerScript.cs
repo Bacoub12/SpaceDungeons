@@ -11,15 +11,17 @@ public class enemyConjurerScript : MonoBehaviour
     NavMeshAgent agent;
     float walkRadius = 7f;
     float minimumWalkDistance = 3f;
-    float cooldownLength = 5f;
     bool canSummon;
     int maxSpawnsPerSummoner = 5;
+    float health = 120f;
+    bool dead;
 
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         canSummon = true;
+        dead = false;
         setNewDest();
     }
 
@@ -80,5 +82,37 @@ public class enemyConjurerScript : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         setNewDest();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Bullet(Clone)")
+        {
+            TakeDamage(24); //5 shots to kill
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
+        {
+            dead = true;
+            gameObject.GetComponent<NavMeshAgent>().enabled = false;
+
+            //Invoke(nameof(DestroyThis), 3f);
+            DestroyThis();
+        }
+    }
+
+    public bool checkIfDead()
+    {
+        return dead;
+    }
+
+    private void DestroyThis()
+    {
+        Destroy(gameObject);
     }
 }

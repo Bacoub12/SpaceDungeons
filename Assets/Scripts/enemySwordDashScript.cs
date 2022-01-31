@@ -13,6 +13,8 @@ public class enemySwordDashScript : MonoBehaviour
     bool canAttack, doingAttack;
     float cooldownLength = 5f;
     float attackDistance = 15f;
+    bool dead;
+    float health = 120f;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,7 @@ public class enemySwordDashScript : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         canAttack = true;
         doingAttack = false;
+        dead = false;
     }
 
     // Update is called once per frame
@@ -94,5 +97,41 @@ public class enemySwordDashScript : MonoBehaviour
         canAttack = false;
         yield return new WaitForSeconds(cooldownLength);
         canAttack = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Bullet(Clone)")
+        {
+            TakeDamage(24); //5 shots to kill
+            if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
+            {
+                agent.SetDestination(target.position);
+            }
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
+        {
+            dead = true;
+            gameObject.GetComponent<NavMeshAgent>().enabled = false;
+
+            //Invoke(nameof(DestroyThis), 3f);
+            DestroyThis();
+        }
+    }
+
+    public bool checkIfDead()
+    {
+        return dead;
+    }
+
+    private void DestroyThis()
+    {
+        Destroy(gameObject);
     }
 }
