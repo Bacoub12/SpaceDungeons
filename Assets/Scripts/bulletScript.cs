@@ -18,12 +18,12 @@ public class bulletScript : MonoBehaviour
         {
             //Debug.Log("tag : " + other.gameObject.tag);
             Instantiate(particules, gameObject.transform.position, Quaternion.identity);
-            //Destroy(particules, timeBeforeDestroy);
             Destroy(gameObject);
+
         }
         else
         {
-            Debug.Log("tag else : " + other.gameObject.tag);
+            //Debug.Log("tag else : " + other.gameObject.tag);
             //Destroy(gameObject);
         }
     }

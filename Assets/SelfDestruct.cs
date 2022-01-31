@@ -10,5 +10,4 @@ public class SelfDestruct : MonoBehaviour
     {
         Destroy(gameObject, timeBeforeDestroy);
     }
-
 }

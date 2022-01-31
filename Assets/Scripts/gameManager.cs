@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class gameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public UIManager UIManager;
+
     void Start()
     {
         Physics.IgnoreLayerCollision(9, 9); //empecher les enemybullet de se frapper entre eux
