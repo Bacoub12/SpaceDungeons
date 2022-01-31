@@ -165,3 +165,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 3189893997636024399, guid: c3e55e6deb42e374ea4037849a045282, type: 3}
   shootPoint: {fileID: 8278062197555521912}
+  guyType: Rifle
