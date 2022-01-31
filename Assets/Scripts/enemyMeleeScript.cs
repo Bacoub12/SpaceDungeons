@@ -5,11 +5,13 @@ using UnityEngine.AI;
 
 public class enemyMeleeScript : MonoBehaviour
 {
+    public Animation anim;
+
     float lookRadius = 30f;
     Transform target;
     NavMeshAgent agent;
     bool canAttack;
-    float cooldownLength = 1f;
+    float cooldownLength = 3f;
     float attackRange = 3f;
     bool dead;
     float health = 120f;
@@ -42,11 +44,15 @@ public class enemyMeleeScript : MonoBehaviour
                 agent.SetDestination(transform.position);
                 FaceTarget(direction);
 
-                if (canAttack)
+                if (canAttack && Vector3.Distance(target.position, transform.position) < attackRange)
                 {
-                    AttackTarget(direction);
+                    StartCoroutine(AttackTarget(direction));
                     StartCoroutine(strikeCooldown());
                 }
+            }
+            else
+            {
+                anim.Play("Run");
             }
         }
     }
@@ -59,13 +65,18 @@ public class enemyMeleeScript : MonoBehaviour
         //transform.LookAt(target);
     }
 
-    private void AttackTarget(Vector3 _direction)
+    IEnumerator AttackTarget(Vector3 _direction)
     {
-        if (Vector3.Distance(target.position, transform.position) < attackRange)
-        {
-            //deal damage to player
-            Debug.Log("attack");
-        }
+        anim.Play("Attack1");
+
+        yield return new WaitForSeconds(0.5f);
+
+        //deal damage to player
+        Debug.Log("attack");
+
+        yield return new WaitForSeconds(1.5f);
+
+        anim.Play("Idle");
     }
 
     IEnumerator strikeCooldown()
