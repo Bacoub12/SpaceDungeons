@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class enemySwordDashScript : MonoBehaviour
+public class enemyDashScript : MonoBehaviour
 {
     public GameObject dashAttackZone;
+    public Animator anim;
 
     float lookRadius = 30f;
     Transform target;
@@ -36,6 +37,7 @@ public class enemySwordDashScript : MonoBehaviour
             if (distance <= lookRadius)
             {
                 agent.SetDestination(target.position);
+                anim.SetBool("Walk Forward", true);
 
                 Vector3 to = target.position + new Vector3(0f, 1f, 0f);
                 Vector3 from = transform.position;
@@ -45,6 +47,7 @@ public class enemySwordDashScript : MonoBehaviour
                 if (distance <= agent.stoppingDistance)
                 {
                     agent.SetDestination(transform.position);
+                    anim.SetBool("Walk Forward", false);
                     FaceTarget(direction);
 
                     if (canAttack)
@@ -73,14 +76,18 @@ public class enemySwordDashScript : MonoBehaviour
 
         //spawn prospective attack zone
         Vector3 centerShift = transform.forward * (attackDistance / 2);
-        Vector3 downShift = new Vector3(0f, -1f, 0f);
-        GameObject zone = Instantiate(dashAttackZone, transform.position + centerShift + downShift, transform.rotation);
+        GameObject zone = Instantiate(dashAttackZone, transform.position + centerShift, transform.rotation);
 
         //wait
-        yield return new WaitForSeconds(2f);
+        anim.SetBool("Defend", true);
+        yield return new WaitForSeconds(1.5f);
+        anim.SetBool("Defend", false);
+        anim.SetTrigger("Stab Attack");
+        yield return new WaitForSeconds(0.5f);
 
         //attack, teleport to end of strike (deal damage to player eventually)
         Destroy(zone);
+
         transform.position = transform.position + (transform.forward * attackDistance);
         Debug.Log("attack");
 
