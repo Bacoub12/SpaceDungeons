@@ -1,3 +1,4 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,15 +10,28 @@ public class PlayerScript : MonoBehaviour
     int _gunId;
     [SerializeField] GameObject _bullet;
     [SerializeField] GameObject UIManager;
+    //[SerializeField] GameObject FirstPersonController;
     [SerializeField] Transform _attach;
-    [SerializeField] float _force = 100f;
-    private bool pause = false;
-
-    public LayerMask interactableLayerMask = 10;
     [SerializeField] private Camera camera;
+    [SerializeField] float _force = 100f;
+    FirstPersonController firstPersonController;
+
+    private float timer = 0.0f;
+    bool onOffCrouch = false;
+    private bool pause = false;
+    CapsuleCollider capsuleCollider;
+    CharacterController _CharacterController;
+    public LayerMask interactableLayerMask = 10;
     private Interactable interactable;
 
     //[SerializeField] GameObject whatgun;
+
+    private void Start()
+    {
+        _CharacterController = GetComponent<CharacterController>();
+        capsuleCollider = GetComponentInChildren<CapsuleCollider>();
+        firstPersonController = GetComponent<FirstPersonController>();
+    }
 
     public void OnFire()
     {
@@ -73,5 +87,40 @@ public class PlayerScript : MonoBehaviour
     public void OnPause()
     {
         UIManager.GetComponent<UIManager>().PauseGame();
+    }
+
+    public void OnCrouch()
+    {
+        Debug.Log(onOffCrouch);
+        if (!onOffCrouch)
+        {
+            _CharacterController.height = 1.0f;
+            capsuleCollider.height = 1.0f;
+            firstPersonController.GroundedOffset = -1.0f;
+            onOffCrouch = true;
+        }
+        else
+        {
+            StartCoroutine(Start2());
+            firstPersonController.GroundedOffset = -0.14f;
+            onOffCrouch = false;
+        }
+
+
+    }
+    IEnumerator Start2()
+    {
+        for (float f = 1; f <= 2; f += 0.02f)
+        {
+            _CharacterController.height = f;
+            capsuleCollider.height = f;
+            if(f >= 1.999)
+            {
+                _CharacterController.height = 2f;
+                capsuleCollider.height = 2f;
+            }
+            yield return new WaitForSeconds(0.001f);
+        }
+       
     }
 }

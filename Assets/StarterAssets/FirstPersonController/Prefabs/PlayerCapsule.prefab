@@ -508,7 +508,7 @@ MonoBehaviour:
   RotationSpeed: 1
   SpeedChangeRate: 10
   JumpHeight: 1.2
-  Gravity: -9.81
+  Gravity: -10
   JumpTimeout: 0.1
   FallTimeout: 0.15
   Grounded: 1
@@ -666,15 +666,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58966b4d0a30f92438eeb1d8618acecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interact: {fileID: 0}
   _bullet: {fileID: 7580972179330452940, guid: 479240c27ac3b6d42b25407e7a2f52e8, type: 3}
   UIManager: {fileID: 0}
   _attach: {fileID: 179799153}
+  camera: {fileID: 4518748}
   _force: 100
   interactableLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  camera: {fileID: 4518748}
 --- !u!135 &169181207
 SphereCollider:
   m_ObjectHideFlags: 0
