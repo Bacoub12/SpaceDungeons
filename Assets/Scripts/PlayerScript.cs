@@ -7,13 +7,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerScript : MonoBehaviour
 {
-    int _gunId;
+    int gunId = 0;
     [SerializeField] GameObject _bullet;
     [SerializeField] GameObject UIManager;
     //[SerializeField] GameObject FirstPersonController;
     [SerializeField] Transform _attach;
     [SerializeField] private Camera camera;
-    [SerializeField] float _force = 100f;
+    [SerializeField] float _force = 300f;
     FirstPersonController firstPersonController;
 
     private float timer = 0.0f;
@@ -21,6 +21,7 @@ public class PlayerScript : MonoBehaviour
     private bool pause = false;
     CapsuleCollider capsuleCollider;
     CharacterController _CharacterController;
+    Rigidbody rb;
     public LayerMask interactableLayerMask = 10;
     private Interactable interactable;
 
@@ -37,22 +38,40 @@ public class PlayerScript : MonoBehaviour
     {
         if (!UIManager.GetComponent<UIManager>().getPause())
         {
-            //Debug.Log("Pew PEw");
-            Rigidbody rb = Instantiate(_bullet, _attach.position, _attach.rotation).GetComponent<Rigidbody>();
-            rb.AddForce(_attach.forward * _force);
+            switch (gunId)
+            {
+                case 0: //pistol
+                    rb = Instantiate(_bullet, _attach.position, _attach.rotation).GetComponent<Rigidbody>();
+                    rb.AddForce(_attach.forward * _force);
+                    break;
+
+                case 1: // rifle
+                    //AutomaticRifle();
+                    break;
+            }
         }
-
-
-        /*switch (gunId)
-        {
-            case 0: //pistol
-            Instantiate
-                break;
-
-            case 1: // rifle
-                break;
-        }*/
     }
+   /* IEnumerable AutomaticRifle()
+    {
+        
+            rb = Instantiate(_bullet, _attach.position, _attach.rotation).GetComponent<Rigidbody>();
+            rb.AddForce(_attach.forward * _force);
+            yield return new WaitForSeconds(0.05f);
+        
+    }*/
+
+    private void OnGun1()
+    {
+        gunId = 0;
+    }
+
+    private void OnGun2()
+    {
+        gunId = 1;
+    }
+
+
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -121,6 +140,9 @@ public class PlayerScript : MonoBehaviour
             }
             yield return new WaitForSeconds(0.001f);
         }
-       
     }
+
+    
+
+
 }
