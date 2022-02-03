@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3252308925183335846}
   - component: {fileID: 3252308925183335845}
   m_Layer: 11
-  m_Name: SwordDashAttackZone
+  m_Name: DashAttackZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,5 +93,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 5.329437, z: 1}
+  m_Center: {x: 0, y: 2.1647077, z: 0}

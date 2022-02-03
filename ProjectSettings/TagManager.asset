@@ -10,6 +10,7 @@ TagManager:
   - Summoned
   - Illusionist
   - Illusion
+  - BossSpawns
   layers:
   - Default
   - TransparentFX

@@ -86,10 +86,17 @@ public class enemyDashScript : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         //attack, teleport to end of strike (deal damage to player eventually)
-        Destroy(zone);
 
+        //check if player is intersecting zone collider
+        Vector3 playerPos = target.position;
+        if (zone.GetComponent<Collider>().bounds.Contains(playerPos))
+        {
+            //deal damage
+            Debug.Log("hit");
+        }
+        
+        Destroy(zone);
         transform.position = transform.position + (transform.forward * attackDistance);
-        Debug.Log("attack");
 
         //wait
         agent.SetDestination(transform.position);

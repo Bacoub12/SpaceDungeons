@@ -59,17 +59,24 @@ public class enemyBossScript : MonoBehaviour
 
                     if (canAttack)
                     {
-                        int attackChoice = Random.Range(1, 4); //1 à 3
+                        int attackChoice;
+
+                        int amntSpawns = GameObject.FindGameObjectsWithTag("BossSpawns").Length;
+                        if (amntSpawns < 4)
+                            attackChoice = Random.Range(1, 4); //1 à 3
+                        else
+                            attackChoice = Random.Range(1, 3); //1 à 2
+
                         switch (attackChoice)
                         {
                             case 1:
                                 StartCoroutine(dash());
                                 break;
                             case 2:
-                                StartCoroutine(slam());
+                                StartCoroutine(shoot(direction));
                                 break;
                             case 3:
-                                StartCoroutine(shoot(direction));
+                                StartCoroutine(slam());
                                 break;
                         }
 
@@ -105,10 +112,18 @@ public class enemyBossScript : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         //attack, teleport to end of strike, deal damage to player eventually
+
+        //check if player is intersecting zone collider
+        Vector3 playerPos = target.position;
+        if (zone.GetComponent<Collider>().bounds.Contains(playerPos))
+        {
+            //deal damage
+            Debug.Log("hit");
+        }
+
         Destroy(zone);
 
         transform.position = transform.position + (transform.forward * dashDistance);
-        Debug.Log("dash");
 
         //wait
         agent.SetDestination(transform.position);
@@ -135,12 +150,21 @@ public class enemyBossScript : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         //attack, deal damage to player eventually
+
+        //check if player is intersecting zone collider
+        Vector3 playerPos = target.position;
+        if (zone.GetComponent<Collider>().bounds.Contains(playerPos))
+        {
+            //deal damage
+            Debug.Log("hit");
+        }
         Destroy(zone);
-        Debug.Log("slam");
 
         //spawn enemies
-        Instantiate(spawnedEnemy, spawnPoint1.position, transform.rotation);
-        Instantiate(spawnedEnemy, spawnPoint2.position, transform.rotation);
+        GameObject spawn1 = Instantiate(spawnedEnemy, spawnPoint1.position, transform.rotation);
+        spawn1.tag = "BossSpawns";
+        GameObject spawn2 = Instantiate(spawnedEnemy, spawnPoint2.position, transform.rotation);
+        spawn2.tag = "BossSpawns";
 
         //wait
         agent.SetDestination(transform.position);
@@ -173,7 +197,6 @@ public class enemyBossScript : MonoBehaviour
             rb.transform.Rotate(randomX, randomY, randomZ);
             rb.AddForce(rb.transform.forward * 750f);
         }
-        Debug.Log("shoot");
 
         //wait
         agent.SetDestination(transform.position);
