@@ -16,6 +16,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] float _force = 300f;
     FirstPersonController firstPersonController;
 
+    bool interaction = false;
     private float timer = 0.0f;
     bool onOffCrouch = false;
     private bool pause = false;
@@ -46,19 +47,23 @@ public class PlayerScript : MonoBehaviour
                     break;
 
                 case 1: // rifle
-                    //AutomaticRifle();
+                    AutoFunction();
                     break;
             }
         }
     }
-   /* IEnumerable AutomaticRifle()
+
+    private void AutoFunction()
     {
-        
-            rb = Instantiate(_bullet, _attach.position, _attach.rotation).GetComponent<Rigidbody>();
-            rb.AddForce(_attach.forward * _force);
-            yield return new WaitForSeconds(0.05f);
-        
-    }*/
+        AutomaticRifle();
+    }
+
+    IEnumerable AutomaticRifle()
+    {   
+        rb = Instantiate(_bullet, _attach.position, _attach.rotation).GetComponent<Rigidbody>();
+        rb.AddForce(_attach.forward * _force);
+        yield return new WaitForSeconds(0.05f);
+    }
 
     private void OnGun1()
     {
@@ -88,7 +93,13 @@ public class PlayerScript : MonoBehaviour
                 UIManager.GetComponent<UIManager>().Interactive(true);
                 if (interactable == null || interactable.ID != hit.collider.GetComponent<Interactable>().ID)
                 {
+                    interaction = true;
                     interactable = hit.collider.GetComponent<Interactable>();
+                    Debug.Log("new interactable " + interactable);
+                }
+                else
+                {
+                    interaction = false;
                     Debug.Log("new interactable " + interactable);
                 }
             }
@@ -100,7 +111,14 @@ public class PlayerScript : MonoBehaviour
     }
     public void OnInteract() // le boutons
     {
-        interactable.onInteract.Invoke();  // peut causé des crashs, mais incapable de reproduire...
+        if(interactable == true)
+        {
+            interactable.onInteract.Invoke();// peut causé des crashs, mais incapable de reproduire...
+        }
+        else
+        {
+            Debug.Log("/Veg");
+        }
     }
 
     public void OnPause()
