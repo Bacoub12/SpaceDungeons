@@ -8,13 +8,17 @@ public class enemyBossScript : MonoBehaviour
     public GameObject dashAttackZone;
     public GameObject slamAttackZone;
     public GameObject bullet;
+    public GameObject spawnedEnemy;
+    public Transform shootPoint;
+    public Transform spawnPoint1;
+    public Transform spawnPoint2;
     public Animator anim;
 
     float lookRadius = 30f;
     Transform target;
     NavMeshAgent agent;
     bool canAttack, doingAttack;
-    float cooldownLength = 5f;
+    float cooldownLength = 4f;
     float dashDistance = 15f;
     float slamDistance = 5f;
     bool dead;
@@ -65,7 +69,7 @@ public class enemyBossScript : MonoBehaviour
                                 StartCoroutine(slam());
                                 break;
                             case 3:
-                                StartCoroutine(shoot());
+                                StartCoroutine(shoot(direction));
                                 break;
                         }
 
@@ -95,7 +99,7 @@ public class enemyBossScript : MonoBehaviour
 
         //wait
         anim.SetBool("Defend", true);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         anim.SetBool("Defend", false);
         anim.SetTrigger("Stab Attack");
         yield return new WaitForSeconds(0.5f);
@@ -125,7 +129,7 @@ public class enemyBossScript : MonoBehaviour
 
         //wait
         anim.SetBool("Defend", true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         anim.SetBool("Defend", false);
         anim.SetTrigger("Smash Attack");
         yield return new WaitForSeconds(0.5f);
@@ -133,6 +137,10 @@ public class enemyBossScript : MonoBehaviour
         //attack, deal damage to player eventually
         Destroy(zone);
         Debug.Log("slam");
+
+        //spawn enemies
+        Instantiate(spawnedEnemy, spawnPoint1.position, transform.rotation);
+        Instantiate(spawnedEnemy, spawnPoint2.position, transform.rotation);
 
         //wait
         agent.SetDestination(transform.position);
@@ -142,12 +150,29 @@ public class enemyBossScript : MonoBehaviour
         doingAttack = false;
     }
 
-    IEnumerator shoot()
+    IEnumerator shoot(Vector3 _direction)
     {
         doingAttack = true;
         canAttack = false;
 
+        //wait
+        anim.SetBool("Defend", true);
+        yield return new WaitForSeconds(0.5f);
+        anim.SetBool("Defend", false);
+        anim.SetTrigger("Cast Spell");
+        yield return new WaitForSeconds(0.5f);
+
         //[DO ATTACK]
+        for (int i = 0; i < 80; i++)
+        {
+            float randomX = Random.Range(-40f, 40f);
+            float randomY = Random.Range(-40f, 40f);
+            float randomZ = Random.Range(-40f, 40f);
+            Rigidbody rb = Instantiate(bullet, shootPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
+            rb.transform.forward = _direction;
+            rb.transform.Rotate(randomX, randomY, randomZ);
+            rb.AddForce(rb.transform.forward * 750f);
+        }
         Debug.Log("shoot");
 
         //wait
