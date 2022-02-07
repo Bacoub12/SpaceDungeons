@@ -8,6 +8,7 @@ public class enemyIllusionistScript : MonoBehaviour
     public GameObject bullet;
     public Transform shootPoint;
     public GameObject illusion;
+    public GameObject illusionEffect;
 
     float lookRadius = 20f;
     Transform target;
@@ -98,7 +99,8 @@ public class enemyIllusionistScript : MonoBehaviour
                 transform.position.x + Random.Range(-illusionRadius, illusionRadius),
                 transform.position.y,
                 transform.position.z + Random.Range(-illusionRadius, illusionRadius));
-            Instantiate(illusion, randomPos, Quaternion.identity);
+            Instantiate(illusion, randomPos, transform.rotation);
+            Instantiate(illusionEffect, randomPos, Quaternion.identity);
         } else if (teleport == 1) //tp
         {
             Vector3 oldPos = transform.position;
@@ -107,7 +109,8 @@ public class enemyIllusionistScript : MonoBehaviour
                 transform.position.y,
                 transform.position.z + Random.Range(-illusionRadius, illusionRadius));
             transform.position = randomPos;
-            Instantiate(illusion, oldPos, Quaternion.identity);
+            Instantiate(illusion, oldPos, transform.rotation);
+            Instantiate(illusionEffect, oldPos, Quaternion.identity);
         }
     }
 

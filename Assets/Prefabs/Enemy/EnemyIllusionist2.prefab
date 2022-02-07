@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4183439570668547866}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -135,6 +135,7 @@ MonoBehaviour:
   bullet: {fileID: 3189893997636024399, guid: c3e55e6deb42e374ea4037849a045282, type: 3}
   shootPoint: {fileID: 2252758170879672815}
   illusion: {fileID: 6289470798875643972, guid: 6f4f80af05d16aa418e4df9379520111, type: 3}
+  illusionEffect: {fileID: 86334240090340619, guid: 867b0a7906d7aea4f95d1b3578bce621, type: 3}
 --- !u!1 &8296825718188857520
 GameObject:
   m_ObjectHideFlags: 0
