@@ -1,4 +1,5 @@
 using StarterAssets;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,16 +11,17 @@ public class PlayerScript : MonoBehaviour
     int gunId = 0;
     [SerializeField] GameObject _bullet;
     [SerializeField] GameObject UIManager;
-    //[SerializeField] GameObject FirstPersonController;
     [SerializeField] Transform _attach;
     [SerializeField] private Camera camera;
-    [SerializeField] float _force = 300f;
+    [SerializeField] float _force = 500f;
+    [SerializeField] private InputActionAsset _actionAsset = default;
     FirstPersonController firstPersonController;
 
+    bool autoStop = false;
     bool interaction = false;
-    private float timer = 0.0f;
     bool onOffCrouch = false;
-    private bool pause = false;
+    bool pause = false;
+    float timer = 0.0f;
     CapsuleCollider capsuleCollider;
     CharacterController _CharacterController;
     Rigidbody rb;
@@ -33,9 +35,20 @@ public class PlayerScript : MonoBehaviour
         _CharacterController = GetComponent<CharacterController>();
         capsuleCollider = GetComponentInChildren<CapsuleCollider>();
         firstPersonController = GetComponent<FirstPersonController>();
+
+        var fireAction = _actionAsset.FindAction("Fire");
+        fireAction.performed += FireAction_performed;
+        fireAction.canceled += FireAction_canceled;
+        fireAction.Enable();
     }
 
-    public void OnFire()
+    private void FireAction_canceled(InputAction.CallbackContext obj)
+    {
+        autoStop = false;
+        StopCoroutine(AutomaticRifle());
+    }
+
+    private void FireAction_performed(InputAction.CallbackContext obj)
     {
         if (!UIManager.GetComponent<UIManager>().getPause())
         {
@@ -47,22 +60,28 @@ public class PlayerScript : MonoBehaviour
                     break;
 
                 case 1: // rifle
-                    AutoFunction();
+                    autoStop = true;
+                    StartCoroutine(AutomaticRifle());
                     break;
             }
         }
+        
     }
 
-    private void AutoFunction()
+    /*
+    public void OnFire()
     {
-        AutomaticRifle();
-    }
+        
+    }*/
 
-    IEnumerable AutomaticRifle()
-    {   
-        rb = Instantiate(_bullet, _attach.position, _attach.rotation).GetComponent<Rigidbody>();
-        rb.AddForce(_attach.forward * _force);
-        yield return new WaitForSeconds(0.05f);
+    IEnumerator AutomaticRifle()
+    {
+        while (autoStop)
+        {
+            rb = Instantiate(_bullet, _attach.position, _attach.rotation).GetComponent<Rigidbody>();
+            rb.AddForce(_attach.forward * _force);
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 
     private void OnGun1()

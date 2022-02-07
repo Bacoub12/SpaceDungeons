@@ -673,7 +673,7 @@ MonoBehaviour:
   _force: 100
   interactableLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1024
 --- !u!135 &169181207
 SphereCollider:
   m_ObjectHideFlags: 0
