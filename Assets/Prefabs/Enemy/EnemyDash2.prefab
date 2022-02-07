@@ -219,6 +219,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dashAttackZone: {fileID: 3252308925183335844, guid: b156269213cb7dd458285873ac0d96be, type: 3}
+  dashDustParticles: {fileID: 5546790190248951131, guid: 341a677ccea25e243af52f744ba9687e, type: 3}
+  dashEnergyParticles: {fileID: 2188242768791403442, guid: eaf32fe2f09062548986eaaeed152676, type: 3}
   anim: {fileID: 4223779137595684678}
 --- !u!195 &4308952724184453620
 NavMeshAgent:

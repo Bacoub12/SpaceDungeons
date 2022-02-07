@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class enemyDashScript : MonoBehaviour
 {
     public GameObject dashAttackZone;
+    public GameObject dashDustParticles;
+    public GameObject dashEnergyParticles;
     public Animator anim;
 
     float lookRadius = 30f;
@@ -96,6 +98,11 @@ public class enemyDashScript : MonoBehaviour
         }
         
         Destroy(zone);
+        GameObject dust = Instantiate(dashDustParticles, transform.position, Quaternion.identity);
+        dust.transform.Rotate(-90f, 0f, 0f, Space.Self);
+        GameObject trail = Instantiate(dashEnergyParticles, transform.position + centerShift, transform.rotation);
+        trail.transform.Rotate(0f, 180f, 0f, Space.Self);
+
         transform.position = transform.position + (transform.forward * attackDistance);
 
         //wait

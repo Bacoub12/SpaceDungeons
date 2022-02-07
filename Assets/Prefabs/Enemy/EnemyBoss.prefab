@@ -584,6 +584,8 @@ MonoBehaviour:
   slamAttackZone: {fileID: 2701182304037059973, guid: dec073d56c24c21489de292b33de27db, type: 3}
   bullet: {fileID: 8295858668267065419, guid: d577fc912a9b37c42bd6085450a3bce3, type: 3}
   spawnedEnemy: {fileID: 4307828513875369024, guid: adbbb2b88ec25324981f225e52735b74, type: 3}
+  dashDustParticles: {fileID: 8795520811009294717, guid: 5efcc638102ce804e889d237bd2fe40c, type: 3}
+  dashEnergyParticles: {fileID: 6744424725174026719, guid: faabf5de1ef5dbf4b8208234fdfca1ee, type: 3}
   shootPoint: {fileID: 1735859582}
   spawnPoint1: {fileID: 1228114876}
   spawnPoint2: {fileID: 913544918}

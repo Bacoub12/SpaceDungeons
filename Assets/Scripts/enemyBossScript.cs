@@ -9,6 +9,8 @@ public class enemyBossScript : MonoBehaviour
     public GameObject slamAttackZone;
     public GameObject bullet;
     public GameObject spawnedEnemy;
+    public GameObject dashDustParticles;
+    public GameObject dashEnergyParticles;
     public Transform shootPoint;
     public Transform spawnPoint1;
     public Transform spawnPoint2;
@@ -122,6 +124,10 @@ public class enemyBossScript : MonoBehaviour
         }
 
         Destroy(zone);
+        GameObject dust = Instantiate(dashDustParticles, transform.position, Quaternion.identity);
+        dust.transform.Rotate(-90.0f, 0.0f, 0.0f, Space.Self);
+        GameObject trail = Instantiate(dashEnergyParticles, transform.position + centerShift, transform.rotation);
+        trail.transform.Rotate(0f, 180f, 0f, Space.Self);
 
         transform.position = transform.position + (transform.forward * dashDistance);
 
@@ -147,7 +153,7 @@ public class enemyBossScript : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         anim.SetBool("Defend", false);
         anim.SetTrigger("Smash Attack");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
 
         //attack, deal damage to player eventually
 
@@ -161,8 +167,12 @@ public class enemyBossScript : MonoBehaviour
         Destroy(zone);
 
         //spawn enemies
+        GameObject dust1 = Instantiate(dashDustParticles, spawnPoint1.position, Quaternion.identity);
+        dust1.transform.Rotate(-90.0f, 0.0f, 0.0f, Space.Self);
         GameObject spawn1 = Instantiate(spawnedEnemy, spawnPoint1.position, transform.rotation);
         spawn1.tag = "BossSpawns";
+        GameObject dust2 = Instantiate(dashDustParticles, spawnPoint2.position, Quaternion.identity);
+        dust2.transform.Rotate(-90.0f, 0.0f, 0.0f, Space.Self);
         GameObject spawn2 = Instantiate(spawnedEnemy, spawnPoint2.position, transform.rotation);
         spawn2.tag = "BossSpawns";
 
