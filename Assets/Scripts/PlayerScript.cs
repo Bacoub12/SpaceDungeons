@@ -5,17 +5,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class PlayerScript : MonoBehaviour
 {
     int gunId = 0;
     [SerializeField] GameObject _bullet;
     [SerializeField] GameObject UIManager;
+    [SerializeField] GameObject ShotgunScript;
     [SerializeField] Transform _attach;
     [SerializeField] private Camera camera;
     [SerializeField] float _force = 500f;
     [SerializeField] private InputActionAsset _actionAsset = default;
     FirstPersonController firstPersonController;
+
+    
 
     bool autoStop = false;
     bool interaction = false;
@@ -40,6 +44,8 @@ public class PlayerScript : MonoBehaviour
         fireAction.performed += FireAction_performed;
         fireAction.canceled += FireAction_canceled;
         fireAction.Enable();
+
+        
     }
 
     private void FireAction_canceled(InputAction.CallbackContext obj)
@@ -52,14 +58,21 @@ public class PlayerScript : MonoBehaviour
     {
         if (!UIManager.GetComponent<UIManager>().getPause())
         {
+            autoStop = false;
             switch (gunId)
             {
                 case 0: //pistol
+                    autoStop = false;
                     rb = Instantiate(_bullet, _attach.position, _attach.rotation).GetComponent<Rigidbody>();
                     rb.AddForce(_attach.forward * _force);
                     break;
 
-                case 1: // rifle
+                case 1: // shotgun
+                    autoStop = false;
+                    //ShotgunScript.GetComponent<ShotgunScript>().Shotgun();
+                    break;
+
+                case 2: // rifle
                     autoStop = true;
                     StartCoroutine(AutomaticRifle());
                     break;
@@ -67,12 +80,6 @@ public class PlayerScript : MonoBehaviour
         }
         
     }
-
-    /*
-    public void OnFire()
-    {
-        
-    }*/
 
     IEnumerator AutomaticRifle()
     {
@@ -93,7 +100,10 @@ public class PlayerScript : MonoBehaviour
     {
         gunId = 1;
     }
-
+    private void OnGun3()
+    {
+        gunId = 2;
+    }
 
 
 
