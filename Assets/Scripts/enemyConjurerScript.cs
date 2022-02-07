@@ -7,6 +7,7 @@ public class enemyConjurerScript : MonoBehaviour
 {
     public GameObject summonedEnemy;
     public GameObject summonZone;
+    public GameObject summonParticles;
     public Animator anim;
 
     NavMeshAgent agent;
@@ -70,10 +71,14 @@ public class enemyConjurerScript : MonoBehaviour
         //starts conjuring, takes 2 seconds, put an effect where the summoning takes place
         Vector3 summonLocation = transform.position + (transform.forward * 2f);
         GameObject zone = Instantiate(summonZone, summonLocation, Quaternion.identity);
+        GameObject particles = Instantiate(summonParticles, summonLocation, Quaternion.identity);
+        particles.transform.Rotate(-90f, 0f, 0f, Space.Self);
         yield return new WaitForSeconds(2f);
 
         //conjures
         Destroy(zone);
+        ParticleSystem particlesPSys = particles.GetComponent<ParticleSystem>();
+        particlesPSys.Stop();
         Instantiate(summonedEnemy, summonLocation, transform.rotation);
 
         yield return new WaitForSeconds(1f);
