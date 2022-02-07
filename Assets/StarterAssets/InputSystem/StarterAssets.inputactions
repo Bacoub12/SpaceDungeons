@@ -84,6 +84,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Gun3",
+                    "type": "Button",
+                    "id": "972eee34-5d60-4c7b-8f7a-2e3570602d5c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -326,6 +334,17 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "Gun2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1fbfcc31-3332-4b12-928f-4394ffb54a94",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Gun3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
