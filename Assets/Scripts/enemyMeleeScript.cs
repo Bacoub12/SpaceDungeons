@@ -10,10 +10,9 @@ public class enemyMeleeScript : MonoBehaviour
     float lookRadius = 30f;
     Transform target;
     NavMeshAgent agent;
-    bool canAttack;
+    bool canAttack, attacking, dead;
     float cooldownLength = 3f;
     float attackRange = 3f;
-    bool dead;
     float health = 120f;
 
     // Start is called before the first frame update
@@ -22,6 +21,7 @@ public class enemyMeleeScript : MonoBehaviour
         target = GameObject.Find("PlayerCapsule").transform;
         agent = GetComponent<NavMeshAgent>();
         canAttack = true;
+        attacking = false;
         dead = false;
     }
 
@@ -30,7 +30,7 @@ public class enemyMeleeScript : MonoBehaviour
     {
         float distance = Vector3.Distance(target.position, transform.position);
 
-        if (distance <= lookRadius)
+        if (distance <= lookRadius && attacking == false)
         {
             agent.SetDestination(target.position);
 
@@ -67,16 +67,26 @@ public class enemyMeleeScript : MonoBehaviour
 
     IEnumerator AttackTarget(Vector3 _direction)
     {
+        attacking = true;
+
+        agent.SetDestination(transform.position);
+
         anim.Play("Attack1");
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
 
-        //deal damage to player
-        Debug.Log("attack");
+        //deal damage to player if player is still in range
+        float distance = Vector3.Distance(target.position, transform.position);
+        if (distance <= agent.stoppingDistance)
+        {
+            Debug.Log("hit");
+        }
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
 
         anim.Play("Idle");
+
+        attacking = false;
     }
 
     IEnumerator strikeCooldown()
