@@ -6,14 +6,16 @@ using UnityEngine.AI;
 public class enemyMeleeScript : MonoBehaviour
 {
     public Animation anim;
+    public Collider attackBox;
 
-    float lookRadius = 30f;
     Transform target;
     NavMeshAgent agent;
+    float lookRadius = 30f;
     bool canAttack, attacking, dead;
     float cooldownLength = 3f;
     float attackRange = 3f;
     float health = 120f;
+    float fieldOfView = 90f;
 
     // Start is called before the first frame update
     void Start()
@@ -77,7 +79,7 @@ public class enemyMeleeScript : MonoBehaviour
 
         //deal damage to player if player is still in range
         float distance = Vector3.Distance(target.position, transform.position);
-        if (distance <= agent.stoppingDistance)
+        if (distance <= agent.stoppingDistance && attackBox.bounds.Contains(target.position))
         {
             Debug.Log("hit");
         }
