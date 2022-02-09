@@ -7,6 +7,7 @@ public class enemyMeleeScript : MonoBehaviour
 {
     public Animation anim;
     public Collider attackBox;
+    public string type;
 
     Transform target;
     NavMeshAgent agent;
@@ -54,7 +55,10 @@ public class enemyMeleeScript : MonoBehaviour
             }
             else
             {
-                anim.Play("Run");
+                if (type == "zombie")
+                    anim.Play("Run");
+                else if (type == "spider")
+                    anim.Play("run");
             }
         }
     }
@@ -73,7 +77,10 @@ public class enemyMeleeScript : MonoBehaviour
 
         agent.SetDestination(transform.position);
 
-        anim.Play("Attack1");
+        if (type == "zombie")
+            anim.Play("Attack1");
+        else if (type == "spider")
+            anim.Play("attack");
 
         yield return new WaitForSeconds(0.6f);
 
@@ -86,7 +93,10 @@ public class enemyMeleeScript : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        anim.Play("Idle");
+        if (type == "zombie")
+            anim.Play("Idle");
+        else if (type == "spider")
+            anim.Play("idle");
 
         attacking = false;
     }

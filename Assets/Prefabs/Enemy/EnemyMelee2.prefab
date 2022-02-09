@@ -990,6 +990,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 3486453183257091629}
   attackBox: {fileID: 7126111846852122128}
+  type: zombie
 --- !u!1 &3596770991106355615
 GameObject:
   m_ObjectHideFlags: 0
