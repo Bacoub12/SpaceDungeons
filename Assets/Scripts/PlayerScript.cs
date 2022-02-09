@@ -2,6 +2,8 @@ using StarterAssets;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -12,15 +14,14 @@ public class PlayerScript : MonoBehaviour
     int gunId = 0;
     [SerializeField] GameObject _bullet;
     [SerializeField] GameObject UIManager;
-    [SerializeField] GameObject ShotgunScript;
     [SerializeField] Transform _attach;
     [SerializeField] private Camera camera;
-    [SerializeField] float _force = 500f;
+    [SerializeField] float _force = 1000f;
     [SerializeField] private InputActionAsset _actionAsset = default;
+
+    int canShootShotgun = 0;
+    int canShootRifle = 0;
     FirstPersonController firstPersonController;
-
-    
-
     bool autoStop = false;
     bool interaction = false;
     bool onOffCrouch = false;
@@ -58,37 +59,53 @@ public class PlayerScript : MonoBehaviour
     {
         if (!UIManager.GetComponent<UIManager>().getPause())
         {
-            autoStop = false;
             switch (gunId)
             {
                 case 0: //pistol
-                    autoStop = false;
                     rb = Instantiate(_bullet, _attach.position, _attach.rotation).GetComponent<Rigidbody>();
                     rb.AddForce(_attach.forward * _force);
                     break;
 
                 case 1: // shotgun
-                    autoStop = false;
-                    //ShotgunScript.GetComponent<ShotgunScript>().Shotgun();
+                    if (canShootShotgun == 0)
+                        StartCoroutine(PumpShotgun());
                     break;
 
                 case 2: // rifle
                     autoStop = true;
-                    StartCoroutine(AutomaticRifle());
+                    if (canShootRifle == 0)
+                        StartCoroutine(AutomaticRifle());
                     break;
             }
         }
-        
     }
 
     IEnumerator AutomaticRifle()
     {
         while (autoStop)
         {
+            canShootRifle = 1;
             rb = Instantiate(_bullet, _attach.position, _attach.rotation).GetComponent<Rigidbody>();
             rb.AddForce(_attach.forward * _force);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
+            canShootRifle = 0;
         }
+    }
+
+    IEnumerator PumpShotgun()
+    {
+        canShootShotgun = 1;
+        for (int i = 0; i < 40; i++)
+        {
+            float randomX = Random.Range(-20f, 20f);
+            float randomY = Random.Range(-20f, 20f);
+            float randomZ = Random.Range(-20f, 20f);
+            Rigidbody rb = Instantiate(_bullet, _attach.position, _attach.rotation).GetComponent<Rigidbody>();
+            rb.transform.Rotate(randomX, randomY, randomZ);
+            rb.AddForce(rb.transform.forward * _force);
+        }
+        yield return new WaitForSeconds(1.0f);
+        canShootShotgun = 0;
     }
 
     private void OnGun1()
@@ -137,6 +154,7 @@ public class PlayerScript : MonoBehaviour
         {
             UIManager.GetComponent<UIManager>().Interactive(false);
         }
+        
     }
     public void OnInteract() // le boutons
     {
@@ -188,8 +206,5 @@ public class PlayerScript : MonoBehaviour
             yield return new WaitForSeconds(0.001f);
         }
     }
-
-    
-
 
 }

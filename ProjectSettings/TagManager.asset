@@ -11,6 +11,8 @@ TagManager:
   - Illusionist
   - Illusion
   - BossSpawns
+  - Gun
+  - Bullet
   layers:
   - Default
   - TransparentFX
