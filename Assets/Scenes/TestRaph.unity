@@ -512,62 +512,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1995259019}
     m_Modifications:
-    - target: {fileID: 179799153, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 179799153, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 179799153, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.561
-      objectReference: {fileID: 0}
-    - target: {fileID: 678993996, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: _force
-      value: 2000
-      objectReference: {fileID: 0}
     - target: {fileID: 678993996, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: UIManager
       value: 
       objectReference: {fileID: 1456843439}
-    - target: {fileID: 678993996, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: BarrelExit
-      value: 
-      objectReference: {fileID: 1216693372}
-    - target: {fileID: 678993996, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: pelletCount
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 678993996, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: spreadAngle
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 678993996, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: _actionAsset
-      value: 
-      objectReference: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e, type: 3}
-    - target: {fileID: 678993996, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: ShotgunScript
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1287200291, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.55
-      objectReference: {fileID: 0}
-    - target: {fileID: 2061638810, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2061638810, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2061638810, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.55
-      objectReference: {fileID: 0}
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Name
       value: PlayerCapsule
@@ -962,11 +910,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194363202}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1216693372 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 179799153, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-  m_PrefabInstance: {fileID: 487897942}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1349468511
 GameObject:
   m_ObjectHideFlags: 0
