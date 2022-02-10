@@ -1219,10 +1219,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3036136712705861855}
   - component: {fileID: 3134066784024716027}
-  - component: {fileID: 96372439267287921}
   - component: {fileID: 6862008492586850394}
   - component: {fileID: 1356194976543530190}
-  - component: {fileID: 5060600404734559572}
+  - component: {fileID: 2630894244380556391}
   m_Layer: 0
   m_Name: EnemySpider
   m_TagString: Untagged
@@ -1257,7 +1256,7 @@ Animator:
   m_GameObject: {fileID: 3038675222441660627}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 7a538f29bad700d47a681a6568b943b4, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a930e6deb631ea94ba2c793a3709f31e, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1266,26 +1265,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!111 &96372439267287921
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3038675222441660627}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400002, guid: 7a538f29bad700d47a681a6568b943b4, type: 3}
-  m_Animations:
-  - {fileID: 7400004, guid: 7a538f29bad700d47a681a6568b943b4, type: 3}
-  - {fileID: 7400008, guid: 7a538f29bad700d47a681a6568b943b4, type: 3}
-  - {fileID: 7400002, guid: 7a538f29bad700d47a681a6568b943b4, type: 3}
-  - {fileID: 7400000, guid: 7a538f29bad700d47a681a6568b943b4, type: 3}
-  - {fileID: 7400006, guid: 7a538f29bad700d47a681a6568b943b4, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!65 &6862008492586850394
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1321,7 +1300,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5060600404734559572
+--- !u!114 &2630894244380556391
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1330,10 +1309,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3038675222441660627}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87b7e665e49afb14a85ba9a9463e6610, type: 3}
+  m_Script: {fileID: 11500000, guid: 5caa64b767f856347b9228f1da3fd1e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 96372439267287921}
+  anim: {fileID: 3134066784024716027}
   attackBox: {fileID: 1511626646}
   type: spider
 --- !u!1 &3038705317744065485
