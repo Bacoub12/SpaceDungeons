@@ -11,6 +11,7 @@ public class enemyBossScript : MonoBehaviour
     public GameObject spawnedEnemy;
     public GameObject dashDustParticles;
     public GameObject dashEnergyParticles;
+    public GameObject corpse;
     public Transform shootPoint;
     public Transform spawnPoint1;
     public Transform spawnPoint2;
@@ -24,7 +25,8 @@ public class enemyBossScript : MonoBehaviour
     float dashDistance = 15f;
     float slamDistance = 5f;
     bool dead;
-    float health = 2000f;
+    float health = 1000f; //1000f
+    GameObject existingAttackVisual;
 
     // Start is called before the first frame update
     void Start()
@@ -104,7 +106,7 @@ public class enemyBossScript : MonoBehaviour
 
         //spawn prospective attack zone
         Vector3 centerShift = transform.forward * (dashDistance / 2);
-        GameObject zone = Instantiate(dashAttackZone, transform.position + centerShift, transform.rotation);
+        existingAttackVisual = Instantiate(dashAttackZone, transform.position + centerShift, transform.rotation);
 
         //wait
         anim.SetBool("Defend", true);
@@ -117,13 +119,13 @@ public class enemyBossScript : MonoBehaviour
 
         //check if player is intersecting zone collider
         Vector3 playerPos = target.position;
-        if (zone.GetComponent<Collider>().bounds.Contains(playerPos))
+        if (existingAttackVisual.GetComponent<Collider>().bounds.Contains(playerPos))
         {
             //deal damage
             Debug.Log("hit");
         }
 
-        Destroy(zone);
+        Destroy(existingAttackVisual);
         GameObject dust = Instantiate(dashDustParticles, transform.position, Quaternion.identity);
         dust.transform.Rotate(-90.0f, 0.0f, 0.0f, Space.Self);
         GameObject trail = Instantiate(dashEnergyParticles, transform.position + centerShift, transform.rotation);
@@ -146,7 +148,7 @@ public class enemyBossScript : MonoBehaviour
 
         //spawn prospective attack zone
         Vector3 centerShift = transform.forward * (slamDistance / 2);
-        GameObject zone = Instantiate(slamAttackZone, transform.position + centerShift, transform.rotation);
+        existingAttackVisual = Instantiate(slamAttackZone, transform.position + centerShift, transform.rotation);
 
         //wait
         anim.SetBool("Defend", true);
@@ -159,12 +161,12 @@ public class enemyBossScript : MonoBehaviour
 
         //check if player is intersecting zone collider
         Vector3 playerPos = target.position;
-        if (zone.GetComponent<Collider>().bounds.Contains(playerPos))
+        if (existingAttackVisual.GetComponent<Collider>().bounds.Contains(playerPos))
         {
             //deal damage
             Debug.Log("hit");
         }
-        Destroy(zone);
+        Destroy(existingAttackVisual);
 
         //spawn enemies
         GameObject dust1 = Instantiate(dashDustParticles, spawnPoint1.position, Quaternion.identity);
@@ -243,6 +245,13 @@ public class enemyBossScript : MonoBehaviour
         {
             dead = true;
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
+
+            if (existingAttackVisual != null)
+            {
+                Destroy(existingAttackVisual);
+            }
+
+            Instantiate(corpse, transform.position, transform.rotation);
 
             //Invoke(nameof(DestroyThis), 3f);
             DestroyThis();

@@ -9,6 +9,7 @@ public class enemyDashScript : MonoBehaviour
     public GameObject dashDustParticles;
     public GameObject dashEnergyParticles;
     public Animator anim;
+    public GameObject corpse;
 
     float lookRadius = 30f;
     Transform target;
@@ -18,6 +19,7 @@ public class enemyDashScript : MonoBehaviour
     float attackDistance = 15f;
     bool dead;
     float health = 120f;
+    GameObject existingAttackVisual;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +34,7 @@ public class enemyDashScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (doingAttack == false)
+        if (doingAttack == false && dead == false)
         {
             float distance = Vector3.Distance(target.position, transform.position);
 
@@ -78,7 +80,7 @@ public class enemyDashScript : MonoBehaviour
 
         //spawn prospective attack zone
         Vector3 centerShift = transform.forward * (attackDistance / 2);
-        GameObject zone = Instantiate(dashAttackZone, transform.position + centerShift, transform.rotation);
+        existingAttackVisual = Instantiate(dashAttackZone, transform.position + centerShift, transform.rotation);
 
         //wait
         anim.SetBool("Defend", true);
@@ -91,13 +93,14 @@ public class enemyDashScript : MonoBehaviour
 
         //check if player is intersecting zone collider
         Vector3 playerPos = target.position;
-        if (zone.GetComponent<Collider>().bounds.Contains(playerPos))
-        {
-            //deal damage
-            Debug.Log("hit");
-        }
+        if (existingAttackVisual != null)
+            if (existingAttackVisual.GetComponent<Collider>().bounds.Contains(playerPos))
+            {
+                //deal damage
+                Debug.Log("hit");
+            }
         
-        Destroy(zone);
+        Destroy(existingAttackVisual);
         GameObject dust = Instantiate(dashDustParticles, transform.position, Quaternion.identity);
         dust.transform.Rotate(-90f, 0f, 0f, Space.Self);
         GameObject trail = Instantiate(dashEnergyParticles, transform.position + centerShift, transform.rotation);
@@ -140,6 +143,19 @@ public class enemyDashScript : MonoBehaviour
         {
             dead = true;
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
+
+            if (doingAttack)
+            {
+                StopCoroutine("strike");
+                anim.SetBool("Defend", false);
+            }
+
+            if (existingAttackVisual != null)
+            {
+                Destroy(existingAttackVisual);
+            }
+
+            Instantiate(corpse, transform.position, transform.rotation);
 
             //Invoke(nameof(DestroyThis), 3f);
             DestroyThis();
