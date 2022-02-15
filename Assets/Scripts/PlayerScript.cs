@@ -32,6 +32,7 @@ public class PlayerScript : MonoBehaviour
     Rigidbody rb;
     public LayerMask interactableLayerMask = 10;
     private Interactable interactable;
+    private Inventory inventory;
 
     //[SerializeField] GameObject whatgun;
 
@@ -47,6 +48,11 @@ public class PlayerScript : MonoBehaviour
         fireAction.Enable();
 
         
+    }
+
+    private void Awake()
+    {
+        inventory = new Inventory();
     }
 
     private void FireAction_canceled(InputAction.CallbackContext obj)
