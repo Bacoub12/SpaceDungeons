@@ -8,6 +8,7 @@ public class enemyConjurerScript : MonoBehaviour
     public GameObject summonedEnemy;
     public GameObject summonZone;
     public GameObject summonParticles;
+    public GameObject explosion;
     public Animator anim;
 
     NavMeshAgent agent;
@@ -18,6 +19,7 @@ public class enemyConjurerScript : MonoBehaviour
     float health = 120f;
     bool dead;
     GameObject existingAttackVisual;
+    GameObject existingParticles;
 
     // Start is called before the first frame update
     void Start()
@@ -72,13 +74,13 @@ public class enemyConjurerScript : MonoBehaviour
         //starts conjuring, takes 2 seconds, put an effect where the summoning takes place
         Vector3 summonLocation = transform.position + (transform.forward * 2f);
         existingAttackVisual = Instantiate(summonZone, summonLocation, Quaternion.identity);
-        GameObject particles = Instantiate(summonParticles, summonLocation, Quaternion.identity);
-        particles.transform.Rotate(-90f, 0f, 0f, Space.Self);
+        existingParticles = Instantiate(summonParticles, summonLocation, Quaternion.identity);
+        existingParticles.transform.Rotate(-90f, 0f, 0f, Space.Self);
         yield return new WaitForSeconds(2f);
 
         //conjures
         Destroy(existingAttackVisual);
-        ParticleSystem particlesPSys = particles.GetComponent<ParticleSystem>();
+        ParticleSystem particlesPSys = existingParticles.GetComponent<ParticleSystem>();
         particlesPSys.Stop();
         Instantiate(summonedEnemy, summonLocation, transform.rotation);
 
@@ -116,6 +118,13 @@ public class enemyConjurerScript : MonoBehaviour
             {
                 Destroy(existingAttackVisual);
             }
+
+            if (existingParticles != null)
+            {
+                Destroy(existingParticles);
+            }
+
+            Instantiate(explosion, transform.position, transform.rotation);
 
             //Invoke(nameof(DestroyThis), 3f);
             DestroyThis();

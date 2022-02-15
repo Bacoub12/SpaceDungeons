@@ -8,6 +8,7 @@ public class enemyMeleeScript : MonoBehaviour
     public Animation anim;
     public Collider attackBox;
     public string type;
+    public GameObject corpse;
 
     Transform target;
     NavMeshAgent agent;
@@ -119,6 +120,8 @@ public class enemyMeleeScript : MonoBehaviour
         {
             dead = true;
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
+
+            Instantiate(corpse, transform.position, transform.rotation);
 
             //Invoke(nameof(DestroyThis), 3f);
             DestroyThis();

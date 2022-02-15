@@ -163,5 +163,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 6505536793000633759, guid: 5fde640bce8b6ec4ab1c75e7d85bf86d, type: 3}
+  explosion: {fileID: 6272777995149316251, guid: 4fd6469931414cf4ba812346bd971cb9, type: 3}
   shootPoint: {fileID: 968136005603044852}
   guyType: Illusion

@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class enemyShotgunScript : MonoBehaviour
 {
     public GameObject bullet;
+    public GameObject explosion;
     public Transform shootPoint;
 
     float lookRadius = 20f;
@@ -104,6 +105,8 @@ public class enemyShotgunScript : MonoBehaviour
         {
             dead = true;
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
+
+            Instantiate(explosion, transform.position, transform.rotation);
 
             //Invoke(nameof(DestroyThis), 3f);
             DestroyThis();

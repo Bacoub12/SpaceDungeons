@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class enemyRifleScript : MonoBehaviour
 {
     public GameObject bullet;
+    public GameObject explosion;
     public Transform shootPoint;
     public string guyType;
 
@@ -105,6 +106,8 @@ public class enemyRifleScript : MonoBehaviour
         {
             dead = true;
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
+
+            Instantiate(explosion, transform.position, transform.rotation);
 
             //Invoke(nameof(DestroyThis), 3f);
             DestroyThis();

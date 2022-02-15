@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1511626647}
   - component: {fileID: 1511626646}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: AttackBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1315,6 +1315,7 @@ MonoBehaviour:
   anim: {fileID: 3134066784024716027}
   attackBox: {fileID: 1511626646}
   type: spider
+  corpse: {fileID: 2014669520318972735, guid: 94125e17b6091fa45a9416da9ce6108d, type: 3}
 --- !u!1 &3038705317744065485
 GameObject:
   m_ObjectHideFlags: 0

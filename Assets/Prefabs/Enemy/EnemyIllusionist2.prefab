@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 3189893997636024399, guid: c3e55e6deb42e374ea4037849a045282, type: 3}
+  explosion: {fileID: 6721181524601549745, guid: 4e99ee3522a7bf14cb9230d650c89bea, type: 3}
   shootPoint: {fileID: 2252758170879672815}
   illusion: {fileID: 6289470798875643972, guid: 6f4f80af05d16aa418e4df9379520111, type: 3}
   illusionEffect: {fileID: 86334240090340619, guid: 867b0a7906d7aea4f95d1b3578bce621, type: 3}

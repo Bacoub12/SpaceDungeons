@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class enemyIllusionistScript : MonoBehaviour
 {
     public GameObject bullet;
+    public GameObject explosion;
     public Transform shootPoint;
     public GameObject illusion;
     public GameObject illusionEffect;
@@ -93,6 +94,8 @@ public class enemyIllusionistScript : MonoBehaviour
         //coin flip as to whether the original changes place or not
         int teleport = Random.Range(0, 2); //0 ou 1
 
+        Vector3 downShift = new Vector3(0f, -1f, 0f);
+
         if (teleport == 0) //no tp
         {
             Vector3 randomPos = new Vector3(
@@ -100,7 +103,7 @@ public class enemyIllusionistScript : MonoBehaviour
                 transform.position.y,
                 transform.position.z + Random.Range(-illusionRadius, illusionRadius));
             Instantiate(illusion, randomPos, transform.rotation);
-            Instantiate(illusionEffect, randomPos, Quaternion.identity);
+            Instantiate(illusionEffect, randomPos + downShift, Quaternion.identity);
         } else if (teleport == 1) //tp
         {
             Vector3 oldPos = transform.position;
@@ -110,7 +113,7 @@ public class enemyIllusionistScript : MonoBehaviour
                 transform.position.z + Random.Range(-illusionRadius, illusionRadius));
             transform.position = randomPos;
             Instantiate(illusion, oldPos, transform.rotation);
-            Instantiate(illusionEffect, oldPos, Quaternion.identity);
+            Instantiate(illusionEffect, oldPos + downShift, Quaternion.identity);
         }
     }
 
@@ -148,6 +151,8 @@ public class enemyIllusionistScript : MonoBehaviour
         {
             dead = true;
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
+
+            Instantiate(explosion, transform.position, transform.rotation);
 
             //Invoke(nameof(DestroyThis), 3f);
             DestroyThis();
