@@ -18,6 +18,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private Camera camera;
     [SerializeField] float _force = 1000f;
     [SerializeField] private InputActionAsset _actionAsset = default;
+    [SerializeField] private UI_Inventory uiInventory;
 
     int canShootShotgun = 0;
     int canShootRifle = 0;
@@ -53,6 +54,7 @@ public class PlayerScript : MonoBehaviour
     private void Awake()
     {
         inventory = new Inventory();
+        uiInventory.SetInventory(inventory);
     }
 
     private void FireAction_canceled(InputAction.CallbackContext obj)
