@@ -448,6 +448,7 @@ MonoBehaviour:
   animCompType: Animator
   transitionType: Trigger
   timeBeforeDestroy: 2
+  deathParticles: {fileID: 1951868466668198733, guid: bb432e95630bf564b9acc3fa3cf4ef9c, type: 3}
 --- !u!1 &2014699072442099745
 GameObject:
   m_ObjectHideFlags: 0

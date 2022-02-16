@@ -8,6 +8,7 @@ public class enemyDeathScript : MonoBehaviour
     public string animCompType;
     public string transitionType; //leave blank if animator
     public float timeBeforeDestroy;
+    public GameObject deathParticles;
 
     Animator animator;
     Animation animation;
@@ -50,6 +51,8 @@ public class enemyDeathScript : MonoBehaviour
     IEnumerator destruction(float time)
     {
         yield return new WaitForSeconds(time);
+        if (deathParticles != null)
+            Instantiate(deathParticles, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 
