@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory
-{
+{/*
 
     private List<Item> itemList;
 
@@ -11,6 +11,9 @@ public class Inventory
     {
         itemList = new List<Item>();
         AddItem(new Item { itemType = Item.ItemType.Chest, amount = 1 });
+        // toute les items différents devront être lister ci-dessous
+        //
+        //
         Debug.Log(itemList.Count);
     }
 
@@ -23,5 +26,5 @@ public class Inventory
     {
         return itemList;
     }
-
+    */
 }

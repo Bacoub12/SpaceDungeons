@@ -42,6 +42,8 @@ public class PlayerScript : MonoBehaviour
         _CharacterController = GetComponent<CharacterController>();
         capsuleCollider = GetComponentInChildren<CapsuleCollider>();
         firstPersonController = GetComponent<FirstPersonController>();
+        //inventory = new Inventory();
+        //uiInventory.SetInventory(inventory);
 
         var fireAction = _actionAsset.FindAction("Fire");
         fireAction.performed += FireAction_performed;
@@ -49,13 +51,9 @@ public class PlayerScript : MonoBehaviour
         fireAction.Enable();
 
         
+
     }
 
-    private void Awake()
-    {
-        inventory = new Inventory();
-        uiInventory.SetInventory(inventory);
-    }
 
     private void FireAction_canceled(InputAction.CallbackContext obj)
     {

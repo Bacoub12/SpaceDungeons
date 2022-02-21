@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Item
-{
+{/*
    public enum ItemType
     {
         Helmet,
@@ -15,5 +15,5 @@ public class Item
     }
 
     public ItemType itemType;
-    public int amount;
+    public int amount;*/
 }

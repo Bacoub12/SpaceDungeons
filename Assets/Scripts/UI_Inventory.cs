@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UI_Inventory : MonoBehaviour
-{
+{/*
     private Inventory inventory;
     private Transform itemSlotContainer;
     private Transform itemSlotTemplate;
@@ -28,6 +28,7 @@ public class UI_Inventory : MonoBehaviour
 
         foreach (Item item in inventory.GetItemList())
         {
+            Debug.Log("item " + itemSlotTemplate + " and " + itemSlotContainer);
             RectTransform itemSlotRectTransform = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
             itemSlotRectTransform.gameObject.SetActive(true);
             itemSlotRectTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, y* itemSlotCellSize);
@@ -39,5 +40,5 @@ public class UI_Inventory : MonoBehaviour
                 y++;
             }
         }
-    }
+    }*/
 }
