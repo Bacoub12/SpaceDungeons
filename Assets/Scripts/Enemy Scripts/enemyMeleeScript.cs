@@ -9,7 +9,8 @@ public class enemyMeleeScript : MonoBehaviour
     public Collider attackBox;
     public string type;
     public GameObject corpse;
-    public AudioSource attackAudio;
+    public AudioSource audioAttack;
+    public AudioSource audioWalk;
 
     Transform target;
     NavMeshAgent agent;
@@ -49,6 +50,10 @@ public class enemyMeleeScript : MonoBehaviour
                 agent.SetDestination(transform.position);
                 FaceTarget(direction);
 
+                if (!audioWalk.isPlaying)
+                    audioWalk.Play();
+                audioWalk.mute = true;
+
                 if (canAttack && Vector3.Distance(target.position, transform.position) < attackRange)
                 {
                     StartCoroutine(AttackTarget(direction));
@@ -58,6 +63,10 @@ public class enemyMeleeScript : MonoBehaviour
             else
             {
                 anim.Play("Run");
+
+                if (!audioWalk.isPlaying)
+                    audioWalk.Play();
+                audioWalk.mute = false;
             }
         }
     }
@@ -77,7 +86,7 @@ public class enemyMeleeScript : MonoBehaviour
         agent.SetDestination(transform.position);
 
         anim.Play("Attack1");
-        attackAudio.Play();
+        audioAttack.Play();
 
         yield return new WaitForSeconds(0.6f);
 
@@ -110,6 +119,10 @@ public class enemyMeleeScript : MonoBehaviour
             if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
             {
                 agent.SetDestination(target.position);
+
+                if (!audioWalk.isPlaying)
+                    audioWalk.Play();
+                audioWalk.mute = false;
             }
         }
     }
@@ -122,6 +135,8 @@ public class enemyMeleeScript : MonoBehaviour
         {
             dead = true;
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
+
+            audioWalk.mute = true;
 
             Instantiate(corpse, transform.position, transform.rotation);
 

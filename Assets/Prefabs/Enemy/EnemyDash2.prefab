@@ -133,9 +133,9 @@ GameObject:
   - component: {fileID: 4306483310678049682}
   - component: {fileID: 4223779137595684678}
   - component: {fileID: 4308952724184453627}
-  - component: {fileID: 4308952724184453621}
   - component: {fileID: 4308952724184453620}
-  - component: {fileID: 3518090543988599313}
+  - component: {fileID: 9037261086491515333}
+  - component: {fileID: 4308952724184453621}
   m_Layer: 0
   m_Name: EnemyDash2
   m_TagString: Untagged
@@ -207,23 +207,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.5, z: 2}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &4308952724184453621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4307828513875369024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14b41eadebbbc6a4681f1fa19231ed22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dashAttackZone: {fileID: 3252308925183335844, guid: b156269213cb7dd458285873ac0d96be, type: 3}
-  dashDustParticles: {fileID: 5546790190248951131, guid: 341a677ccea25e243af52f744ba9687e, type: 3}
-  dashEnergyParticles: {fileID: 2188242768791403442, guid: eaf32fe2f09062548986eaaeed152676, type: 3}
-  anim: {fileID: 4223779137595684678}
-  corpse: {fileID: 3851568581459077765, guid: 19cad25e1493a9e4ba8166fc9db578eb, type: 3}
 --- !u!195 &4308952724184453620
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -246,7 +229,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!82 &3518090543988599313
+--- !u!82 &9037261086491515333
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -256,11 +239,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 193fdf5bb19cb5944b6c1d85a583c795, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a66efe5a269161e44b1a5668c700b678, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -342,6 +325,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4308952724184453621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4307828513875369024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14b41eadebbbc6a4681f1fa19231ed22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashAttackZone: {fileID: 3252308925183335844, guid: b156269213cb7dd458285873ac0d96be, type: 3}
+  dashDustParticles: {fileID: 5546790190248951131, guid: 341a677ccea25e243af52f744ba9687e, type: 3}
+  dashEnergyParticles: {fileID: 2188242768791403442, guid: eaf32fe2f09062548986eaaeed152676, type: 3}
+  anim: {fileID: 4223779137595684678}
+  corpse: {fileID: 3851568581459077765, guid: 19cad25e1493a9e4ba8166fc9db578eb, type: 3}
+  audioWalk: {fileID: 9037261086491515333}
 --- !u!1 &4307831421545024678
 GameObject:
   m_ObjectHideFlags: 0

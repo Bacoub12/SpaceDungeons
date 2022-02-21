@@ -10,6 +10,7 @@ public class enemyDashScript : MonoBehaviour
     public GameObject dashEnergyParticles;
     public Animator anim;
     public GameObject corpse;
+    public AudioSource audioWalk;
 
     float lookRadius = 30f;
     Transform target;
@@ -43,6 +44,10 @@ public class enemyDashScript : MonoBehaviour
                 agent.SetDestination(target.position);
                 anim.SetBool("Walk Forward", true);
 
+                if (!audioWalk.isPlaying)
+                    audioWalk.Play();
+                audioWalk.mute = false;
+
                 Vector3 to = target.position + new Vector3(0f, 1f, 0f);
                 Vector3 from = transform.position;
                 Vector3 direction = (to - from).normalized;
@@ -52,6 +57,7 @@ public class enemyDashScript : MonoBehaviour
                 {
                     agent.SetDestination(transform.position);
                     anim.SetBool("Walk Forward", false);
+                    audioWalk.mute = true;
                     FaceTarget(direction);
 
                     if (canAttack)
@@ -62,6 +68,11 @@ public class enemyDashScript : MonoBehaviour
                     }
                 }
             }
+        } 
+        else
+        {
+            if (audioWalk.isPlaying)
+                audioWalk.mute = true;
         }
     }
 
@@ -131,6 +142,10 @@ public class enemyDashScript : MonoBehaviour
             if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
             {
                 agent.SetDestination(target.position);
+
+                if (!audioWalk.isPlaying)
+                    audioWalk.Play();
+                audioWalk.mute = false;
             }
         }
     }
@@ -143,6 +158,8 @@ public class enemyDashScript : MonoBehaviour
         {
             dead = true;
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
+
+            audioWalk.mute = true;
 
             if (doingAttack)
             {

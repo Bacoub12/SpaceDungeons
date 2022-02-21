@@ -12,6 +12,7 @@ public class enemyConjurerScript : MonoBehaviour
     public Animator anim;
     public AudioSource audioSummon;
     public AudioSource audioSummonEnd;
+    public AudioSource audioWalk;
 
     NavMeshAgent agent;
     float walkRadius = 7f;
@@ -62,7 +63,11 @@ public class enemyConjurerScript : MonoBehaviour
         if (Vector3.Distance(transform.position, newDest) > minimumWalkDistance)
         {
             agent.SetDestination(newDest);
+
             anim.SetBool("Walk_Anim", true);
+            if (!audioWalk.isPlaying)
+                audioWalk.Play();
+            audioWalk.mute = false;
         }
     }
 
@@ -71,7 +76,11 @@ public class enemyConjurerScript : MonoBehaviour
         canSummon = false;
         //when this starts, conjurer has reached destination
         agent.SetDestination(transform.position);
+
         anim.SetBool("Walk_Anim", false);
+        if (!audioWalk.isPlaying)
+            audioWalk.Play();
+        audioWalk.mute = true;
 
         //starts conjuring, takes 2 seconds, put an effect where the summoning takes place
         audioSummon.Play();
@@ -98,6 +107,10 @@ public class enemyConjurerScript : MonoBehaviour
     IEnumerator onHold()
     {
         anim.SetBool("Walk_Anim", false);
+        if (!audioWalk.isPlaying)
+            audioWalk.Play();
+        audioWalk.mute = true;
+
         yield return new WaitForSeconds(1f);
         setNewDest();
     }
@@ -118,6 +131,8 @@ public class enemyConjurerScript : MonoBehaviour
         {
             dead = true;
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
+
+            audioWalk.mute = true;
 
             if (existingAttackVisual != null)
             {
