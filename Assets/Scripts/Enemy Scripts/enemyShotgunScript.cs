@@ -8,6 +8,7 @@ public class enemyShotgunScript : MonoBehaviour
     public GameObject bullet;
     public GameObject explosion;
     public Transform shootPoint;
+    public AudioSource audioShot;
 
     float lookRadius = 20f;
     Transform target;
@@ -66,6 +67,7 @@ public class enemyShotgunScript : MonoBehaviour
 
     private void AttackTarget(Vector3 _direction)
     {
+        audioShot.Play();
         for (int i = 0; i < 40; i++)
         {
             float randomX = Random.Range(-20f, 20f);

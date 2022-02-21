@@ -9,6 +9,7 @@ public class enemyMeleeScript : MonoBehaviour
     public Collider attackBox;
     public string type;
     public GameObject corpse;
+    public AudioSource attackAudio;
 
     Transform target;
     NavMeshAgent agent;
@@ -76,6 +77,7 @@ public class enemyMeleeScript : MonoBehaviour
         agent.SetDestination(transform.position);
 
         anim.Play("Attack1");
+        attackAudio.Play();
 
         yield return new WaitForSeconds(0.6f);
 

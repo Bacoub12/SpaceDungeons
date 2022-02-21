@@ -10,6 +10,8 @@ public class enemyConjurerScript : MonoBehaviour
     public GameObject summonParticles;
     public GameObject explosion;
     public Animator anim;
+    public AudioSource audioSummon;
+    public AudioSource audioSummonEnd;
 
     NavMeshAgent agent;
     float walkRadius = 7f;
@@ -72,6 +74,7 @@ public class enemyConjurerScript : MonoBehaviour
         anim.SetBool("Walk_Anim", false);
 
         //starts conjuring, takes 2 seconds, put an effect where the summoning takes place
+        audioSummon.Play();
         Vector3 summonLocation = transform.position + (transform.forward * 2f);
         existingAttackVisual = Instantiate(summonZone, summonLocation, Quaternion.identity);
         existingParticles = Instantiate(summonParticles, summonLocation, Quaternion.identity);
@@ -79,6 +82,8 @@ public class enemyConjurerScript : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         //conjures
+        audioSummon.Stop();
+        audioSummonEnd.Play();
         Destroy(existingAttackVisual);
         ParticleSystem particlesPSys = existingParticles.GetComponent<ParticleSystem>();
         particlesPSys.Stop();

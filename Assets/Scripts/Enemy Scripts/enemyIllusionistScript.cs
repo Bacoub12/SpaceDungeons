@@ -10,6 +10,7 @@ public class enemyIllusionistScript : MonoBehaviour
     public Transform shootPoint;
     public GameObject illusion;
     public GameObject illusionEffect;
+    public AudioSource audioShot;
 
     float lookRadius = 20f;
     Transform target;
@@ -84,6 +85,7 @@ public class enemyIllusionistScript : MonoBehaviour
 
     private void AttackTarget(Vector3 _direction)
     {
+        audioShot.Play();
         Rigidbody rb = Instantiate(bullet, shootPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
         rb.transform.forward = _direction;
         rb.AddForce(rb.transform.forward * 750f);

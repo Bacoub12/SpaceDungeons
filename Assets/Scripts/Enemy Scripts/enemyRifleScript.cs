@@ -8,6 +8,7 @@ public class enemyRifleScript : MonoBehaviour
     public GameObject bullet;
     public GameObject explosion;
     public Transform shootPoint;
+    public AudioSource audioShot;
     public string guyType;
 
     float lookRadius = 20f;
@@ -66,6 +67,7 @@ public class enemyRifleScript : MonoBehaviour
 
     private void AttackTarget(Vector3 _direction)
     {
+        audioShot.Play();
         Rigidbody rb = Instantiate(bullet, shootPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
         rb.transform.forward = _direction;
         rb.AddForce(rb.transform.forward * 1000f);
