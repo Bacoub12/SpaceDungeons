@@ -16,6 +16,9 @@ public class enemyBossScript : MonoBehaviour
     public Transform spawnPoint1;
     public Transform spawnPoint2;
     public Animator anim;
+    public AudioSource audioShoot;
+    public AudioSource audioSlam;
+    public AudioSource audioWalk;
 
     float lookRadius = 30f;
     Transform target;
@@ -41,7 +44,7 @@ public class enemyBossScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (doingAttack == false)
+        if (doingAttack == false && dead == false)
         {
             float distance = Vector3.Distance(target.position, transform.position);
 
@@ -49,6 +52,10 @@ public class enemyBossScript : MonoBehaviour
             {
                 agent.SetDestination(target.position);
                 anim.SetBool("Walk Forward", true);
+
+                if (!audioWalk.isPlaying)
+                    audioWalk.Play();
+                audioWalk.mute = false;
 
                 Vector3 to = target.position + new Vector3(0f, 1f, 0f);
                 Vector3 from = transform.position;
@@ -59,6 +66,7 @@ public class enemyBossScript : MonoBehaviour
                 {
                     agent.SetDestination(transform.position);
                     anim.SetBool("Walk Forward", false);
+                    audioWalk.mute = true;
                     FaceTarget(direction);
 
                     if (canAttack)
@@ -88,6 +96,11 @@ public class enemyBossScript : MonoBehaviour
                     }
                 }
             }
+        }
+        else
+        {
+            if (audioWalk.isPlaying)
+                audioWalk.mute = true;
         }
     }
 
@@ -155,7 +168,9 @@ public class enemyBossScript : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         anim.SetBool("Defend", false);
         anim.SetTrigger("Smash Attack");
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.6f);
+        audioSlam.Play();
+        yield return new WaitForSeconds(0.2f);
 
         //attack, deal damage to player eventually
 
@@ -196,6 +211,7 @@ public class enemyBossScript : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         anim.SetBool("Defend", false);
         anim.SetTrigger("Cast Spell");
+        audioShoot.Play();
         yield return new WaitForSeconds(0.5f);
 
         //[DO ATTACK]
@@ -233,6 +249,10 @@ public class enemyBossScript : MonoBehaviour
             if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
             {
                 agent.SetDestination(target.position);
+
+                if (!audioWalk.isPlaying)
+                    audioWalk.Play();
+                audioWalk.mute = false;
             }
         }
     }
@@ -245,6 +265,8 @@ public class enemyBossScript : MonoBehaviour
         {
             dead = true;
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
+
+            audioWalk.mute = true;
 
             if (existingAttackVisual != null)
             {
