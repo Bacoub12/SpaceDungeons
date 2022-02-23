@@ -8,6 +8,7 @@ public class enemyShotgunScript : MonoBehaviour
     public GameObject bullet;
     public GameObject explosion;
     public Transform shootPoint;
+    public Transform eye;
     public AudioSource audioShot;
 
     float lookRadius = 20f;
@@ -17,6 +18,7 @@ public class enemyShotgunScript : MonoBehaviour
     float cooldownLength = 3f;
     float health = 120f;
     bool dead;
+    bool enemyInSight, alerted;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,8 @@ public class enemyShotgunScript : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         canShoot = true;
         dead = false;
+        enemyInSight = false;
+        alerted = false;
     }
 
     // Update is called once per frame
@@ -32,9 +36,40 @@ public class enemyShotgunScript : MonoBehaviour
     {
         float distance = Vector3.Distance(target.position, transform.position);
 
-        if (distance <= lookRadius)
+        Vector3 eyePos = eye.position;
+
+        Vector3 vectorToEnemy = (eyePos - target.position) * -1 + new Vector3(0f, 1f, 0f);
+
+        int gunLayerIndex = LayerMask.NameToLayer("Gun");
+        int gunLayerMask = (1 << gunLayerIndex);
+        gunLayerMask = ~gunLayerMask;
+
+        RaycastHit hit; //= new RaycastHit()
+        if (Physics.Raycast(eyePos, vectorToEnemy, out hit, lookRadius, gunLayerMask))
+        {
+            /*
+            Debug.Log("Tag:" + hit.collider.gameObject.tag);
+            Debug.Log("Name: " + hit.collider.gameObject.name);
+            */
+            if (hit.collider.gameObject.tag == "Player") // && Vector3.Angle(eye.forward, vectorToEnemy) <= fieldOfView / 2
+            {
+                enemyInSight = true;
+            }
+            else
+            {
+                enemyInSight = false;
+            }
+        }
+        else
+        {
+            enemyInSight = false;
+        }
+
+        if (distance <= lookRadius && (enemyInSight || alerted))
         {
             agent.SetDestination(target.position);
+
+            alerted = true;
 
             Vector3 to = target.position + new Vector3(0f, 1f, 0f);
             Vector3 from = shootPoint.position;
@@ -95,6 +130,8 @@ public class enemyShotgunScript : MonoBehaviour
             if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
             {
                 agent.SetDestination(target.position);
+
+                alerted = true;
             }
         }
     }

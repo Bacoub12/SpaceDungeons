@@ -51,8 +51,10 @@ public class enemyMeleeAnimtrScript : MonoBehaviour
         RaycastHit hit; //= new RaycastHit()
         if (Physics.Raycast(eyePos, vectorToEnemy, out hit, lookRadius, gunLayerMask))
         {
+            /*
             Debug.Log("Tag:" + hit.collider.gameObject.tag);
             Debug.Log("Name: " + hit.collider.gameObject.name);
+            */
             if (hit.collider.gameObject.tag == "Player") // && Vector3.Angle(eye.forward, vectorToEnemy) <= fieldOfView / 2
             {
                 enemyInSight = true;
