@@ -11,6 +11,7 @@ public class enemyDashScript : MonoBehaviour
     public Animator anim;
     public GameObject corpse;
     public AudioSource audioWalk;
+    public Transform eye;
 
     float lookRadius = 30f;
     Transform target;
@@ -21,6 +22,7 @@ public class enemyDashScript : MonoBehaviour
     bool dead;
     float health = 120f;
     GameObject existingAttackVisual;
+    bool enemyInSight, alerted;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +32,8 @@ public class enemyDashScript : MonoBehaviour
         canAttack = true;
         doingAttack = false;
         dead = false;
+        enemyInSight = false;
+        alerted = false;
     }
 
     // Update is called once per frame
@@ -39,8 +43,37 @@ public class enemyDashScript : MonoBehaviour
         {
             float distance = Vector3.Distance(target.position, transform.position);
 
-            if (distance <= lookRadius)
+            Vector3 eyePos = eye.position;
+
+            Vector3 vectorToEnemy = (eyePos - target.position) * -1 + new Vector3(0f, 1f, 0f);
+
+            int gunLayerIndex = LayerMask.NameToLayer("Gun");
+            int gunLayerMask = (1 << gunLayerIndex);
+            gunLayerMask = ~gunLayerMask;
+
+            RaycastHit hit; //= new RaycastHit()
+            if (Physics.Raycast(eyePos, vectorToEnemy, out hit, lookRadius, gunLayerMask))
             {
+                Debug.Log("Tag:" + hit.collider.gameObject.tag);
+                Debug.Log("Name: " + hit.collider.gameObject.name);
+                if (hit.collider.gameObject.tag == "Player") // && Vector3.Angle(eye.forward, vectorToEnemy) <= fieldOfView / 2
+                {
+                    enemyInSight = true;
+                }
+                else
+                {
+                    enemyInSight = false;
+                }
+            }
+            else
+            {
+                enemyInSight = false;
+            }
+
+            if (distance <= lookRadius && (enemyInSight || alerted))
+            {
+                alerted = true;
+
                 agent.SetDestination(target.position);
                 anim.SetBool("Walk Forward", true);
 
@@ -142,6 +175,7 @@ public class enemyDashScript : MonoBehaviour
             if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
             {
                 agent.SetDestination(target.position);
+                alerted = true;
 
                 if (!audioWalk.isPlaying)
                     audioWalk.Play();

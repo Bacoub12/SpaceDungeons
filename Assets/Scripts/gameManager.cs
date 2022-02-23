@@ -10,6 +10,7 @@ public class gameManager : MonoBehaviour
     {
         Physics.IgnoreLayerCollision(9, 9); //empecher les enemybullet de se frapper entre eux
         Physics.IgnoreLayerCollision(6, 11); //empecher le joueur et les visuals de se frapper
+        Physics.IgnoreLayerCollision(8, 11); //empecher le joueur (layer gun) et les visuals de se frapper
         Physics.IgnoreLayerCollision(7, 11); //empecher les ennemis et les visuals de se frapper
         Physics.IgnoreLayerCollision(9, 11); //empecher les enemybullet et les visuals de se frapper
         Physics.IgnoreLayerCollision(9, 7); //empecher les enemybullet et les ennemis de se frapper

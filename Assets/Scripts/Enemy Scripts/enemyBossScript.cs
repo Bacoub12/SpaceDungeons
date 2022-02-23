@@ -15,6 +15,7 @@ public class enemyBossScript : MonoBehaviour
     public Transform shootPoint;
     public Transform spawnPoint1;
     public Transform spawnPoint2;
+    public Transform eye;
     public Animator anim;
     public AudioSource audioShoot;
     public AudioSource audioSlam;
@@ -28,6 +29,7 @@ public class enemyBossScript : MonoBehaviour
     float dashDistance = 15f;
     float slamDistance = 5f;
     bool dead;
+    bool enemyInSight, alerted;
     float health = 1000f; //1000f
     GameObject existingAttackVisual;
 
@@ -39,6 +41,8 @@ public class enemyBossScript : MonoBehaviour
         canAttack = true;
         doingAttack = false;
         dead = false;
+        enemyInSight = false;
+        alerted = false;
     }
 
     // Update is called once per frame
@@ -48,8 +52,37 @@ public class enemyBossScript : MonoBehaviour
         {
             float distance = Vector3.Distance(target.position, transform.position);
 
-            if (distance <= lookRadius)
+            Vector3 eyePos = eye.position;
+
+            Vector3 vectorToEnemy = (eyePos - target.position) * -1 + new Vector3(0f, 1f, 0f);
+
+            int gunLayerIndex = LayerMask.NameToLayer("Gun");
+            int gunLayerMask = (1 << gunLayerIndex);
+            gunLayerMask = ~gunLayerMask;
+
+            RaycastHit hit; //= new RaycastHit()
+            if (Physics.Raycast(eyePos, vectorToEnemy, out hit, lookRadius, gunLayerMask))
             {
+                Debug.Log("Tag:" + hit.collider.gameObject.tag);
+                Debug.Log("Name: " + hit.collider.gameObject.name);
+                if (hit.collider.gameObject.tag == "Player") // && Vector3.Angle(eye.forward, vectorToEnemy) <= fieldOfView / 2
+                {
+                    enemyInSight = true;
+                }
+                else
+                {
+                    enemyInSight = false;
+                }
+            }
+            else
+            {
+                enemyInSight = false;
+            }
+
+            if (distance <= lookRadius && (enemyInSight || alerted))
+            {
+                alerted = true;
+
                 agent.SetDestination(target.position);
                 anim.SetBool("Walk Forward", true);
 
@@ -140,7 +173,7 @@ public class enemyBossScript : MonoBehaviour
 
         Destroy(existingAttackVisual);
         GameObject dust = Instantiate(dashDustParticles, transform.position, Quaternion.identity);
-        dust.transform.Rotate(-90.0f, 0.0f, 0.0f, Space.Self);
+        dust.transform.Rotate(-90f, 0f, 0f, Space.Self);
         GameObject trail = Instantiate(dashEnergyParticles, transform.position + centerShift, transform.rotation);
         trail.transform.Rotate(0f, 180f, 0f, Space.Self);
 
@@ -249,6 +282,8 @@ public class enemyBossScript : MonoBehaviour
             if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
             {
                 agent.SetDestination(target.position);
+
+                alerted = true;
 
                 if (!audioWalk.isPlaying)
                     audioWalk.Play();

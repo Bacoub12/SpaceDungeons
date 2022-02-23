@@ -11,15 +11,17 @@ public class enemyMeleeScript : MonoBehaviour
     public GameObject corpse;
     public AudioSource audioAttack;
     public AudioSource audioWalk;
+    public Transform eye;
 
     Transform target;
     NavMeshAgent agent;
     float lookRadius = 30f;
     bool canAttack, attacking, dead;
-    float cooldownLength = 3f;
+    float cooldownLength = 2.5f;
     float attackRange = 3f;
     float health = 120f;
     float fieldOfView = 90f;
+    bool enemyInSight, alerted;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,8 @@ public class enemyMeleeScript : MonoBehaviour
         canAttack = true;
         attacking = false;
         dead = false;
+        enemyInSight = false;
+        alerted = false;
     }
 
     // Update is called once per frame
@@ -36,9 +40,38 @@ public class enemyMeleeScript : MonoBehaviour
     {
         float distance = Vector3.Distance(target.position, transform.position);
 
-        if (distance <= lookRadius && attacking == false)
+        Vector3 eyePos = eye.position;
+
+        Vector3 vectorToEnemy = (eyePos - target.position) * -1 + new Vector3(0f, 1f, 0f);
+
+        int gunLayerIndex = LayerMask.NameToLayer("Gun");
+        int gunLayerMask = (1 << gunLayerIndex);
+        gunLayerMask = ~gunLayerMask;
+
+        RaycastHit hit; //= new RaycastHit()
+        if (Physics.Raycast(eyePos, vectorToEnemy, out hit, lookRadius, gunLayerMask))
+        {
+            Debug.Log("Tag:" + hit.collider.gameObject.tag);
+            Debug.Log("Name: " + hit.collider.gameObject.name);
+            if (hit.collider.gameObject.tag == "Player") // && Vector3.Angle(eye.forward, vectorToEnemy) <= fieldOfView / 2
+            {
+                enemyInSight = true;
+            }
+            else
+            {
+                enemyInSight = false;
+            }
+        }
+        else
+        {
+            enemyInSight = false;
+        }
+
+        if (distance <= lookRadius && attacking == false && (enemyInSight || alerted))
         {
             agent.SetDestination(target.position);
+
+            alerted = true;
 
             Vector3 to = target.position + new Vector3(0f, 1f, 0f);
             Vector3 from = transform.position;
@@ -48,6 +81,7 @@ public class enemyMeleeScript : MonoBehaviour
             if (distance <= agent.stoppingDistance)
             {
                 agent.SetDestination(transform.position);
+                anim.Play("Idle");
                 FaceTarget(direction);
 
                 if (!audioWalk.isPlaying)
@@ -119,6 +153,8 @@ public class enemyMeleeScript : MonoBehaviour
             if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
             {
                 agent.SetDestination(target.position);
+
+                alerted = true;
 
                 if (!audioWalk.isPlaying)
                     audioWalk.Play();
