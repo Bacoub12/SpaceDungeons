@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-653136473159593916
+--- !u!114 &-6597155439412747127
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Day
-  m_Shader: {fileID: -6465566751694194690, guid: bd0e2df58f2cc144a97ee07122116f7f, type: 3}
+  m_Name: Leaves
+  m_Shader: {fileID: -6465566751694194690, guid: 74df69b1b27f33348817523a9b4b54c2, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -32,6 +32,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_5b2d74b6f7374f5bbcb1c8280e532a18:
+        m_Texture: {fileID: 2800000, guid: 2db507f92b0d5954bb24715d7c4e464c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -89,7 +93,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_4bea39f138fc4749bdd545d54e8da141: 1
+    - Vector1_2b12a2d9ca9b48568ceb07a36bfc3063: 0.2
+    - Vector1_36de529505664c6f8ee97e773e644b86: 1.2
+    - Vector1_60bdc21158a6497989353b9339249d46: 0.5
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -117,8 +123,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_5c34cf7f86514809b1b90918b566058a: {r: 0.9858491, g: 0.99406576, b: 1, a: 0}
-    - Color_cd26497da334482ab28ca3983a2eb9e8: {r: 0.514151, g: 0.6963443, b: 1, a: 1}
+    - Color_9b7209d1636b4e7f9d65f895c4f69809: {r: 0.28581148, g: 0.5849056, b: 0.19588816, a: 0}
+    - Vector2_2b4fc29d1bf441b5aaac13d5fd173f78: {r: 1, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
