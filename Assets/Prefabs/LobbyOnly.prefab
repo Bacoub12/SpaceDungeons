@@ -490,6 +490,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6987130191799535140, guid: 33d844dff65ec2747a716572042ac424, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dd10953f9fd788a49844028a77cd07b8, type: 2}
+    - target: {fileID: -5265558064501858721, guid: 33d844dff65ec2747a716572042ac424, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dd10953f9fd788a49844028a77cd07b8, type: 2}
     - target: {fileID: 919132149155446097, guid: 33d844dff65ec2747a716572042ac424, type: 3}
       propertyPath: m_Name
       value: WindowsLobby
