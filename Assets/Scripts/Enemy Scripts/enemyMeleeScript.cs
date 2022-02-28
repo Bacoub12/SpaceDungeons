@@ -49,13 +49,14 @@ public class enemyMeleeScript : MonoBehaviour
         gunLayerMask = ~gunLayerMask;
 
         RaycastHit hit; //= new RaycastHit()
-        if (Physics.Raycast(eyePos, vectorToEnemy, out hit, lookRadius, gunLayerMask))
+        if (Physics.Raycast(eyePos, vectorToEnemy, out hit, lookRadius, gunLayerMask, QueryTriggerInteraction.Ignore))
         {
+            string tag = hit.collider.gameObject.tag;
             /*
-            Debug.Log("Tag:" + hit.collider.gameObject.tag);
+            Debug.Log("Tag:" + tag);
             Debug.Log("Name: " + hit.collider.gameObject.name);
             */
-            if (hit.collider.gameObject.tag == "Player") // && Vector3.Angle(eye.forward, vectorToEnemy) <= fieldOfView / 2
+            if (tag == "Player") // && Vector3.Angle(eye.forward, vectorToEnemy) <= fieldOfView / 2
             {
                 enemyInSight = true;
             }
@@ -69,6 +70,7 @@ public class enemyMeleeScript : MonoBehaviour
             enemyInSight = false;
         }
 
+        //Debug.Log("enemy in sight: " + enemyInSight + ", attacking: " + attacking + ", distance: " + distance);
         if (distance <= lookRadius && attacking == false && (enemyInSight || alerted))
         {
             agent.SetDestination(target.position);

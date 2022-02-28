@@ -83,7 +83,7 @@ public class enemyRifleScript : MonoBehaviour
                 agent.SetDestination(transform.position);
                 FaceTarget(direction);
 
-                if (canShoot)
+                if (canShoot && Vector3.Angle(eye.forward, vectorToEnemy) <= 20f)
                 {
                     AttackTarget(direction);
                     StartCoroutine(shotCooldown());

@@ -81,7 +81,7 @@ public class enemyShotgunScript : MonoBehaviour
                 agent.SetDestination(transform.position);
                 FaceTarget(direction);
 
-                if (canShoot)
+                if (canShoot && Vector3.Angle(eye.forward, vectorToEnemy) <= 20f)
                 {
                     AttackTarget(direction);
                     StartCoroutine(shotCooldown());
@@ -92,12 +92,10 @@ public class enemyShotgunScript : MonoBehaviour
 
     private void FaceTarget(Vector3 _direction)
     {
-        /*
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(_direction.x, 0, _direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-        */
 
-        transform.LookAt(target);
+        //transform.LookAt(target);
     }
 
     private void AttackTarget(Vector3 _direction)

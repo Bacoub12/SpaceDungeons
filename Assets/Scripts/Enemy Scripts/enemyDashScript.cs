@@ -54,11 +54,12 @@ public class enemyDashScript : MonoBehaviour
             RaycastHit hit; //= new RaycastHit()
             if (Physics.Raycast(eyePos, vectorToEnemy, out hit, lookRadius, gunLayerMask))
             {
+                string tag = hit.collider.gameObject.tag;
                 /*
-                Debug.Log("Tag:" + hit.collider.gameObject.tag);
+                Debug.Log("Tag:" + tag);
                 Debug.Log("Name: " + hit.collider.gameObject.name);
                 */
-                if (hit.collider.gameObject.tag == "Player") // && Vector3.Angle(eye.forward, vectorToEnemy) <= fieldOfView / 2
+                if (tag == "Player")
                 {
                     enemyInSight = true;
                 }
@@ -95,7 +96,7 @@ public class enemyDashScript : MonoBehaviour
                     audioWalk.mute = true;
                     FaceTarget(direction);
 
-                    if (canAttack)
+                    if (canAttack && Vector3.Angle(eye.forward, vectorToEnemy) <= 15f)
                     {
                         //CHECK IF THERES ROOM TO ATTACK, if not, either abort or (more complicated) do a shorter dash, until the obstacle
                         StartCoroutine(strike(direction));

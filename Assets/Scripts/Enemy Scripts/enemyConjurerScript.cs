@@ -8,17 +8,21 @@ public class enemyConjurerScript : MonoBehaviour
     public GameObject summonedEnemy;
     public GameObject summonZone;
     public GameObject summonParticles;
+    public GameObject summonEndParticles;
     public GameObject explosion;
+    public GameObject destSphere;
     public Animator anim;
     public AudioSource audioSummon;
     public AudioSource audioSummonEnd;
     public AudioSource audioWalk;
+    public Transform eye;
 
     NavMeshAgent agent;
     float walkRadius = 7f;
-    float minimumWalkDistance = 3f;
+    float minWalkDistance = 3f;
+    float maxWalkDistance = 7f;
     bool canSummon;
-    int maxSpawnsPerSummoner = 5;
+    int maxSpawnsPerSummoner = 5; //5? 10?
     float health = 120f;
     bool dead;
     GameObject existingAttackVisual;
@@ -55,12 +59,61 @@ public class enemyConjurerScript : MonoBehaviour
 
     private void setNewDest()
     {
-        Vector3 newDest = new Vector3(
-            transform.position.x + Random.Range(-walkRadius, walkRadius), 
-            transform.position.y, 
+        bool pathIsValid = false;
+
+        while (pathIsValid == false)
+        {
+            Vector3 newDest = new Vector3(
+            transform.position.x + Random.Range(-walkRadius, walkRadius),
+            transform.position.y,
             transform.position.z + Random.Range(-walkRadius, walkRadius));
 
-        if (Vector3.Distance(transform.position, newDest) > minimumWalkDistance)
+            //drawray from eye to location
+            bool destInSight = false;
+
+            GameObject dest = Instantiate(destSphere, newDest, Quaternion.identity);
+            Vector3 eyePos = eye.position;
+            Vector3 vectorToDest = (eyePos - dest.transform.position) * -1;
+
+            int enemyLayerIndex = LayerMask.NameToLayer("Enemy");
+            int enemyLayerMask = (1 << enemyLayerIndex);
+            enemyLayerMask = ~enemyLayerMask;
+
+            RaycastHit hit; //= new RaycastHit()
+            if (Physics.Raycast(eyePos, vectorToDest, out hit, walkRadius, enemyLayerMask, QueryTriggerInteraction.Collide))
+            {
+                if (hit.collider.gameObject.tag == "Destination")
+                {
+                    destInSight = true;
+                }
+            }
+
+            Destroy(dest);
+
+            float distToDest = Vector3.Distance(transform.position, newDest);
+
+            agent.SetDestination(newDest);
+
+            if (destInSight == true && distToDest > minWalkDistance)
+            {
+                pathIsValid = true;
+
+                anim.SetBool("Walk_Anim", true);
+                if (!audioWalk.isPlaying)
+                    audioWalk.Play();
+                audioWalk.mute = false;
+            }
+        }
+
+        /*
+        Vector3 newDest = new Vector3(
+            transform.position.x + Random.Range(-walkRadius, walkRadius),
+            transform.position.y,
+            transform.position.z + Random.Range(-walkRadius, walkRadius));
+
+        float distToDest = Vector3.Distance(transform.position, newDest);
+
+        if (distToDest > minWalkDistance)
         {
             agent.SetDestination(newDest);
 
@@ -69,6 +122,28 @@ public class enemyConjurerScript : MonoBehaviour
                 audioWalk.Play();
             audioWalk.mute = false;
         }
+        */
+    }
+
+    private float getPathLength(NavMeshPath path)
+    {
+        float length = 0.0f;
+
+        if (path.status != NavMeshPathStatus.PathInvalid)
+        {
+            Debug.Log("path corners: " + path.corners.Length);
+            for (int i = 1; i < path.corners.Length; ++i)
+            {
+                length += Vector3.Distance(path.corners[i - 1], path.corners[i]);
+            }
+        }
+        else
+        {
+            Debug.Log("path invalid?");
+        }
+
+        Debug.Log("path length: " + length);
+        return length;
     }
 
     IEnumerator summon()
@@ -96,6 +171,7 @@ public class enemyConjurerScript : MonoBehaviour
         Destroy(existingAttackVisual);
         ParticleSystem particlesPSys = existingParticles.GetComponent<ParticleSystem>();
         particlesPSys.Stop();
+        Instantiate(summonEndParticles, summonLocation, transform.rotation);
         Instantiate(summonedEnemy, summonLocation, transform.rotation);
 
         yield return new WaitForSeconds(1f);

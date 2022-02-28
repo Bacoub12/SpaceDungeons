@@ -117,17 +117,24 @@ public class enemyBossScript : MonoBehaviour
                         switch (attackChoice)
                         {
                             case 1:
-                                StartCoroutine(dash());
+                                if (Vector3.Angle(eye.forward, vectorToEnemy) <= 20f)
+                                {
+                                    StartCoroutine(dash());
+                                    StartCoroutine(strikeCooldown());
+                                }
                                 break;
                             case 2:
-                                StartCoroutine(shoot(direction));
+                                if (Vector3.Angle(eye.forward, vectorToEnemy) <= 20f)
+                                {
+                                    StartCoroutine(shoot(transform.forward));
+                                    StartCoroutine(strikeCooldown());
+                                }
                                 break;
                             case 3:
                                 StartCoroutine(slam());
+                                StartCoroutine(strikeCooldown());
                                 break;
                         }
-
-                        StartCoroutine(strikeCooldown());
                     }
                 }
             }
