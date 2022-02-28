@@ -42,8 +42,6 @@ public class PlayerScript : MonoBehaviour
         _CharacterController = GetComponent<CharacterController>();
         capsuleCollider = GetComponentInChildren<CapsuleCollider>();
         firstPersonController = GetComponent<FirstPersonController>();
-        //inventory = new Inventory();
-        //uiInventory.SetInventory(inventory);
 
         var fireAction = _actionAsset.FindAction("Fire");
         fireAction.performed += FireAction_performed;
@@ -132,7 +130,15 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.layer == 14)
+        {
+            //Debug.Log("layer de  : " + other.gameObject.layer);
+            //Destroy(other.gameObject);
+        }
+        else
+        {
+            //Debug.Log("layer autre que collectible  : " + other.gameObject.layer);
+        }
     }
 
     void Update()

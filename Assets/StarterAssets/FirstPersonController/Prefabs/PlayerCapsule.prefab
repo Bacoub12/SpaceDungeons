@@ -672,6 +672,7 @@ MonoBehaviour:
   camera: {fileID: 4518748}
   _force: 2000
   _actionAsset: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e, type: 3}
+  uiInventory: {fileID: 0}
   interactableLayerMask:
     serializedVersion: 2
     m_Bits: 1024
