@@ -7,6 +7,7 @@ public class enemyRifleScript : MonoBehaviour
 {
     public GameObject bullet;
     public GameObject explosion;
+    public GameObject gunshotDust;
     public Transform shootPoint;
     public Transform eye;
     public AudioSource audioShot;
@@ -104,6 +105,7 @@ public class enemyRifleScript : MonoBehaviour
     {
         audioShot.Play();
         Rigidbody rb = Instantiate(bullet, shootPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
+        Instantiate(gunshotDust, shootPoint.position, transform.rotation);
         rb.transform.forward = _direction;
         rb.AddForce(rb.transform.forward * 1000f);
     }

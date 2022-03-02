@@ -232,6 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 3189893997636024399, guid: c3e55e6deb42e374ea4037849a045282, type: 3}
   explosion: {fileID: 6721181524601549745, guid: 4e99ee3522a7bf14cb9230d650c89bea, type: 3}
+  gunshotDust: {fileID: 6794455463095599252, guid: 8543c3447fd7125499d4e216dd0a256c, type: 3}
   shootPoint: {fileID: 8139797576894655964}
   eye: {fileID: 1431793170228037956}
   audioShot: {fileID: 9051173183553950877}

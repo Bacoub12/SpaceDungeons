@@ -7,6 +7,7 @@ public class enemyShotgunScript : MonoBehaviour
 {
     public GameObject bullet;
     public GameObject explosion;
+    public GameObject gunshotDust;
     public Transform shootPoint;
     public Transform eye;
     public AudioSource audioShot;
@@ -111,6 +112,7 @@ public class enemyShotgunScript : MonoBehaviour
             rb.transform.Rotate(randomX, randomY, randomZ);
             rb.AddForce(rb.transform.forward * 500f);
         }
+        Instantiate(gunshotDust, shootPoint.position, transform.rotation);
     }
 
     IEnumerator shotCooldown()

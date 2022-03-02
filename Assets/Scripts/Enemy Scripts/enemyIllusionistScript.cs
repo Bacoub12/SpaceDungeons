@@ -7,6 +7,7 @@ public class enemyIllusionistScript : MonoBehaviour
 {
     public GameObject bullet;
     public GameObject explosion;
+    public GameObject gunshotDust;
     public Transform shootPoint;
     public Transform eye;
     public GameObject illusion;
@@ -122,6 +123,7 @@ public class enemyIllusionistScript : MonoBehaviour
     {
         audioShot.Play();
         Rigidbody rb = Instantiate(bullet, shootPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
+        Instantiate(gunshotDust, shootPoint.position, transform.rotation);
         rb.transform.forward = _direction;
         rb.AddForce(rb.transform.forward * 750f);
     }
