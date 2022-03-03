@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ChestDrop : MonoBehaviour
 {
+    public GameObject item;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +16,14 @@ public class ChestDrop : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 0)
+        {
+            Instantiate(item, transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
+        }
     }
 }
