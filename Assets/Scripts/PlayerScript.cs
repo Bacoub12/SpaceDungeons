@@ -152,7 +152,10 @@ public class PlayerScript : MonoBehaviour
                 switch (objectName)
                 {
                     case "Chest":
-                        UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour ouvrir le coffre");
+                        if (hit.collider.gameObject.GetComponent<chestScript>().isOpened() == false)
+                            UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour ouvrir le coffre");
+                        else
+                            UIManager.GetComponent<UIManager>().Interactive(false, "");
                         break;
                     case "Door":
                         UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour ouvrir la porte");
@@ -167,6 +170,7 @@ public class PlayerScript : MonoBehaviour
                         UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour intéragir");
                         break;
                 }
+
                 if (interactable == null || interactable.ID != hit.collider.GetComponent<Interactable>().ID)
                 {
                     interaction = true;

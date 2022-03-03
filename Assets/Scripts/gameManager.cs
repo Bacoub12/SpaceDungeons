@@ -8,12 +8,13 @@ public class gameManager : MonoBehaviour
 
     void Start()
     {
-        Physics.IgnoreLayerCollision(9, 9); //empecher les enemybullet de se frapper entre eux
-        Physics.IgnoreLayerCollision(6, 11); //empecher le joueur et les visuals de se frapper
-        Physics.IgnoreLayerCollision(8, 11); //empecher le joueur (layer gun) et les visuals de se frapper
-        Physics.IgnoreLayerCollision(7, 11); //empecher les ennemis et les visuals de se frapper
-        Physics.IgnoreLayerCollision(9, 11); //empecher les enemybullet et les visuals de se frapper
-        Physics.IgnoreLayerCollision(9, 7); //empecher les enemybullet et les ennemis de se frapper
+        Physics.IgnoreLayerCollision(9, 9); //enemybullet entre eux
+        Physics.IgnoreLayerCollision(6, 11); //joueur et visuals
+        Physics.IgnoreLayerCollision(8, 11); //joueur (layer gun) et visuals
+        Physics.IgnoreLayerCollision(7, 11); //ennemis et visuals
+        Physics.IgnoreLayerCollision(9, 11); //enemybullet et visuals
+        Physics.IgnoreLayerCollision(9, 7); //enemybullet et ennemis
+        Physics.IgnoreLayerCollision(10, 11); //interactable (donc les chests) et drops
     }
 
     // Update is called once per frame
