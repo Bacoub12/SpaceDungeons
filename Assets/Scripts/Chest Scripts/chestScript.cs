@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class chestScript : MonoBehaviour
+public class ChestScript : MonoBehaviour
 {
     public GameObject drop;
 
