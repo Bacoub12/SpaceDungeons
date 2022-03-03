@@ -148,7 +148,25 @@ public class PlayerScript : MonoBehaviour
         {
             if (hit.collider.GetComponent<Interactable>() != false)
             {
-                UIManager.GetComponent<UIManager>().Interactive(true);
+                string objectName = hit.collider.name;
+                switch (objectName)
+                {
+                    case "Chest":
+                        UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour ouvrir le coffre");
+                        break;
+                    case "Door":
+                        UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour ouvrir la porte");
+                        break;
+                    case "Key":
+                        UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour prendre la clé");
+                        break;
+                    case "Teleporter":
+                        UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour utiliser le téléporteur");
+                        break;
+                    default:
+                        UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour intéragir");
+                        break;
+                }
                 if (interactable == null || interactable.ID != hit.collider.GetComponent<Interactable>().ID)
                 {
                     interaction = true;
@@ -164,7 +182,7 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            UIManager.GetComponent<UIManager>().Interactive(false);
+            UIManager.GetComponent<UIManager>().Interactive(false, "");
         }
         
     }
@@ -172,7 +190,7 @@ public class PlayerScript : MonoBehaviour
     {
         if(interactable == true)
         {
-            interactable.onInteract.Invoke();// peut causé des crashs, mais incapable de reproduire...
+            interactable.onInteract.Invoke();
         }
         else
         {

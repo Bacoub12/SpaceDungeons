@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -26,12 +27,14 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void Interactive(bool OnOff)
+    public void Interactive(bool OnOff, string message)
     {
         switch (OnOff)
         {
             case true:
+                //Debug.Log(_interact.name);
                 _interact.SetActive(true);
+                _interact.GetComponent<TMP_Text>().SetText(message);
                 break;
 
             case false:
