@@ -2,18 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item
-{/*
-   public enum ItemType
+public class Item : MonoBehaviour
+{
+    [SerializeField] public string type;
+    [SerializeField] public int amount;
+
+
+    public Item(string type, int amount)
     {
-        Helmet,
-        Chest,
-        Pantalon,
-        Boots,
-        Money,
-        Health,
+        this.type = type;
+        this.amount = amount;
     }
 
-    public ItemType itemType;
-    public int amount;*/
+    public void setType(string _type)
+    {
+        type = _type;
+    }
+
+    public string getType()
+    {
+        return type;
+    }
+
+    public void setAmount(int _amount)
+    {
+        amount = _amount;
+    }
+
+    public int getAmount()
+    {
+        return amount;
+    }
+
 }

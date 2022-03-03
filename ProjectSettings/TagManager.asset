@@ -13,6 +13,11 @@ TagManager:
   - BossSpawns
   - Gun
   - Bullet
+  - Money
+  - Helmet
+  - Chest
+  - Pantalon
+  - Boot
   layers:
   - Default
   - TransparentFX

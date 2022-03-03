@@ -34,6 +34,7 @@ public class PlayerScript : MonoBehaviour
     public LayerMask interactableLayerMask = 10;
     private Interactable interactable;
     private Inventory inventory;
+    private Item item;
 
     //[SerializeField] GameObject whatgun;
 
@@ -42,6 +43,8 @@ public class PlayerScript : MonoBehaviour
         _CharacterController = GetComponent<CharacterController>();
         capsuleCollider = GetComponentInChildren<CapsuleCollider>();
         firstPersonController = GetComponent<FirstPersonController>();
+        inventory = GameObject.Find("InventoryManager").GetComponent<Inventory>();
+        item = GetComponent<Item>();
 
         var fireAction = _actionAsset.FindAction("Fire");
         fireAction.performed += FireAction_performed;
@@ -49,7 +52,6 @@ public class PlayerScript : MonoBehaviour
         fireAction.Enable();
 
         
-
     }
 
 
@@ -132,6 +134,46 @@ public class PlayerScript : MonoBehaviour
     {
         if (other.gameObject.layer == 14)
         {
+            if(other.gameObject.tag == "Money")
+            {
+                item = other.gameObject.GetComponent<Item>(); //chercher le script
+                inventory.AddItem(item);
+                Destroy(other.gameObject);
+                foreach(Item i in inventory.GetItemList())
+                Debug.Log("List : " + i.getType());
+            }
+            if (other.gameObject.tag == "Helmet")
+            {
+                item = other.gameObject.GetComponent<Item>(); //chercher le script
+                inventory.AddItem(item);
+                Destroy(other.gameObject);
+                foreach (Item i in inventory.GetItemList())
+                    Debug.Log("List : " + i.getType());
+            }
+            if (other.gameObject.tag == "Chest")
+            {
+                item = other.gameObject.GetComponent<Item>(); //chercher le script
+                inventory.AddItem(item);
+                Destroy(other.gameObject);
+                foreach (Item i in inventory.GetItemList())
+                    Debug.Log("List : " + i.getType());
+            }
+            if (other.gameObject.tag == "Pantalon")
+            {
+                item = other.gameObject.GetComponent<Item>(); //chercher le script
+                inventory.AddItem(item);
+                Destroy(other.gameObject);
+                foreach (Item i in inventory.GetItemList())
+                    Debug.Log("List : " + i.getType());
+            }
+            if (other.gameObject.tag == "Boot")
+            {
+                item = other.gameObject.GetComponent<Item>(); //chercher le script
+                inventory.AddItem(item);
+                Destroy(other.gameObject);
+                foreach (Item i in inventory.GetItemList())
+                    Debug.Log("List : " + i.getType());
+            }
             //Debug.Log("layer de  : " + other.gameObject.layer);
             //Destroy(other.gameObject);
         }

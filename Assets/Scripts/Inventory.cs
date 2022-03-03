@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory
-{/*
+public class Inventory : MonoBehaviour
+{
 
     private List<Item> itemList;
 
     public Inventory()
     {
         itemList = new List<Item>();
-        AddItem(new Item { itemType = Item.ItemType.Chest, amount = 1 });
+        //AddItem(new Item { itemType = Item.ItemType.Chest, amount = 1 });
         // toute les items différents devront être lister ci-dessous
         //
         //
@@ -26,5 +26,5 @@ public class Inventory
     {
         return itemList;
     }
-    */
+    
 }
