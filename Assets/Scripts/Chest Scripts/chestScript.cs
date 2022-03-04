@@ -44,7 +44,8 @@ public class ChestScript : MonoBehaviour
         Vector3 launchVector = transform.forward + transform.up;
         Rigidbody rb = Instantiate(drop, transform.position + upShift, transform.rotation).GetComponent<Rigidbody>();
         Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), drop.GetComponent<Collider>());
-        rb.AddForce(launchVector * 150f);
+        rb.AddForce(launchVector * 200f);
         rb.AddTorque(transform.right * 50f);
+        rb.AddTorque(transform.up * 50f);
     }
 }
