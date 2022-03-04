@@ -37,6 +37,7 @@ public class PlayerScript : MonoBehaviour
     private Inventory inventory;
     private Item item;
     private MoneyScript moneyScript;
+    private Transform itemSlotContainer;
 
     //[SerializeField] GameObject whatgun;
 
@@ -46,6 +47,7 @@ public class PlayerScript : MonoBehaviour
         capsuleCollider = GetComponentInChildren<CapsuleCollider>();
         firstPersonController = GetComponent<FirstPersonController>();
         inventory = GameObject.Find("InventoryManager").GetComponent<Inventory>();
+        itemSlotContainer = transform.Find("itemSlotContainer");
         item = GetComponent<Item>();
 
         var fireAction = _actionAsset.FindAction("Fire");
@@ -211,7 +213,7 @@ public class PlayerScript : MonoBehaviour
                 string objectName = hit.collider.name;
                 switch (objectName)
                 {
-                    case "Chest":
+                    case "ArmorChest": case "HealthChest": case "MoneyChest":
                         if (hit.collider.gameObject.GetComponent<ChestScript>().isOpened() == false)
                             UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour ouvrir le coffre");
                         else
@@ -265,6 +267,11 @@ public class PlayerScript : MonoBehaviour
     public void OnPause()
     {
         UIManager.GetComponent<UIManager>().PauseGame();
+        foreach (Item i in inventory.GetItemList())
+        {
+            
+            Debug.Log("List : " + i.getType());
+        }
     }
 
     public void OnCrouch()

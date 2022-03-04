@@ -18,6 +18,7 @@ public class Inventory : MonoBehaviour
     {
         itemList.Add(item);
         Debug.Log(itemList.Count);
+
     }
 
     public List<Item> GetItemList()
