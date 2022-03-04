@@ -12,14 +12,12 @@ public class Inventory : MonoBehaviour
         itemList = new List<Item>();
         //AddItem(new Item { itemType = Item.ItemType.Chest, amount = 1 });
         // toute les items différents devront être lister ci-dessous
-        //
-        //
-        Debug.Log(itemList.Count);
     }
 
     public void AddItem(Item item)
     {
         itemList.Add(item);
+        Debug.Log(itemList.Count);
     }
 
     public List<Item> GetItemList()

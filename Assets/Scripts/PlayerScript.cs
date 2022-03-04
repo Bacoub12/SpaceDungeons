@@ -12,6 +12,9 @@ using Random = UnityEngine.Random;
 public class PlayerScript : MonoBehaviour
 {
     int gunId = 0;
+    int canShootShotgun = 0;
+    int canShootRifle = 0;
+    public int money = 0;
     [SerializeField] GameObject _bullet;
     [SerializeField] GameObject UIManager;
     [SerializeField] Transform _attach;
@@ -20,14 +23,12 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private InputActionAsset _actionAsset = default;
     [SerializeField] private UI_Inventory uiInventory;
 
-    int canShootShotgun = 0;
-    int canShootRifle = 0;
-    FirstPersonController firstPersonController;
     bool autoStop = false;
     bool interaction = false;
     bool onOffCrouch = false;
     bool pause = false;
     float timer = 0.0f;
+    FirstPersonController firstPersonController;
     CapsuleCollider capsuleCollider;
     CharacterController _CharacterController;
     Rigidbody rb;
@@ -35,6 +36,7 @@ public class PlayerScript : MonoBehaviour
     private Interactable interactable;
     private Inventory inventory;
     private Item item;
+    private MoneyScript moneyScript;
 
     //[SerializeField] GameObject whatgun;
 
@@ -127,52 +129,58 @@ public class PlayerScript : MonoBehaviour
     {
         gunId = 2;
     }
-
-
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 14)
         {
             if(other.gameObject.tag == "Money")
             {
-                item = other.gameObject.GetComponent<Item>(); //chercher le script
-                inventory.AddItem(item);
+                moneyScript = other.gameObject.GetComponent<MoneyScript>();
+                money += moneyScript.getMoneyValue();
                 Destroy(other.gameObject);
-                foreach(Item i in inventory.GetItemList())
-                Debug.Log("List : " + i.getType());
+                Debug.Log("Money : " + money);
             }
-            if (other.gameObject.tag == "Helmet")
+            else if (other.gameObject.tag == "Helmet")
             {
                 item = other.gameObject.GetComponent<Item>(); //chercher le script
                 inventory.AddItem(item);
                 Destroy(other.gameObject);
                 foreach (Item i in inventory.GetItemList())
+                {
                     Debug.Log("List : " + i.getType());
+                    
+                }
             }
-            if (other.gameObject.tag == "Chest")
+            else if (other.gameObject.tag == "Chest")
             {
                 item = other.gameObject.GetComponent<Item>(); //chercher le script
                 inventory.AddItem(item);
                 Destroy(other.gameObject);
                 foreach (Item i in inventory.GetItemList())
+                {
                     Debug.Log("List : " + i.getType());
+                }
             }
-            if (other.gameObject.tag == "Pantalon")
+            else if (other.gameObject.tag == "Pantalon")
             {
                 item = other.gameObject.GetComponent<Item>(); //chercher le script
                 inventory.AddItem(item);
                 Destroy(other.gameObject);
                 foreach (Item i in inventory.GetItemList())
+                {
                     Debug.Log("List : " + i.getType());
+                }
             }
-            if (other.gameObject.tag == "Boot")
+            else if (other.gameObject.tag == "Boot")
             {
                 item = other.gameObject.GetComponent<Item>(); //chercher le script
                 inventory.AddItem(item);
                 Destroy(other.gameObject);
                 foreach (Item i in inventory.GetItemList())
+                {
                     Debug.Log("List : " + i.getType());
+                }
             }
             //Debug.Log("layer de  : " + other.gameObject.layer);
             //Destroy(other.gameObject);
