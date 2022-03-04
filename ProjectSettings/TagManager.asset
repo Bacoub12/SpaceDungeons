@@ -18,6 +18,7 @@ TagManager:
   - Chest
   - Pantalon
   - Boot
+  - Health
   layers:
   - Default
   - TransparentFX
