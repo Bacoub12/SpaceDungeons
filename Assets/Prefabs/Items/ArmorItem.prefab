@@ -171,7 +171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4439036910517251825}
-  - component: {fileID: 7281072824716246143}
+  - component: {fileID: 6098697392273542621}
   - component: {fileID: 7971537727777390658}
   - component: {fileID: 7125587755293819733}
   m_Layer: 14
@@ -205,8 +205,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7281072824716246143
-BoxCollider:
+--- !u!135 &6098697392273542621
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -216,7 +216,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 1.25, z: 0.7}
+  m_Radius: 1
   m_Center: {x: -0.45, y: 0.7, z: 0}
 --- !u!114 &7971537727777390658
 MonoBehaviour:
@@ -243,7 +243,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: Chest
-  amount: 1
 --- !u!1 &4525818637068334587
 GameObject:
   m_ObjectHideFlags: 0

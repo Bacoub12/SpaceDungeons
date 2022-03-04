@@ -15,6 +15,7 @@ public class gameManager : MonoBehaviour
         Physics.IgnoreLayerCollision(9, 11); //enemybullet et visuals
         Physics.IgnoreLayerCollision(9, 7); //enemybullet et ennemis
         Physics.IgnoreLayerCollision(10, 11); //interactable (donc les chests) et drops
+        Physics.IgnoreLayerCollision(11, 11); //visuals et visuals
     }
 
     // Update is called once per frame
