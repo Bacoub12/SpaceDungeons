@@ -182,6 +182,16 @@ public class PlayerScript : MonoBehaviour
                     Debug.Log("List : " + i.getType());
                 }
             }
+            else if (other.gameObject.tag == "Health")
+            {
+                item = other.gameObject.GetComponent<Item>(); //chercher le script
+                inventory.AddItem(item);
+                Destroy(other.gameObject);
+                foreach (Item i in inventory.GetItemList())
+                {
+                    Debug.Log("List : " + i.getType());
+                }
+            }
             //Debug.Log("layer de  : " + other.gameObject.layer);
             //Destroy(other.gameObject);
         }
