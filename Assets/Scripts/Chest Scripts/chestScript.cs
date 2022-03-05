@@ -45,8 +45,13 @@ public class ChestScript : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Vector3 upShift = new Vector3(0f, 0.5f, 0f); //0f, 0.5f, 0f
         Vector3 launchVector = transform.forward + transform.up;
-        Rigidbody rb = Instantiate(drop, transform.position + upShift, transform.rotation).GetComponent<Rigidbody>();
+
+        GameObject dropObject = Instantiate(drop, transform.position + upShift, transform.rotation);
+        dropObject.GetComponent<ChestDrop>().chestHeight = transform.position.y;
+
+        Rigidbody rb = dropObject.GetComponent<Rigidbody>();
         Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), drop.GetComponent<Collider>());
+
         rb.AddForce(launchVector * 200f);
         rb.AddTorque(transform.right * 50f);
         rb.AddTorque(transform.up * 50f);
@@ -60,10 +65,16 @@ public class ChestScript : MonoBehaviour
         for (int i = 0; i < nbrDrops; i++)
         {
             Vector3 launchVector = transform.forward + transform.up;
-            Vector3 randomShift = new Vector3(Random.Range(0f, 0.5f), Random.Range(0f, 0.5f), Random.Range(0f, 0.5f));
+            float shiftSize = 0.5f;
+            Vector3 randomShift = new Vector3(Random.Range(-shiftSize, shiftSize), Random.Range(-shiftSize, shiftSize), Random.Range(-shiftSize, shiftSize));
             launchVector = launchVector + randomShift;
-            Rigidbody rb = Instantiate(drop, transform.position + upShift, transform.rotation).GetComponent<Rigidbody>();
+
+            GameObject dropObject = Instantiate(drop, transform.position + upShift, transform.rotation);
+            dropObject.GetComponent<ChestDrop>().chestHeight = transform.position.y;
+
+            Rigidbody rb = dropObject.GetComponent<Rigidbody>();
             Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), drop.GetComponent<Collider>());
+
             rb.AddForce(launchVector * Random.Range(150f, 250f));
             rb.AddTorque(transform.right * 50f);
             rb.AddTorque(transform.up * 50f);
