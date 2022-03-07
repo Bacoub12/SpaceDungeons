@@ -37,7 +37,6 @@ public class PlayerScript : MonoBehaviour
     private Inventory inventory;
     private Item item;
     private MoneyScript moneyScript;
-    private Transform itemSlotContainer;
 
     //[SerializeField] GameObject whatgun;
 
@@ -47,7 +46,6 @@ public class PlayerScript : MonoBehaviour
         capsuleCollider = GetComponentInChildren<CapsuleCollider>();
         firstPersonController = GetComponent<FirstPersonController>();
         inventory = GameObject.Find("InventoryManager").GetComponent<Inventory>();
-        itemSlotContainer = transform.Find("itemSlotContainer");
         item = GetComponent<Item>();
 
         var fireAction = _actionAsset.FindAction("Fire");
@@ -260,7 +258,7 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("/Veg");
+            Debug.Log("/Vegu");
         }
     }
 
@@ -269,7 +267,7 @@ public class PlayerScript : MonoBehaviour
         UIManager.GetComponent<UIManager>().PauseGame();
         foreach (Item i in inventory.GetItemList())
         {
-            
+            UIManager.GetComponent<UIManager>().SortItem(i);
             Debug.Log("List : " + i.getType());
         }
     }

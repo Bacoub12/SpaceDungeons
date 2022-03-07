@@ -9,6 +9,9 @@ public class UIManager : MonoBehaviour
     private bool OnOff;
     [SerializeField] private GameObject _escapeMenuPanel;
     [SerializeField] private GameObject _interact;
+    [SerializeField] private Transform _itemSlotContainer;
+    [SerializeField] private GameObject _item;
+
     public void PauseGame()
     {
         if (Time.timeScale == 1)
@@ -41,6 +44,28 @@ public class UIManager : MonoBehaviour
                 _interact.SetActive(false);
                 break;
         }
+        
+    }
+
+    public void SortItem(Item i)
+    {
+        switch (i.getType()){
+            case "Helmet":
+                // something changer la source de l'image
+                break;
+            case "Chest":
+                break;
+            case "Pantalon":
+                break;
+            case "Boot":
+                break;
+
+            default:
+
+                break;
+        }
+        GameObject inventoryItem = Instantiate(_item, _itemSlotContainer);
+        GameObject image = inventoryItem.GetComponentInChildren<GameObject>();
         
     }
 
