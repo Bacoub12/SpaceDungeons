@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    private int score;
+    private double score;
+    private bool onStreak;
 
     // Start is called before the first frame update
     void Start()
     {
         setScore(0);
+        onStreak = false;
     }
 
     // Update is called once per frame
@@ -18,18 +20,29 @@ public class ScoreManager : MonoBehaviour
         
     }
 
-    public int getScore()
+    public double getScore()
     {
         return score;
     }
 
-    public void setScore(int _score)
+    public void setScore(double _score)
     {
         score = _score;
     }
 
-    public void addToScore(int _score)
+    public void addToScore(double _score)
     {
-        score += _score;
+        double scoreMultiplier = 1f;
+        if (onStreak)
+            scoreMultiplier *= 1.5;
+        score += _score * scoreMultiplier;
+        Debug.Log("Score: " + score);
+    }
+
+    IEnumerator streakCoroutine()
+    {
+        onStreak = true;
+        yield return new WaitForSeconds(3f);
+        onStreak = false;
     }
 }

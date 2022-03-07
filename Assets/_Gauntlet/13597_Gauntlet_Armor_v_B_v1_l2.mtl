@@ -1,0 +1,49 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 17.02.2012 14:59:31
+
+newmtl 13597GauntletArmorvB_leatherhand
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 1.0000 1.0000 1.0000
+	Kd 1.0000 1.0000 1.0000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka 13597GauntletArmorvB_leatherhand_diffuse.jpg
+	map_Kd 13597GauntletArmorvB_leatherhand_diffuse.jpg
+	map_bump Map__2_Normal Bump.jpg
+
+newmtl 13597GauntletArmorvB_hand
+	Ns 37.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 1.0000 1.0000 1.0000
+	Kd 1.0000 1.0000 1.0000
+	Ks 0.6750 0.6750 0.6750
+	Ke 0.0000 0.0000 0.0000
+	map_Ka 13597GauntletArmorvB_hand_diffuse.jpg
+	map_Kd 13597GauntletArmorvB_hand_diffuse.jpg
+	map_bump 13597GauntletArmorvB_hand_bump.jpg
+	bump 13597GauntletArmorvB_hand_bump.jpg
+
+newmtl 13597GauntletArmorvB_handtop
+	Ns 37.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 1.0000 1.0000 1.0000
+	Kd 1.0000 1.0000 1.0000
+	Ks 0.6750 0.6750 0.6750
+	Ke 0.0000 0.0000 0.0000
+	map_Ka 13597GauntletArmorvB_handtop_diffuse.jpg
+	map_Kd 13597GauntletArmorvB_handtop_diffuse.jpg
+	map_bump 13597GauntletArmorvB_handtop_bump.jpg
+	bump 13597GauntletArmorvB_handtop_bump.jpg

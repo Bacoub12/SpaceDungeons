@@ -195,6 +195,9 @@ public class enemyIllusionistScript : MonoBehaviour
 
             Instantiate(explosion, transform.position, transform.rotation);
 
+            ScoreManager scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+            scoreManager.addToScore(20);
+
             //Invoke(nameof(DestroyThis), 3f);
             DestroyThis();
         }

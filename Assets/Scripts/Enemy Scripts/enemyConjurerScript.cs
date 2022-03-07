@@ -222,6 +222,9 @@ public class enemyConjurerScript : MonoBehaviour
 
             Instantiate(explosion, transform.position, transform.rotation);
 
+            ScoreManager scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+            scoreManager.addToScore(15);
+
             //Invoke(nameof(DestroyThis), 3f);
             DestroyThis();
         }

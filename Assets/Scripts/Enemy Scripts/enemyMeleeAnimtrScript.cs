@@ -182,6 +182,9 @@ public class enemyMeleeAnimtrScript : MonoBehaviour
 
             Instantiate(corpse, transform.position, transform.rotation);
 
+            ScoreManager scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+            scoreManager.addToScore(10);
+
             //Invoke(nameof(DestroyThis), 3f);
             DestroyThis();
         }
