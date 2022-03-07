@@ -37,6 +37,7 @@ public class ScoreManager : MonoBehaviour
             scoreMultiplier *= 1.5;
         score += _score * scoreMultiplier;
         Debug.Log("Score: " + score);
+        StartCoroutine(streakCoroutine());
     }
 
     IEnumerator streakCoroutine()
