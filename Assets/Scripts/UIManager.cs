@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour
@@ -11,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _interact;
     [SerializeField] private Transform _itemSlotContainer;
     [SerializeField] private GameObject _item;
+    [SerializeField] private Sprite[] _itemSprite;
 
     public void PauseGame()
     {
@@ -27,6 +29,7 @@ public class UIManager : MonoBehaviour
             pause = false;
             _escapeMenuPanel.SetActive(false);
             CursorLock();
+            
         }
     }
 
@@ -47,15 +50,19 @@ public class UIManager : MonoBehaviour
         
     }
 
-    public void SortItem(Item i)
+    public void AjoutItemUi(Item i)
     {
+        GameObject inventoryItem = Instantiate(_item, _itemSlotContainer);
+        Image image = inventoryItem.transform.GetChild(0).gameObject.GetComponent<Image>();
         switch (i.getType()){
             case "Helmet":
                 // something changer la source de l'image
                 break;
             case "Chest":
+                image.sprite = _itemSprite[0];
                 break;
             case "Pantalon":
+                image.sprite = _itemSprite[1];
                 break;
             case "Boot":
                 break;
@@ -64,8 +71,8 @@ public class UIManager : MonoBehaviour
 
                 break;
         }
-        GameObject inventoryItem = Instantiate(_item, _itemSlotContainer);
-        GameObject image = inventoryItem.GetComponentInChildren<GameObject>();
+        
+        
         
     }
 

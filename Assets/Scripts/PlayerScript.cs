@@ -141,59 +141,13 @@ public class PlayerScript : MonoBehaviour
                 Destroy(other.gameObject);
                 Debug.Log("Money : " + money);
             }
-            else if (other.gameObject.tag == "Helmet")
+            else if (other.gameObject.tag == "Helmet" || other.gameObject.tag == "Chest" || other.gameObject.tag == "Pantalon" || other.gameObject.tag == "Boot" || other.gameObject.tag == "Health")
             {
                 item = other.gameObject.GetComponent<Item>(); //chercher le script
                 inventory.AddItem(item);
+                UIManager.GetComponent<UIManager>().AjoutItemUi(item);
                 Destroy(other.gameObject);
-                foreach (Item i in inventory.GetItemList())
-                {
-                    Debug.Log("List : " + i.getType());
-                    
-                }
             }
-            else if (other.gameObject.tag == "Chest")
-            {
-                item = other.gameObject.GetComponent<Item>(); //chercher le script
-                inventory.AddItem(item);
-                Destroy(other.gameObject);
-                foreach (Item i in inventory.GetItemList())
-                {
-                    Debug.Log("List : " + i.getType());
-                }
-            }
-            else if (other.gameObject.tag == "Pantalon")
-            {
-                item = other.gameObject.GetComponent<Item>(); //chercher le script
-                inventory.AddItem(item);
-                Destroy(other.gameObject);
-                foreach (Item i in inventory.GetItemList())
-                {
-                    Debug.Log("List : " + i.getType());
-                }
-            }
-            else if (other.gameObject.tag == "Boot")
-            {
-                item = other.gameObject.GetComponent<Item>(); //chercher le script
-                inventory.AddItem(item);
-                Destroy(other.gameObject);
-                foreach (Item i in inventory.GetItemList())
-                {
-                    Debug.Log("List : " + i.getType());
-                }
-            }
-            else if (other.gameObject.tag == "Health")
-            {
-                item = other.gameObject.GetComponent<Item>(); //chercher le script
-                inventory.AddItem(item);
-                Destroy(other.gameObject);
-                foreach (Item i in inventory.GetItemList())
-                {
-                    Debug.Log("List : " + i.getType());
-                }
-            }
-            //Debug.Log("layer de  : " + other.gameObject.layer);
-            //Destroy(other.gameObject);
         }
         else
         {
@@ -265,11 +219,6 @@ public class PlayerScript : MonoBehaviour
     public void OnPause()
     {
         UIManager.GetComponent<UIManager>().PauseGame();
-        foreach (Item i in inventory.GetItemList())
-        {
-            UIManager.GetComponent<UIManager>().SortItem(i);
-            Debug.Log("List : " + i.getType());
-        }
     }
 
     public void OnCrouch()

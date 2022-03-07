@@ -17,8 +17,11 @@ public class Inventory : MonoBehaviour
     public void AddItem(Item item)
     {
         itemList.Add(item);
-        Debug.Log(itemList.Count);
+    }
 
+    public void RemoveItem(Item item)
+    {
+        //avec le menu quand on click sur drop
     }
 
     public List<Item> GetItemList()

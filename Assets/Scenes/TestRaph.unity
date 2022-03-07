@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 64796588}
   m_Layer: 14
   m_Name: Cuve32 (2)
-  m_TagString: Pantalon
+  m_TagString: Health
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1624,6 +1624,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 442764339}
+    - target: {fileID: 5308552985886277685, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5308552985886277685, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5308552985886277685, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5308552985886277686, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5308552986172552000, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1761,6 +1777,18 @@ PrefabInstance:
       propertyPath: _itemSlotContainer
       value: 
       objectReference: {fileID: 1266416291}
+    - target: {fileID: 9190368129060722932, guid: a86bc40bb5f8dc54eaa412d550fbb0b6, type: 3}
+      propertyPath: _itemSprite.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9190368129060722932, guid: a86bc40bb5f8dc54eaa412d550fbb0b6, type: 3}
+      propertyPath: _itemSprite.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 70f237b5c0a17a34ab575ce7652296c8, type: 3}
+    - target: {fileID: 9190368129060722932, guid: a86bc40bb5f8dc54eaa412d550fbb0b6, type: 3}
+      propertyPath: _itemSprite.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: e87d7919088ea3f43b5de34d47f86cc3, type: 3}
     - target: {fileID: 9190368129060722933, guid: a86bc40bb5f8dc54eaa412d550fbb0b6, type: 3}
       propertyPath: m_RootOrder
       value: 2
