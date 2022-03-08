@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 782aaed19707e9840821b27c9e805807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: Pantalon
+  type: Health
 --- !u!54 &64796589
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1321,11 +1321,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194363202}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1266416290 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 66348618, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
-  m_PrefabInstance: {fileID: 5308552986284056439}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1266416291 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 66348619, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
@@ -1624,22 +1619,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 442764339}
-    - target: {fileID: 5308552985886277685, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308552985886277685, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308552985886277685, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308552985886277686, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5308552986172552000, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1758,10 +1737,6 @@ PrefabInstance:
       value: UIManager
       objectReference: {fileID: 0}
     - target: {fileID: 9190368129060722932, guid: a86bc40bb5f8dc54eaa412d550fbb0b6, type: 3}
-      propertyPath: _item
-      value: 
-      objectReference: {fileID: 8671505138107167368, guid: 60a479ab1f1eb5644802058729458082, type: 3}
-    - target: {fileID: 9190368129060722932, guid: a86bc40bb5f8dc54eaa412d550fbb0b6, type: 3}
       propertyPath: _interact
       value: 
       objectReference: {fileID: 1684176030}
@@ -1770,25 +1745,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 970694465}
     - target: {fileID: 9190368129060722932, guid: a86bc40bb5f8dc54eaa412d550fbb0b6, type: 3}
-      propertyPath: ItemSlotContainer
-      value: 
-      objectReference: {fileID: 1266416290}
-    - target: {fileID: 9190368129060722932, guid: a86bc40bb5f8dc54eaa412d550fbb0b6, type: 3}
       propertyPath: _itemSlotContainer
       value: 
       objectReference: {fileID: 1266416291}
-    - target: {fileID: 9190368129060722932, guid: a86bc40bb5f8dc54eaa412d550fbb0b6, type: 3}
-      propertyPath: _itemSprite.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9190368129060722932, guid: a86bc40bb5f8dc54eaa412d550fbb0b6, type: 3}
-      propertyPath: _itemSprite.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 70f237b5c0a17a34ab575ce7652296c8, type: 3}
-    - target: {fileID: 9190368129060722932, guid: a86bc40bb5f8dc54eaa412d550fbb0b6, type: 3}
-      propertyPath: _itemSprite.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: e87d7919088ea3f43b5de34d47f86cc3, type: 3}
     - target: {fileID: 9190368129060722933, guid: a86bc40bb5f8dc54eaa412d550fbb0b6, type: 3}
       propertyPath: m_RootOrder
       value: 2
