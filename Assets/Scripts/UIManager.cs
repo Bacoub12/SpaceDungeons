@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Transform _itemSlotContainer;
     [SerializeField] private GameObject _item;
     [SerializeField] private Sprite[] _itemSprite;
-    [SerializeField] private Item[] _itemList;
+    [SerializeField] private GameObject[] _itemList;
 
     public void PauseGame()
     {
@@ -60,16 +60,16 @@ public class UIManager : MonoBehaviour
                 // something changer la source de l'image
                 break;
             case "Chest":
-                i = _itemList[0]; // jpense que sa va finir par planter -> un moment donner, s'il y a plus que un item avec des stats differentes,
+               // i = _itemList[0]; // jpense que sa va finir par planter -> un moment donner, s'il y a plus que un item avec des stats differentes,
                 image.sprite = _itemSprite[0];
                 break;
-            case "Pantalon":
+            case "Gloves":
                 
                 break;
             case "Boot":
                 break;
             case "Health":
-                i = _itemList[1];
+               // i = _itemList[1];
                 image.sprite = _itemSprite[1];
                 break;
 
