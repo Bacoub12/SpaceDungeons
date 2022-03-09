@@ -36,25 +36,22 @@ public class ChestDrop : MonoBehaviour
             Vector3 spawnAdjust = new Vector3(0f, 0f, 0f); //modifiable au cas ou
 
             //Debug.Log(gameObject.name);
-            /*
-            if (gameObject.name == "ArmorDrop(Clone)")
+            
+            if (gameObject.name == "HelmetDrop(Clone)")
             {
-                spawnAdjust = new Vector3(0f, 0f, 0f);
-            }
-            else if (gameObject.name == "HealthDrop(Clone)")
+                spawnAdjust = new Vector3(0f, 0.25f, 0f);
+            } 
+            else if (gameObject.name == "GlovesDrop(Clone)")
             {
-                spawnAdjust = new Vector3(0f, 0f, 0f);
+                spawnAdjust = new Vector3(0f, 0.2f, 0f);
             }
-            else if (gameObject.name == "MoneyDrop(Clone)")
-            {
-                spawnAdjust = new Vector3(0f, 0f, 0f);
-            }
-            */
 
             GameObject spawnedItem = Instantiate(item, spawnPos + spawnAdjust, Quaternion.identity);
             spawnedItem.transform.Rotate(0.0f, 180.0f, 0.0f, Space.Self);
             if (gameObject.name == "MoneyDrop(Clone)")
                 spawnedItem.transform.Rotate(90.0f, 0.0f, 0.0f, Space.Self);
+            if (gameObject.name == "BootsDrop(Clone)")
+                spawnedItem.transform.Rotate(-90.0f, 0.0f, 0.0f, Space.Self);
             Destroy(this.gameObject);
         }
     }
