@@ -30,8 +30,10 @@ public class ChestDrop : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(collision.gameObject.layer);
         if (collision.gameObject.layer == 0)
         {
+            Debug.Log("allo");
             Vector3 spawnPos = new Vector3(transform.position.x, chestHeight + 0.2f, transform.position.z);
             Vector3 spawnAdjust = new Vector3(0f, 0f, 0f); //modifiable au cas ou
 

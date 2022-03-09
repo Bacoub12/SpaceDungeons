@@ -780,8 +780,16 @@ PrefabInstance:
       value: 20215
       objectReference: {fileID: 0}
     - target: {fileID: 169181207, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: m_Radius
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 169181207, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 169181207, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: m_Center.y
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 169181207, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_IsTrigger
@@ -1623,6 +1631,10 @@ PrefabInstance:
       propertyPath: m_ConstraintCount
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1057676593, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1142675208, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1787,6 +1799,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8466624472275071977, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
 --- !u!1001 &5841363752244739665
@@ -1880,7 +1896,7 @@ PrefabInstance:
     - target: {fileID: 9190368129060722932, guid: a86bc40bb5f8dc54eaa412d550fbb0b6, type: 3}
       propertyPath: _itemList.Array.data[0]
       value: 
-      objectReference: {fileID: 1759345395428809368, guid: ddc4b0f3676a0b54b83ce5b4072ae909, type: 3}
+      objectReference: {fileID: 8399512265110151577, guid: bfd220c9e895dab4aae3482c2119c5ad, type: 3}
     - target: {fileID: 9190368129060722932, guid: a86bc40bb5f8dc54eaa412d550fbb0b6, type: 3}
       propertyPath: _itemList.Array.data[1]
       value: 
@@ -1892,7 +1908,7 @@ PrefabInstance:
     - target: {fileID: 9190368129060722932, guid: a86bc40bb5f8dc54eaa412d550fbb0b6, type: 3}
       propertyPath: _itemList.Array.data[3]
       value: 
-      objectReference: {fileID: 8848751966023311480, guid: f2d9449c67830634a9ec309eb26747d8, type: 3}
+      objectReference: {fileID: 3845682195950458517, guid: 3383da805861a3a43bdf309764cf68c9, type: 3}
     - target: {fileID: 9190368129060722932, guid: a86bc40bb5f8dc54eaa412d550fbb0b6, type: 3}
       propertyPath: _itemList.Array.data[4]
       value: 

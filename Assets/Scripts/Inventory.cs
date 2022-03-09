@@ -24,9 +24,9 @@ public class Inventory : MonoBehaviour
         itemList.Add(item);
     }
 
-    public void RemoveItem(Item item)
+    public void RemoveItem(Sprite sprite)
     {/*
-        foreach(sprites in List)
+        foreach(sprites in itemList)
         {
             if (counter == 0)
             {
@@ -49,16 +49,16 @@ public class Inventory : MonoBehaviour
     {
         string objectName = image.sprite.name;
         Transform playerPosition = GameManager.PlayerPostion;
+        Vector3 launch = new Vector3(playerPosition.position.x, playerPosition.position.y + 2f, playerPosition.position.z);
+        Vector3 forward = playerPosition.forward;
         switch (objectName)
         {
             case "Helmet":
-                Instantiate(helmet, playerPosition.position, playerPosition.rotation);
-                Debug.Log("player pos : " + playerPosition);
+                Instantiate(helmet, launch + forward, playerPosition.rotation);
                 break;
 
             case "Chestplate":
-                Instantiate(chestplate, playerPosition.position, playerPosition.rotation);
-                Debug.Log("player pos : " + playerPosition);
+                Instantiate(chestplate, launch + forward, playerPosition.rotation);
                 break;
             case "Gloves":
 
@@ -68,15 +68,42 @@ public class Inventory : MonoBehaviour
                 break;
 
             case "Health":
-                Instantiate(health, playerPosition.position, playerPosition.rotation);
-                Debug.Log("player pos : " + playerPosition);
+
+                Instantiate(health, launch + forward, playerPosition.rotation);
                 break;
 
             default:
 
                 break;
         }
-        Debug.Log(objectName);
+    }
+
+    public void use(Image image)
+    {
+        string objectName = image.sprite.name;
+        switch (objectName)
+        {
+            case "Helmet":
+                break;
+
+            case "Chestplate":
+                break;
+            case "Gloves":
+
+                break;
+
+            case "Boot":
+                //use armor
+                break;
+
+            case "Health":
+                //use health
+                break;
+
+            default:
+
+                break;
+        }
     }
     
 }

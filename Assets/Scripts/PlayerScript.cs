@@ -141,7 +141,7 @@ public class PlayerScript : MonoBehaviour
                 Destroy(other.gameObject);
                 Debug.Log("Money : " + money);
             }
-            else if (other.gameObject.tag == "Helmet" || other.gameObject.tag == "Chest" || other.gameObject.tag == "Pantalon" || other.gameObject.tag == "Boot" || other.gameObject.tag == "Health")
+            else if (other.gameObject.tag == "Helmet" || other.gameObject.tag == "Chest" || other.gameObject.tag == "Gloves" || other.gameObject.tag == "Boot" || other.gameObject.tag == "Health")
             {
                 item = other.gameObject.GetComponent<Item>(); //chercher le script
                 inventory.AddItem(item);
