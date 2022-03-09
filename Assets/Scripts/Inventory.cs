@@ -24,20 +24,22 @@ public class Inventory : MonoBehaviour
         itemList.Add(item);
     }
 
-    public void RemoveItem(Sprite sprite)
-    {/*
-        foreach(sprites in itemList)
+    public void RemoveItem(Image image)
+    {
+        string name = image.sprite.name;
+        bool found = false;
+        foreach(Item item in itemList) /* work in progress*/
         {
-            if (counter == 0)
+            if (found == false)
             {
-                if (nom in list)
+                if (name == item.getType())
                 {
-                    delete;
-                    counter++;
+                    Destroy(image.gameObject.transform.parent.gameObject);
+                    found = true;
                 }
             }
             break;
-        }*/
+        }
     }
 
     public List<Item> GetItemList()
