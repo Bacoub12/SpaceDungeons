@@ -6,7 +6,7 @@ public class BulletScript : MonoBehaviour
 {
     float timeBeforeDestroy = 3f;
     [SerializeField] private ParticleSystem particules;
-
+    
     void Start()
     {
         Destroy(gameObject, timeBeforeDestroy);

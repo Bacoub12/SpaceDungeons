@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    int id;
     [SerializeField] public string type;
 
 
-    public Item(string type)
+    public Item(string type, int id)
     {
         this.type = type;
+        this.id = id;
     }
 
     public void setType(string _type)
@@ -20,6 +22,16 @@ public class Item : MonoBehaviour
     public string getType()
     {
         return type;
+    }
+
+    public void setId(int _id)
+    {
+        id = _id;
+    }
+
+    public int getId()
+    {
+        return id;
     }
 
 }

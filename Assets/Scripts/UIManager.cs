@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
 {
     public bool pause = false;
     private bool OnOff;
+    public Sprite sprite;
     [SerializeField] private GameObject _escapeMenuPanel;
     [SerializeField] private GameObject _interact;
     [SerializeField] private Transform _itemSlotContainer;
@@ -81,7 +82,8 @@ public class UIManager : MonoBehaviour
 
     public void DropItem()
     {
-       
+        sprite = this.gameObject.GetComponentInChildren<Image>().sprite;
+        Debug.Log("sprite : " + sprite);
     }
 
     public bool getPause()
