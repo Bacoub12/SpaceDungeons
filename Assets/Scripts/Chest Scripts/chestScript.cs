@@ -47,7 +47,6 @@ public class ChestScript : MonoBehaviour
         Vector3 launchVector = transform.forward + transform.up;
 
         GameObject dropObject = Instantiate(drop, transform.position + upShift, transform.rotation);
-        dropObject.GetComponent<ChestDrop>().chestHeight = transform.position.y;
 
         Rigidbody rb = dropObject.GetComponent<Rigidbody>();
         Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), drop.GetComponent<Collider>());
@@ -70,7 +69,6 @@ public class ChestScript : MonoBehaviour
             launchVector = launchVector + randomShift;
 
             GameObject dropObject = Instantiate(drop, transform.position + upShift, transform.rotation);
-            dropObject.GetComponent<ChestDrop>().chestHeight = transform.position.y;
 
             Rigidbody rb = dropObject.GetComponent<Rigidbody>();
             Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), drop.GetComponent<Collider>());

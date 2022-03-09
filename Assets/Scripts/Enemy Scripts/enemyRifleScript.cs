@@ -146,7 +146,6 @@ public class enemyRifleScript : MonoBehaviour
         if (health <= 0)
         {
             dead = true;
-            gameObject.GetComponent<NavMeshAgent>().enabled = false;
 
             Instantiate(explosion, transform.position, transform.rotation);
 
@@ -154,6 +153,7 @@ public class enemyRifleScript : MonoBehaviour
             scoreManager.addToScore(10);
 
             //Invoke(nameof(DestroyThis), 3f);
+            gameObject.GetComponent<NavMeshAgent>().enabled = false;
             DestroyThis();
         }
     }

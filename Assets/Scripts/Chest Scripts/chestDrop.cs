@@ -5,7 +5,6 @@ using UnityEngine;
 public class ChestDrop : MonoBehaviour
 {
     public GameObject item;
-    public float chestHeight;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +17,7 @@ public class ChestDrop : MonoBehaviour
     {
         if (transform.position.y < -100f)
         {
-            Vector3 spawnPos = new Vector3(transform.position.x, chestHeight + 0.2f, transform.position.z);
+            Vector3 spawnPos = new Vector3(transform.position.x, 0.2f, transform.position.z);
             Vector3 spawnAdjust = new Vector3(0f, 0f, 0f); //modifiable au cas ou
             GameObject spawnedItem = Instantiate(item, spawnPos + spawnAdjust, Quaternion.identity);
             spawnedItem.transform.Rotate(0.0f, 180.0f, 0.0f, Space.Self);
@@ -30,11 +29,9 @@ public class ChestDrop : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.layer);
         if (collision.gameObject.layer == 0)
         {
-            Debug.Log("allo");
-            Vector3 spawnPos = new Vector3(transform.position.x, chestHeight + 0.2f, transform.position.z);
+            Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             Vector3 spawnAdjust = new Vector3(0f, 0f, 0f); //modifiable au cas ou
 
             //Debug.Log(gameObject.name);
@@ -44,6 +41,10 @@ public class ChestDrop : MonoBehaviour
                 spawnAdjust = new Vector3(0f, 0.25f, 0f);
             } 
             else if (gameObject.name == "GlovesDrop(Clone)")
+            {
+                spawnAdjust = new Vector3(0f, 0.2f, 0f);
+            }
+            else if (gameObject.name == "MoneyDrop(Clone)")
             {
                 spawnAdjust = new Vector3(0f, 0.2f, 0f);
             }

@@ -50,6 +50,7 @@ public class enemyDeathScript : MonoBehaviour
 
     IEnumerator destruction(float time)
     {
+        gameObject.GetComponent<moneyDropScript>().enabled = true;
         yield return new WaitForSeconds(time);
         if (deathParticles != null)
             Instantiate(deathParticles, transform.position, transform.rotation);
