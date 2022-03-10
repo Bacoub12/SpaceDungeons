@@ -40,6 +40,7 @@ public class PlayerScript : MonoBehaviour
     private Inventory inventory;
     private Item item;
     private MoneyScript moneyScript;
+    private UpgradeDeskScript upgradeDeskScript;
 
     //[SerializeField] GameObject whatgun;
 
@@ -56,7 +57,8 @@ public class PlayerScript : MonoBehaviour
         fireAction.canceled += FireAction_canceled;
         fireAction.Enable();
 
-        
+        if (GameObject.Find("UpgradeDesk") != null)
+            upgradeDeskScript = GameObject.Find("UpgradeDesk").GetComponent<UpgradeDeskScript>();
     }
 
 
@@ -68,26 +70,38 @@ public class PlayerScript : MonoBehaviour
 
     private void FireAction_performed(InputAction.CallbackContext obj)
     {
-        if (!UIManager.GetComponent<UIManager>().getPause())
+        if (upgradeDeskScript != null)
         {
-            switch (gunId)
+            if (!UIManager.GetComponent<UIManager>().getPause() && !upgradeDeskScript.checkIfActive())
             {
-                case 0: //pistol
-                    rb = Instantiate(_bullet, _attach.position, _attach.rotation).GetComponent<Rigidbody>();
-                    rb.AddForce(_attach.forward * _force);
-                    break;
-
-                case 1: // shotgun
-                    if (canShootShotgun == 0)
-                        StartCoroutine(PumpShotgun());
-                    break;
-
-                case 2: // rifle
-                    autoStop = true;
-                    if (canShootRifle == 0)
-                        StartCoroutine(AutomaticRifle());
-                    break;
+                shoot();
             }
+        }
+        else if (!UIManager.GetComponent<UIManager>().getPause())
+        {
+            shoot();
+        }
+    }
+
+    private void shoot()
+    {
+        switch (gunId)
+        {
+            case 0: //pistol
+                rb = Instantiate(_bullet, _attach.position, _attach.rotation).GetComponent<Rigidbody>();
+                rb.AddForce(_attach.forward * _force);
+                break;
+
+            case 1: // shotgun
+                if (canShootShotgun == 0)
+                    StartCoroutine(PumpShotgun());
+                break;
+
+            case 2: // rifle
+                autoStop = true;
+                if (canShootRifle == 0)
+                    StartCoroutine(AutomaticRifle());
+                break;
         }
     }
 
@@ -250,6 +264,12 @@ public class PlayerScript : MonoBehaviour
 
     public void OnPause()
     {
+        //si l'ecran update est là, l'enlever
+        if (upgradeDeskScript != null)
+        {
+            if (upgradeDeskScript.checkIfActive() == true)
+                upgradeDeskScript.toggleUpgradeInterface();
+        }
         UIManager.GetComponent<UIManager>().PauseGame();
     }
 
