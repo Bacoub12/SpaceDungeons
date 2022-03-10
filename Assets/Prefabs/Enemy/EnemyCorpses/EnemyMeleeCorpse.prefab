@@ -1679,8 +1679,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8752831827780430490}
   - component: {fileID: 8717607783290321470}
-  - component: {fileID: 1376381269687831535}
   - component: {fileID: 4785195910782712199}
+  - component: {fileID: 1376381269687831535}
+  - component: {fileID: 3736813122533293972}
   m_Layer: 0
   m_Name: EnemyMeleeCorpse
   m_TagString: Summoned
@@ -1730,23 +1731,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
---- !u!114 &1376381269687831535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8751399738798266984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d48e601390c29a47a09f2b5e4d049e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  deathAnimName: Death
-  animCompType: Animation
-  transitionType: 
-  timeBeforeDestroy: 2
-  deathParticles: {fileID: 3459016289815738942, guid: db4fd4c115e8a3d4b92bcdd91e640669, type: 3}
 --- !u!82 &4785195910782712199
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1843,6 +1827,36 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1376381269687831535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8751399738798266984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d48e601390c29a47a09f2b5e4d049e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathAnimName: Death
+  animCompType: Animation
+  transitionType: 
+  timeBeforeDestroy: 2
+  deathParticles: {fileID: 3459016289815738942, guid: db4fd4c115e8a3d4b92bcdd91e640669, type: 3}
+--- !u!114 &3736813122533293972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8751399738798266984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51bc21aa2ffc6114bbbc66c3d0fb32e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cash: {fileID: 7067550015486924025, guid: b3233e25ecbca914094c213f21846ee4, type: 3}
 --- !u!1 &8751400679612896652
 GameObject:
   m_ObjectHideFlags: 0
