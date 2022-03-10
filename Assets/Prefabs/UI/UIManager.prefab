@@ -47,6 +47,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   _escapeMenuPanel: {fileID: 0}
   _interact: {fileID: 0}
+  _deathPanel: {fileID: 0}
   _itemSlotContainer: {fileID: 0}
   _item: {fileID: 2232459501595708697, guid: e666480f026e70e4ba355c79c2899e22, type: 3}
   _itemSprite:

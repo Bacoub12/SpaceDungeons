@@ -15,6 +15,7 @@ public class PlayerScript : MonoBehaviour
     int gunId = 0;
     int canShootShotgun = 0;
     int canShootRifle = 0;
+    public int health = 100;
     public int money = 0;
     [SerializeField] GameObject _bullet;
     [SerializeField] GameObject UIManager;
@@ -155,6 +156,17 @@ public class PlayerScript : MonoBehaviour
                 buttonDrop.GetComponent<Button>().onClick.AddListener(delegate { inventoryManager.GetComponent<Inventory>().Drop(theImage); });
 
                 Destroy(other.gameObject);
+            }
+            else if (other.gameObject.layer == 9)
+            {
+                if (health > 0)
+                {
+                    health -= 10;
+                }
+                else
+                {
+                    UIManager.GetComponent<UIManager>().DeathScreen(true);
+                }
             }
         }
         else

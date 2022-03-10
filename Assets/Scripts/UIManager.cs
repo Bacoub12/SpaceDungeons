@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public Sprite sprite;
     [SerializeField] private GameObject _escapeMenuPanel;
     [SerializeField] private GameObject _interact;
+    [SerializeField] private GameObject _deathPanel;
     [SerializeField] private Transform _itemSlotContainer;
     [SerializeField] private GameObject _item;
     [SerializeField] private Sprite[] _itemSprite;
@@ -49,7 +50,23 @@ public class UIManager : MonoBehaviour
                 _interact.SetActive(false);
                 break;
         }
-        
+    }
+
+    public void DeathScreen(bool OnOff)
+    {
+        switch (OnOff)
+        {
+            case true:
+                //Debug.Log(_interact.name);
+                _interact.SetActive(true);
+                Time.timeScale = 0;
+                break;
+
+            case false:
+                _interact.SetActive(false);
+                Time.timeScale = 1;
+                break;
+        }
     }
 
     public GameObject AjoutItemUi(Item i)

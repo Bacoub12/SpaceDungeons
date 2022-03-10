@@ -2147,6 +2147,11 @@ PrefabInstance:
       objectReference: {fileID: 1456843441}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
+--- !u!1 &5308552986284056440 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1057676593, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
+  m_PrefabInstance: {fileID: 5308552986284056439}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5841363752244739665
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2219,6 +2224,10 @@ PrefabInstance:
       propertyPath: _interact
       value: 
       objectReference: {fileID: 1684176030}
+    - target: {fileID: 9190368129060722932, guid: a86bc40bb5f8dc54eaa412d550fbb0b6, type: 3}
+      propertyPath: _deathPanel
+      value: 
+      objectReference: {fileID: 5308552986284056440}
     - target: {fileID: 9190368129060722932, guid: a86bc40bb5f8dc54eaa412d550fbb0b6, type: 3}
       propertyPath: _escapeMenuPanel
       value: 
