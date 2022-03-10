@@ -175,8 +175,8 @@ GameObject:
   - component: {fileID: 7971537727777390658}
   - component: {fileID: 7125587755293819733}
   m_Layer: 14
-  m_Name: ArmorItem
-  m_TagString: Chest
+  m_Name: ChestplateItem
+  m_TagString: Chestplate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 782aaed19707e9840821b27c9e805807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: Chest
+  type: Chestplate
 --- !u!1 &4525818637068334587
 GameObject:
   m_ObjectHideFlags: 0

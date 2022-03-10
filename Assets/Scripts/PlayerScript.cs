@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -134,18 +135,25 @@ public class PlayerScript : MonoBehaviour
     {
         if (other.gameObject.layer == 14)
         {
-            if(other.gameObject.tag == "Money")
+            if (other.gameObject.tag == "Money")
             {
                 moneyScript = other.gameObject.GetComponent<MoneyScript>();
                 money += moneyScript.getMoneyValue();
                 Destroy(other.gameObject);
                 Debug.Log("Money : " + money);
             }
-            else if (other.gameObject.tag == "Helmet" || other.gameObject.tag == "Chest" || other.gameObject.tag == "Gloves" || other.gameObject.tag == "Boot" || other.gameObject.tag == "Health")
+            else if (other.gameObject.tag == "Helmet" || other.gameObject.tag == "Chestplate" || other.gameObject.tag == "Gloves" || other.gameObject.tag == "Boot" || other.gameObject.tag == "Health")
             {
                 item = other.gameObject.GetComponent<Item>(); //chercher le script
+                //Debug.Log("item" + item.getType());
                 inventory.AddItem(item);
-                UIManager.GetComponent<UIManager>().AjoutItemUi(item);
+
+                GameObject itemObject = UIManager.GetComponent<UIManager>().AjoutItemUi(item);
+                GameObject buttonDrop = itemObject.transform.GetChild(1).gameObject;
+                GameObject inventoryManager = GameObject.Find("InventoryManager");
+                Image theImage = itemObject.transform.GetChild(0).gameObject.GetComponent<Image>();
+                buttonDrop.GetComponent<Button>().onClick.AddListener(delegate { inventoryManager.GetComponent<Inventory>().Drop(theImage); });
+
                 Destroy(other.gameObject);
             }
         }

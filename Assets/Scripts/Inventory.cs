@@ -12,34 +12,49 @@ public class Inventory : MonoBehaviour
     [SerializeField] GameObject health;
     private List<Item> itemList;
 
-    public Inventory()
+    private void Start()
     {
         itemList = new List<Item>();
-        //AddItem(new Item { itemType = Item.ItemType.Chest, amount = 1 });
-        // toute les items différents devront être lister ci-dessous
+        Debug.Log("lists initialized");
     }
 
     public void AddItem(Item item)
     {
         itemList.Add(item);
+        Debug.Log("item added, item count now " + itemList.Count);
+        if (itemList.Count == 2)
+        {
+            Debug.Log("oui");
+        }
+        
+
     }
 
     public void RemoveItem(Image image)
     {
+        //Debug.Log("it pass");
         string name = image.sprite.name;
         bool found = false;
-        foreach(Item item in itemList) /* work in progress*/
+        int removedItemPosition = 0;
+
+        Debug.Log("trying to remove, item count now " + itemList.Count);
+        foreach (Item item in itemList) /* work in progress*/
         {
+            Debug.Log("dans le foreacj");
             if (found == false)
             {
+                Debug.Log("dans le if, avec spriteName " + name + " et item type" + item.getType());
                 if (name == item.getType())
                 {
                     Destroy(image.gameObject.transform.parent.gameObject);
+                    removedItemPosition = itemList.IndexOf(item);
+                    Debug.Log("dans le if2");
                     found = true;
                 }
             }
-            break;
         }
+
+        itemList.RemoveAt(removedItemPosition);
     }
 
     public List<Item> GetItemList()
@@ -49,10 +64,12 @@ public class Inventory : MonoBehaviour
 
     public void Drop(Image image)
     {
+
+        Debug.Log("trying to drop, item count now " + itemList.Count);
         string objectName = image.sprite.name;
         Transform playerPosition = GameManager.PlayerPostion;
-        Vector3 launch = new Vector3(playerPosition.position.x, playerPosition.position.y + 2f, playerPosition.position.z);
-        Vector3 forward = playerPosition.forward;
+        Vector3 launch = new Vector3(playerPosition.position.x, playerPosition.position.y + 0.5f, playerPosition.position.z);
+        Vector3 forward = playerPosition.forward *1.5f;
         switch (objectName)
         {
             case "Helmet":
@@ -61,6 +78,7 @@ public class Inventory : MonoBehaviour
 
             case "Chestplate":
                 Instantiate(chestplate, launch + forward, playerPosition.rotation);
+                RemoveItem(image);
                 break;
             case "Gloves":
 
@@ -72,6 +90,7 @@ public class Inventory : MonoBehaviour
             case "Health":
 
                 Instantiate(health, launch + forward, playerPosition.rotation);
+                RemoveItem(image);
                 break;
 
             default:

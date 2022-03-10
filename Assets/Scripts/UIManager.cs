@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
         
     }
 
-    public void AjoutItemUi(Item i)
+    public GameObject AjoutItemUi(Item i)
     {
         GameObject inventoryItem = Instantiate(_item, _itemSlotContainer);
         Image image = inventoryItem.transform.GetChild(0).gameObject.GetComponent<Image>();
@@ -60,9 +60,9 @@ public class UIManager : MonoBehaviour
             case "Helmet":
                 // something changer la source de l'image
                 break;
-            case "Chest":
+            case "Chestplate":
                // i = _itemList[0]; // jpense que sa va finir par planter -> un moment donner, s'il y a plus que un item avec des stats differentes,
-                image.sprite = _itemSprite[0];
+                image.sprite = _itemSprite[1];
                 break;
             case "Gloves":
                 
@@ -71,13 +71,15 @@ public class UIManager : MonoBehaviour
                 break;
             case "Health":
                // i = _itemList[1];
-                image.sprite = _itemSprite[1];
+                image.sprite = _itemSprite[4];
                 break;
 
             default:
 
                 break;
         }
+
+        return inventoryItem;
     }
 
     public void DropItem()

@@ -15,10 +15,10 @@ TagManager:
   - Bullet
   - Money
   - Helmet
-  - Chest
   - Boot
   - Health
   - Gloves
+  - Chestplate
   layers:
   - Default
   - TransparentFX
