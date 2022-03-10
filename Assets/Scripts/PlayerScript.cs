@@ -16,6 +16,7 @@ public class PlayerScript : MonoBehaviour
     int canShootShotgun = 0;
     int canShootRifle = 0;
     public int health = 100;
+    public int armure = 100;
     public int money = 0;
     [SerializeField] GameObject _bullet;
     [SerializeField] GameObject UIManager;
@@ -159,14 +160,8 @@ public class PlayerScript : MonoBehaviour
             }
             else if (other.gameObject.layer == 9)
             {
-                if (health > 0)
-                {
-                    health -= 10;
-                }
-                else
-                {
-                    UIManager.GetComponent<UIManager>().DeathScreen(true);
-                }
+                //mettre des if pour le nombre de degat recu
+                Damage();
             }
         }
         else
@@ -224,6 +219,23 @@ public class PlayerScript : MonoBehaviour
         }
         
     }
+
+    private void Damage()
+    {
+        // mettre que les degat rentre dans larmnure et aprse le restant des degat rentre dans la vie
+        if (armure > 0)
+        {
+            if (health > 0)
+            {
+                health -= 10;
+            }
+            else
+            {
+                UIManager.GetComponent<UIManager>().DeathScreen(true);
+            }
+        }
+    }
+
     public void OnInteract() // le boutons
     {
         if(interactable == true)
