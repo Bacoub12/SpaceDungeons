@@ -69,18 +69,46 @@ public class UpgradeDeskScript : MonoBehaviour
                         //chaque bouton doit déclencher dans son onclick un load basé sur le script UpgradeScript à côté de lui
                         buttonGameObject.GetComponent<Button>()
                             .onClick.AddListener(delegate {
-                                loadUpgradeInfo(upgradeScript.title, upgradeScript.description, upgradeScript.price); 
+                                loadUpgradeInfo(upgradeScript.title, upgradeScript.description, upgradeScript.price, upgradeScript.bought); 
                             });
                     }
-                    
+
+                    GameObject buyButton = GameObject.Find("btBuy");
+                    buyButton.GetComponent<Button>()
+                            .onClick.AddListener(delegate {
+                                buyUpgrade();
+                                updateMoneyVisual();
+                            });
 
                     initialized = true;
                 }
+
+                updateMoneyVisual();
+
+                GameObject descPanel = GameObject.Find("DescPanel");
+                descPanel.transform.GetChild(0).gameObject
+                    .GetComponent<TMP_Text>()
+                    .text = "";
+                descPanel.transform.GetChild(1).gameObject
+                    .GetComponent<TMP_Text>()
+                    .text = "";
+                descPanel.transform.GetChild(2).gameObject
+                    .GetComponent<TMP_Text>()
+                    .text = "";
+                descPanel.transform.GetChild(3).gameObject
+                    .GetComponent<Button>()
+                    .interactable = false;
             }
         }
     }
 
-    public void loadUpgradeInfo(string title, string description, float price)
+    public void updateMoneyVisual()
+    {
+        GameObject moneyText = GameObject.Find("MoneyText");
+        moneyText.GetComponent<TMP_Text>().text = "Crédits: " + GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>().money;
+    }
+
+    public void loadUpgradeInfo(string title, string description, float price, bool bought)
     {
         GameObject descPanel = GameObject.Find("DescPanel");
         descPanel.transform.GetChild(0).gameObject
@@ -92,6 +120,48 @@ public class UpgradeDeskScript : MonoBehaviour
         descPanel.transform.GetChild(2).gameObject
             .GetComponent<TMP_Text>()
             .text = "Prix: " + price;
+
+        if (bought)
+        {
+            descPanel.transform.GetChild(3).gameObject
+                .GetComponent<Button>()
+                .interactable = false;
+        }
+        else
+        {
+            descPanel.transform.GetChild(3).gameObject
+                .GetComponent<Button>()
+                .interactable = true;
+        }
+    }
+
+    public void buyUpgrade()
+    {
+        int price = int.Parse(GameObject.Find("textPrice").GetComponent<TMP_Text>().text.Split(':')[1].Trim());
+        int money = int.Parse(GameObject.Find("MoneyText").GetComponent<TMP_Text>().text.Split(':')[1].Trim());
+
+        if (money > price)
+        {
+            int newMoney = money - price;
+            GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>().money = newMoney;
+            updateMoneyVisual();
+
+            string upgradeName = GameObject.Find("textTitle").GetComponent<TMP_Text>().text;
+            foreach (Transform child in GameObject.Find("ListPanel").transform)
+            {
+                GameObject buttonGameObject = child.gameObject;
+                if (buttonGameObject.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text == upgradeName)
+                {
+                    UpgradeScript upgradeScript = buttonGameObject.GetComponent<UpgradeScript>();
+                    upgradeScript.bought = true;
+                }
+            }
+
+            GameObject.Find("DescPanel")
+                .transform.GetChild(3)
+                .gameObject.GetComponent<Button>()
+                .interactable = false;
+        }
     }
 
     private void CursorUnlock()
