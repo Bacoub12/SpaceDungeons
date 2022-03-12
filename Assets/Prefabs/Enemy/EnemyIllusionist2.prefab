@@ -268,6 +268,7 @@ MonoBehaviour:
   illusion: {fileID: 6289470798875643972, guid: 6f4f80af05d16aa418e4df9379520111, type: 3}
   illusionEffect: {fileID: 86334240090340619, guid: 867b0a7906d7aea4f95d1b3578bce621, type: 3}
   audioShot: {fileID: 3038303002548447170}
+  health: 200
 --- !u!1 &8296825718188857520
 GameObject:
   m_ObjectHideFlags: 0

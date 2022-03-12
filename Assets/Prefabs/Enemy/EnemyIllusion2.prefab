@@ -297,3 +297,4 @@ MonoBehaviour:
   eye: {fileID: 2230704313481288263}
   audioShot: {fileID: 2253543917835650581}
   guyType: Illusion
+  health: 100

@@ -12,6 +12,7 @@ public class enemyMeleeScript : MonoBehaviour
     public AudioSource audioAttack;
     public AudioSource audioWalk;
     public Transform eye;
+    [SerializeField] float health;
 
     Transform target;
     NavMeshAgent agent;
@@ -19,7 +20,6 @@ public class enemyMeleeScript : MonoBehaviour
     bool canAttack, attacking, dead;
     float cooldownLength = 2.5f;
     float attackRange = 3f;
-    float health = 120f;
     float fieldOfView = 90f;
     bool enemyInSight, alerted;
 
@@ -153,7 +153,7 @@ public class enemyMeleeScript : MonoBehaviour
     {
         if (other.gameObject.name == "Bullet(Clone)")
         {
-            TakeDamage(24); //5 shots to kill
+            TakeDamage(other.gameObject.GetComponent<BulletScript>().getTrueDamage());
             if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
             {
                 agent.SetDestination(target.position);
@@ -167,7 +167,7 @@ public class enemyMeleeScript : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
 

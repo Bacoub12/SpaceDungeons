@@ -1544,6 +1544,7 @@ MonoBehaviour:
   audioAttack: {fileID: 2009105695179389240}
   audioWalk: {fileID: -3975818881154680330}
   eye: {fileID: 1604510411397203183}
+  health: 150
 --- !u!1 &3038705317744065485
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,13 +11,13 @@ public class enemyShotgunScript : MonoBehaviour
     public Transform shootPoint;
     public Transform eye;
     public AudioSource audioShot;
+    [SerializeField] float health;
 
     float lookRadius = 20f;
     Transform target;
     NavMeshAgent agent;
     bool canShoot;
     float cooldownLength = 3f;
-    float health = 120f;
     bool dead;
     bool enemyInSight, alerted;
 
@@ -126,7 +126,7 @@ public class enemyShotgunScript : MonoBehaviour
     {
         if (other.gameObject.name == "Bullet(Clone)")
         {
-            TakeDamage(24); //5 shots to kill
+            TakeDamage(other.gameObject.GetComponent<BulletScript>().getTrueDamage());
             if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
             {
                 agent.SetDestination(target.position);
@@ -136,7 +136,7 @@ public class enemyShotgunScript : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
 

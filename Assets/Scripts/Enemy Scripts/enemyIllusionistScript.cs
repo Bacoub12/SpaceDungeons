@@ -13,6 +13,7 @@ public class enemyIllusionistScript : MonoBehaviour
     public GameObject illusion;
     public GameObject illusionEffect;
     public AudioSource audioShot;
+    [SerializeField] float health;
 
     float lookRadius = 20f;
     Transform target;
@@ -24,7 +25,6 @@ public class enemyIllusionistScript : MonoBehaviour
     float illusionRadius = 5f;
     int maxIllusionsPerIllusionist = 4;
     bool dead;
-    float health = 120f;
     bool enemyInSight, alerted;
 
     // Start is called before the first frame update
@@ -174,7 +174,7 @@ public class enemyIllusionistScript : MonoBehaviour
     {
         if (other.gameObject.name == "Bullet(Clone)")
         {
-            TakeDamage(24); //5 shots to kill
+            TakeDamage(other.gameObject.GetComponent<BulletScript>().getTrueDamage());
             if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
             {
                 agent.SetDestination(target.position);
@@ -184,7 +184,7 @@ public class enemyIllusionistScript : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
 

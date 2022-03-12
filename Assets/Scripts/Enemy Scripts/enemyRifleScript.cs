@@ -12,6 +12,7 @@ public class enemyRifleScript : MonoBehaviour
     public Transform eye;
     public AudioSource audioShot;
     public string guyType;
+    [SerializeField] float health;
 
     float lookRadius = 20f;
     Transform target;
@@ -19,7 +20,6 @@ public class enemyRifleScript : MonoBehaviour
     bool canShoot;
     float cooldownLength;
     bool dead;
-    float health = 120f;
     bool enemyInSight, alerted;
 
     // Start is called before the first frame update
@@ -121,17 +121,7 @@ public class enemyRifleScript : MonoBehaviour
     {
         if (other.gameObject.name == "Bullet(Clone)")
         {
-            switch (guyType)
-            {
-                case "Rifle":
-                    TakeDamage(24); //5 shots to kill
-                    alerted = true;
-                    break;
-                case "Illusion":
-                    TakeDamage(60); //2 shots to kill
-                    alerted = true;
-                    break;
-            }
+            TakeDamage(other.gameObject.GetComponent<BulletScript>().getTrueDamage());
             if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
             {
                 agent.SetDestination(target.position);
@@ -139,7 +129,7 @@ public class enemyRifleScript : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
 

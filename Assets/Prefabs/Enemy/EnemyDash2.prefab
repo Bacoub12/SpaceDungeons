@@ -375,6 +375,7 @@ MonoBehaviour:
   corpse: {fileID: 3851568581459077765, guid: 19cad25e1493a9e4ba8166fc9db578eb, type: 3}
   audioWalk: {fileID: 9037261086491515333}
   eye: {fileID: 2556619883706066808}
+  health: 200
 --- !u!1 &4307831421545024678
 GameObject:
   m_ObjectHideFlags: 0

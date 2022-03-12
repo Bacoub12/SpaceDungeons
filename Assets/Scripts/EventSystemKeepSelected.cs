@@ -21,22 +21,6 @@ public class EventSystemKeepSelected : MonoBehaviour
             if (GameObject.Find("UpgradeDesk").GetComponent<UpgradeDeskScript>().checkIfActive() == true)
             {
 
-                /*
-                if (eventSystem.currentSelectedGameObject != null)
-                {
-                    if (eventSystem.currentSelectedGameObject.GetComponent<UpgradeScript>() != null)
-                    {
-                        keptSelection = eventSystem.currentSelectedGameObject;
-                    }
-                }
-
-                if (keptSelection != null)
-                {
-                    eventSystem.SetSelectedGameObject(GameObject.Find(keptSelection.name));
-                    Debug.Log(keptSelection.name);
-                }
-                */
-
                 string upgradeName = GameObject.Find("textTitle").GetComponent<TMP_Text>().text;
                 foreach (Transform child in GameObject.Find("ListPanel").transform)
                 {

@@ -266,6 +266,7 @@ MonoBehaviour:
   shootPoint: {fileID: 6000458919950163894}
   eye: {fileID: 1810119054625346928}
   audioShot: {fileID: 238475190352960298}
+  health: 150
 --- !u!1 &7106084181745845094
 GameObject:
   m_ObjectHideFlags: 0

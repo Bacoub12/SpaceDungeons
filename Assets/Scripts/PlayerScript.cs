@@ -42,6 +42,9 @@ public class PlayerScript : MonoBehaviour
     private MoneyScript moneyScript;
     private UpgradeDeskScript upgradeDeskScript;
 
+    private float pistolDamage, shotgunDamage, rifleDamage;
+    private bool damageUpgrade1, damageUpgrade2, damageUpgrade3;
+
     //[SerializeField] GameObject whatgun;
 
     private void Start()
@@ -59,6 +62,13 @@ public class PlayerScript : MonoBehaviour
 
         if (GameObject.Find("UpgradeDesk") != null)
             upgradeDeskScript = GameObject.Find("UpgradeDesk").GetComponent<UpgradeDeskScript>();
+
+        pistolDamage = 10f;
+        shotgunDamage = 2f; //? vu que y'a plus de balles
+        rifleDamage = 5f; //même raisonnement
+        damageUpgrade1 = false;
+        damageUpgrade2 = false;
+        damageUpgrade3 = false;
     }
 
 
@@ -88,7 +98,9 @@ public class PlayerScript : MonoBehaviour
         switch (gunId)
         {
             case 0: //pistol
-                rb = Instantiate(_bullet, _attach.position, _attach.rotation).GetComponent<Rigidbody>();
+                GameObject bullet = Instantiate(_bullet, _attach.position, _attach.rotation);
+                bullet.GetComponent<BulletScript>().setDamageParams(pistolDamage, damageUpgrade1, damageUpgrade2, damageUpgrade3);
+                rb = bullet.GetComponent<Rigidbody>();
                 rb.AddForce(_attach.forward * _force);
                 break;
 
@@ -110,7 +122,9 @@ public class PlayerScript : MonoBehaviour
         while (autoStop)
         {
             canShootRifle = 1;
-            rb = Instantiate(_bullet, _attach.position, _attach.rotation).GetComponent<Rigidbody>();
+            GameObject bullet = Instantiate(_bullet, _attach.position, _attach.rotation);
+            bullet.GetComponent<BulletScript>().setDamageParams(rifleDamage, damageUpgrade1, damageUpgrade2, damageUpgrade3);
+            rb = bullet.GetComponent<Rigidbody>();
             rb.AddForce(_attach.forward * _force);
             yield return new WaitForSeconds(0.2f);
             canShootRifle = 0;
@@ -125,12 +139,22 @@ public class PlayerScript : MonoBehaviour
             float randomX = Random.Range(-20f, 20f);
             float randomY = Random.Range(-20f, 20f);
             float randomZ = Random.Range(-20f, 20f);
-            Rigidbody rb = Instantiate(_bullet, _attach.position, _attach.rotation).GetComponent<Rigidbody>();
+            GameObject bullet = Instantiate(_bullet, _attach.position, _attach.rotation);
+            bullet.GetComponent<BulletScript>().setDamageParams(shotgunDamage, damageUpgrade1, damageUpgrade2, damageUpgrade3);
+            rb = bullet.GetComponent<Rigidbody>();
             rb.transform.Rotate(randomX, randomY, randomZ);
             rb.AddForce(rb.transform.forward * _force);
         }
         yield return new WaitForSeconds(1.0f);
         canShootShotgun = 0;
+    }
+
+    public void setDamageUpgrades(bool _damageUpgrade1, bool _damageUpgrade2, bool _damageUpgrade3)
+    {
+        damageUpgrade1 = _damageUpgrade1;
+        damageUpgrade2 = _damageUpgrade2;
+        damageUpgrade3 = _damageUpgrade3;
+        //Debug.Log("damage upgrades updated: " + damageUpgrade1 + " " + damageUpgrade2 + " " + damageUpgrade3);
     }
 
     private void OnGun1()

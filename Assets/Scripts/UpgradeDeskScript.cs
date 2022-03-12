@@ -10,12 +10,14 @@ public class UpgradeDeskScript : MonoBehaviour
     public GameObject uiManager;
 
     private bool isActive, initialized;
+    private Color boughtColor;
 
     // Start is called before the first frame update
     void Start()
     {
         isActive = false;
         initialized = false;
+        boughtColor = new Color(0.71f, 0.92f, 0.35f, 1f);
     }
 
     // Update is called once per frame
@@ -71,6 +73,9 @@ public class UpgradeDeskScript : MonoBehaviour
                             .onClick.AddListener(delegate {
                                 loadUpgradeInfo(upgradeScript.title, upgradeScript.description, upgradeScript.price, upgradeScript.bought); 
                             });
+
+                        if (upgradeScript.bought)
+                            buttonGameObject.GetComponent<Image>().color = boughtColor;
                     }
 
                     GameObject buyButton = GameObject.Find("btBuy");
@@ -154,6 +159,7 @@ public class UpgradeDeskScript : MonoBehaviour
                 {
                     UpgradeScript upgradeScript = buttonGameObject.GetComponent<UpgradeScript>();
                     upgradeScript.bought = true;
+                    buttonGameObject.GetComponent<Image>().color = boughtColor;
                 }
             }
 
@@ -161,7 +167,29 @@ public class UpgradeDeskScript : MonoBehaviour
                 .transform.GetChild(3)
                 .gameObject.GetComponent<Button>()
                 .interactable = false;
+
+            switch (upgradeName.Split(' ')[0])
+            {
+                case "Dégâts":
+                    updateDmgUpgrades();
+                    break;
+            }
         }
+    }
+
+    private void updateDmgUpgrades()
+    {
+        bool dmgUpgrade1 = false;
+        bool dmgUpgrade2 = false;
+        bool dmgUpgrade3 = false;
+        PlayerScript playerScript = GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>();
+        if (GameObject.Find("btUpgradeDegats1").GetComponent<Image>().color == boughtColor)
+            dmgUpgrade1 = true;
+        if (GameObject.Find("btUpgradeDegats2").GetComponent<Image>().color == boughtColor)
+            dmgUpgrade2 = true;
+        if (GameObject.Find("btUpgradeDegats3").GetComponent<Image>().color == boughtColor)
+            dmgUpgrade3 = true;
+        playerScript.setDamageUpgrades(dmgUpgrade1, dmgUpgrade2, dmgUpgrade3);
     }
 
     private void CursorUnlock()

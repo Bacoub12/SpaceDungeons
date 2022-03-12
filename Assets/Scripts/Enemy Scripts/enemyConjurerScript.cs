@@ -16,6 +16,7 @@ public class enemyConjurerScript : MonoBehaviour
     public AudioSource audioSummonEnd;
     public AudioSource audioWalk;
     public Transform eye;
+    [SerializeField] float health;
 
     NavMeshAgent agent;
     float walkRadius = 7f;
@@ -23,7 +24,6 @@ public class enemyConjurerScript : MonoBehaviour
     float maxWalkDistance = 7f;
     bool canSummon;
     int maxSpawnsPerSummoner = 5; //5? 10?
-    float health = 120f;
     bool dead;
     GameObject existingAttackVisual;
     GameObject existingParticles;
@@ -195,11 +195,11 @@ public class enemyConjurerScript : MonoBehaviour
     {
         if (other.gameObject.name == "Bullet(Clone)")
         {
-            TakeDamage(24); //5 shots to kill
+            TakeDamage(other.gameObject.GetComponent<BulletScript>().getTrueDamage());
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
 

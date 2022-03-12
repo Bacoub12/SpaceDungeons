@@ -12,6 +12,7 @@ public class enemyDashScript : MonoBehaviour
     public GameObject corpse;
     public AudioSource audioWalk;
     public Transform eye;
+    [SerializeField] float health;
 
     float lookRadius = 30f;
     Transform target;
@@ -20,7 +21,6 @@ public class enemyDashScript : MonoBehaviour
     float cooldownLength = 5f;
     float attackDistance = 15f;
     bool dead;
-    float health = 120f;
     GameObject existingAttackVisual;
     bool enemyInSight, alerted;
 
@@ -174,7 +174,7 @@ public class enemyDashScript : MonoBehaviour
     {
         if (other.gameObject.name == "Bullet(Clone)")
         {
-            TakeDamage(24); //5 shots to kill
+            TakeDamage(other.gameObject.GetComponent<BulletScript>().getTrueDamage());
             if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
             {
                 agent.SetDestination(target.position);
@@ -187,7 +187,7 @@ public class enemyDashScript : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
 

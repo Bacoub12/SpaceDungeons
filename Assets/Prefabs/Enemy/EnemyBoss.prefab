@@ -917,6 +917,7 @@ MonoBehaviour:
   audioShoot: {fileID: -4161043956157575031}
   audioSlam: {fileID: -497449651256855089}
   audioWalk: {fileID: -7732421803759726588}
+  health: 2000
 --- !u!1 &7427742323212697924
 GameObject:
   m_ObjectHideFlags: 0

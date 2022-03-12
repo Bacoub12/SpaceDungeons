@@ -20,6 +20,7 @@ public class enemyBossScript : MonoBehaviour
     public AudioSource audioShoot;
     public AudioSource audioSlam;
     public AudioSource audioWalk;
+    [SerializeField] float health; //1000? 2000?
 
     float lookRadius = 30f;
     Transform target;
@@ -30,7 +31,6 @@ public class enemyBossScript : MonoBehaviour
     float slamDistance = 5f;
     bool dead;
     bool enemyInSight, alerted;
-    float health = 1000f; //1000f
     GameObject existingAttackVisual;
 
     // Start is called before the first frame update
@@ -287,7 +287,7 @@ public class enemyBossScript : MonoBehaviour
     {
         if (other.gameObject.name == "Bullet(Clone)")
         {
-            TakeDamage(10); //5 shots to kill
+            TakeDamage(other.gameObject.GetComponent<BulletScript>().getTrueDamage());
             if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
             {
                 agent.SetDestination(target.position);
@@ -301,7 +301,7 @@ public class enemyBossScript : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
 
