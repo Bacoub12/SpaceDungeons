@@ -15,7 +15,7 @@ public class ChestDrop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y < -100f)
+        if (transform.position.y < -50f)
         {
             Vector3 spawnPos = new Vector3(transform.position.x, 0.2f, transform.position.z);
             Vector3 spawnAdjust = new Vector3(0f, 0f, 0f); //modifiable au cas ou

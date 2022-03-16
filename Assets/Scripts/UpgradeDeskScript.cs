@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class UpgradeDeskScript : MonoBehaviour
@@ -11,6 +12,7 @@ public class UpgradeDeskScript : MonoBehaviour
 
     private bool isActive, initialized;
     private Color boughtColor;
+    private EventSystem eventSystem;
 
     // Start is called before the first frame update
     void Start()
@@ -18,12 +20,26 @@ public class UpgradeDeskScript : MonoBehaviour
         isActive = false;
         initialized = false;
         boughtColor = new Color(0.71f, 0.92f, 0.35f, 1f);
+        eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (checkIfActive() == true)
+        {
+            string upgradeName = GameObject.Find("textTitle").GetComponent<TMP_Text>().text;
+            foreach (Transform child in GameObject.Find("ListPanel").transform)
+            {
+                GameObject buttonGameObject = child.gameObject;
+                if (buttonGameObject.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text == upgradeName)
+                {
+                    if (eventSystem.currentSelectedGameObject == buttonGameObject)
+                        eventSystem.SetSelectedGameObject(null);
+                    eventSystem.SetSelectedGameObject(buttonGameObject);
+                }
+            }
+        }
     }
 
     public void toggleUpgradeInterface()
@@ -173,6 +189,12 @@ public class UpgradeDeskScript : MonoBehaviour
                 case "Dégâts":
                     updateDmgUpgrades();
                     break;
+                case "Santé":
+                    updateHealthUpgrades();
+                    break;
+                case "Armure":
+                    updateArmorUpgrades();
+                    break;
             }
         }
     }
@@ -190,6 +212,36 @@ public class UpgradeDeskScript : MonoBehaviour
         if (GameObject.Find("btUpgradeDegats3").GetComponent<Image>().color == boughtColor)
             dmgUpgrade3 = true;
         playerScript.setDamageUpgrades(dmgUpgrade1, dmgUpgrade2, dmgUpgrade3);
+    }
+
+    private void updateHealthUpgrades()
+    {
+        bool healthUpgrade1 = false;
+        bool healthUpgrade2 = false;
+        bool healthUpgrade3 = false;
+        PlayerScript playerScript = GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>();
+        if (GameObject.Find("btUpgradeSante1").GetComponent<Image>().color == boughtColor)
+            healthUpgrade1 = true;
+        if (GameObject.Find("btUpgradeSante2").GetComponent<Image>().color == boughtColor)
+            healthUpgrade2 = true;
+        if (GameObject.Find("btUpgradeSante3").GetComponent<Image>().color == boughtColor)
+            healthUpgrade3 = true;
+        playerScript.setHealthUpgrades(healthUpgrade1, healthUpgrade2, healthUpgrade3);
+    }
+
+    private void updateArmorUpgrades()
+    {
+        bool armorUpgrade1 = false;
+        bool armorUpgrade2 = false;
+        bool armorUpgrade3 = false;
+        PlayerScript playerScript = GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>();
+        if (GameObject.Find("btUpgradeArmure1").GetComponent<Image>().color == boughtColor)
+            armorUpgrade1 = true;
+        if (GameObject.Find("btUpgradeArmure2").GetComponent<Image>().color == boughtColor)
+            armorUpgrade2 = true;
+        if (GameObject.Find("btUpgradeArmure3").GetComponent<Image>().color == boughtColor)
+            armorUpgrade3 = true;
+        //playerScript.setArmorUpgrades(armorUpgrade1, armorUpgrade2, armorUpgrade3); //todo faire les upgrades d'armure quand raph aura fait l'armure en soi
     }
 
     private void CursorUnlock()

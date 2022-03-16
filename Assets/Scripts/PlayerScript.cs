@@ -15,7 +15,8 @@ public class PlayerScript : MonoBehaviour
     int gunId = 0;
     int canShootShotgun = 0;
     int canShootRifle = 0;
-    public int health = 100;
+    int baseHealth = 100;
+    public int health, maxHealth; //maxhealth pourra être utilisé pour empêcher le joueur de 'overheal'
     public int armure = 100;
     public int money = 0;
     [SerializeField] GameObject _bullet;
@@ -44,6 +45,7 @@ public class PlayerScript : MonoBehaviour
 
     private float pistolDamage, shotgunDamage, rifleDamage;
     private bool damageUpgrade1, damageUpgrade2, damageUpgrade3;
+    private bool healthUpgrade1, healthUpgrade2, healthUpgrade3;
 
     //[SerializeField] GameObject whatgun;
 
@@ -66,9 +68,17 @@ public class PlayerScript : MonoBehaviour
         pistolDamage = 10f;
         shotgunDamage = 2f; //? vu que y'a plus de balles
         rifleDamage = 5f; //même raisonnement
+
+        health = baseHealth;
+        maxHealth = baseHealth;
+
         damageUpgrade1 = false;
         damageUpgrade2 = false;
         damageUpgrade3 = false;
+
+        healthUpgrade1 = false;
+        healthUpgrade2 = false;
+        healthUpgrade3 = false;
     }
 
 
@@ -196,11 +206,12 @@ public class PlayerScript : MonoBehaviour
 
                 Destroy(other.gameObject);
             }
-            else if (other.gameObject.layer == 9)
-            {
-                //mettre des if pour le nombre de degat recu
-                Damage();
-            }
+        }
+        else if (other.gameObject.layer == 9 && other.gameObject.name != "EnemyBulletIllusion")
+        {
+            //mettre des if pour le nombre de degat recu
+            Damage();
+            Destroy(other.gameObject);
         }
         else
         {
@@ -258,7 +269,7 @@ public class PlayerScript : MonoBehaviour
         
     }
 
-    private void Damage()
+    public void Damage()
     {
         // mettre que les degat rentre dans larmnure et aprse le restant des degat rentre dans la vie
         if (armure > 0)
@@ -266,12 +277,37 @@ public class PlayerScript : MonoBehaviour
             if (health > 0)
             {
                 health -= 10;
+                Debug.Log("health: " + health);
             }
             else
             {
                 UIManager.GetComponent<UIManager>().DeathScreen(true);
             }
         }
+    }
+
+    public void setHealthUpgrades(bool _healthUpgrade1, bool _healthUpgrade2, bool _healthUpgrade3)
+    {
+        healthUpgrade1 = _healthUpgrade1;
+        healthUpgrade2 = _healthUpgrade2;
+        healthUpgrade3 = _healthUpgrade3;
+        //Debug.Log("health upgrades updated: " + healthUpgrade1 + " " + healthUpgrade2 + " " + healthUpgrade3);
+
+        health = baseHealth; //heal to 100
+        if (healthUpgrade1)
+        {
+            health = baseHealth + 100;
+        }
+        if (healthUpgrade2)
+        {
+            health += 100;
+        }
+        if (healthUpgrade3)
+        {
+            health += 100;
+        }
+        maxHealth = health;
+        //Debug.Log("new health: " + health);
     }
 
     public void OnInteract() // le boutons

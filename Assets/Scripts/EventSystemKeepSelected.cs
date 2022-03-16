@@ -7,7 +7,6 @@ using TMPro;
 public class EventSystemKeepSelected : MonoBehaviour
 {
     private EventSystem eventSystem;
-    private GameObject keptSelection = null;
     void Start()
     {
         eventSystem = GetComponent<EventSystem>();
