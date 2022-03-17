@@ -241,7 +241,7 @@ public class UpgradeDeskScript : MonoBehaviour
             armorUpgrade2 = true;
         if (GameObject.Find("btUpgradeArmure3").GetComponent<Image>().color == boughtColor)
             armorUpgrade3 = true;
-        //playerScript.setArmorUpgrades(armorUpgrade1, armorUpgrade2, armorUpgrade3); //todo faire les upgrades d'armure quand raph aura fait l'armure en soi
+        playerScript.setArmureUpgrades(armorUpgrade1, armorUpgrade2, armorUpgrade3); //todo faire les upgrades d'armure quand raph aura fait l'armure en soi
     }
 
     private void CursorUnlock()

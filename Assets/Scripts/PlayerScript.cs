@@ -16,8 +16,9 @@ public class PlayerScript : MonoBehaviour
     int canShootShotgun = 0;
     int canShootRifle = 0;
     int baseHealth = 100;
+    int baseArmure = 100;
     public int health, maxHealth; //maxhealth pourra être utilisé pour empêcher le joueur de 'overheal'
-    public int armure = 100;
+    public int armure, maxArmure; //pareil pour maxarmure
     public int money = 0;
     [SerializeField] GameObject _bullet;
     [SerializeField] GameObject UIManager;
@@ -46,6 +47,7 @@ public class PlayerScript : MonoBehaviour
     private float pistolDamage, shotgunDamage, rifleDamage;
     private bool damageUpgrade1, damageUpgrade2, damageUpgrade3;
     private bool healthUpgrade1, healthUpgrade2, healthUpgrade3;
+    private bool armureUpgrade1, armureUpgrade2, armureUpgrade3;
 
     //[SerializeField] GameObject whatgun;
 
@@ -71,6 +73,8 @@ public class PlayerScript : MonoBehaviour
 
         health = baseHealth;
         maxHealth = baseHealth;
+        armure = baseArmure;
+        maxArmure = baseArmure;
 
         damageUpgrade1 = false;
         damageUpgrade2 = false;
@@ -79,6 +83,10 @@ public class PlayerScript : MonoBehaviour
         healthUpgrade1 = false;
         healthUpgrade2 = false;
         healthUpgrade3 = false;
+
+        armureUpgrade1 = false;
+        armureUpgrade2 = false;
+        armureUpgrade3 = false;
     }
 
 
@@ -308,6 +316,30 @@ public class PlayerScript : MonoBehaviour
         }
         maxHealth = health;
         //Debug.Log("new health: " + health);
+    }
+
+    public void setArmureUpgrades(bool _armureUpgrade1, bool _armureUpgrade2, bool _armureUpgrade3)
+    {
+        armureUpgrade1 = _armureUpgrade1;
+        armureUpgrade2 = _armureUpgrade2;
+        armureUpgrade3 = _armureUpgrade3;
+        Debug.Log("armure upgrades updated: " + armureUpgrade1 + " " + armureUpgrade2 + " " + armureUpgrade3);
+
+        armure = baseArmure; //set to 100 (??)
+        if (armureUpgrade1)
+        {
+            armure = baseArmure + 100;
+        }
+        if (armureUpgrade2)
+        {
+            armure += 100;
+        }
+        if (armureUpgrade3)
+        {
+            armure += 100;
+        }
+        maxArmure = armure;
+        Debug.Log("new armure: " + armure);
     }
 
     public void OnInteract() // le boutons
