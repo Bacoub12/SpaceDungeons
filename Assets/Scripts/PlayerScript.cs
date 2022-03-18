@@ -48,6 +48,7 @@ public class PlayerScript : MonoBehaviour
     private bool damageUpgrade1, damageUpgrade2, damageUpgrade3;
     private bool healthUpgrade1, healthUpgrade2, healthUpgrade3;
     private bool armureUpgrade1, armureUpgrade2, armureUpgrade3;
+    private bool poisoned;
 
     //[SerializeField] GameObject whatgun;
 
@@ -87,6 +88,8 @@ public class PlayerScript : MonoBehaviour
         armureUpgrade1 = false;
         armureUpgrade2 = false;
         armureUpgrade3 = false;
+
+        poisoned = false;
     }
 
 
@@ -215,10 +218,22 @@ public class PlayerScript : MonoBehaviour
                 Destroy(other.gameObject);
             }
         }
-        else if (other.gameObject.layer == 9 && other.gameObject.name != "EnemyBulletIllusion")
+        else if (other.gameObject.layer == 9 && other.gameObject.name != "EnemyBulletIllusion(Clone)")
         {
             //mettre des if pour le nombre de degat recu
-            Damage();
+            switch (other.gameObject.name)
+            {
+                case "EnemyBullet(Clone)":
+                    Damage(5);
+                    break;
+                case "EnemyBulletBig(Clone)":
+                    Damage(10);
+                    break;
+                case "EnemyBulletPoison(Clone)":
+                    if (!poisoned)
+                        StartCoroutine(PoisonCoroutine());
+                    break;
+            }
             Destroy(other.gameObject);
         }
         else
@@ -277,21 +292,47 @@ public class PlayerScript : MonoBehaviour
         
     }
 
-    public void Damage()
+    public void Damage(int damage)
     {
         // mettre que les degat rentre dans larmnure et aprse le restant des degat rentre dans la vie
+        // (note de christian: ok, c'est ce que j'ai essayé de faire)
+
+        int damageToHealth = 0;
         if (armure > 0)
         {
-            if (health > 0)
-            {
-                health -= 10;
-                Debug.Log("health: " + health);
-            }
-            else
+            armure -= damage;
+            damageToHealth = -(armure);
+            if (armure < 0)
+                armure = 0;
+        }
+        else
+            damageToHealth = damage;
+
+        if (armure <= 0)
+        {
+            health -= damageToHealth;
+
+            if (health <= 0)
             {
                 UIManager.GetComponent<UIManager>().DeathScreen(true);
             }
         }
+
+        Debug.Log("armure: " + armure + ", health: " + health);
+    }
+
+    IEnumerator PoisonCoroutine()
+    {
+        poisoned = true;
+
+        yield return new WaitForSeconds(0.5f);
+        Damage(5);
+        yield return new WaitForSeconds(1.0f);
+        Damage(5);
+        yield return new WaitForSeconds(1.0f);
+        Damage(5);
+
+        poisoned = false;
     }
 
     public void setHealthUpgrades(bool _healthUpgrade1, bool _healthUpgrade2, bool _healthUpgrade3)

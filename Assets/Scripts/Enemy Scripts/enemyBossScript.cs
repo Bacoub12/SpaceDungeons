@@ -176,8 +176,7 @@ public class enemyBossScript : MonoBehaviour
         Vector3 playerPos = target.position;
         if (existingAttackVisual.GetComponent<Collider>().bounds.Contains(playerPos))
         {
-            //deal damage
-            Debug.Log("hit");
+            target.gameObject.GetComponent<PlayerScript>().Damage(40);
         }
 
         Destroy(existingAttackVisual);
@@ -220,8 +219,7 @@ public class enemyBossScript : MonoBehaviour
         Vector3 playerPos = target.position;
         if (existingAttackVisual.GetComponent<Collider>().bounds.Contains(playerPos))
         {
-            //deal damage
-            Debug.Log("hit");
+            target.gameObject.GetComponent<PlayerScript>().Damage(40);
         }
         Destroy(existingAttackVisual);
 

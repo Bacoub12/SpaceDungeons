@@ -143,8 +143,7 @@ public class enemyDashScript : MonoBehaviour
         if (existingAttackVisual != null)
             if (existingAttackVisual.GetComponent<Collider>().bounds.Contains(playerPos))
             {
-                //deal damage
-                Debug.Log("hit");
+                target.gameObject.GetComponent<PlayerScript>().Damage(15);
             }
         
         Destroy(existingAttackVisual);

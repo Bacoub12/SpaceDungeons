@@ -134,7 +134,7 @@ public class enemyMeleeAnimtrScript : MonoBehaviour
         float distance = Vector3.Distance(target.position, transform.position);
         if (distance <= agent.stoppingDistance && attackBox.bounds.Contains(target.position))
         {
-            Debug.Log("hit");
+            target.gameObject.GetComponent<PlayerScript>().Damage(10);
         }
 
         anim.SetBool("attacking", false);
