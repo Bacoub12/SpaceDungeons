@@ -37,6 +37,7 @@ public class enemyIllusionistScript : MonoBehaviour
         dead = false;
         enemyInSight = false;
         alerted = false;
+        transform.position = new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z);
     }
 
     // Update is called once per frame

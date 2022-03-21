@@ -32,6 +32,7 @@ public class enemyRifleScript : MonoBehaviour
         enemyInSight = false;
         alerted = false;
         cooldownLength = Random.Range(1f, 3f);
+        transform.position = new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z);
     }
 
     // Update is called once per frame
