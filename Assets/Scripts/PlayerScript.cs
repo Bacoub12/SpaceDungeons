@@ -1,4 +1,4 @@
-using StarterAssets;
+ï»¿using StarterAssets;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ public class PlayerScript : MonoBehaviour
     int canShootRifle = 0;
     int baseHealth = 100;
     int baseArmure = 100;
-    public int health, maxHealth; //maxhealth pourra être utilisé pour empêcher le joueur de 'overheal'
+    public int health, maxHealth; //maxhealth pourra Ãªtre utilisÃ© pour empÃªcher le joueur de 'overheal'
     public int armure, maxArmure; //pareil pour maxarmure
     public int money = 0;
     [SerializeField] GameObject _bullet;
@@ -70,7 +70,7 @@ public class PlayerScript : MonoBehaviour
 
         pistolDamage = 10f;
         shotgunDamage = 2f; //? vu que y'a plus de balles
-        rifleDamage = 5f; //même raisonnement
+        rifleDamage = 5f; //mÃªme raisonnement
 
         health = baseHealth;
         maxHealth = baseHealth;
@@ -262,13 +262,13 @@ public class PlayerScript : MonoBehaviour
                         UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour ouvrir la porte");
                         break;
                     case "Key":
-                        UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour prendre la clé");
+                        UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour prendre la clÃ©");
                         break;
                     case "Teleporter":
-                        UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour utiliser le téléporteur");
+                        UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour utiliser le tÃ©lÃ©porteur");
                         break;
                     default:
-                        UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour intéragir");
+                        UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour intÃ©ragir");
                         break;
                 }
 
@@ -295,7 +295,7 @@ public class PlayerScript : MonoBehaviour
     public void Damage(int damage)
     {
         // mettre que les degat rentre dans larmnure et aprse le restant des degat rentre dans la vie
-        // (note de christian: ok, c'est ce que j'ai essayé de faire)
+        // (note de christian: ok, c'est ce que j'ai essayÃ© de faire)
 
         int damageToHealth = 0;
         if (armure > 0)
@@ -397,7 +397,7 @@ public class PlayerScript : MonoBehaviour
 
     public void OnPause()
     {
-        //si l'ecran update est là, l'enlever
+        //si l'ecran update est lÃ , l'enlever
         if (upgradeDeskScript != null)
         {
             if (upgradeDeskScript.checkIfActive() == true)

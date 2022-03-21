@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -68,23 +68,6 @@ public class UpgradeDeskScript : MonoBehaviour
                         GameObject buttonGameObject = child.gameObject;
                         UpgradeScript upgradeScript = buttonGameObject.GetComponent<UpgradeScript>();
 
-                        /*
-                        string objectName = buttonGameObject.name;
-                        switch (objectName)
-                        {
-                            case "btUpgradeDegats1":
-                                upgradeScript.setUpgradeInfo("Dégâts I", "Envéloppe vos balles de cyanure.", 200);
-                                break;
-                            case "btUpgradeDegats2":
-                                upgradeScript.setUpgradeInfo("Dégâts II", "Envéloppe vos balles de cyanure.", 300);
-                                break;
-                            case "btUpgradeDegats3":
-                                upgradeScript.setUpgradeInfo("Dégâts III", "Envéloppe vos balles de cyanure.", 400);
-                                break;
-                        }
-                        */
-
-                        //chaque bouton doit déclencher dans son onclick un load basé sur le script UpgradeScript à côté de lui
                         buttonGameObject.GetComponent<Button>()
                             .onClick.AddListener(delegate {
                                 loadUpgradeInfo(upgradeScript.title, upgradeScript.description, upgradeScript.price, upgradeScript.bought); 
@@ -126,7 +109,7 @@ public class UpgradeDeskScript : MonoBehaviour
     public void updateMoneyVisual()
     {
         GameObject moneyText = GameObject.Find("MoneyText");
-        moneyText.GetComponent<TMP_Text>().text = "Crédits: " + GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>().money;
+        moneyText.GetComponent<TMP_Text>().text = "CrÃ©dits: " + GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>().money;
     }
 
     public void loadUpgradeInfo(string title, string description, float price, bool bought)
@@ -186,10 +169,10 @@ public class UpgradeDeskScript : MonoBehaviour
 
             switch (upgradeName.Split(' ')[0])
             {
-                case "Dégâts":
+                case "DÃ©gÃ¢ts":
                     updateDmgUpgrades();
                     break;
-                case "Santé":
+                case "SantÃ©":
                     updateHealthUpgrades();
                     break;
                 case "Armure":
