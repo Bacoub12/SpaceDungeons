@@ -75,19 +75,18 @@ public class UIManager : MonoBehaviour
         Image image = inventoryItem.transform.GetChild(0).gameObject.GetComponent<Image>();
         switch (i.getType()){
             case "Helmet":
-                // something changer la source de l'image
+                image.sprite = _itemSprite[0];
                 break;
             case "Chestplate":
-               // i = _itemList[0]; // jpense que sa va finir par planter -> un moment donner, s'il y a plus que un item avec des stats differentes,
                 image.sprite = _itemSprite[1];
                 break;
             case "Gloves":
-                
+                image.sprite = _itemSprite[2];
                 break;
             case "Boot":
+                image.sprite = _itemSprite[3];
                 break;
             case "Health":
-               // i = _itemList[1];
                 image.sprite = _itemSprite[4];
                 break;
 

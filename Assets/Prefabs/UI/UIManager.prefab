@@ -51,10 +51,10 @@ MonoBehaviour:
   _itemSlotContainer: {fileID: 0}
   _item: {fileID: 2232459501595708697, guid: e666480f026e70e4ba355c79c2899e22, type: 3}
   _itemSprite:
+  - {fileID: 21300000, guid: 3e6ccc5734c419c40bd738274b8bb5c5, type: 3}
   - {fileID: 21300000, guid: 70f237b5c0a17a34ab575ce7652296c8, type: 3}
-  - {fileID: 21300000, guid: 70f237b5c0a17a34ab575ce7652296c8, type: 3}
-  - {fileID: 21300000, guid: e87d7919088ea3f43b5de34d47f86cc3, type: 3}
-  - {fileID: 21300000, guid: e87d7919088ea3f43b5de34d47f86cc3, type: 3}
+  - {fileID: 21300000, guid: b0469128e24caba43bbe12659e7f7e3f, type: 3}
+  - {fileID: 21300000, guid: 6625736f935fa9d449c7fd46121473c8, type: 3}
   - {fileID: 21300000, guid: e87d7919088ea3f43b5de34d47f86cc3, type: 3}
   _itemList:
   - {fileID: 8399512265110151577, guid: bfd220c9e895dab4aae3482c2119c5ad, type: 3}

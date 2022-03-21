@@ -37,23 +37,22 @@ public class Inventory : MonoBehaviour
         bool found = false;
         int removedItemPosition = 0;
 
-        Debug.Log("trying to remove, item count now " + itemList.Count);
+        //Debug.Log("trying to remove, item count now " + itemList.Count);
         foreach (Item item in itemList) /* work in progress*/
         {
-            Debug.Log("dans le foreacj");
+            //Debug.Log("dans le foreacj");
             if (found == false)
             {
-                Debug.Log("dans le if, avec spriteName " + name + " et item type" + item.getType());
+                //Debug.Log("dans le if, avec spriteName " + name + " et item type" + item.getType());
                 if (name == item.getType())
                 {
                     Destroy(image.gameObject.transform.parent.gameObject);
                     removedItemPosition = itemList.IndexOf(item);
-                    Debug.Log("dans le if2");
+                    //Debug.Log("dans le if2");
                     found = true;
                 }
             }
         }
-
         itemList.RemoveAt(removedItemPosition);
     }
 
@@ -74,6 +73,7 @@ public class Inventory : MonoBehaviour
         {
             case "Helmet":
                 Instantiate(helmet, launch + forward, playerPosition.rotation);
+                RemoveItem(image);
                 break;
 
             case "Chestplate":
@@ -81,10 +81,13 @@ public class Inventory : MonoBehaviour
                 RemoveItem(image);
                 break;
             case "Gloves":
-
+                Instantiate(gloves, launch + forward, playerPosition.rotation);
+                RemoveItem(image);
                 break;
 
             case "Boot":
+                Instantiate(boots, launch + forward, playerPosition.rotation);
+                RemoveItem(image);
                 break;
 
             case "Health":

@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 64796588}
   m_Layer: 14
   m_Name: Cuve32 (2)
-  m_TagString: Health
+  m_TagString: Boot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 782aaed19707e9840821b27c9e805807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: Health
+  type: Boot
 --- !u!54 &64796589
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -780,6 +780,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1456843439}
     - target: {fileID: 678993996, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: _moneyText
+      value: 
+      objectReference: {fileID: 1710779678}
+    - target: {fileID: 678993996, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: uiInventory
       value: 
       objectReference: {fileID: 449283510}
@@ -1106,7 +1110,7 @@ GameObject:
   - component: {fileID: 642757989}
   m_Layer: 14
   m_Name: Cuve32 (3)
-  m_TagString: Chestplate
+  m_TagString: Gloves
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1137,7 +1141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 782aaed19707e9840821b27c9e805807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: Chestplate
+  type: Gloves
 --- !u!54 &642757990
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1660,6 +1664,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5308552986886054889, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
   m_PrefabInstance: {fileID: 5308552986284056439}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1710779678 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1710779678, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
+  m_PrefabInstance: {fileID: 5308552986284056439}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1844740481
 GameObject:
   m_ObjectHideFlags: 0
@@ -1878,7 +1893,7 @@ GameObject:
   - component: {fileID: 1971803807}
   m_Layer: 14
   m_Name: Cuve32 (5)
-  m_TagString: Chestplate
+  m_TagString: Helmet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1909,7 +1924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 782aaed19707e9840821b27c9e805807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: Chestplate
+  type: Helmet
 --- !u!54 &1971803808
 Rigidbody:
   m_ObjectHideFlags: 0

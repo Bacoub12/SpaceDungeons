@@ -9,6 +9,7 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] float _force = 1000f;
     [SerializeField] private InputActionAsset _actionAsset = default;
     [SerializeField] private UI_Inventory uiInventory;
+    [SerializeField] private TMP_Text _moneyText;
 
     bool autoStop = false;
     bool interaction = false;
@@ -200,6 +202,7 @@ public class PlayerScript : MonoBehaviour
             {
                 moneyScript = other.gameObject.GetComponent<MoneyScript>();
                 money += moneyScript.getMoneyValue();
+                _moneyText.text = "Credit : " + money.ToString();
                 Destroy(other.gameObject);
                 Debug.Log("Money : " + money);
             }
