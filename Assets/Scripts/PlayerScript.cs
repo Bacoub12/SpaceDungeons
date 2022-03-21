@@ -29,6 +29,8 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private InputActionAsset _actionAsset = default;
     [SerializeField] private UI_Inventory uiInventory;
     [SerializeField] private TMP_Text _moneyText;
+    [SerializeField] private TMP_Text _healthText;
+    [SerializeField] private TMP_Text _armorText;
 
     bool autoStop = false;
     bool interaction = false;
@@ -92,6 +94,9 @@ public class PlayerScript : MonoBehaviour
         armureUpgrade3 = false;
 
         poisoned = false;
+
+        _healthText.text = "Vie : " + health;
+        _armorText.text = "Armure : " + armure;
     }
 
 
@@ -214,10 +219,11 @@ public class PlayerScript : MonoBehaviour
 
                 GameObject itemObject = UIManager.GetComponent<UIManager>().AjoutItemUi(item);
                 GameObject buttonDrop = itemObject.transform.GetChild(1).gameObject;
+                GameObject buttonUse = itemObject.transform.GetChild(2).gameObject;
                 GameObject inventoryManager = GameObject.Find("InventoryManager");
                 Image theImage = itemObject.transform.GetChild(0).gameObject.GetComponent<Image>();
                 buttonDrop.GetComponent<Button>().onClick.AddListener(delegate { inventoryManager.GetComponent<Inventory>().Drop(theImage); });
-
+                buttonUse.GetComponent<Button>().onClick.AddListener(delegate { inventoryManager.GetComponent<Inventory>().Use(theImage); });
                 Destroy(other.gameObject);
             }
         }
@@ -320,7 +326,8 @@ public class PlayerScript : MonoBehaviour
                 UIManager.GetComponent<UIManager>().DeathScreen(true);
             }
         }
-
+        _healthText.text = "Vie : " + health;
+        _armorText.text = "Armure : " + armure;
         Debug.Log("armure: " + armure + ", health: " + health);
     }
 
@@ -443,4 +450,30 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+
+    public void addHealth(int addedHealth)
+    {
+        int add = health + addedHealth;
+        if(add > maxHealth)
+        {
+            health = maxHealth;
+        }
+        else
+        {
+            health = add;
+        }
+    }
+
+    public void addArmor(int addedArmor)
+    {
+        int add = armure + addedArmor;
+        if (add > maxArmure)
+        {
+            armure = maxArmure;
+        }
+        else
+        {
+            armure = add;
+        }
+    }
 }

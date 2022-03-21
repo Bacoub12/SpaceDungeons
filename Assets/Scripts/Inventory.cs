@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    [SerializeField] GameObject player;
     [SerializeField] GameObject helmet;
     [SerializeField] GameObject chestplate;
     [SerializeField] GameObject gloves;
@@ -63,8 +64,7 @@ public class Inventory : MonoBehaviour
 
     public void Drop(Image image)
     {
-
-        Debug.Log("trying to drop, item count now " + itemList.Count);
+        //Debug.Log("trying to drop, item count now " + itemList.Count);
         string objectName = image.sprite.name;
         Transform playerPosition = GameManager.PlayerPostion;
         Vector3 launch = new Vector3(playerPosition.position.x, playerPosition.position.y + 0.5f, playerPosition.position.z);
@@ -102,30 +102,37 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void use(Image image)
+    public void Use(Image image)
     {
+        Debug.Log("trying to use, item count now " + itemList.Count);
         string objectName = image.sprite.name;
         switch (objectName)
         {
             case "Helmet":
+                player.GetComponent<PlayerScript>().addArmor(60); // pourrait changer les valeurs pour les augmenter en meme temps que les ameliorations d'armure
+                RemoveItem(image);
                 break;
 
             case "Chestplate":
+                player.GetComponent<PlayerScript>().addArmor(80);
+                RemoveItem(image);
                 break;
             case "Gloves":
-
+                player.GetComponent<PlayerScript>().addArmor(25);
+                RemoveItem(image);
                 break;
 
             case "Boot":
-                //use armor
+                player.GetComponent<PlayerScript>().addArmor(35);
+                RemoveItem(image);
                 break;
 
             case "Health":
-                //use health
+                player.GetComponent<PlayerScript>().addHealth(75);
+                RemoveItem(image);
                 break;
 
             default:
-
                 break;
         }
     }
