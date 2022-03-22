@@ -31,6 +31,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private TMP_Text _moneyText;
     [SerializeField] private TMP_Text _healthText;
     [SerializeField] private TMP_Text _armorText;
+    [SerializeField] private GameObject gunAnim;
 
     bool autoStop = false;
     bool interaction = false;
@@ -126,21 +127,36 @@ public class PlayerScript : MonoBehaviour
         switch (gunId)
         {
             case 0: //pistol
-                GameObject bullet = Instantiate(_bullet, _attach.position, _attach.rotation);
-                bullet.GetComponent<BulletScript>().setDamageParams(pistolDamage, damageUpgrade1, damageUpgrade2, damageUpgrade3);
-                rb = bullet.GetComponent<Rigidbody>();
-                rb.AddForce(_attach.forward * _force);
+                if(gunAnim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("SwitchGun") &&
+                    gunAnim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f){}
+                else
+                {
+                    GameObject bullet = Instantiate(_bullet, _attach.position, _attach.rotation);
+                    bullet.GetComponent<BulletScript>().setDamageParams(pistolDamage, damageUpgrade1, damageUpgrade2, damageUpgrade3);
+                    rb = bullet.GetComponent<Rigidbody>();
+                    rb.AddForce(_attach.forward * _force);
+                }
                 break;
 
             case 1: // shotgun
-                if (canShootShotgun == 0)
-                    StartCoroutine(PumpShotgun());
+                if (gunAnim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("SwitchGun") &&
+                    gunAnim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f) { }
+                else
+                {
+                    if (canShootShotgun == 0)
+                        StartCoroutine(PumpShotgun());
+                }
                 break;
 
             case 2: // rifle
-                autoStop = true;
-                if (canShootRifle == 0)
-                    StartCoroutine(AutomaticRifle());
+                if (gunAnim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("SwitchGun") &&
+                   gunAnim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f) { }
+                else
+                {
+                    autoStop = true;
+                    if (canShootRifle == 0)
+                        StartCoroutine(AutomaticRifle());
+                }
                 break;
         }
     }
@@ -187,15 +203,18 @@ public class PlayerScript : MonoBehaviour
 
     private void OnGun1()
     {
+        gunAnim.GetComponent<Animator>().Play("SwitchGun", -1, 0f);
         gunId = 0;
     }
 
     private void OnGun2()
     {
+        gunAnim.GetComponent<Animator>().Play("SwitchGun", -1, 0f);
         gunId = 1;
     }
     private void OnGun3()
     {
+        gunAnim.GetComponent<Animator>().Play("SwitchGun", -1, 0f);
         gunId = 2;
     }
     
