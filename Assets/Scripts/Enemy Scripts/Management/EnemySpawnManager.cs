@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +27,7 @@ public class EnemySpawnManager : MonoBehaviour
         moneySpawnOdds = 40f;
         //adds up to 100
 
-        //‡ enlever (et gÈrer par GameManager gÈnÈral) dans le jeu final
+        //„Éªenlever (et g√©n√©er par GameManager g√©n√©ral) dans le jeu final
         spawnEnemiesOnTerrain();
         spawnChestsOnTerrain();
     }
@@ -53,7 +53,7 @@ public class EnemySpawnManager : MonoBehaviour
 
         if (enemySpawns == null)
         {
-            Debug.Log("aucun terrain trouvÈ");
+            Debug.Log("aucun terrain trouv√©");
         } 
         else
         {
@@ -81,7 +81,7 @@ public class EnemySpawnManager : MonoBehaviour
 
         if (chestSpawnTransform == null || chestSpawnTransform.gameObject.name != "ChestSpawn")
         {
-            Debug.Log("aucun chest spawn trouvÈ");
+            Debug.Log("aucun chest spawn trouv√©");
         }
         else
         {
