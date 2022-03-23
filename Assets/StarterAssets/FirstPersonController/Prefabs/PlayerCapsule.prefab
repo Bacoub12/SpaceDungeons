@@ -472,7 +472,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.25
+  m_StepOffset: 0.5
   m_SkinWidth: 0.02
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.93, z: 0}
@@ -651,10 +651,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58966b4d0a30f92438eeb1d8618acecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 0
-  armure: 0
-  maxArmure: 0
+  health: 100
+  maxHealth: 100
+  armure: 100
+  maxArmure: 100
   money: 0
   _bullet: {fileID: 7580972179330452940, guid: 479240c27ac3b6d42b25407e7a2f52e8, type: 3}
   UIManager: {fileID: 0}

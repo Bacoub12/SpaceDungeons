@@ -15,10 +15,13 @@ EditorBuildSettings:
     path: Assets/Scenes/Settings.unity
     guid: 8bba219b7d6e0504891651c53c2b81af
   - enabled: 1
-    path: Assets/Scenes/TestRaph.unity
-    guid: 3ac60eaffaa7aeb4fb93f98353e292b8
-  - enabled: 1
     path: Assets/Scenes/Lobby.unity
     guid: 89877e7f5d123ae4a8857903d778d40e
+  - enabled: 1
+    path: Assets/Scenes/LevelOne.unity
+    guid: 794596a48d1514a49aadb32795835c50
+  - enabled: 0
+    path: Assets/Scenes/TestRaph.unity
+    guid: 3ac60eaffaa7aeb4fb93f98353e292b8
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 3ceff661db48ce34e881c951a3506183, type: 2}

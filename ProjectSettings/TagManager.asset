@@ -19,6 +19,7 @@ TagManager:
   - Health
   - Gloves
   - Chestplate
+  - DoorDetection
   layers:
   - Default
   - TransparentFX

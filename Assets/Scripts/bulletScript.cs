@@ -22,11 +22,12 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Gun" && other.gameObject.tag != "Bullet")
+        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Gun" && other.gameObject.tag != "Bullet" && other.gameObject.tag != "DoorDetection")
         {
             //Debug.Log("tag de  : " + other.gameObject.tag);
             Instantiate(particules, gameObject.transform.position, Quaternion.identity);
             Destroy(gameObject);
+            //Destroy(other.gameObject); rage mode
 
         }
         else
