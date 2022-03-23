@@ -15,9 +15,9 @@ public class EnemySpawnManager : MonoBehaviour
     void Start()
     {
         conjurerSpawnOdds = 10f;
-        dashSpawnOdds = 10f;
+        dashSpawnOdds = 15f;
         illusionistSpawnOdds = 10f;
-        rifleSpawnOdds = 25f;
+        rifleSpawnOdds = 30f;
         shotgunSpawnOdds = 25f;
         spiderSpawnOdds = 10f;
         //adds up to 100
@@ -59,8 +59,8 @@ public class EnemySpawnManager : MonoBehaviour
         {
             foreach (Transform t in enemySpawns.transform)
             {
-                //Debug.Log("yes");
-                spawnEnemyAtPosition(t.position);
+                Debug.Log("spawning enemy at " + t.position.x + " " + t.position.y + " " + t.position.z);
+                spawnEnemyAtPosition(t.position, t.rotation);
             }
         }
     }
@@ -85,11 +85,11 @@ public class EnemySpawnManager : MonoBehaviour
         }
         else
         {
-            spawnChestAtPosition(chestSpawnTransform.position);
+            spawnChestAtPosition(chestSpawnTransform.position, chestSpawnTransform.rotation);
         }
     }
 
-    private void spawnEnemyAtPosition(Vector3 position)
+    private void spawnEnemyAtPosition(Vector3 position, Quaternion rotation)
     {
         //roll from 0 to 100, split that into 'brackets', spawn based on what 'bracket' the number fell in
         float rolledNumber = Random.Range(0f, 100f);
@@ -102,7 +102,7 @@ public class EnemySpawnManager : MonoBehaviour
         //conjurer
         if (rolledNumber >= bracketMinimum && rolledNumber < bracketMaximum)
         {
-            Instantiate(enemies[0], position, Quaternion.identity);
+            Instantiate(enemies[0], position, rotation);
             spawnDone = true;
         }
         else
@@ -114,7 +114,7 @@ public class EnemySpawnManager : MonoBehaviour
         //dash
         if (spawnDone == false && rolledNumber >= bracketMinimum && rolledNumber < bracketMaximum)
         {
-            Instantiate(enemies[1], position, Quaternion.identity);
+            Instantiate(enemies[1], position, rotation);
             spawnDone = true;
         }
         else
@@ -126,7 +126,7 @@ public class EnemySpawnManager : MonoBehaviour
         //illusionist
         if (spawnDone == false && rolledNumber >= bracketMinimum && rolledNumber < bracketMaximum)
         {
-            Instantiate(enemies[2], position, Quaternion.identity);
+            Instantiate(enemies[2], position, rotation);
             spawnDone = true;
         }
         else
@@ -138,7 +138,7 @@ public class EnemySpawnManager : MonoBehaviour
         //rifle
         if (spawnDone == false && rolledNumber >= bracketMinimum && rolledNumber < bracketMaximum)
         {
-            Instantiate(enemies[3], position, Quaternion.identity);
+            Instantiate(enemies[3], position, rotation);
             spawnDone = true;
         }
         else
@@ -150,7 +150,7 @@ public class EnemySpawnManager : MonoBehaviour
         //shotgun
         if (spawnDone == false && rolledNumber >= bracketMinimum && rolledNumber < bracketMaximum)
         {
-            Instantiate(enemies[4], position, Quaternion.identity);
+            Instantiate(enemies[4], position, rotation);
             spawnDone = true;
         }
         else
@@ -162,17 +162,22 @@ public class EnemySpawnManager : MonoBehaviour
         //spider
         if (spawnDone == false && rolledNumber >= bracketMinimum && rolledNumber <= bracketMaximum)
         {
-            Instantiate(enemies[5], position, Quaternion.identity);
+            Instantiate(enemies[5], position, rotation);
             spawnDone = true;
+        }
+        
+        if (spawnDone == true)
+        {
+            Debug.Log("rolled enemy number = " + rolledNumber);
         }
         else
         {
-            Debug.Log("not supposed to be here. rolled number = " + rolledNumber);
+            Debug.Log("not supposed to be here. rolled enemy number = " + rolledNumber);
         }
 
     }
 
-    private void spawnChestAtPosition(Vector3 position)
+    private void spawnChestAtPosition(Vector3 position, Quaternion rotation)
     {
         float rolledNumber = Random.Range(0f, 100f);
         float bracketMinimum = 0;
@@ -182,7 +187,7 @@ public class EnemySpawnManager : MonoBehaviour
         //armor
         if (rolledNumber >= bracketMinimum && rolledNumber < bracketMaximum)
         {
-            Instantiate(chests[0], position, Quaternion.identity);
+            Instantiate(chests[0], position, rotation);
             spawnDone = true;
         }
         else
@@ -194,7 +199,7 @@ public class EnemySpawnManager : MonoBehaviour
         //health
         if (spawnDone == false && rolledNumber >= bracketMinimum && rolledNumber < bracketMaximum)
         {
-            Instantiate(chests[1], position, Quaternion.identity);
+            Instantiate(chests[1], position, rotation);
             spawnDone = true;
         }
         else
@@ -206,12 +211,17 @@ public class EnemySpawnManager : MonoBehaviour
         //money
         if (spawnDone == false && rolledNumber >= bracketMinimum && rolledNumber <= bracketMaximum)
         {
-            Instantiate(chests[2], position, Quaternion.identity);
+            Instantiate(chests[2], position, rotation);
             spawnDone = true;
+        }
+        
+        if (spawnDone == true)
+        {
+            Debug.Log("rolled chest number = " + rolledNumber);
         }
         else
         {
-            Debug.Log("not supposed to be here. rolled number = " + rolledNumber);
+            Debug.Log("not supposed to be here. rolled chest number = " + rolledNumber);
         }
     }
 }
