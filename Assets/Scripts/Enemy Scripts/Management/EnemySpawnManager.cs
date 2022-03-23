@@ -59,7 +59,6 @@ public class EnemySpawnManager : MonoBehaviour
         {
             foreach (Transform t in enemySpawns.transform)
             {
-                Debug.Log("spawning enemy at " + t.position.x + " " + t.position.y + " " + t.position.z);
                 spawnEnemyAtPosition(t.position, t.rotation);
             }
         }
@@ -102,6 +101,7 @@ public class EnemySpawnManager : MonoBehaviour
         //conjurer
         if (rolledNumber >= bracketMinimum && rolledNumber < bracketMaximum)
         {
+            Debug.Log("spawning conjurer at " + position.x + " " + position.y + " " + position.z);
             Instantiate(enemies[0], position, rotation);
             spawnDone = true;
         }
@@ -114,6 +114,7 @@ public class EnemySpawnManager : MonoBehaviour
         //dash
         if (spawnDone == false && rolledNumber >= bracketMinimum && rolledNumber < bracketMaximum)
         {
+            Debug.Log("spawning dash at " + position.x + " " + position.y + " " + position.z);
             Instantiate(enemies[1], position, rotation);
             spawnDone = true;
         }
@@ -126,6 +127,7 @@ public class EnemySpawnManager : MonoBehaviour
         //illusionist
         if (spawnDone == false && rolledNumber >= bracketMinimum && rolledNumber < bracketMaximum)
         {
+            Debug.Log("spawning illusionist at " + position.x + " " + position.y + " " + position.z);
             Instantiate(enemies[2], position, rotation);
             spawnDone = true;
         }
@@ -138,6 +140,7 @@ public class EnemySpawnManager : MonoBehaviour
         //rifle
         if (spawnDone == false && rolledNumber >= bracketMinimum && rolledNumber < bracketMaximum)
         {
+            Debug.Log("spawning rifle at " + position.x + " " + position.y + " " + position.z);
             Instantiate(enemies[3], position, rotation);
             spawnDone = true;
         }
@@ -150,6 +153,7 @@ public class EnemySpawnManager : MonoBehaviour
         //shotgun
         if (spawnDone == false && rolledNumber >= bracketMinimum && rolledNumber < bracketMaximum)
         {
+            Debug.Log("spawning shotgun at " + position.x + " " + position.y + " " + position.z);
             Instantiate(enemies[4], position, rotation);
             spawnDone = true;
         }
@@ -162,6 +166,7 @@ public class EnemySpawnManager : MonoBehaviour
         //spider
         if (spawnDone == false && rolledNumber >= bracketMinimum && rolledNumber <= bracketMaximum)
         {
+            Debug.Log("spawning spider at " + position.x + " " + position.y + " " + position.z);
             Instantiate(enemies[5], position, rotation);
             spawnDone = true;
         }
