@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5917257998496369212}
   - component: {fileID: 4073429839987701948}
   - component: {fileID: 2691414233873369729}
+  - component: {fileID: 130708198170813584}
   m_Layer: 0
   m_Name: Canopy3
   m_TagString: Untagged
@@ -81,6 +82,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &130708198170813584
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480014562217215609}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8295304625031256650, guid: db83c60dcdde420489e944b068db5b2a, type: 3}
 --- !u!1 &504692358603529803
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,6 +201,7 @@ GameObject:
   - component: {fileID: 5522562242299101235}
   - component: {fileID: 1545655316006092508}
   - component: {fileID: 8889100639092789807}
+  - component: {fileID: 1700703107937481186}
   m_Layer: 0
   m_Name: Canopy3
   m_TagString: Untagged
@@ -256,6 +272,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1700703107937481186
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386831391109256212}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8295304625031256650, guid: db83c60dcdde420489e944b068db5b2a, type: 3}
 --- !u!1 &1644470407404247277
 GameObject:
   m_ObjectHideFlags: 0
@@ -3801,6 +3831,7 @@ GameObject:
   - component: {fileID: 8705239231030274225}
   - component: {fileID: 3993315826797073106}
   - component: {fileID: 5018912355866567959}
+  - component: {fileID: 3773715978964857897}
   m_Layer: 0
   m_Name: Canopy
   m_TagString: Untagged
@@ -3871,6 +3902,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3773715978964857897
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2483987540947890385}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2728963856613279042, guid: 95b8573399440774ca315b593d577fa1, type: 3}
 --- !u!1 &2801311587735138640
 GameObject:
   m_ObjectHideFlags: 0
@@ -3882,6 +3927,7 @@ GameObject:
   - component: {fileID: 1403554615942298825}
   - component: {fileID: 454153982528660172}
   - component: {fileID: 5882470785413725450}
+  - component: {fileID: 3693146115693167022}
   m_Layer: 0
   m_Name: Canopy
   m_TagString: Untagged
@@ -3952,6 +3998,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3693146115693167022
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2801311587735138640}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2728963856613279042, guid: 95b8573399440774ca315b593d577fa1, type: 3}
 --- !u!1 &2963040810929029127
 GameObject:
   m_ObjectHideFlags: 0
@@ -3963,6 +4023,7 @@ GameObject:
   - component: {fileID: 5553913466977439846}
   - component: {fileID: 1125026956511000258}
   - component: {fileID: 4602837842380953307}
+  - component: {fileID: 5807082950654140107}
   m_Layer: 0
   m_Name: Canopy3
   m_TagString: Untagged
@@ -4033,6 +4094,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5807082950654140107
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2963040810929029127}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8295304625031256650, guid: db83c60dcdde420489e944b068db5b2a, type: 3}
 --- !u!1 &3191819521005845116
 GameObject:
   m_ObjectHideFlags: 0
@@ -4074,6 +4149,7 @@ GameObject:
   - component: {fileID: 6820752349237085324}
   - component: {fileID: 391357963690521056}
   - component: {fileID: 760032534283508777}
+  - component: {fileID: 2973547634933799783}
   m_Layer: 0
   m_Name: Canopy3
   m_TagString: Untagged
@@ -4144,6 +4220,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2973547634933799783
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3224743165888021830}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8295304625031256650, guid: db83c60dcdde420489e944b068db5b2a, type: 3}
 --- !u!1 &3321692589827369061
 GameObject:
   m_ObjectHideFlags: 0
@@ -4249,6 +4339,7 @@ GameObject:
   - component: {fileID: 564677539305596086}
   - component: {fileID: 7205700961885832748}
   - component: {fileID: 6349063072077430424}
+  - component: {fileID: 7686852283931880216}
   m_Layer: 0
   m_Name: Canopy
   m_TagString: Untagged
@@ -4319,6 +4410,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7686852283931880216
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3897692589791373068}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2728963856613279042, guid: 95b8573399440774ca315b593d577fa1, type: 3}
 --- !u!1 &4002172293196452808
 GameObject:
   m_ObjectHideFlags: 0
@@ -4394,6 +4499,7 @@ GameObject:
   - component: {fileID: 3208362556625473378}
   - component: {fileID: 3946195017371980807}
   - component: {fileID: 9215410747087245310}
+  - component: {fileID: 7003469907299325988}
   m_Layer: 0
   m_Name: Canopy3
   m_TagString: Untagged
@@ -4464,6 +4570,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7003469907299325988
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4550170684983141185}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8295304625031256650, guid: db83c60dcdde420489e944b068db5b2a, type: 3}
 --- !u!1 &4584193224823732332
 GameObject:
   m_ObjectHideFlags: 0
@@ -4604,6 +4724,7 @@ GameObject:
   - component: {fileID: 8758363726664394966}
   - component: {fileID: 298792701925277841}
   - component: {fileID: 4448059223752657141}
+  - component: {fileID: 2725457109225107063}
   m_Layer: 0
   m_Name: Canopy
   m_TagString: Untagged
@@ -4674,6 +4795,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2725457109225107063
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6030398409302073396}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2728963856613279042, guid: 95b8573399440774ca315b593d577fa1, type: 3}
 --- !u!1 &6036247673664558187
 GameObject:
   m_ObjectHideFlags: 0
@@ -4685,6 +4820,7 @@ GameObject:
   - component: {fileID: 427949939841941010}
   - component: {fileID: 768189601968032749}
   - component: {fileID: 9156696596855010260}
+  - component: {fileID: 2965938261053575788}
   m_Layer: 0
   m_Name: Canopy3
   m_TagString: Untagged
@@ -4755,6 +4891,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2965938261053575788
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6036247673664558187}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8295304625031256650, guid: db83c60dcdde420489e944b068db5b2a, type: 3}
 --- !u!1 &6706395104946443296
 GameObject:
   m_ObjectHideFlags: 0
@@ -4766,6 +4916,7 @@ GameObject:
   - component: {fileID: 868631681597446091}
   - component: {fileID: 6102736716340361559}
   - component: {fileID: 6098484053327906303}
+  - component: {fileID: 4203230357452161988}
   m_Layer: 0
   m_Name: Canopy
   m_TagString: Untagged
@@ -4836,6 +4987,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4203230357452161988
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6706395104946443296}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2728963856613279042, guid: 95b8573399440774ca315b593d577fa1, type: 3}
 --- !u!1 &6882632146668485914
 GameObject:
   m_ObjectHideFlags: 0
@@ -4847,6 +5012,7 @@ GameObject:
   - component: {fileID: 1349402431419021192}
   - component: {fileID: 6383581773879975144}
   - component: {fileID: 8713366894294026916}
+  - component: {fileID: 1470946442577311125}
   m_Layer: 0
   m_Name: Canopy
   m_TagString: Untagged
@@ -4917,6 +5083,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1470946442577311125
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6882632146668485914}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2728963856613279042, guid: 95b8573399440774ca315b593d577fa1, type: 3}
 --- !u!1 &7214027122293884421
 GameObject:
   m_ObjectHideFlags: 0
@@ -4958,6 +5138,7 @@ GameObject:
   - component: {fileID: 607419569892553505}
   - component: {fileID: 2116533517835666223}
   - component: {fileID: 2495264137773552397}
+  - component: {fileID: 4315570621478884990}
   m_Layer: 0
   m_Name: Canopy3
   m_TagString: Untagged
@@ -5028,6 +5209,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4315570621478884990
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7274027767360647723}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8295304625031256650, guid: db83c60dcdde420489e944b068db5b2a, type: 3}
 --- !u!1 &7289980110462823545
 GameObject:
   m_ObjectHideFlags: 0
@@ -5069,6 +5264,7 @@ GameObject:
   - component: {fileID: 3722267327663605882}
   - component: {fileID: 7815306660681196096}
   - component: {fileID: 6506666082086235192}
+  - component: {fileID: 1561382807710250777}
   m_Layer: 0
   m_Name: Canopy3
   m_TagString: Untagged
@@ -5139,6 +5335,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1561382807710250777
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7415541670771392377}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8295304625031256650, guid: db83c60dcdde420489e944b068db5b2a, type: 3}
 --- !u!1 &7672082983610816308
 GameObject:
   m_ObjectHideFlags: 0
@@ -5182,6 +5392,7 @@ GameObject:
   - component: {fileID: 2594260982712959125}
   - component: {fileID: 7953377441914350640}
   - component: {fileID: 2638513761306741223}
+  - component: {fileID: 2725493830413957968}
   m_Layer: 0
   m_Name: Canopy3
   m_TagString: Untagged
@@ -5252,6 +5463,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2725493830413957968
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7943543952611825737}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8295304625031256650, guid: db83c60dcdde420489e944b068db5b2a, type: 3}
 --- !u!1 &8265649064784861770
 GameObject:
   m_ObjectHideFlags: 0
