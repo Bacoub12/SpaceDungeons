@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d370883ee024b744834fa33267f9a96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   helmet: {fileID: 8399512265110151577, guid: bfd220c9e895dab4aae3482c2119c5ad, type: 3}
   chestplate: {fileID: 1051530423479219741, guid: 890991ea1057e0c4e8367995c8f73a3f, type: 3}
   gloves: {fileID: 3615442222258730677, guid: 6f00bb03c819dbe489836d3443ba9e79, type: 3}

@@ -65,6 +65,7 @@ public class DoorScript : MonoBehaviour
         try
         {
             LeLock = transform.GetChild(3).gameObject;
+            GameObject.Find("Player").GetComponent<PlayerScript>().setLeLock(true);
         }
         catch (UnityException ex)
         {
@@ -73,6 +74,9 @@ public class DoorScript : MonoBehaviour
         if(LeLock == null)
         {
             DoorController.Play("OpenDoor");
+            GameObject.Find("Player").GetComponent<PlayerScript>().setLeLock(false);
+            doorOpen = true;
+            GameObject.Find("Player").GetComponent<PlayerScript>().setOnce(true);
         }
         Debug.Log("LeLock : " + LeLock);
     }

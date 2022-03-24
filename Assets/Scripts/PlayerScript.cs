@@ -38,6 +38,8 @@ public class PlayerScript : MonoBehaviour
     bool onOffCrouch = false;
     bool pause = false;
     bool key = false;
+    bool LeLock = true;
+    bool once = false;
     float timer = 0.0f;
     FirstPersonController firstPersonController;
     CapsuleCollider capsuleCollider;
@@ -288,17 +290,17 @@ public class PlayerScript : MonoBehaviour
                             UIManager.GetComponent<UIManager>().Interactive(false, "");
                         break;
                     case "Door1_low":
-                        if (getKey() == true)
+                        if (getKey() == true && getLeLock() == false && getOnce() == true)
                             UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour ouvrir la porte");
-                        else if(getKey() == false)
+                        else if(getKey() == false && getLeLock() == false)
                         {
                             UIManager.GetComponent<UIManager>().Interactive(true, "La porte est barré");
                         }
                         break;
                     case "Door2_low":
-                        if (getKey() == true)
+                        if (getKey() == true && getLeLock() == false && getOnce() == true)
                             UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour ouvrir la porte");
-                        else if (getKey() == false)
+                        else if (getKey() == false && getLeLock() == false)
                         {
                             UIManager.GetComponent<UIManager>().Interactive(true, "La porte est barré");
                         }
@@ -342,9 +344,6 @@ public class PlayerScript : MonoBehaviour
 
     public void Damage(int damage)
     {
-        // mettre que les degat rentre dans larmnure et aprse le restant des degat rentre dans la vie
-        // (note de christian: ok, c'est ce que j'ai essayé de faire)
-
         int damageToHealth = 0;
         if (armure > 0)
         {
@@ -367,7 +366,7 @@ public class PlayerScript : MonoBehaviour
         }
         _healthText.text = "Vie : " + health;
         _armorText.text = "Armure : " + armure;
-        Debug.Log("armure: " + armure + ", health: " + health);
+        //Debug.Log("armure: " + armure + ", health: " + health);
     }
 
     IEnumerator PoisonCoroutine()
@@ -413,7 +412,7 @@ public class PlayerScript : MonoBehaviour
         armureUpgrade1 = _armureUpgrade1;
         armureUpgrade2 = _armureUpgrade2;
         armureUpgrade3 = _armureUpgrade3;
-        Debug.Log("armure upgrades updated: " + armureUpgrade1 + " " + armureUpgrade2 + " " + armureUpgrade3);
+        //Debug.Log("armure upgrades updated: " + armureUpgrade1 + " " + armureUpgrade2 + " " + armureUpgrade3);
 
         armure = baseArmure; //set to 100 (??)
         if (armureUpgrade1)
@@ -429,7 +428,7 @@ public class PlayerScript : MonoBehaviour
             armure += 100;
         }
         maxArmure = armure;
-        Debug.Log("new armure: " + armure);
+        //Debug.Log("new armure: " + armure);
     }
 
     public void OnInteract() // le boutons
@@ -440,7 +439,7 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("/Vegu");
+            //Debug.Log("/Vegu");
         }
     }
 
@@ -524,5 +523,25 @@ public class PlayerScript : MonoBehaviour
     public void setKey(bool _key)
     {
         key = _key;
+    }
+
+    public bool getLeLock()
+    {
+        return LeLock;
+    }
+
+    public void setLeLock(bool _LeLock)
+    {
+        LeLock = _LeLock;
+    }
+
+    public bool getOnce()
+    {
+        return LeLock;
+    }
+
+    public void setOnce(bool _Once)
+    {
+        once = _Once;
     }
 }
