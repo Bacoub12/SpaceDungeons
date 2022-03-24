@@ -10,7 +10,6 @@ public class DoorScript : MonoBehaviour
     private Animator DoorController;
     private bool key;
     private bool doorOpen = false;
-    private bool boolLock = false;
 
     // Start is called before the first frame update
     void Start()
@@ -62,7 +61,7 @@ public class DoorScript : MonoBehaviour
 
     public void OpenTheDoor()
     {
-        LeLock = null; // le lock ne tombe pas null for some reason
+        LeLock = null;
         try
         {
             LeLock = transform.GetChild(3).gameObject;

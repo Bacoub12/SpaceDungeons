@@ -289,7 +289,7 @@ public class PlayerScript : MonoBehaviour
                         break;
                     case "Door1_low":
                         if (getKey() == true)
-                            UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour ouvrir la porte"); // les portes s'ouvrent toute seul // le verrou ?
+                            UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour ouvrir la porte");
                         else if(getKey() == false)
                         {
                             UIManager.GetComponent<UIManager>().Interactive(true, "La porte est barré");
