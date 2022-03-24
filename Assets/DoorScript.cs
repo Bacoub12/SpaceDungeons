@@ -6,25 +6,43 @@ public class DoorScript : MonoBehaviour
 {
     private GameObject leftDoor;
     private GameObject rightDoor;
+    private GameObject LeLock;
     private Animator DoorController;
+    private bool key;
     private bool doorOpen = false;
+    private bool boolLock = false;
+
     // Start is called before the first frame update
     void Start()
     {
         leftDoor = transform.GetChild(0).gameObject;
         rightDoor = transform.GetChild(1).gameObject;
         DoorController = GetComponent<Animator>();
+        try
+        {
+            LeLock = transform.GetChild(3).gameObject;
+        }
+        catch (UnityException ex)
+        {
+            Debug.Log(ex);
+            LeLock = null;
+        }
+        
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
         Physics.IgnoreLayerCollision(1, 7);
         Physics.IgnoreLayerCollision(9, 14);
-
+        key = GameObject.Find("Player").GetComponent<PlayerScript>().getKey();
         if(other.gameObject.layer == 8)
         {
-            doorOpen = true;
-            DoorController.Play("OpenDoor");
+            if (key == true && LeLock == null)
+            {
+                doorOpen = true;
+                DoorController.Play("OpenDoor");
+            }
         }
     }
 
@@ -42,4 +60,21 @@ public class DoorScript : MonoBehaviour
         }
     }
 
+    public void OpenTheDoor()
+    {
+        LeLock = null; // le lock ne tombe pas null for some reason
+        try
+        {
+            LeLock = transform.GetChild(3).gameObject;
+        }
+        catch (UnityException ex)
+        {
+            LeLock = null;
+        }
+        if(LeLock == null)
+        {
+            DoorController.Play("OpenDoor");
+        }
+        Debug.Log("LeLock : " + LeLock);
+    }
 }

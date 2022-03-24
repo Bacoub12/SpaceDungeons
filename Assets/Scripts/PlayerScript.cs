@@ -37,6 +37,7 @@ public class PlayerScript : MonoBehaviour
     bool interaction = false;
     bool onOffCrouch = false;
     bool pause = false;
+    bool key = false;
     float timer = 0.0f;
     FirstPersonController firstPersonController;
     CapsuleCollider capsuleCollider;
@@ -286,14 +287,33 @@ public class PlayerScript : MonoBehaviour
                         else
                             UIManager.GetComponent<UIManager>().Interactive(false, "");
                         break;
-                    case "Door":
-                        UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour ouvrir la porte");
+                    case "Door1_low":
+                        if (getKey() == true)
+                            UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour ouvrir la porte"); // les portes s'ouvrent toute seul // le verrou ?
+                        else if(getKey() == false)
+                        {
+                            UIManager.GetComponent<UIManager>().Interactive(true, "La porte est barré");
+                        }
+                        break;
+                    case "Door2_low":
+                        if (getKey() == true)
+                            UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour ouvrir la porte");
+                        else if (getKey() == false)
+                        {
+                            UIManager.GetComponent<UIManager>().Interactive(true, "La porte est barré");
+                        }
                         break;
                     case "Key":
                         UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour prendre la clé");
                         break;
                     case "Teleporter":
                         UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour utiliser le téléporteur");
+                        break;
+                    case "Lock":
+                        if (getKey() == false)
+                        UIManager.GetComponent<UIManager>().Interactive(true, "La porte est barré");
+                        else if (getKey() == true)
+                            UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour débarré la porte");
                         break;
                     default:
                         UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour intéragir");
@@ -304,12 +324,12 @@ public class PlayerScript : MonoBehaviour
                 {
                     interaction = true;
                     interactable = hit.collider.GetComponent<Interactable>();
-                    Debug.Log("new interactable " + interactable);
+                    //Debug.Log("new interactable " + interactable);
                 }
                 else
                 {
                     interaction = false;
-                    Debug.Log("new interactable " + interactable);
+                    //Debug.Log("new interactable " + interactable);
                 }
             }
         }
@@ -494,5 +514,15 @@ public class PlayerScript : MonoBehaviour
         {
             armure = add;
         }
+    }
+
+    public bool getKey()
+    {
+        return key;
+    }
+
+    public void setKey(bool _key)
+    {
+        key = _key;
     }
 }
