@@ -20,6 +20,8 @@ TagManager:
   - Gloves
   - Chestplate
   - DoorDetection
+  - Destination
+  - Water
   layers:
   - Default
   - TransparentFX

@@ -40,6 +40,7 @@ public class PlayerScript : MonoBehaviour
     bool key = false;
     bool LeLock = true;
     bool once = false;
+    bool waterRun = false;
     float timer = 0.0f;
     FirstPersonController firstPersonController;
     CapsuleCollider capsuleCollider;
@@ -267,9 +268,23 @@ public class PlayerScript : MonoBehaviour
             }
             Destroy(other.gameObject);
         }
+        else if(other.gameObject.tag == "Water")
+        {
+            waterRun = true;
+            StartCoroutine(WaterCoroutine());
+        }
         else
         {
             //Debug.Log("layer autre que collectible  : " + other.gameObject.layer);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Water")
+        {
+            waterRun = false;
+            StopCoroutine(WaterCoroutine());
         }
     }
 
@@ -381,6 +396,15 @@ public class PlayerScript : MonoBehaviour
         Damage(5);
 
         poisoned = false;
+    }
+
+    IEnumerator WaterCoroutine()
+    {
+        while (waterRun == true)
+        {
+            Damage(10);
+            yield return new WaitForSeconds(1.0f);
+        }
     }
 
     public void setHealthUpgrades(bool _healthUpgrade1, bool _healthUpgrade2, bool _healthUpgrade3)
