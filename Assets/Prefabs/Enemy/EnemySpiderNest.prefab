@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2435367881415810433}
   - component: {fileID: 4031827368839649968}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemySpiderNest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 7560325475625383743}
   - component: {fileID: 3674488618987810987}
   - component: {fileID: 2218546292317763566}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rock_Pile_Rock_Pile1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

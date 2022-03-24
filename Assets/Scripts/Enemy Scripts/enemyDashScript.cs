@@ -84,22 +84,32 @@ public class enemyDashScript : MonoBehaviour
                     audioWalk.Play();
                 audioWalk.mute = false;
 
-                Vector3 to = target.position + new Vector3(0f, 1f, 0f);
+                Vector3 to = target.position;
                 Vector3 from = transform.position;
                 Vector3 direction = (to - from).normalized;
                 Debug.DrawLine(from, to);
 
-                if (distance <= agent.stoppingDistance)
+                if (distance <= agent.stoppingDistance
+                    && direction.y > -3f && direction.y < 3f)
                 {
                     agent.SetDestination(transform.position);
                     anim.SetBool("Walk Forward", false);
                     audioWalk.mute = true;
                     FaceTarget(direction);
 
-                    if (canAttack && Vector3.Angle(eye.forward, vectorToEnemy) <= 15f)
+                    bool possibleEndPoint = false;
+                    Vector3 endPosition = new Vector3(0f, 0f, 0f);
+                    NavMeshHit hitMesh;
+                    if (NavMesh.SamplePosition(transform.position + (direction * attackDistance), out hitMesh, 2f, NavMesh.AllAreas))
+                    {
+                        possibleEndPoint = true;
+                        endPosition = hitMesh.position;
+                    }
+
+                    if (canAttack && Vector3.Angle(eye.forward, vectorToEnemy) <= 30f && possibleEndPoint)
                     {
                         //CHECK IF THERES ROOM TO ATTACK, if not, either abort or (more complicated) do a shorter dash, until the obstacle
-                        StartCoroutine(strike(direction));
+                        StartCoroutine(strike(direction, endPosition));
                         StartCoroutine(strikeCooldown());
                     }
                 }
@@ -120,14 +130,24 @@ public class enemyDashScript : MonoBehaviour
         //transform.LookAt(target);
     }
 
-    IEnumerator strike(Vector3 _direction)
+    IEnumerator strike(Vector3 _direction, Vector3 endPosition)
     {
         doingAttack = true;
         canAttack = false;
 
         //spawn prospective attack zone
-        Vector3 centerShift = transform.forward * (attackDistance / 2);
+        Vector3 centerShift = _direction * (attackDistance / 2);
         existingAttackVisual = Instantiate(dashAttackZone, transform.position + centerShift, transform.rotation);
+        existingAttackVisual.transform.LookAt(endPosition);
+
+        float rotX = existingAttackVisual.transform.localRotation.x;
+        Debug.Log(rotX);
+        if (rotX >= -0.03f && rotX <= 0.03f)
+        {
+            Debug.Log("salut");
+            Vector3 zoneRotation = existingAttackVisual.transform.rotation.eulerAngles;
+            existingAttackVisual.transform.rotation = Quaternion.Euler(0f, zoneRotation.y, zoneRotation.z);
+        }
 
         //wait
         anim.SetBool("Defend", true);
@@ -152,7 +172,8 @@ public class enemyDashScript : MonoBehaviour
         GameObject trail = Instantiate(dashEnergyParticles, transform.position + centerShift, transform.rotation);
         trail.transform.Rotate(0f, 180f, 0f, Space.Self);
 
-        transform.position = transform.position + (transform.forward * attackDistance);
+        //transform.position = transform.position + (transform.forward * attackDistance);
+        transform.position = endPosition;
 
         //wait
         agent.SetDestination(transform.position);
