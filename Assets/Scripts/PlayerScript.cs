@@ -76,6 +76,8 @@ public class PlayerScript : MonoBehaviour
 
         if (GameObject.Find("UpgradeDesk") != null)
             upgradeDeskScript = GameObject.Find("UpgradeDesk").GetComponent<UpgradeDeskScript>();
+        else if (GameObject.Find("PodAlone") != null)
+            upgradeDeskScript = GameObject.Find("PodAlone").GetComponent<UpgradeDeskScript>();
 
         pistolDamage = 10f;
         shotgunDamage = 2f; //? vu que y'a plus de balles

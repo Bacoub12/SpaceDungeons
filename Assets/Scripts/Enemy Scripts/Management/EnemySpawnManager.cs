@@ -11,6 +11,7 @@ public class EnemySpawnManager : MonoBehaviour
     public GameObject[] chests;
     public GameObject[] armorPieces;
     public GameObject spawnEffect;
+    public GameObject boss;
 
     private NavMeshSurface surface;
 
@@ -51,8 +52,8 @@ public class EnemySpawnManager : MonoBehaviour
         enemyReserveForces = 5;
 
         //enlever (et généer par GameManager général) dans le jeu final
-        spawnEnemiesOnTerrain();
-        spawnChestsOnTerrain();
+        //spawnEnemiesOnTerrain();
+        //spawnChestsOnTerrain();
     }
 
     // Update is called once per frame
@@ -118,8 +119,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     public void spawnEnemiesOnTerrain()
     {
-        //Debug.Log("salut");
-
+        //check for possible enemy spawns
         GameObject enemySpawns = null;
         for (int i = 1; i <= 15; i++)
         {
@@ -341,5 +341,26 @@ public class EnemySpawnManager : MonoBehaviour
         }
 
         everythingSpawned = true;
+    }
+
+    //after a few maps, say 3, boss spawn odds start going up by 10 each completed map. this should prolly be managed in a higher-scale gamemanager
+    public void spawnBoss(float spawnOdds)
+    {
+        float rolledNumber = Random.Range(0f, 100f);
+        if (rolledNumber <= spawnOdds)
+        {
+            //check for possible boss spawns
+            GameObject bossSpawn = null;
+            if (GameObject.Find("BossSpawn") != null)
+            {
+                bossSpawn = GameObject.Find("BossSpawn");
+                Quaternion randomYRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+                Instantiate(boss, bossSpawn.transform.position, randomYRotation);
+            }
+            else
+            {
+                Debug.Log("aucun boss spawn trouvé");
+            }
+        }
     }
 }

@@ -141,10 +141,8 @@ public class enemyDashScript : MonoBehaviour
         existingAttackVisual.transform.LookAt(endPosition);
 
         float rotX = existingAttackVisual.transform.localRotation.x;
-        Debug.Log(rotX);
         if (rotX >= -0.02f && rotX <= 0.02f)
         {
-            Debug.Log("salut");
             Vector3 zoneRotation = existingAttackVisual.transform.rotation.eulerAngles;
             existingAttackVisual.transform.rotation = Quaternion.Euler(0f, zoneRotation.y, zoneRotation.z);
         }

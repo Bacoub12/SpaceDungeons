@@ -55,53 +55,121 @@ public class UpgradeDeskScript : MonoBehaviour
             }
             else
             {
-                upgradeDeskPanel.SetActive(true);
-                Time.timeScale = 0;
-                CursorUnlock();
-                isActive = true;
-
-                if (initialized == false)
+                Camera camera = GameObject.Find("PlayerCameraRoot").GetComponent<Camera>();
+                LayerMask interactableLayerMask = 1 << 10;
+                RaycastHit hit;
+                if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, 2, interactableLayerMask))
                 {
-                    
-                    foreach (Transform child in GameObject.Find("ListPanel").transform)
+                    Debug.Log(hit.collider.gameObject.name);
+                    if (hit.collider.gameObject.name == "UpgradeDesk" || hit.collider.gameObject.name == "PodInteraction")
                     {
-                        GameObject buttonGameObject = child.gameObject;
-                        UpgradeScript upgradeScript = buttonGameObject.GetComponent<UpgradeScript>();
+                        Debug.Log("allo3");
 
-                        buttonGameObject.GetComponent<Button>()
-                            .onClick.AddListener(delegate {
-                                loadUpgradeInfo(upgradeScript.title, upgradeScript.description, upgradeScript.price, upgradeScript.bought); 
-                            });
+                        upgradeDeskPanel.SetActive(true);
+                        Time.timeScale = 0;
+                        CursorUnlock();
+                        isActive = true;
 
-                        if (upgradeScript.bought)
-                            buttonGameObject.GetComponent<Image>().color = boughtColor;
+                        if (initialized == false)
+                        {
+                            foreach (Transform child in GameObject.Find("ListPanel").transform)
+                            {
+                                GameObject buttonGameObject = child.gameObject;
+                                UpgradeScript upgradeScript = buttonGameObject.GetComponent<UpgradeScript>();
+
+                                buttonGameObject.GetComponent<Button>()
+                                    .onClick.AddListener(delegate {
+                                        loadUpgradeInfo(upgradeScript.title, upgradeScript.description, upgradeScript.price, upgradeScript.bought);
+                                    });
+
+                                if (upgradeScript.bought)
+                                    buttonGameObject.GetComponent<Image>().color = boughtColor;
+                            }
+
+                            GameObject buyButton = GameObject.Find("btBuy");
+                            buyButton.GetComponent<Button>()
+                                    .onClick.AddListener(delegate {
+                                        buyUpgrade();
+                                        updateMoneyVisual();
+                                    });
+
+                            initialized = true;
+                        }
+
+                        updateMoneyVisual();
+
+                        GameObject descPanel = GameObject.Find("DescPanel");
+                        descPanel.transform.GetChild(0).gameObject
+                            .GetComponent<TMP_Text>()
+                            .text = "";
+                        descPanel.transform.GetChild(1).gameObject
+                            .GetComponent<TMP_Text>()
+                            .text = "";
+                        descPanel.transform.GetChild(2).gameObject
+                            .GetComponent<TMP_Text>()
+                            .text = "";
+                        descPanel.transform.GetChild(3).gameObject
+                            .GetComponent<Button>()
+                            .interactable = false;
+
                     }
-
-                    GameObject buyButton = GameObject.Find("btBuy");
-                    buyButton.GetComponent<Button>()
-                            .onClick.AddListener(delegate {
-                                buyUpgrade();
-                                updateMoneyVisual();
-                            });
-
-                    initialized = true;
                 }
 
-                updateMoneyVisual();
+                /*
+                if (GameObject.Find("UpgradeDesk"))
+                {
+                    GameObject upgradeDesk = GameObject.Find("UpgradeDesk");
+                    if (Vector3.Distance(upgradeDesk.transform.position, GameObject.Find("Player").transform.position) <= 2f)
+                    {
+                        upgradeDeskPanel.SetActive(true);
+                        Time.timeScale = 0;
+                        CursorUnlock();
+                        isActive = true;
 
-                GameObject descPanel = GameObject.Find("DescPanel");
-                descPanel.transform.GetChild(0).gameObject
-                    .GetComponent<TMP_Text>()
-                    .text = "";
-                descPanel.transform.GetChild(1).gameObject
-                    .GetComponent<TMP_Text>()
-                    .text = "";
-                descPanel.transform.GetChild(2).gameObject
-                    .GetComponent<TMP_Text>()
-                    .text = "";
-                descPanel.transform.GetChild(3).gameObject
-                    .GetComponent<Button>()
-                    .interactable = false;
+                        if (initialized == false)
+                        {
+                            foreach (Transform child in GameObject.Find("ListPanel").transform)
+                            {
+                                GameObject buttonGameObject = child.gameObject;
+                                UpgradeScript upgradeScript = buttonGameObject.GetComponent<UpgradeScript>();
+
+                                buttonGameObject.GetComponent<Button>()
+                                    .onClick.AddListener(delegate {
+                                        loadUpgradeInfo(upgradeScript.title, upgradeScript.description, upgradeScript.price, upgradeScript.bought);
+                                    });
+
+                                if (upgradeScript.bought)
+                                    buttonGameObject.GetComponent<Image>().color = boughtColor;
+                            }
+
+                            GameObject buyButton = GameObject.Find("btBuy");
+                            buyButton.GetComponent<Button>()
+                                    .onClick.AddListener(delegate {
+                                        buyUpgrade();
+                                        updateMoneyVisual();
+                                    });
+
+                            initialized = true;
+                        }
+
+                        updateMoneyVisual();
+
+                        GameObject descPanel = GameObject.Find("DescPanel");
+                        descPanel.transform.GetChild(0).gameObject
+                            .GetComponent<TMP_Text>()
+                            .text = "";
+                        descPanel.transform.GetChild(1).gameObject
+                            .GetComponent<TMP_Text>()
+                            .text = "";
+                        descPanel.transform.GetChild(2).gameObject
+                            .GetComponent<TMP_Text>()
+                            .text = "";
+                        descPanel.transform.GetChild(3).gameObject
+                            .GetComponent<Button>()
+                            .interactable = false;
+                    }
+                }
+                */
             }
         }
     }

@@ -92,7 +92,7 @@ public class enemyBossScript : MonoBehaviour
                     audioWalk.Play();
                 audioWalk.mute = false;
 
-                Vector3 to = target.position + new Vector3(0f, 1f, 0f);
+                Vector3 to = target.position;
                 Vector3 from = transform.position;
                 Vector3 direction = (to - from).normalized;
                 Debug.DrawLine(from, to);
@@ -116,21 +116,33 @@ public class enemyBossScript : MonoBehaviour
 
                         switch (attackChoice)
                         {
-                            case 1:
-                                if (Vector3.Angle(eye.forward, vectorToEnemy) <= 20f)
+
+                            case 1: //dash
+                                bool possibleEndPoint = false;
+                                Vector3 endPosition = new Vector3(0f, 0f, 0f);
+                                NavMeshHit hitMesh;
+                                if (NavMesh.SamplePosition(transform.position + (direction * dashDistance), out hitMesh, 5f, NavMesh.AllAreas))
                                 {
-                                    StartCoroutine(dash());
+                                    possibleEndPoint = true;
+                                    endPosition = hitMesh.position;
+                                }
+
+                                if (Vector3.Angle(eye.forward, vectorToEnemy) <= 30f && possibleEndPoint)
+                                {
+                                    StartCoroutine(dash(direction, endPosition));
                                     StartCoroutine(strikeCooldown());
                                 }
                                 break;
-                            case 2:
+
+                            case 2: //shoot
                                 if (Vector3.Angle(eye.forward, vectorToEnemy) <= 20f)
                                 {
                                     StartCoroutine(shoot(transform.forward));
                                     StartCoroutine(strikeCooldown());
                                 }
                                 break;
-                            case 3:
+
+                            case 3: //slam
                                 StartCoroutine(slam());
                                 StartCoroutine(strikeCooldown());
                                 break;
@@ -154,14 +166,22 @@ public class enemyBossScript : MonoBehaviour
         //transform.LookAt(target);
     }
 
-    IEnumerator dash()
+    IEnumerator dash(Vector3 _direction, Vector3 endPosition)
     {
         doingAttack = true;
         canAttack = false;
 
         //spawn prospective attack zone
-        Vector3 centerShift = transform.forward * (dashDistance / 2);
+        Vector3 centerShift = _direction * (dashDistance / 2);
         existingAttackVisual = Instantiate(dashAttackZone, transform.position + centerShift, transform.rotation);
+        existingAttackVisual.transform.LookAt(endPosition);
+
+        float rotX = existingAttackVisual.transform.localRotation.x;
+        if (rotX >= -0.02f && rotX <= 0.02f)
+        {
+            Vector3 zoneRotation = existingAttackVisual.transform.rotation.eulerAngles;
+            existingAttackVisual.transform.rotation = Quaternion.Euler(0f, zoneRotation.y, zoneRotation.z);
+        }
 
         //wait
         anim.SetBool("Defend", true);
@@ -174,10 +194,11 @@ public class enemyBossScript : MonoBehaviour
 
         //check if player is intersecting zone collider
         Vector3 playerPos = target.position;
-        if (existingAttackVisual.GetComponent<Collider>().bounds.Contains(playerPos))
-        {
-            target.gameObject.GetComponent<PlayerScript>().Damage(40);
-        }
+        if (existingAttackVisual != null)
+            if (existingAttackVisual.GetComponent<Collider>().bounds.Contains(playerPos))
+            {
+                target.gameObject.GetComponent<PlayerScript>().Damage(40);
+            }
 
         Destroy(existingAttackVisual);
         GameObject dust = Instantiate(dashDustParticles, transform.position, Quaternion.identity);
@@ -185,7 +206,7 @@ public class enemyBossScript : MonoBehaviour
         GameObject trail = Instantiate(dashEnergyParticles, transform.position + centerShift, transform.rotation);
         trail.transform.Rotate(0f, 180f, 0f, Space.Self);
 
-        transform.position = transform.position + (transform.forward * dashDistance);
+        transform.position = endPosition;
 
         //wait
         agent.SetDestination(transform.position);
