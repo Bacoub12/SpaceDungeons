@@ -16,12 +16,6 @@ public class ChestScript : MonoBehaviour
         opened = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void open()
     {
         if (opened == false)

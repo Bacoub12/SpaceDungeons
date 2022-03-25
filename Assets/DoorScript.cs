@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {
-    private GameObject leftDoor;
-    private GameObject rightDoor;
     private GameObject LeLock;
     private Animator DoorController;
     private bool key;
@@ -14,8 +12,6 @@ public class DoorScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        leftDoor = transform.GetChild(0).gameObject;
-        rightDoor = transform.GetChild(1).gameObject;
         DoorController = GetComponent<Animator>();
         try
         {
@@ -78,6 +74,6 @@ public class DoorScript : MonoBehaviour
             doorOpen = true;
             GameObject.Find("Player").GetComponent<PlayerScript>().setOnce(true);
         }
-        Debug.Log("LeLock : " + LeLock);
+        //Debug.Log("LeLock : " + LeLock);
     }
 }

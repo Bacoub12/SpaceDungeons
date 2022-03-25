@@ -332,6 +332,15 @@ public class PlayerScript : MonoBehaviour
                         else if (getKey() == true)
                             UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour débarré la porte");
                         break;
+                    case "Bed":
+                        UIManager.GetComponent<UIManager>().Interactive(true, "Appuyer sur F pour dormir (Quitter la partie)");
+                        break;
+                    case "MissionCrate":
+                        UIManager.GetComponent<UIManager>().Interactive(true, "Appuyer sur F pour partir en aventure !");
+                        break;
+                    case "PodInteraction":
+                        UIManager.GetComponent<UIManager>().Interactive(true, "Appuyer sur F pour parcourir les améliorations");
+                        break;
                     default:
                         UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour intéragir");
                         break;
@@ -480,7 +489,7 @@ public class PlayerScript : MonoBehaviour
 
     public void OnCrouch()
     {
-        Debug.Log(onOffCrouch);
+        //Debug.Log(onOffCrouch);
         if (!onOffCrouch)
         {
             _CharacterController.height = 1.0f;
