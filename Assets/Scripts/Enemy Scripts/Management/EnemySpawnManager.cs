@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using Unity.AI.Navigation;
 using System.Text.RegularExpressions;
 
@@ -9,6 +10,7 @@ public class EnemySpawnManager : MonoBehaviour
     public GameObject[] enemies;
     public GameObject[] chests;
     public GameObject[] armorPieces;
+    public GameObject spawnEffect;
 
     private NavMeshSurface surface;
 
@@ -18,6 +20,7 @@ public class EnemySpawnManager : MonoBehaviour
     private bool everythingSpawned;
     private string terrainNameString;
     private string enemyGameObjectRegex;
+    private int enemyReserveForces;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +48,9 @@ public class EnemySpawnManager : MonoBehaviour
 
         enemyGameObjectRegex = "^Enemy(?!Bullet|SpawnManager)"; //check for enemy but not bullet or spawnmanager
 
-        //・enlever (et généer par GameManager général) dans le jeu final
+        enemyReserveForces = 5;
+
+        //enlever (et généer par GameManager général) dans le jeu final
         spawnEnemiesOnTerrain();
         spawnChestsOnTerrain();
     }
@@ -53,18 +58,26 @@ public class EnemySpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (everythingSpawned && getEnemyCount() <= 2)
+        if (everythingSpawned && getEnemyCount() <= 2 && enemyReserveForces > 0)
         {
-            //check for all enemies dead
             GameObject terrain = GameObject.Find(terrainNameString);
             GameObject enemySpawns = terrain.transform.GetChild(terrain.transform.childCount - 2).gameObject;
+
             int enemyLayerMask = 1 << 7;
             int playerLayerMask = 1 << 8; //ou plutot "gun" mais bon c'est équivalent pour nos besoins
+
+            bool spawnCompleted = false;
             foreach (Transform spawnTransform in enemySpawns.transform)
             {
-                if (Physics.CheckSphere(spawnTransform.position, 5f, enemyLayerMask) || Physics.CheckSphere(spawnTransform.position, 10f, playerLayerMask))
+                if (spawnCompleted == false)
                 {
-                    spawnEnemyAtPosition(spawnTransform.position);
+                    if (!Physics.CheckSphere(spawnTransform.position, 5f, enemyLayerMask) && !Physics.CheckSphere(spawnTransform.position, 10f, playerLayerMask))
+                    {
+                        spawnEnemyAtPosition(spawnTransform.position);
+                        enemyReserveForces--;
+                        setAllEnemiesOnPlayer();
+                        spawnCompleted = true;
+                    }
                 }
             }
         }
@@ -73,14 +86,34 @@ public class EnemySpawnManager : MonoBehaviour
     public int getEnemyCount()
     {
         int enemyCount = 0;
-        foreach (GameObject GOinScene in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
+        foreach (GameObject GOinScene in FindObjectsOfType<GameObject>())
         {
             if (Regex.IsMatch(GOinScene.name, enemyGameObjectRegex))
             {
+                Debug.Log(GOinScene.name);
                 enemyCount++;
             }
         }
+        //Debug.Log(enemyCount);
         return enemyCount;
+    }
+
+    public void setReserveForces(int _enemyBenchedForces)
+    {
+        enemyReserveForces = _enemyBenchedForces;
+    }
+
+    public void setAllEnemiesOnPlayer()
+    {
+        foreach (GameObject GOinScene in FindObjectsOfType<GameObject>())
+        {
+            if (Regex.IsMatch(GOinScene.name, enemyGameObjectRegex))
+            {
+                if (GOinScene.name != "EnemySpiderNest(Clone)")
+                    GOinScene.GetComponent<NavMeshAgent>()
+                        .SetDestination(GameObject.Find("PlayerCapsule").transform.position);
+            }
+        }
     }
 
     public void spawnEnemiesOnTerrain()
@@ -105,7 +138,7 @@ public class EnemySpawnManager : MonoBehaviour
         {
             foreach (Transform t in enemySpawns.transform)
             {
-                //spawnEnemyAtPosition(t.position);
+                spawnEnemyAtPosition(t.position);
             }
         }
     }
@@ -240,6 +273,7 @@ public class EnemySpawnManager : MonoBehaviour
             //Debug.Log("not supposed to be here. rolled enemy number = " + rolledNumber);
         }
 
+        Instantiate(spawnEffect, position, Quaternion.identity);
     }
 
     private void spawnChestAtPosition(Vector3 position, Quaternion rotation)
