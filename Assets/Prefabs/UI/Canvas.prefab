@@ -2555,6 +2555,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2021663599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7657438294822561789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279593d43ab9c1b4985bd97c97ac4f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &584517214806404833
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2562,9 +2574,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5308552986172552000}
     m_Modifications:
+    - target: {fileID: 1427317909884357320, guid: 8e8a6cc242c6b4744bd981a46c2f9960, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2021663599}
+    - target: {fileID: 1427317909884357320, guid: 8e8a6cc242c6b4744bd981a46c2f9960, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: toggle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427317909884357320, guid: 8e8a6cc242c6b4744bd981a46c2f9960, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ToggleUpgradePanel, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2335612850094823398, guid: 8e8a6cc242c6b4744bd981a46c2f9960, type: 3}
       propertyPath: m_Name
       value: UpgradeDeskPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2335612850094823398, guid: 8e8a6cc242c6b4744bd981a46c2f9960, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4011450996128794653, guid: 8e8a6cc242c6b4744bd981a46c2f9960, type: 3}
       propertyPath: m_Pivot.x
@@ -2652,6 +2680,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e8a6cc242c6b4744bd981a46c2f9960, type: 3}
+--- !u!1 &7657438294822561789 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7086467622207605020, guid: 8e8a6cc242c6b4744bd981a46c2f9960, type: 3}
+  m_PrefabInstance: {fileID: 584517214806404833}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4591162681276638972 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4011450996128794653, guid: 8e8a6cc242c6b4744bd981a46c2f9960, type: 3}

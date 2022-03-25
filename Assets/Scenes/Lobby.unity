@@ -356,20 +356,32 @@ PrefabInstance:
     m_TransformParent: {fileID: 1714749154}
     m_Modifications:
     - target: {fileID: 2004741049625814057, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2004741049625814057, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2004741049625814057, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 910864515}
+      objectReference: {fileID: 2021663599}
+    - target: {fileID: 2004741049625814057, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2004741049625814057, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: toggle
       objectReference: {fileID: 0}
     - target: {fileID: 2004741049625814057, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: ToggleUpgradePanel, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2004741049625814057, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2915338366899697927, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
       propertyPath: m_IsActive
@@ -1426,6 +1438,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 636e54e383bbf934abb4158f8c5ea34f, type: 3}
+--- !u!1 &2021663594 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7657438294822561789, guid: 9af65edf31e44e1459edc05d8edbac32, type: 3}
+  m_PrefabInstance: {fileID: 524076385}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2021663599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021663594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279593d43ab9c1b4985bd97c97ac4f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2027840597
 PrefabInstance:
   m_ObjectHideFlags: 0
