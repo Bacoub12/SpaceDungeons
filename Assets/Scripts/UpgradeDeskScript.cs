@@ -109,7 +109,7 @@ public class UpgradeDeskScript : MonoBehaviour
     public void updateMoneyVisual()
     {
         GameObject moneyText = GameObject.Find("MoneyText");
-        moneyText.GetComponent<TMP_Text>().text = "Crédits: " + GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>().money;
+        moneyText.GetComponent<TMP_Text>().text = "Crédits: " + GameObject.Find("Player").GetComponent<PlayerScript>().money;
     }
 
     public void loadUpgradeInfo(string title, string description, float price, bool bought)
@@ -147,7 +147,7 @@ public class UpgradeDeskScript : MonoBehaviour
         if (money > price)
         {
             int newMoney = money - price;
-            GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>().money = newMoney;
+            GameObject.Find("Player").GetComponent<PlayerScript>().money = newMoney;
             updateMoneyVisual();
 
             string upgradeName = GameObject.Find("textTitle").GetComponent<TMP_Text>().text;
@@ -187,7 +187,7 @@ public class UpgradeDeskScript : MonoBehaviour
         bool dmgUpgrade1 = false;
         bool dmgUpgrade2 = false;
         bool dmgUpgrade3 = false;
-        PlayerScript playerScript = GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>();
+        PlayerScript playerScript = GameObject.Find("Player").GetComponent<PlayerScript>();
         if (GameObject.Find("btUpgradeDegats1").GetComponent<Image>().color == boughtColor)
             dmgUpgrade1 = true;
         if (GameObject.Find("btUpgradeDegats2").GetComponent<Image>().color == boughtColor)
@@ -202,7 +202,7 @@ public class UpgradeDeskScript : MonoBehaviour
         bool healthUpgrade1 = false;
         bool healthUpgrade2 = false;
         bool healthUpgrade3 = false;
-        PlayerScript playerScript = GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>();
+        PlayerScript playerScript = GameObject.Find("Player").GetComponent<PlayerScript>();
         if (GameObject.Find("btUpgradeSante1").GetComponent<Image>().color == boughtColor)
             healthUpgrade1 = true;
         if (GameObject.Find("btUpgradeSante2").GetComponent<Image>().color == boughtColor)
@@ -217,7 +217,7 @@ public class UpgradeDeskScript : MonoBehaviour
         bool armorUpgrade1 = false;
         bool armorUpgrade2 = false;
         bool armorUpgrade3 = false;
-        PlayerScript playerScript = GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>();
+        PlayerScript playerScript = GameObject.Find("Player").GetComponent<PlayerScript>();
         if (GameObject.Find("btUpgradeArmure1").GetComponent<Image>().color == boughtColor)
             armorUpgrade1 = true;
         if (GameObject.Find("btUpgradeArmure2").GetComponent<Image>().color == boughtColor)

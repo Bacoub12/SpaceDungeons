@@ -16,7 +16,7 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         itemList = new List<Item>();
-        Debug.Log("lists initialized");
+        //Debug.Log("lists initialized");
     }
 
     public void AddItem(Item item)

@@ -350,12 +350,12 @@ public class PlayerScript : MonoBehaviour
                 {
                     interaction = true;
                     interactable = hit.collider.GetComponent<Interactable>();
-                    //Debug.Log("new interactable " + interactable);
+                    Debug.Log("new interactable " + interactable);
                 }
                 else
                 {
                     interaction = false;
-                    //Debug.Log("new interactable " + interactable);
+                    Debug.Log("new interactable " + interactable);
                 }
             }
         }

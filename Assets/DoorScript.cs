@@ -19,7 +19,7 @@ public class DoorScript : MonoBehaviour
         }
         catch (UnityException ex)
         {
-            Debug.Log(ex);
+            //Debug.Log(ex);
             LeLock = null;
         }
         
