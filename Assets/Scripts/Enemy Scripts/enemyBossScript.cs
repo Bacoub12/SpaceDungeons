@@ -36,7 +36,7 @@ public class enemyBossScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.Find("Player").transform;
+        target = GameObject.Find("PlayerCapsule").transform;
         agent = GetComponent<NavMeshAgent>();
         canAttack = true;
         doingAttack = false;

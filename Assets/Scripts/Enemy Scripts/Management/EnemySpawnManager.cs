@@ -112,7 +112,7 @@ public class EnemySpawnManager : MonoBehaviour
             {
                 if (GOinScene.name != "EnemySpiderNest(Clone)")
                     GOinScene.GetComponent<NavMeshAgent>()
-                        .SetDestination(GameObject.Find("Player").transform.position);
+                        .SetDestination(GameObject.Find("PlayerCapsule").transform.position);
             }
         }
     }

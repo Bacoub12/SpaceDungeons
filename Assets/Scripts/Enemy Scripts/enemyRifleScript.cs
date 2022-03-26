@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using System.Text.RegularExpressions;
 
 public class enemyRifleScript : MonoBehaviour
 {
@@ -26,7 +25,7 @@ public class enemyRifleScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.Find("Player").transform;
+        target = GameObject.Find("PlayerCapsule").transform;
         agent = GetComponent<NavMeshAgent>();
         canShoot = true;
         dead = false;
@@ -127,7 +126,6 @@ public class enemyRifleScript : MonoBehaviour
             if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
             {
                 agent.SetDestination(target.position);
-                callForAid(target.position);
             }
         }
     }
@@ -148,30 +146,6 @@ public class enemyRifleScript : MonoBehaviour
             //Invoke(nameof(DestroyThis), 3f);
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
             DestroyThis();
-        }
-    }
-
-    public void callForAid(Vector3 playerPos)
-    {
-        string enemyGameObjectRegex = "^Enemy(?!Bullet|SpawnManager)";
-        foreach (GameObject GOinScene in FindObjectsOfType<GameObject>())
-        {
-            if (Regex.IsMatch(GOinScene.name, enemyGameObjectRegex) 
-                && Vector3.Distance(gameObject.transform.position, GOinScene.transform.position) <= 10f
-                && GOinScene != gameObject)
-            {
-                switch (GOinScene.name)
-                {
-                    case "EnemyDash":        case "EnemyDash(Clone)":
-                    case "EnemyIllusionist": case "EnemyIllusionist(Clone)":
-                    case "EnemyMelee":       case "EnemyMelee(Clone)":
-                    case "EnemyRifle":       case "EnemyRifle(Clone)":
-                    case "EnemyShotgun":     case "EnemyShotgun(Clone)":
-                    case "EnemySpider":      case "EnemySpider(Clone)":
-                        GOinScene.GetComponent<NavMeshAgent>().SetDestination(playerPos);
-                        break;
-                }
-            }
         }
     }
 
