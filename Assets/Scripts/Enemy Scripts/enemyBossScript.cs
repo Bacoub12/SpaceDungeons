@@ -36,7 +36,7 @@ public class enemyBossScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.Find("PlayerCapsule").transform;
+        target = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         canAttack = true;
         doingAttack = false;
@@ -85,7 +85,17 @@ public class enemyBossScript : MonoBehaviour
             {
                 alerted = true;
 
-                agent.SetDestination(target.position);
+                NavMeshPath path = new NavMeshPath();
+                bool pathFound = NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path);
+                if (pathFound)
+                    agent.SetDestination(target.position);
+                else //calculate path to closest valid navmesh
+                {
+                    NavMeshHit hitMesh;
+                    if (NavMesh.SamplePosition(target.position, out hitMesh, 5f, NavMesh.AllAreas))
+                        agent.SetDestination(hitMesh.position);
+                }
+
                 anim.SetBool("Walk Forward", true);
 
                 if (!audioWalk.isPlaying)
@@ -121,13 +131,15 @@ public class enemyBossScript : MonoBehaviour
                                 bool possibleEndPoint = false;
                                 Vector3 endPosition = new Vector3(0f, 0f, 0f);
                                 NavMeshHit hitMesh;
-                                if (NavMesh.SamplePosition(transform.position + (direction * dashDistance), out hitMesh, 5f, NavMesh.AllAreas))
+                                if (NavMesh.SamplePosition(transform.position + (direction * dashDistance), out hitMesh, 12.5f, NavMesh.AllAreas))
                                 {
                                     possibleEndPoint = true;
                                     endPosition = hitMesh.position;
                                 }
 
-                                if (Vector3.Angle(eye.forward, vectorToEnemy) <= 30f && possibleEndPoint)
+                                bool targetIsGrounded = target.gameObject.GetComponent<StarterAssets.FirstPersonController>().Grounded;
+
+                                if (Vector3.Angle(eye.forward, vectorToEnemy) <= 30f && possibleEndPoint && targetIsGrounded)
                                 {
                                     StartCoroutine(dash(direction, endPosition));
                                     StartCoroutine(strikeCooldown());
@@ -181,6 +193,11 @@ public class enemyBossScript : MonoBehaviour
         {
             Vector3 zoneRotation = existingAttackVisual.transform.rotation.eulerAngles;
             existingAttackVisual.transform.rotation = Quaternion.Euler(0f, zoneRotation.y, zoneRotation.z);
+        }
+        else if (rotX > 0f && _direction.y > 0f)
+        {
+            Vector3 zoneRotation = existingAttackVisual.transform.rotation.eulerAngles;
+            existingAttackVisual.transform.rotation = Quaternion.Euler(-(zoneRotation.x), zoneRotation.y, zoneRotation.z);
         }
 
         //wait

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Text.RegularExpressions;
 
 public class enemyDashScript : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class enemyDashScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.Find("PlayerCapsule").transform;
+        target = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         canAttack = true;
         doingAttack = false;
@@ -77,7 +78,17 @@ public class enemyDashScript : MonoBehaviour
             {
                 alerted = true;
 
-                agent.SetDestination(target.position);
+                NavMeshPath path = new NavMeshPath();
+                bool pathFound = NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path);
+                if (pathFound)
+                    agent.SetDestination(target.position);
+                else //calculate path to closest valid navmesh
+                {
+                    NavMeshHit hitMesh;
+                    if (NavMesh.SamplePosition(target.position, out hitMesh, 5f, NavMesh.AllAreas))
+                        agent.SetDestination(hitMesh.position);
+                }
+
                 anim.SetBool("Walk Forward", true);
 
                 if (!audioWalk.isPlaying)
@@ -100,13 +111,15 @@ public class enemyDashScript : MonoBehaviour
                     bool possibleEndPoint = false;
                     Vector3 endPosition = new Vector3(0f, 0f, 0f);
                     NavMeshHit hitMesh;
-                    if (NavMesh.SamplePosition(transform.position + (direction * attackDistance), out hitMesh, 2f, NavMesh.AllAreas))
+                    if (NavMesh.SamplePosition(transform.position + (direction * attackDistance), out hitMesh, 5f, NavMesh.AllAreas))
                     {
                         possibleEndPoint = true;
                         endPosition = hitMesh.position;
                     }
 
-                    if (canAttack && Vector3.Angle(eye.forward, vectorToEnemy) <= 30f && possibleEndPoint)
+                    bool targetIsGrounded = target.gameObject.GetComponent<StarterAssets.FirstPersonController>().Grounded;
+
+                    if (canAttack && Vector3.Angle(eye.forward, vectorToEnemy) <= 30f && possibleEndPoint && targetIsGrounded)
                     {
                         //CHECK IF THERES ROOM TO ATTACK, if not, either abort or (more complicated) do a shorter dash, until the obstacle
                         StartCoroutine(strike(direction, endPosition));
@@ -145,6 +158,11 @@ public class enemyDashScript : MonoBehaviour
         {
             Vector3 zoneRotation = existingAttackVisual.transform.rotation.eulerAngles;
             existingAttackVisual.transform.rotation = Quaternion.Euler(0f, zoneRotation.y, zoneRotation.z);
+        }
+        else if (rotX > 0f && _direction.y > 0f)
+        {
+            Vector3 zoneRotation = existingAttackVisual.transform.rotation.eulerAngles;
+            existingAttackVisual.transform.rotation = Quaternion.Euler(-(zoneRotation.x), zoneRotation.y, zoneRotation.z);
         }
 
         //wait
@@ -196,6 +214,7 @@ public class enemyDashScript : MonoBehaviour
             if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
             {
                 agent.SetDestination(target.position);
+                callForAid(target.position);
                 alerted = true;
 
                 if (!audioWalk.isPlaying)
@@ -234,6 +253,36 @@ public class enemyDashScript : MonoBehaviour
 
             //Invoke(nameof(DestroyThis), 3f);
             DestroyThis();
+        }
+    }
+
+    public void callForAid(Vector3 playerPos)
+    {
+        string enemyGameObjectRegex = "^Enemy(?!Bullet|SpawnManager)";
+        foreach (GameObject GOinScene in FindObjectsOfType<GameObject>())
+        {
+            if (Regex.IsMatch(GOinScene.name, enemyGameObjectRegex)
+                && Vector3.Distance(gameObject.transform.position, GOinScene.transform.position) <= 10f
+                && GOinScene != gameObject)
+            {
+                switch (GOinScene.name)
+                {
+                    case "EnemyDash":
+                    case "EnemyDash(Clone)":
+                    case "EnemyIllusionist":
+                    case "EnemyIllusionist(Clone)":
+                    case "EnemyMelee":
+                    case "EnemyMelee(Clone)":
+                    case "EnemyRifle":
+                    case "EnemyRifle(Clone)":
+                    case "EnemyShotgun":
+                    case "EnemyShotgun(Clone)":
+                    case "EnemySpider":
+                    case "EnemySpider(Clone)":
+                        GOinScene.GetComponent<NavMeshAgent>().SetDestination(playerPos);
+                        break;
+                }
+            }
         }
     }
 

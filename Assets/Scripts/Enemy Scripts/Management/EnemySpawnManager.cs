@@ -27,8 +27,8 @@ public class EnemySpawnManager : MonoBehaviour
     void Start()
     {
         //générer navmesh
+        NavMesh.RemoveAllNavMeshData();
         surface = GameObject.Find("NavMesh").GetComponent<NavMeshSurface>();
-        surface.RemoveData();
         surface.BuildNavMesh();
 
         conjurerSpawnOdds = 5f;
