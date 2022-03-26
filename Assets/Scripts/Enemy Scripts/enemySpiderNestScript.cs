@@ -15,7 +15,7 @@ public class enemySpiderNestScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.Find("PlayerCapsule").transform;
+        target = GameObject.Find("Player").transform;
         spawning = false;
     }
 
