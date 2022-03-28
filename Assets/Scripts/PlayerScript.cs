@@ -344,7 +344,7 @@ public class PlayerScript : MonoBehaviour
                         UIManager.GetComponent<UIManager>().Interactive(true, "Appuyer sur F pour dormir (Quitter la partie)");
                         break;
                     case "MissionCrate":
-                        UIManager.GetComponent<UIManager>().Interactive(true, "Appuyer sur F pour partir en aventure !");
+                        UIManager.GetComponent<UIManager>().Interactive(true, "Appuyer sur F pour partir à aventure !");
                         break;
                     case "PodInteraction":
                         UIManager.GetComponent<UIManager>().Interactive(true, "Appuyer sur F pour parcourir les améliorations");
