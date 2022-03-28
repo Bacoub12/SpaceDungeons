@@ -647,7 +647,6 @@ GameObject:
   - component: {fileID: 449283507}
   - component: {fileID: 449283509}
   - component: {fileID: 449283508}
-  - component: {fileID: 449283510}
   m_Layer: 5
   m_Name: InventairePanel
   m_TagString: Untagged
@@ -715,18 +714,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &449283510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 449283506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa57c30b78352584fa03f221ccbb7862, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1057676593
 GameObject:
   m_ObjectHideFlags: 0
