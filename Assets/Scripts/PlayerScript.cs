@@ -260,7 +260,7 @@ public class PlayerScript : MonoBehaviour
             switch (other.gameObject.name)
             {
                 case "EnemyBullet(Clone)":
-                    Damage(5);
+                    Damage(3);
                     break;
                 case "EnemyBulletBig(Clone)":
                     Damage(10);

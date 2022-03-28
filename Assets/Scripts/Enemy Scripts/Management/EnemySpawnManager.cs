@@ -18,7 +18,7 @@ public class EnemySpawnManager : MonoBehaviour
     private float conjurerSpawnOdds, dashSpawnOdds, illusionistSpawnOdds, 
         rifleSpawnOdds, shotgunSpawnOdds, spiderSpawnOdds, meleeSpawnOdds;
     private float armorSpawnOdds, healthSpawnOdds, moneySpawnOdds;
-    private bool everythingSpawned;
+    private bool everythingSpawned, reserveForcesSet;
     private string terrainNameString;
     private string enemyGameObjectRegex;
     private int enemyReserveForces;
@@ -26,11 +26,6 @@ public class EnemySpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //générer navmesh
-        NavMesh.RemoveAllNavMeshData();
-        surface = GameObject.Find("NavMesh").GetComponent<NavMeshSurface>();
-        surface.BuildNavMesh();
-
         conjurerSpawnOdds = 5f;
         dashSpawnOdds = 15f;
         illusionistSpawnOdds = 10f;
@@ -46,40 +41,49 @@ public class EnemySpawnManager : MonoBehaviour
         //adds up to 100
 
         everythingSpawned = false;
+        //reserveForcesSet = false;
 
-        enemyGameObjectRegex = "^Enemy(?!Bullet|SpawnManager)"; //check for enemy but not bullet or spawnmanager
-
-        enemyReserveForces = 5;
+        enemyGameObjectRegex = "^Enemy(?!Bullet|Spawn|SpiderNest)"; //check for enemy but not bullet/spawnmanager/spidernest
 
         //enlever (et généer par GameManager général) dans le jeu final
-        //spawnEnemiesOnTerrain();
-        //spawnChestsOnTerrain();
+        spawnEnemiesOnTerrain();
+        spawnChestsOnTerrain();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (everythingSpawned && getEnemyCount() <= 2 && enemyReserveForces > 0)
+        Debug.Log(everythingSpawned + " " + reserveForcesSet);
+        if (everythingSpawned && reserveForcesSet)
         {
-            GameObject terrain = GameObject.Find(terrainNameString);
-            GameObject enemySpawns = terrain.transform.GetChild(terrain.transform.childCount - 2).gameObject;
-
-            int enemyLayerMask = 1 << 7;
-            int playerLayerMask = 1 << 8; //ou plutot "gun" mais bon c'est équivalent pour nos besoins
-
-            bool spawnCompleted = false;
-            foreach (Transform spawnTransform in enemySpawns.transform)
+            //Debug.Log(getEnemyCount() + " " + enemyReserveForces);
+            if (getEnemyCount() <= 2 && enemyReserveForces > 0)
             {
-                if (spawnCompleted == false)
+                GameObject terrain = GameObject.Find(terrainNameString);
+                GameObject enemySpawns = terrain.transform.GetChild(terrain.transform.childCount - 2).gameObject;
+
+                int enemyLayerMask = 1 << 7;
+                int playerLayerMask = 1 << 8; //ou plutot "gun" mais bon c'est équivalent pour nos besoins
+
+                bool spawnCompleted = false;
+                foreach (Transform spawnTransform in enemySpawns.transform)
                 {
-                    if (!Physics.CheckSphere(spawnTransform.position, 5f, enemyLayerMask) && !Physics.CheckSphere(spawnTransform.position, 10f, playerLayerMask))
+                    if (spawnCompleted == false)
                     {
-                        spawnEnemyAtPosition(spawnTransform.position);
-                        enemyReserveForces--;
-                        setAllEnemiesOnPlayer();
-                        spawnCompleted = true;
+                        if (!Physics.CheckSphere(spawnTransform.position, 5f, enemyLayerMask) && !Physics.CheckSphere(spawnTransform.position, 10f, playerLayerMask))
+                        {
+                            spawnEnemyAtPosition(spawnTransform.position);
+                            enemyReserveForces--;
+                            setAllEnemiesOnPlayer();
+                            spawnCompleted = true;
+                        }
                     }
                 }
+            }
+            else if (getEnemyCount() <= 0 && enemyReserveForces <= 0)
+            {
+                GameObject.Find("TerrainGenerator").GetComponent<RandomTerrain>()
+                    .readyNextTerrain(transform.parent.gameObject);
             }
         }
     }
@@ -91,7 +95,7 @@ public class EnemySpawnManager : MonoBehaviour
         {
             if (Regex.IsMatch(GOinScene.name, enemyGameObjectRegex))
             {
-                Debug.Log(GOinScene.name);
+                //Debug.Log(GOinScene.name);
                 enemyCount++;
             }
         }
@@ -102,6 +106,8 @@ public class EnemySpawnManager : MonoBehaviour
     public void setReserveForces(int _enemyBenchedForces)
     {
         enemyReserveForces = _enemyBenchedForces;
+        reserveForcesSet = true;
+        Debug.Log("yooo");
     }
 
     public void setAllEnemiesOnPlayer()
@@ -123,8 +129,8 @@ public class EnemySpawnManager : MonoBehaviour
         GameObject enemySpawns = null;
         for (int i = 1; i <= 15; i++)
         {
-            if (GameObject.Find("Terrain" + i) != null) {
-                GameObject terrain = GameObject.Find("Terrain" + i);
+            if (transform.parent.Find("Terrain" + i) != null) {
+                GameObject terrain = transform.parent.Find("Terrain" + i).gameObject;
                 enemySpawns = terrain.transform.GetChild(terrain.transform.childCount - 2).gameObject;
                 terrainNameString = terrain.name;
             }
@@ -150,9 +156,9 @@ public class EnemySpawnManager : MonoBehaviour
         Transform chestSpawnTransform = null;
         for (int i = 1; i <= 15; i++)
         {
-            if (GameObject.Find("Terrain" + i) != null)
+            if (transform.parent.Find("Terrain" + i) != null)
             {
-                GameObject terrain = GameObject.Find("Terrain" + i);
+                GameObject terrain = transform.parent.Find("Terrain" + i).gameObject;
                 chestSpawnTransform = terrain.transform.GetChild(terrain.transform.childCount - 1).gameObject.transform;
             }
         }

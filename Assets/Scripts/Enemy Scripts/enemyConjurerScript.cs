@@ -203,7 +203,7 @@ public class enemyConjurerScript : MonoBehaviour
     {
         health -= damage;
 
-        if (health <= 0)
+        if (health <= 0 && !dead)
         {
             dead = true;
             gameObject.GetComponent<NavMeshAgent>().enabled = false;

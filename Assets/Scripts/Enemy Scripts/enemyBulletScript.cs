@@ -26,6 +26,14 @@ public class enemyBulletScript : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer != 9 && other.gameObject.layer != 7) //not enemybullet or enemy
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
