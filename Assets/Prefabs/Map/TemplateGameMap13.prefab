@@ -4885,6 +4885,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7959884153317991163}
     m_Modifications:
+    - target: {fileID: 7453241279955211250, guid: cb2dee69377742f49943ae0cefac416b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 50.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 7453241279955211250, guid: cb2dee69377742f49943ae0cefac416b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99256957
+      objectReference: {fileID: 0}
+    - target: {fileID: 7453241279955211250, guid: cb2dee69377742f49943ae0cefac416b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.00000006608433
+      objectReference: {fileID: 0}
+    - target: {fileID: 7453241279955211250, guid: cb2dee69377742f49943ae0cefac416b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.000000008101287
+      objectReference: {fileID: 0}
+    - target: {fileID: 7453241279955211250, guid: cb2dee69377742f49943ae0cefac416b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.12167926
+      objectReference: {fileID: 0}
+    - target: {fileID: 7453241279955211250, guid: cb2dee69377742f49943ae0cefac416b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 13.978
+      objectReference: {fileID: 0}
     - target: {fileID: 7453241280449139504, guid: cb2dee69377742f49943ae0cefac416b, type: 3}
       propertyPath: m_Name
       value: Terrain13
