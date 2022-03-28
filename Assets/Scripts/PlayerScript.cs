@@ -27,11 +27,12 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private Camera camera;
     [SerializeField] float _force = 1000f;
     [SerializeField] private InputActionAsset _actionAsset = default;
-    [SerializeField] private UI_Inventory uiInventory;
     [SerializeField] private TMP_Text _moneyText;
     [SerializeField] private TMP_Text _healthText;
     [SerializeField] private TMP_Text _armorText;
     [SerializeField] private GameObject gunAnim;
+    [SerializeField] private GameObject ThePlayer;
+    [SerializeField] private Transform TutoSpawn;
 
     bool autoStop = false;
     bool interaction = false;
@@ -234,7 +235,7 @@ public class PlayerScript : MonoBehaviour
                 money += moneyScript.getMoneyValue();
                 _moneyText.text = "Credit : " + money.ToString();
                 Destroy(other.gameObject);
-                Debug.Log("Money : " + money);
+                //Debug.Log("Money : " + money);
             }
             else if (other.gameObject.tag == "Helmet" || other.gameObject.tag == "Chestplate" || other.gameObject.tag == "Gloves" || other.gameObject.tag == "Boot" || other.gameObject.tag == "Health")
             {
@@ -352,12 +353,12 @@ public class PlayerScript : MonoBehaviour
                 {
                     interaction = true;
                     interactable = hit.collider.GetComponent<Interactable>();
-                    Debug.Log("new interactable " + interactable);
+                    //Debug.Log("new interactable " + interactable);
                 }
                 else
                 {
                     interaction = false;
-                    Debug.Log("new interactable " + interactable);
+                    //Debug.Log("new interactable " + interactable);
                 }
             }
         }
@@ -387,12 +388,14 @@ public class PlayerScript : MonoBehaviour
 
             if (health <= 0)
             {
+                ThePlayer.transform.SetPositionAndRotation(TutoSpawn.position, TutoSpawn.rotation);
                 UIManager.GetComponent<UIManager>().DeathScreen(true);
+
             }
         }
         _healthText.text = "Vie : " + health;
         _armorText.text = "Armure : " + armure;
-        //Debug.Log("armure: " + armure + ", health: " + health);
+        Debug.Log("armure: " + armure + ", health: " + health);
     }
 
     IEnumerator PoisonCoroutine()
@@ -414,7 +417,7 @@ public class PlayerScript : MonoBehaviour
         while (waterRun == true)
         {
             Damage(10);
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 
@@ -429,14 +432,17 @@ public class PlayerScript : MonoBehaviour
         if (healthUpgrade1)
         {
             health = baseHealth + 100;
+            _healthText.text = "Vie : " + health;
         }
         if (healthUpgrade2)
         {
             health += 100;
+            _healthText.text = "Vie : " + health;
         }
         if (healthUpgrade3)
         {
             health += 100;
+            _healthText.text = "Vie : " + health;
         }
         maxHealth = health;
         //Debug.Log("new health: " + health);
@@ -453,14 +459,17 @@ public class PlayerScript : MonoBehaviour
         if (armureUpgrade1)
         {
             armure = baseArmure + 100;
+            _armorText.text = "Armure : " + armure;
         }
         if (armureUpgrade2)
         {
             armure += 100;
+            _armorText.text = "Armure : " + armure;
         }
         if (armureUpgrade3)
         {
             armure += 100;
+            _armorText.text = "Armure : " + armure;
         }
         maxArmure = armure;
         //Debug.Log("new armure: " + armure);

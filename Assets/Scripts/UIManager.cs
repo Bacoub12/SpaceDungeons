@@ -58,13 +58,16 @@ public class UIManager : MonoBehaviour
         {
             case true:
                 //Debug.Log(_interact.name);
-                _interact.SetActive(true);
-                //Time.timeScale = 0; ////// on peut pas téléporter le joueur en dehors a cause de l'animation et si on veut l'animation, on doit avoir le timescale
+                _deathPanel.SetActive(true);
+                CursorUnlock();
+                Time.timeScale = 0; 
                 break;
 
             case false:
-                _interact.SetActive(false);
-                //Time.timeScale = 1;
+                _deathPanel = GameObject.Find("DeathPanel");
+                _deathPanel.SetActive(false);
+                CursorLock();
+                Time.timeScale = 1;
                 break;
         }
     }
