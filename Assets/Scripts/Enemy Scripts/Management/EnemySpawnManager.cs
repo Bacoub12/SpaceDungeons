@@ -53,7 +53,6 @@ public class EnemySpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(everythingSpawned + " " + reserveForcesSet);
         if (everythingSpawned && reserveForcesSet)
         {
             //Debug.Log(getEnemyCount() + " " + enemyReserveForces);
@@ -107,7 +106,6 @@ public class EnemySpawnManager : MonoBehaviour
     {
         enemyReserveForces = _enemyBenchedForces;
         reserveForcesSet = true;
-        Debug.Log("yooo");
     }
 
     public void setAllEnemiesOnPlayer()
