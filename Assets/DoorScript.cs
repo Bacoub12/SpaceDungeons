@@ -8,6 +8,7 @@ public class DoorScript : MonoBehaviour
     private Animator DoorController;
     private bool key;
     private bool doorOpen = false;
+    [SerializeField] private AudioSource doorsound;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,7 @@ public class DoorScript : MonoBehaviour
             {
                 doorOpen = true;
                 DoorController.Play("OpenDoor");
+                doorsound.Play();
             }
         }
     }
@@ -51,6 +53,7 @@ public class DoorScript : MonoBehaviour
             {
                 doorOpen = false;
                 DoorController.Play("CloseDoor");
+                doorsound.Play();
             }
         }
     }
