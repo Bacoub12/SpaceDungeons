@@ -4,26 +4,37 @@ using UnityEngine;
 
 public class RandomTerrain : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject[] layouts;
 
-    public GameObject[] Layout;
+    private List<string> usedLayoutNames;
+
+    // Start is called before the first frame update
     void Start()
     {
-        int x = 0;
-        var rndNombre = 0;
-        var ancientNombre = 0;
-        var positionX = 0;
+        int positionX = 0;
+        int rndNombre;
+        bool terrainHasBeenUsed;
+        usedLayoutNames = new List<string>();
 
-        for (x = 0; x<10; x++){ 
+        for (int i = 0; i < 10; i++){
 
-            while(rndNombre == ancientNombre)
+            do
             {
                 rndNombre = Random.Range(1, 16);
-            }
 
-            ancientNombre = rndNombre;
+                terrainHasBeenUsed = false;
+                foreach (string name in usedLayoutNames)
+                {
+                    string tentativeTerrainName = "TemplateGameMap" + rndNombre + "(Clone)";
+                    if (name == tentativeTerrainName)
+                        terrainHasBeenUsed = true;
+                }
 
-            Instantiate(Layout[rndNombre-1], new Vector3(positionX, 0, 0), Quaternion.identity);
+            } while (terrainHasBeenUsed);
+
+            GameObject spawnedTerrain = Instantiate(layouts[rndNombre - 1], new Vector3(positionX, 0, 0), Quaternion.identity);
+
+            usedLayoutNames.Add(spawnedTerrain.name);
 
             positionX += 200;
         }
