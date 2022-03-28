@@ -62,7 +62,7 @@ public class PlayerScript : MonoBehaviour
     private bool damageUpgrade1, damageUpgrade2, damageUpgrade3;
     private bool healthUpgrade1, healthUpgrade2, healthUpgrade3;
     private bool armureUpgrade1, armureUpgrade2, armureUpgrade3;
-    private bool poisoned;
+    private bool poisoned, dead;
 
     //[SerializeField] GameObject whatgun;
 
@@ -106,6 +106,7 @@ public class PlayerScript : MonoBehaviour
         armureUpgrade3 = false;
 
         poisoned = false;
+        dead = false;
 
         _healthText.text = "Vie : " + health;
         _armorText.text = "Armure : " + armure;
@@ -375,41 +376,46 @@ public class PlayerScript : MonoBehaviour
 
     public void Damage(int damage)
     {
-        int damageToHealth = 0;
-        if (armure > 0)
+        if (!dead)
         {
-            armure -= damage;
-            damageToHealth = -(armure);
-            if (armure < 0)
-                armure = 0;
-        }
-        else
-            damageToHealth = damage;
-
-        if (armure <= 0)
-        {
-            health -= damageToHealth;
-
-            if (health <= 0)
+            int damageToHealth = 0;
+            if (armure > 0)
             {
-                onOffSpawn = UpdateSpawn.GetComponent<UpdateSpawn>().getOnOff();
-                if(onOffSpawn == false)
-                {
-                    gameObject.transform.SetPositionAndRotation(TutoSpawn.position, TutoSpawn.rotation);
-                }
-                if(onOffSpawn == true)
-                {
-                    gameObject.transform.SetPositionAndRotation(LobbySpawn.position, LobbySpawn.rotation);
-                }
-                health = baseHealth;
-                armure = baseArmure;
-                UIManager.GetComponent<UIManager>().DeathScreen(true);
-
+                armure -= damage;
+                damageToHealth = -(armure);
+                if (armure < 0)
+                    armure = 0;
             }
+            else
+                damageToHealth = damage;
+
+            if (armure <= 0)
+            {
+                health -= damageToHealth;
+
+                if (health <= 0)
+                {
+                    dead = true;
+
+                    onOffSpawn = UpdateSpawn.GetComponent<UpdateSpawn>().getOnOff();
+                    if (onOffSpawn == false)
+                    {
+                        gameObject.transform.SetPositionAndRotation(TutoSpawn.position, TutoSpawn.rotation);
+                    }
+                    if (onOffSpawn == true)
+                    {
+                        gameObject.transform.SetPositionAndRotation(LobbySpawn.position, LobbySpawn.rotation);
+                    }
+                    health = baseHealth;
+                    armure = baseArmure;
+                    UIManager.GetComponent<UIManager>().DeathScreen(true);
+
+                }
+            }
+            _healthText.text = "Vie : " + health;
+            _armorText.text = "Armure : " + armure;
+            Debug.Log("armure: " + armure + ", health: " + health);
         }
-        _healthText.text = "Vie : " + health;
-        _armorText.text = "Armure : " + armure;
-        Debug.Log("armure: " + armure + ", health: " + health);
     }
 
     IEnumerator PoisonCoroutine()
