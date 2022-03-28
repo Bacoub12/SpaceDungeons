@@ -115,8 +115,25 @@ public class EnemySpawnManager : MonoBehaviour
             if (Regex.IsMatch(GOinScene.name, enemyGameObjectRegex))
             {
                 if (GOinScene.name != "EnemySpiderNest(Clone)")
+                {
                     GOinScene.GetComponent<NavMeshAgent>()
                         .SetDestination(GameObject.Find("Player").transform.position);
+                    switch (GOinScene.name)
+                    {
+                        case "EnemyBoss(Clone)":
+                        case "EnemyDash(Clone)":
+                            GOinScene.GetComponent<Animator>().SetBool("Walk Forward", true);
+                            break;
+                        case "EnemyMelee(Clone)":
+                            GOinScene.GetComponent<Animation>().Play("Run");
+                            break;
+                        case "EnemySpider(Clone)":
+                            GOinScene.GetComponent<Animator>().SetBool("running", true);
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
         }
     }
