@@ -269,16 +269,29 @@ public class enemyDashScript : MonoBehaviour
                 {
                     case "EnemyDash":
                     case "EnemyDash(Clone)":
+                        GOinScene.GetComponent<Animator>().SetBool("Walk Forward", true);
+                        GOinScene.GetComponent<NavMeshAgent>().SetDestination(playerPos);
+                        break;
                     case "EnemyIllusionist":
                     case "EnemyIllusionist(Clone)":
+                        GOinScene.GetComponent<NavMeshAgent>().SetDestination(playerPos);
+                        break;
                     case "EnemyMelee":
                     case "EnemyMelee(Clone)":
+                        GOinScene.GetComponent<Animation>().Play("Run");
+                        GOinScene.GetComponent<NavMeshAgent>().SetDestination(playerPos);
+                        break;
                     case "EnemyRifle":
                     case "EnemyRifle(Clone)":
+                        GOinScene.GetComponent<NavMeshAgent>().SetDestination(playerPos);
+                        break;
                     case "EnemyShotgun":
                     case "EnemyShotgun(Clone)":
+                        GOinScene.GetComponent<NavMeshAgent>().SetDestination(playerPos);
+                        break;
                     case "EnemySpider":
                     case "EnemySpider(Clone)":
+                        GOinScene.GetComponent<Animator>().SetBool("running", true);
                         GOinScene.GetComponent<NavMeshAgent>().SetDestination(playerPos);
                         break;
                 }
