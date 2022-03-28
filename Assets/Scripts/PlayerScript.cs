@@ -389,6 +389,8 @@ public class PlayerScript : MonoBehaviour
             if (health <= 0)
             {
                 ThePlayer.transform.SetPositionAndRotation(TutoSpawn.position, TutoSpawn.rotation);
+                health = baseHealth;
+                armure = baseArmure;
                 UIManager.GetComponent<UIManager>().DeathScreen(true);
 
             }
