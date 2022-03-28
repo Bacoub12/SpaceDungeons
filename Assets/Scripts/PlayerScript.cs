@@ -33,6 +33,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private GameObject gunAnim;
     [SerializeField] private GameObject ThePlayer;
     [SerializeField] private Transform TutoSpawn;
+    [SerializeField] private Transform LobbySpawn;
 
     bool autoStop = false;
     bool interaction = false;
@@ -388,7 +389,8 @@ public class PlayerScript : MonoBehaviour
 
             if (health <= 0)
             {
-                ThePlayer.transform.SetPositionAndRotation(TutoSpawn.position, TutoSpawn.rotation);
+                gameObject.transform.SetPositionAndRotation(TutoSpawn.position, TutoSpawn.rotation);
+                Debug.Log(ThePlayer.transform.position);
                 health = baseHealth;
                 armure = baseArmure;
                 UIManager.GetComponent<UIManager>().DeathScreen(true);

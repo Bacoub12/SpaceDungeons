@@ -666,7 +666,9 @@ MonoBehaviour:
   _healthText: {fileID: 0}
   _armorText: {fileID: 0}
   gunAnim: {fileID: 919132149139043184}
-  ThePlayer: {fileID: 0}
+  ThePlayer: {fileID: 8616685848737228372}
+  TutoSpawn: {fileID: 0}
+  LobbySpawn: {fileID: 0}
   interactableLayerMask:
     serializedVersion: 2
     m_Bits: 1024

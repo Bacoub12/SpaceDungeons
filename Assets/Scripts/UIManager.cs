@@ -60,14 +60,14 @@ public class UIManager : MonoBehaviour
                 //Debug.Log(_interact.name);
                 _deathPanel.SetActive(true);
                 CursorUnlock();
-                Time.timeScale = 0; 
+                //Time.timeScale = 0; 
                 break;
 
             case false:
                 _deathPanel = GameObject.Find("DeathPanel");
                 _deathPanel.SetActive(false);
                 CursorLock();
-                Time.timeScale = 1;
+                //Time.timeScale = 1;
                 break;
         }
     }
