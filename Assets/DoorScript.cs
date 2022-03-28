@@ -73,6 +73,7 @@ public class DoorScript : MonoBehaviour
         if(LeLock == null)
         {
             DoorController.Play("OpenDoor");
+            doorsound.Play();
             GameObject.Find("Player").GetComponent<PlayerScript>().setLeLock(false);
             doorOpen = true;
             GameObject.Find("Player").GetComponent<PlayerScript>().setOnce(true);

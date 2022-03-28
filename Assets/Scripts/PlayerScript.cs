@@ -23,6 +23,7 @@ public class PlayerScript : MonoBehaviour
     public int money = 0;
     [SerializeField] GameObject _bullet;
     [SerializeField] GameObject UIManager;
+    [SerializeField] GameObject UpdateSpawn;
     [SerializeField] Transform _attach;
     [SerializeField] private Camera camera;
     [SerializeField] float _force = 1000f;
@@ -43,7 +44,9 @@ public class PlayerScript : MonoBehaviour
     bool LeLock = true;
     bool once = false;
     bool waterRun = false;
+    bool onOffSpawn;
     float timer = 0.0f;
+
     FirstPersonController firstPersonController;
     CapsuleCollider capsuleCollider;
     CharacterController _CharacterController;
@@ -389,8 +392,15 @@ public class PlayerScript : MonoBehaviour
 
             if (health <= 0)
             {
-                gameObject.transform.SetPositionAndRotation(TutoSpawn.position, TutoSpawn.rotation);
-                Debug.Log(ThePlayer.transform.position);
+                onOffSpawn = UpdateSpawn.GetComponent<UpdateSpawn>().getOnOff();
+                if(onOffSpawn == false)
+                {
+                    gameObject.transform.SetPositionAndRotation(TutoSpawn.position, TutoSpawn.rotation);
+                }
+                if(onOffSpawn == true)
+                {
+                    gameObject.transform.SetPositionAndRotation(LobbySpawn.position, LobbySpawn.rotation);
+                }
                 health = baseHealth;
                 armure = baseArmure;
                 UIManager.GetComponent<UIManager>().DeathScreen(true);
