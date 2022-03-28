@@ -658,6 +658,7 @@ MonoBehaviour:
   money: 0
   _bullet: {fileID: 7580972179330452940, guid: 479240c27ac3b6d42b25407e7a2f52e8, type: 3}
   UIManager: {fileID: 0}
+  UpdateSpawn: {fileID: 0}
   _attach: {fileID: 179799153}
   camera: {fileID: 4518748}
   _force: 2000
