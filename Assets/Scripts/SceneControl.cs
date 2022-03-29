@@ -62,6 +62,15 @@ public class SceneControl : MonoBehaviour
         UpgradeDeskScript podScript = GameObject.Find("PodAlone").GetComponent<UpgradeDeskScript>();
         podScript.uiManager = GameObject.Find("UIManager");
         podScript.upgradeDeskPanel = GameObject.Find("Canvas").transform.GetChild(3).gameObject;
+
+        GameObject.Find("MissionCrate").GetComponent<Interactable>().onInteract.AddListener(
+            GameObject.Find("SceneManager").GetComponent<SceneControl>().NextScene);
+
+        GameObject.Find("Bed").GetComponent<Interactable>().onInteract.AddListener(
+            GameObject.Find("SceneManager").GetComponent<SceneControl>().LoadMenu);
+
+        GameObject.Find("Bed").GetComponent<Interactable>().onInteract.AddListener(
+            GameObject.Find("UIManager").GetComponent<UIManager>().CursorUnlock);
     }
 
     public void LoadMenu()
