@@ -559,10 +559,12 @@ public class PlayerScript : MonoBehaviour
         if(add > maxHealth)
         {
             health = maxHealth;
+            _healthText.text = "Vie : " + health;
         }
         else
         {
             health = add;
+            _healthText.text = "Vie : " + health;
         }
     }
 
@@ -572,10 +574,12 @@ public class PlayerScript : MonoBehaviour
         if (add > maxArmure)
         {
             armure = maxArmure;
+            _armorText.text = "Armure : " + armure;
         }
         else
         {
             armure = add;
+            _armorText.text = "Armure : " + armure;
         }
     }
 

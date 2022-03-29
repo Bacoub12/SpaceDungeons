@@ -16,7 +16,6 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         itemList = new List<Item>();
-        //Debug.Log("lists initialized");
     }
 
     public void AddItem(Item item)
@@ -27,8 +26,6 @@ public class Inventory : MonoBehaviour
         {
             Debug.Log("oui");
         }
-        
-
     }
 
     public void RemoveItem(Image image)
@@ -97,7 +94,6 @@ public class Inventory : MonoBehaviour
                 break;
 
             default:
-
                 break;
         }
     }
@@ -109,7 +105,7 @@ public class Inventory : MonoBehaviour
         switch (objectName)
         {
             case "Helmet":
-                player.GetComponent<PlayerScript>().addArmor(60); // pourrait changer les valeurs pour les augmenter en meme temps que les ameliorations d'armure
+                player.GetComponent<PlayerScript>().addArmor(60); // pourrait changer les valeurs pour les augmenter en meme temps que les ameliorations d'armure=
                 RemoveItem(image);
                 break;
 
