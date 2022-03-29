@@ -35,6 +35,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private GameObject ThePlayer;
     [SerializeField] private Transform TutoSpawn;
     [SerializeField] private Transform LobbySpawn;
+    [SerializeField] private AudioSource PistolShot;
+    [SerializeField] private AudioSource ShotgunShot;
+    [SerializeField] private AudioSource LMGShot;
 
     bool autoStop = false;
     bool interaction = false;
