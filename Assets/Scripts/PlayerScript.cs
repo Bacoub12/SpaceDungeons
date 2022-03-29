@@ -330,7 +330,7 @@ public class PlayerScript : MonoBehaviour
                 string objectName = hit.collider.name;
                 switch (objectName)
                 {
-                    case "ArmorChest": case "HealthChest": case "MoneyChest":
+                    case "ArmorChest": case "HealthChest": case "MoneyChest": case "ArmorChest(Clone)": case "HealthChest(Clone)": case "MoneyChest(Clone)":
                         if (hit.collider.gameObject.GetComponent<ChestScript>().isOpened() == false)
                             UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour ouvrir le coffre");
                         else
