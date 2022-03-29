@@ -60,5 +60,7 @@ MonoBehaviour:
   - {fileID: 5796850320107816040, guid: 7ad9319b775633c41b59ee79196f8647, type: 3}
   - {fileID: 3075375127751878732, guid: 498bf9f5a7eb55640a1fd51ecf8d107d, type: 3}
   enemySpawnManager: {fileID: 282540356435342645, guid: fc853c176fc54824582d3d45f4a8b10b, type: 3}
+  bossSpawnManager: {fileID: 2348861244173066089, guid: 48370b0d3e260394a8e17a7fc4b68619, type: 3}
   exitZone: {fileID: 115892784739443542, guid: 4058465cd087cb64983e46f5a0b45e78, type: 3}
+  finalExitZone: {fileID: 2905901240965565526, guid: 2a3d02233db41bb4988280fc453817bb, type: 3}
   playerSpawnLocation: {fileID: 8953696587789729482, guid: 9419017dae71e5a4eb6cf77d98667d97, type: 3}

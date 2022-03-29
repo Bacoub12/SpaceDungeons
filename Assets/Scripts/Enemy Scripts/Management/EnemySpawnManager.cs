@@ -13,8 +13,6 @@ public class EnemySpawnManager : MonoBehaviour
     public GameObject spawnEffect;
     public GameObject boss;
 
-    private NavMeshSurface surface;
-
     private float conjurerSpawnOdds, dashSpawnOdds, illusionistSpawnOdds, 
         rifleSpawnOdds, shotgunSpawnOdds, spiderSpawnOdds, meleeSpawnOdds;
     private float armorSpawnOdds, healthSpawnOdds, moneySpawnOdds;
@@ -41,11 +39,9 @@ public class EnemySpawnManager : MonoBehaviour
         //adds up to 100
 
         everythingSpawned = false;
-        //reserveForcesSet = false;
 
         enemyGameObjectRegex = "^Enemy(?!Bullet|Spawn|SpiderNest)"; //check for enemy but not bullet/spawnmanager/spidernest
 
-        //enlever (et généer par GameManager général) dans le jeu final
         spawnEnemiesOnTerrain();
         spawnChestsOnTerrain();
     }
@@ -364,7 +360,6 @@ public class EnemySpawnManager : MonoBehaviour
         everythingSpawned = true;
     }
 
-    //after a few maps, say 3, boss spawn odds start going up by 10 each completed map. this should prolly be managed in a higher-scale gamemanager
     public void spawnBoss(float spawnOdds)
     {
         float rolledNumber = Random.Range(0f, 100f);
