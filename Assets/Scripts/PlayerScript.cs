@@ -199,7 +199,7 @@ public class PlayerScript : MonoBehaviour
             bullet.GetComponent<BulletScript>().setDamageParams(rifleDamage, damageUpgrade1, damageUpgrade2, damageUpgrade3);
             rb = bullet.GetComponent<Rigidbody>();
             rb.AddForce(_attach.forward * _force);
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
             canShootRifle = 0;
         }
     }
