@@ -6,7 +6,7 @@ public class BulletScript : MonoBehaviour
 {
     [SerializeField] private ParticleSystem particules;
 
-    float timeBeforeDestroy = 3f;
+    float timeBeforeDestroy = 0.5f;
 
     private float baseDamage, trueDamage;
     private bool damageUpgrade1, damageUpgrade2, damageUpgrade3;
