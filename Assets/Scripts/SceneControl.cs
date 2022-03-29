@@ -5,8 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneControl : MonoBehaviour
 {
-   public void NextScene()
-   {
+    public GameObject player;
+
+    public void NextScene()
+    {
+        Debug.Log("yo");
+        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(player);
         int indexScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(indexScene + 1);
    }
