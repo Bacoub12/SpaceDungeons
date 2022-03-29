@@ -110,6 +110,26 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			if (isMoving == true)
+			{
+				if (lobby != null)
+				{
+					if(!metalWalkingSound.isPlaying)
+					metalWalkingSound.Play();
+				}
+				else
+				{
+					if(!GrassWalkingSound.isPlaying)
+					GrassWalkingSound.Play();
+				}
+			}
+            else
+            {
+				if (metalWalkingSound.isPlaying)
+					metalWalkingSound.Stop();
+				if (GrassWalkingSound.isPlaying)
+					GrassWalkingSound.Stop();
+			}
 		}
 
 		private void LateUpdate()
@@ -172,7 +192,7 @@ namespace StarterAssets
 
 				// round speed to 3 decimal places
 				_speed = Mathf.Round(_speed * 1000f) / 1000f;
-				if(_speed >= 1)
+				if(_speed >= 1f)
                 {
 					isMoving = true;
                 }
@@ -180,6 +200,10 @@ namespace StarterAssets
 			else
 			{
 				_speed = targetSpeed;
+				if (_speed >= 1f)
+				{
+					isMoving = true;
+				}
 			}
 
 			// normalise input direction
