@@ -46,6 +46,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private AudioSource ShieldCrackSound;
     [SerializeField] private AudioSource ShieldRegenSound;
     [SerializeField] private AudioSource MoneyPickUpSound;
+    [SerializeField] private AudioSource TutorialSound;
+    [SerializeField] private AudioSource CombatSound;
+    [SerializeField] private AudioSource LobbySound;
 
     bool autoStop = false;
     bool interaction = false;
@@ -303,6 +306,42 @@ public class PlayerScript : MonoBehaviour
         else
         {
             //Debug.Log("layer autre que collectible  : " + other.gameObject.layer);
+        }
+        if (other.gameObject.name == "tutoMusic")
+        {
+            if (CombatSound.isPlaying)
+            {
+                CombatSound.Stop();
+            }
+            if (LobbySound.isPlaying)
+            {
+                LobbySound.Stop();
+            }
+            TutorialSound.Play();
+        }
+        else if (other.gameObject.name == "combatMusic")
+        {
+            if(TutorialSound.isPlaying)
+            {
+                TutorialSound.Stop();
+            }
+            if (LobbySound.isPlaying)
+            {
+                LobbySound.Stop();
+            }
+            CombatSound.Play();
+        }
+        else if (other.gameObject.name == "LobbyMusic")
+        {
+            if (TutorialSound.isPlaying)
+            {
+                TutorialSound.Stop();
+            }
+            if (CombatSound.isPlaying)
+            {
+                CombatSound.Stop();
+            }
+            LobbySound.Play();
         }
     }
 
