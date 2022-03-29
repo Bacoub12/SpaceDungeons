@@ -32,7 +32,7 @@ public class SceneControl : MonoBehaviour
             {
                 if (go.GetComponent<PlayerScript>().returned == true)
                 {
-
+                    Destroy(go);
                 }
             }
         }
