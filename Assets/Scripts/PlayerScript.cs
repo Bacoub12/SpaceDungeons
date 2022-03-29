@@ -399,7 +399,7 @@ public class PlayerScript : MonoBehaviour
             {
                 armure -= damage;
                 damageToHealth = -(armure);
-                if (armure < 0)
+                if (armure <= 0)
                 {
                     ShieldCrackSound.Play();
                     armure = 0;
