@@ -76,6 +76,7 @@ namespace StarterAssets
 		// sound
 		[SerializeField] private AudioSource metalWalkingSound;
 		[SerializeField] private AudioSource GrassWalkingSound;
+		private bool isMoving;
 		private GameObject lobby;
 
 		private void Awake()
@@ -151,8 +152,11 @@ namespace StarterAssets
 
 			// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
 			// if there is no input, set the target speed to 0
-			if (_input.move == Vector2.zero) targetSpeed = 0.0f;
-
+			if (_input.move == Vector2.zero)
+			{
+				targetSpeed = 0.0f;
+				isMoving = false;
+			}
 			// a reference to the players current horizontal velocity
 			float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
@@ -168,6 +172,10 @@ namespace StarterAssets
 
 				// round speed to 3 decimal places
 				_speed = Mathf.Round(_speed * 1000f) / 1000f;
+				if(_speed >= 1)
+                {
+					isMoving = true;
+                }
 			}
 			else
 			{
@@ -183,15 +191,6 @@ namespace StarterAssets
 			{
 				// move
 				inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
-                if (lobby != null)
-                {
-					metalWalkingSound.Play();
-                }
-                else
-                {
-					GrassWalkingSound.Play();
-                }
-				// walkingsound
 			}
 
 			// move the player
