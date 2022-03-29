@@ -22,7 +22,7 @@ public class ExitZoneScript : MonoBehaviour
         {
             if (backToLobby)
             {
-                //rechanger de scène.. à faire
+                GameObject.Find("SceneManager").GetComponent<SceneControl>().returnToLobby();
             }
             else
             {

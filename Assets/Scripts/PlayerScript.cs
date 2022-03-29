@@ -21,6 +21,7 @@ public class PlayerScript : MonoBehaviour
     public int health, maxHealth; //maxhealth pourra être utilisé pour empêcher le joueur de 'overheal'
     public int armure, maxArmure; //pareil pour maxarmure
     public int money = 0;
+    public bool returned = false;
     [SerializeField] GameObject _bullet;
     [SerializeField] GameObject UIManager;
     [SerializeField] GameObject UpdateSpawn;

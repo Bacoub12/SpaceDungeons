@@ -22,6 +22,23 @@ public class SceneControl : MonoBehaviour
         SceneManager.LoadScene(2);
     }
 
+    public void returnToLobby()
+    {
+        SceneManager.LoadScene(2);
+        GameObject[] player_s = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject go in player_s)
+        {
+            if (go.name == "Player")
+            {
+                if (go.GetComponent<PlayerScript>().returned == true)
+                {
+
+                }
+            }
+        }
+        GameObject.Find("Player").transform.position = new Vector3(0f, 1.7f, 4f);
+    }
+
     public void LoadMenu()
     {
         SceneManager.LoadScene(0);

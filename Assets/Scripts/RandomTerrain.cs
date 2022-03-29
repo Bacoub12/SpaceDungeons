@@ -23,7 +23,7 @@ public class RandomTerrain : MonoBehaviour
     void Start()
     {
         nbrReserveForces = 0;
-        nbrEnemyTerrains = 9;
+        nbrEnemyTerrains = 2;
         int positionX = 0;
         int rndNombre;
         bool terrainHasBeenUsed;
