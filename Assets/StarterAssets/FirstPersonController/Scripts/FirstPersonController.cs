@@ -73,6 +73,11 @@ namespace StarterAssets
 
 		private const float _threshold = 0.01f;
 
+		// sound
+		[SerializeField] private AudioSource metalWalkingSound;
+		[SerializeField] private AudioSource GrassWalkingSound;
+
+
 		private void Awake()
 		{
 			// get a reference to our main camera
@@ -86,7 +91,15 @@ namespace StarterAssets
 		{
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
-
+			try
+			{
+				GameObject.Find("LobbyWithTuto");
+			}
+			catch (UnityException ex)
+			{
+				//Debug.Log(ex);
+				LeLock = null;
+			}
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
@@ -171,6 +184,7 @@ namespace StarterAssets
 			{
 				// move
 				inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
+				// walkingsound
 			}
 
 			// move the player

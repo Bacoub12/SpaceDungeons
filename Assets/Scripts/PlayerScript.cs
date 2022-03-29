@@ -35,6 +35,12 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private GameObject ThePlayer;
     [SerializeField] private Transform TutoSpawn;
     [SerializeField] private Transform LobbySpawn;
+    [SerializeField] private AudioSource PistolSound;
+    [SerializeField] private AudioSource ShotgunSound;
+    [SerializeField] private AudioSource LMGSound;
+    [SerializeField] private AudioSource GruntSound1;
+    [SerializeField] private AudioSource GruntSound2;
+    [SerializeField] private AudioSource GruntSound3;
 
     bool autoStop = false;
     bool interaction = false;
@@ -144,6 +150,7 @@ public class PlayerScript : MonoBehaviour
                 else
                 {
                     GameObject bullet = Instantiate(_bullet, _attach.position, _attach.rotation);
+                    PistolSound.Play();
                     bullet.GetComponent<BulletScript>().setDamageParams(pistolDamage, damageUpgrade1, damageUpgrade2, damageUpgrade3);
                     rb = bullet.GetComponent<Rigidbody>();
                     rb.AddForce(_attach.forward * _force);
@@ -179,6 +186,7 @@ public class PlayerScript : MonoBehaviour
         {
             canShootRifle = 1;
             GameObject bullet = Instantiate(_bullet, _attach.position, _attach.rotation);
+            LMGSound.Play();
             bullet.GetComponent<BulletScript>().setDamageParams(rifleDamage, damageUpgrade1, damageUpgrade2, damageUpgrade3);
             rb = bullet.GetComponent<Rigidbody>();
             rb.AddForce(_attach.forward * _force);
@@ -190,6 +198,7 @@ public class PlayerScript : MonoBehaviour
     IEnumerator PumpShotgun()
     {
         canShootShotgun = 1;
+        ShotgunSound.Play();
         for (int i = 0; i < 40; i++)
         {
             float randomX = Random.Range(-20f, 20f);
@@ -379,6 +388,7 @@ public class PlayerScript : MonoBehaviour
         if (!dead)
         {
             int damageToHealth = 0;
+            getRandomGrunt();
             if (armure > 0)
             {
                 armure -= damage;
@@ -415,6 +425,26 @@ public class PlayerScript : MonoBehaviour
             _healthText.text = "Vie : " + health;
             _armorText.text = "Armure : " + armure;
             Debug.Log("armure: " + armure + ", health: " + health);
+        }
+    }
+
+    private void getRandomGrunt()
+    {
+        int nbr = Random.Range(1, 4);
+
+        switch (nbr)
+        {
+            case 1:
+                GruntSound1.Play();
+                break;
+            case 2:
+                GruntSound2.Play();
+                break;
+            case 3:
+                GruntSound3.Play();
+                break;
+            default:
+                break;
         }
     }
 
