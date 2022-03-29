@@ -110,21 +110,31 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
-			if (isMoving == true)
-			{
-				if (lobby != null)
+            if (Grounded)
+            {
+				if (isMoving == true)
 				{
-					if(!metalWalkingSound.isPlaying)
-					metalWalkingSound.Play();
+					if (lobby != null)
+					{
+						if (!metalWalkingSound.isPlaying)
+							metalWalkingSound.Play();
+					}
+					else
+					{
+						if (!GrassWalkingSound.isPlaying)
+							GrassWalkingSound.Play();
+					}
 				}
 				else
 				{
-					if(!GrassWalkingSound.isPlaying)
-					GrassWalkingSound.Play();
+					if (metalWalkingSound.isPlaying)
+						metalWalkingSound.Stop();
+					if (GrassWalkingSound.isPlaying)
+						GrassWalkingSound.Stop();
 				}
 			}
-            else
-            {
+			else
+			{
 				if (metalWalkingSound.isPlaying)
 					metalWalkingSound.Stop();
 				if (GrassWalkingSound.isPlaying)
