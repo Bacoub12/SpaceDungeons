@@ -96,7 +96,7 @@ Material:
     - _Diffuse: 0.5
     - _DiffusePower: 1
     - _DstBlend: 0
-    - _FaceDilate: 0
+    - _FaceDilate: 0.17
     - _FaceUVSpeedX: 0
     - _FaceUVSpeedY: 0
     - _GlossMapScale: 1
@@ -113,17 +113,17 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineSoftness: 0
+    - _OutlineSoftness: 0.43
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0.071
+    - _OutlineWidth: 0.146
     - _Padding: 0
     - _Parallax: 0.02
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.9
-    - _ScaleRatioB: 0.73125
-    - _ScaleRatioC: 0.73125
+    - _ScaleRatioB: 0.57825005
+    - _ScaleRatioC: 0.57825005
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
@@ -142,9 +142,9 @@ Material:
     - _TextureHeight: 1024
     - _TextureWidth: 1024
     - _UVSec: 0
-    - _UnderlayDilate: 0
-    - _UnderlayOffsetX: 0
-    - _UnderlayOffsetY: 0
+    - _UnderlayDilate: -0.48
+    - _UnderlayOffsetX: 0.86
+    - _UnderlayOffsetY: -0.39
     - _UnderlaySoftness: 0
     - _UseUIAlphaClip: 0
     - _VertexOffsetX: 0
@@ -157,15 +157,15 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
-    - _FaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
     - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
     - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
-    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _Specular: {r: 0, g: 0, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
-    - _UnderlayColor: {r: 0.42315578, g: 0, b: 1, a: 0.5}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.77254903}
   m_BuildTextureStacks: []
 --- !u!114 &11400000
 MonoBehaviour:
