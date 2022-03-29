@@ -2305,6 +2305,10 @@ PrefabInstance:
       propertyPath: _healthText
       value: 
       objectReference: {fileID: 336339044}
+    - target: {fileID: 8172357591700286734, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: cd09706c238e8084f9303302427cff8a, type: 3}
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Name
       value: Player
