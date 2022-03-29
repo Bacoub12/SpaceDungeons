@@ -25,6 +25,12 @@ public class SceneControl : MonoBehaviour
     public void returnToLobby()
     {
         SceneManager.LoadScene(2);
+        StartCoroutine(returnCoroutine());
+    }
+
+    IEnumerator returnCoroutine()
+    {
+        yield return new WaitForSeconds(0.5f);
 
         GameObject[] player_s = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject go in player_s)
@@ -39,8 +45,8 @@ public class SceneControl : MonoBehaviour
         }
         GameObject.Find("Player").transform.position = new Vector3(0f, 1.7f, 4f);
 
-        GameObject[] ui_s = GameObject.FindGameObjectsWithTag("UI");
-        foreach (GameObject go in ui_s)
+        GameObject[] things = FindObjectsOfType<GameObject>();
+        foreach (GameObject go in things)
         {
             if (go.name == "UI")
             {
@@ -50,7 +56,6 @@ public class SceneControl : MonoBehaviour
                 }
             }
         }
-
     }
 
     public void LoadMenu()

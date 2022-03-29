@@ -23,6 +23,7 @@ public class ExitZoneScript : MonoBehaviour
             if (backToLobby)
             {
                 playerTransform.gameObject.GetComponent<PlayerScript>().returned = true;
+                GameObject.Find("UI").GetComponent<IdentifyUI>().returned = true;
                 GameObject.Find("SceneManager").GetComponent<SceneControl>().returnToLobby();
             }
             else
