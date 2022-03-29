@@ -7,6 +7,7 @@ using TMPro;
 
 public class UpgradeDeskScript : MonoBehaviour
 {
+    [SerializeField] private AudioSource MoneySpentSound;
     public GameObject upgradeDeskPanel;
     public GameObject uiManager;
 
@@ -217,7 +218,7 @@ public class UpgradeDeskScript : MonoBehaviour
             int newMoney = money - price;
             GameObject.Find("Player").GetComponent<PlayerScript>().money = newMoney;
             updateMoneyVisual();
-
+            MoneySpentSound.Play();
             string upgradeName = GameObject.Find("textTitle").GetComponent<TMP_Text>().text;
             foreach (Transform child in GameObject.Find("ListPanel").transform)
             {

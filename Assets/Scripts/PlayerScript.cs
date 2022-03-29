@@ -42,6 +42,10 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private AudioSource GruntSound1;
     [SerializeField] private AudioSource GruntSound2;
     [SerializeField] private AudioSource GruntSound3;
+    [SerializeField] private AudioSource HPRegenSound;
+    [SerializeField] private AudioSource ShieldCrackSound;
+    [SerializeField] private AudioSource ShieldRegenSound;
+    [SerializeField] private AudioSource MoneyPickUpSound;
 
     bool autoStop = false;
     bool interaction = false;
@@ -250,6 +254,7 @@ public class PlayerScript : MonoBehaviour
                 money += moneyScript.getMoneyValue();
                 _moneyText.text = "Credit : " + money.ToString();
                 Destroy(other.gameObject);
+                MoneyPickUpSound.Play();
                 //Debug.Log("Money : " + money);
             }
             else if (other.gameObject.tag == "Helmet" || other.gameObject.tag == "Chestplate" || other.gameObject.tag == "Gloves" || other.gameObject.tag == "Boot" || other.gameObject.tag == "Health")
@@ -395,7 +400,10 @@ public class PlayerScript : MonoBehaviour
                 armure -= damage;
                 damageToHealth = -(armure);
                 if (armure < 0)
+                {
+                    ShieldCrackSound.Play();
                     armure = 0;
+                }
             }
             else
                 damageToHealth = damage;
@@ -597,6 +605,7 @@ public class PlayerScript : MonoBehaviour
             health = add;
             _healthText.text = "Vie : " + health;
         }
+        HPRegenSound.Play();
     }
 
     public void addArmor(int addedArmor)
@@ -612,6 +621,7 @@ public class PlayerScript : MonoBehaviour
             armure = add;
             _armorText.text = "Armure : " + armure;
         }
+        ShieldRegenSound.Play();
     }
 
     public bool getKey()

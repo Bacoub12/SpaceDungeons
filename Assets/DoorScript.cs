@@ -9,6 +9,7 @@ public class DoorScript : MonoBehaviour
     private bool key;
     private bool doorOpen = false;
     [SerializeField] private AudioSource doorsound;
+    private bool once = true;
 
     // Start is called before the first frame update
     void Start()
@@ -60,24 +61,29 @@ public class DoorScript : MonoBehaviour
 
     public void OpenTheDoor()
     {
-        LeLock = null;
-        try
-        {
-            LeLock = transform.GetChild(3).gameObject;
-            GameObject.Find("Player").GetComponent<PlayerScript>().setLeLock(true);
-        }
-        catch (UnityException ex)
+        if (once == true)
         {
             LeLock = null;
+            try
+            {
+                LeLock = transform.GetChild(3).gameObject;
+                GameObject.Find("Player").GetComponent<PlayerScript>().setLeLock(true);
+            }
+            catch (UnityException ex)
+            {
+                LeLock = null;
+            }
+            if (LeLock == null)
+            {
+                DoorController.Play("OpenDoor");
+                doorsound.Play();
+                GameObject.Find("Player").GetComponent<PlayerScript>().setLeLock(false);
+                doorOpen = true;
+                GameObject.Find("Player").GetComponent<PlayerScript>().setOnce(true);
+                once = false;
+            }
         }
-        if(LeLock == null)
-        {
-            DoorController.Play("OpenDoor");
-            doorsound.Play();
-            GameObject.Find("Player").GetComponent<PlayerScript>().setLeLock(false);
-            doorOpen = true;
-            GameObject.Find("Player").GetComponent<PlayerScript>().setOnce(true);
-        }
+        
         //Debug.Log("LeLock : " + LeLock);
     }
 }
