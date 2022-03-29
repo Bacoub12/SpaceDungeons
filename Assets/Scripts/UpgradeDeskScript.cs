@@ -211,7 +211,7 @@ public class UpgradeDeskScript : MonoBehaviour
         int price = int.Parse(GameObject.Find("textPrice").GetComponent<TMP_Text>().text.Split(':')[1].Trim());
         int money = int.Parse(GameObject.Find("MoneyText").GetComponent<TMP_Text>().text.Split(':')[1].Trim());
 
-        if (money > price)
+        if (money >= price)
         {
             int newMoney = money - price;
             PlayerScript playerScript = GameObject.Find("Player").GetComponent<PlayerScript>();

@@ -317,7 +317,10 @@ public class PlayerScript : MonoBehaviour
             {
                 LobbySound.Stop();
             }
-            TutorialSound.Play();
+            if (!TutorialSound.isPlaying)
+            {
+                TutorialSound.Play();
+            }
         }
         else if (other.gameObject.name == "combatMusic")
         {
@@ -329,7 +332,10 @@ public class PlayerScript : MonoBehaviour
             {
                 LobbySound.Stop();
             }
-            CombatSound.Play();
+            if (!CombatSound.isPlaying)
+            {
+                CombatSound.Play();
+            }
         }
         else if (other.gameObject.name == "LobbyMusic")
         {
@@ -341,7 +347,10 @@ public class PlayerScript : MonoBehaviour
             {
                 CombatSound.Stop();
             }
-            LobbySound.Play();
+            if (!LobbySound.isPlaying)
+            {
+                LobbySound.Play();
+            }
         }
     }
 
