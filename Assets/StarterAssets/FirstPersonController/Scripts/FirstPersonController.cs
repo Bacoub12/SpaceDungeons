@@ -76,7 +76,7 @@ namespace StarterAssets
 		// sound
 		[SerializeField] private AudioSource metalWalkingSound;
 		[SerializeField] private AudioSource GrassWalkingSound;
-
+		private GameObject lobby;
 
 		private void Awake()
 		{
@@ -91,18 +91,17 @@ namespace StarterAssets
 		{
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
-			try
-			{
-				GameObject.Find("LobbyWithTuto");
-			}
-			catch (UnityException ex)
-			{
-				//Debug.Log(ex);
-				LeLock = null;
-			}
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+			try
+			{
+				lobby = GameObject.Find("LobbyWithTuto");
+			}
+			catch (UnityException ex)
+			{
+				lobby = null;
+			}
 		}
 
 		private void Update()
@@ -184,6 +183,14 @@ namespace StarterAssets
 			{
 				// move
 				inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
+                if (lobby != null)
+                {
+					metalWalkingSound.Play();
+                }
+                else
+                {
+					GrassWalkingSound.Play();
+                }
 				// walkingsound
 			}
 
