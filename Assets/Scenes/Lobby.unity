@@ -221,15 +221,11 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 657752022}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: da673583149634a49a91af7312cd4e8c, type: 3}
       propertyPath: m_RootOrder
-<<<<<<< Updated upstream
       value: 5
-=======
-      value: 17
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: da673583149634a49a91af7312cd4e8c, type: 3}
       propertyPath: m_LocalScale.x
@@ -297,11 +293,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: da673583149634a49a91af7312cd4e8c, type: 3}
   m_PrefabInstance: {fileID: 115010107}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &157019460 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7998946536279874343, guid: 738f0da58ccc3414ea4dd92183463ea4, type: 3}
-  m_PrefabInstance: {fileID: 374108933}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &221699507
 GameObject:
@@ -449,7 +440,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 657752022}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -5076920198792269144, guid: 738f0da58ccc3414ea4dd92183463ea4, type: 3}
       propertyPath: moneyValue
@@ -461,7 +452,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7998946536279874343, guid: 738f0da58ccc3414ea4dd92183463ea4, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7998946536279874343, guid: 738f0da58ccc3414ea4dd92183463ea4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1327,9 +1318,6 @@ Transform:
   - {fileID: 1361247477}
   - {fileID: 692785613}
   - {fileID: 379615131}
-  - {fileID: 157019460}
-  - {fileID: 1922617866}
-  - {fileID: 115010108}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1846,7 +1834,7 @@ Transform:
   - {fileID: 524076390}
   - {fileID: 632436560}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1833747102 stripped
 Transform:
@@ -1994,15 +1982,11 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 657752022}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: da673583149634a49a91af7312cd4e8c, type: 3}
       propertyPath: m_RootOrder
-<<<<<<< Updated upstream
       value: 4
-=======
-      value: 16
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: da673583149634a49a91af7312cd4e8c, type: 3}
       propertyPath: m_LocalScale.x
@@ -2226,11 +2210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_RootOrder
-<<<<<<< Updated upstream
       value: 2
-=======
-      value: 0
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_LocalPosition.x
