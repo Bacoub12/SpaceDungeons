@@ -5,13 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class SceneControl : MonoBehaviour
 {
-    public GameObject player;
+    private void Awake()
+    {
+        DontDestroyOnLoad(GameObject.Find("UI"));
+        DontDestroyOnLoad(GameObject.Find("Player"));
+    }
 
     public void NextScene()
     {
-        Debug.Log("yo");
-        DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(player);
         int indexScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(indexScene + 1);
    }
