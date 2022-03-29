@@ -25,18 +25,32 @@ public class SceneControl : MonoBehaviour
     public void returnToLobby()
     {
         SceneManager.LoadScene(2);
+
         GameObject[] player_s = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject go in player_s)
         {
             if (go.name == "Player")
             {
-                if (go.GetComponent<PlayerScript>().returned == true)
+                if (go.GetComponent<PlayerScript>().returned == false)
                 {
                     Destroy(go);
                 }
             }
         }
         GameObject.Find("Player").transform.position = new Vector3(0f, 1.7f, 4f);
+
+        GameObject[] ui_s = GameObject.FindGameObjectsWithTag("UI");
+        foreach (GameObject go in ui_s)
+        {
+            if (go.name == "UI")
+            {
+                if (go.GetComponent<IdentifyUI>().returned == false)
+                {
+                    Destroy(go);
+                }
+            }
+        }
+
     }
 
     public void LoadMenu()
