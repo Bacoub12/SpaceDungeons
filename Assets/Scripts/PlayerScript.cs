@@ -90,10 +90,7 @@ public class PlayerScript : MonoBehaviour
         fireAction.canceled += FireAction_canceled;
         fireAction.Enable();
 
-        if (GameObject.Find("UpgradeDesk") != null)
-            upgradeDeskScript = GameObject.Find("UpgradeDesk").GetComponent<UpgradeDeskScript>();
-        else if (GameObject.Find("PodAlone") != null)
-            upgradeDeskScript = GameObject.Find("PodAlone").GetComponent<UpgradeDeskScript>();
+        checkForUpgradeStation();
 
         pistolDamage = 10f;
         shotgunDamage = 2f; //? vu que y'a plus de balles
@@ -123,6 +120,13 @@ public class PlayerScript : MonoBehaviour
         _armorText.text = "Armure : " + armure;
     }
 
+    public void checkForUpgradeStation()
+    {
+        if (GameObject.Find("UpgradeDesk") != null)
+            upgradeDeskScript = GameObject.Find("UpgradeDesk").GetComponent<UpgradeDeskScript>();
+        else if (GameObject.Find("PodAlone") != null)
+            upgradeDeskScript = GameObject.Find("PodAlone").GetComponent<UpgradeDeskScript>();
+    }
 
     private void FireAction_canceled(InputAction.CallbackContext obj)
     {
@@ -309,6 +313,11 @@ public class PlayerScript : MonoBehaviour
             waterRun = false;
             StopCoroutine(WaterCoroutine());
         }
+    }
+
+    public void setMoney(int money)
+    {
+        _moneyText.text = "Credit : " + money.ToString();
     }
 
     void Update()

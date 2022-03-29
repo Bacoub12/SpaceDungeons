@@ -43,7 +43,9 @@ public class SceneControl : MonoBehaviour
                 }
             }
         }
-        GameObject.Find("Player").transform.position = new Vector3(0f, 1.7f, 4f);
+        GameObject player = GameObject.Find("Player");
+        player.transform.position = new Vector3(0f, 1.7f, 4f);
+        player.GetComponent<PlayerScript>().checkForUpgradeStation();
 
         GameObject[] things = FindObjectsOfType<GameObject>();
         foreach (GameObject go in things)
@@ -56,6 +58,10 @@ public class SceneControl : MonoBehaviour
                 }
             }
         }
+
+        UpgradeDeskScript podScript = GameObject.Find("PodAlone").GetComponent<UpgradeDeskScript>();
+        podScript.uiManager = GameObject.Find("UIManager");
+        podScript.upgradeDeskPanel = GameObject.Find("Canvas").transform.GetChild(3).gameObject;
     }
 
     public void LoadMenu()

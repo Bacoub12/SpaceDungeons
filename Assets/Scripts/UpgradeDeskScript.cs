@@ -64,8 +64,6 @@ public class UpgradeDeskScript : MonoBehaviour
                     Debug.Log(hit.collider.gameObject.name);
                     if (hit.collider.gameObject.name == "UpgradeDesk" || hit.collider.gameObject.name == "PodInteraction")
                     {
-                        Debug.Log("allo3");
-
                         upgradeDeskPanel.SetActive(true);
                         Time.timeScale = 0;
                         CursorUnlock();
@@ -216,7 +214,9 @@ public class UpgradeDeskScript : MonoBehaviour
         if (money > price)
         {
             int newMoney = money - price;
-            GameObject.Find("Player").GetComponent<PlayerScript>().money = newMoney;
+            PlayerScript playerScript = GameObject.Find("Player").GetComponent<PlayerScript>();
+            playerScript.money = newMoney;
+            playerScript.setMoney(newMoney);
             updateMoneyVisual();
             MoneySpentSound.Play();
             string upgradeName = GameObject.Find("textTitle").GetComponent<TMP_Text>().text;
