@@ -32,17 +32,13 @@ public class SceneControl : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        Debug.Log("allo2");
         GameObject[] player_s = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject go in player_s)
         {
-            Debug.Log("allo3 " + go.name);
             if (go.name == "Player")
             {
-                Debug.Log("allo4 " + go.GetComponent<PlayerScript>().returned);
                 if (go.GetComponent<PlayerScript>().returned == false)
                 {
-                    Debug.Log("destroying player");
                     Destroy(go);
                 }
             }
@@ -56,7 +52,6 @@ public class SceneControl : MonoBehaviour
             {
                 if (go.GetComponent<IdentifyUI>().returned == false)
                 {
-                    Debug.Log("destroying ui");
                     Destroy(go);
                 }
             }
