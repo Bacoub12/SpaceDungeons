@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text.RegularExpressions;
@@ -85,7 +85,7 @@ public class BossSpawnManager : MonoBehaviour
 
         if (chestSpawnTransform == null || chestSpawnTransform.gameObject.name != "ChestSpawn")
         {
-            Debug.Log("aucun chest spawn trouv�");
+            Debug.Log("aucun chest spawn trouvé");
         }
         else
         {
