@@ -14,6 +14,7 @@ using TMPro;
 public class PlayerScript : MonoBehaviour
 {
     int gunId = 0;
+    int canShootPistol = 0;
     int canShootShotgun = 0;
     int canShootRifle = 0;
     int baseHealth = 100;
@@ -101,7 +102,7 @@ public class PlayerScript : MonoBehaviour
 
         checkForUpgradeStation();
 
-        pistolDamage = 10f;
+        pistolDamage = 8f;
         shotgunDamage = 2f; //? vu que y'a plus de balles
         rifleDamage = 5f; //même raisonnement
 
@@ -167,11 +168,8 @@ public class PlayerScript : MonoBehaviour
                     gunAnim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f){}
                 else
                 {
-                    GameObject bullet = Instantiate(_bullet, _attach.position, _attach.rotation);
-                    audioSourcePistol.PlayOneShot(PistolSound);
-                    bullet.GetComponent<BulletScript>().setDamageParams(pistolDamage, damageUpgrade1, damageUpgrade2, damageUpgrade3);
-                    rb = bullet.GetComponent<Rigidbody>();
-                    rb.AddForce(_attach.forward * _force);
+                    if (canShootPistol == 0)
+                        StartCoroutine(PistolShot());
                 }
                 break;
 
@@ -198,6 +196,20 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    IEnumerator PistolShot()
+    {
+        canShootPistol = 1;
+        GameObject bullet = Instantiate(_bullet, _attach.position, _attach.rotation);
+        audioSourcePistol.PlayOneShot(PistolSound);
+        bullet.GetComponent<BulletScript>().setDamageParams(pistolDamage, damageUpgrade1, damageUpgrade2, damageUpgrade3);
+        rb = bullet.GetComponent<Rigidbody>();
+        rb.AddForce(_attach.forward * _force);
+        yield return new WaitForSeconds(0.135f);
+        canShootPistol = 0;
+    }
+
+
+
     IEnumerator AutomaticRifle()
     {
         while (autoStop)
@@ -208,7 +220,7 @@ public class PlayerScript : MonoBehaviour
             bullet.GetComponent<BulletScript>().setDamageParams(rifleDamage, damageUpgrade1, damageUpgrade2, damageUpgrade3);
             rb = bullet.GetComponent<Rigidbody>();
             rb.AddForce(_attach.forward * _force);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.09f);
             canShootRifle = 0;
         }
     }
