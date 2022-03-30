@@ -36,19 +36,22 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private GameObject ThePlayer;
     [SerializeField] private Transform TutoSpawn;
     [SerializeField] private Transform LobbySpawn;
-    [SerializeField] private AudioSource PistolSound;
+    [SerializeField] private AudioClip PistolSound;
     [SerializeField] private AudioSource ShotgunSound;
-    [SerializeField] private AudioSource LMGSound;
+    [SerializeField] private AudioClip LMGSound;
     [SerializeField] private AudioSource GruntSound1;
     [SerializeField] private AudioSource GruntSound2;
     [SerializeField] private AudioSource GruntSound3;
     [SerializeField] private AudioSource HPRegenSound;
     [SerializeField] private AudioSource ShieldCrackSound;
     [SerializeField] private AudioSource ShieldRegenSound;
-    [SerializeField] private AudioSource MoneyPickUpSound;
+    [SerializeField] private AudioClip MoneyPickUpSound;
     [SerializeField] private AudioSource TutorialSound;
     [SerializeField] private AudioSource CombatSound;
     [SerializeField] private AudioSource LobbySound;
+    AudioSource audioSourcePistol;
+    AudioSource audioSourceLMG;
+    AudioSource audioSourceMoney;
 
     bool autoStop = false;
     bool interaction = false;
@@ -82,6 +85,9 @@ public class PlayerScript : MonoBehaviour
 
     private void Start()
     {
+        audioSourcePistol = GetComponent<AudioSource>();
+        audioSourceLMG = GetComponent<AudioSource>();
+        audioSourceMoney = GetComponent<AudioSource>();
         _CharacterController = GetComponent<CharacterController>();
         capsuleCollider = GetComponentInChildren<CapsuleCollider>();
         firstPersonController = GetComponent<FirstPersonController>();
@@ -162,7 +168,7 @@ public class PlayerScript : MonoBehaviour
                 else
                 {
                     GameObject bullet = Instantiate(_bullet, _attach.position, _attach.rotation);
-                    PistolSound.Play();
+                    audioSourcePistol.PlayOneShot(PistolSound);
                     bullet.GetComponent<BulletScript>().setDamageParams(pistolDamage, damageUpgrade1, damageUpgrade2, damageUpgrade3);
                     rb = bullet.GetComponent<Rigidbody>();
                     rb.AddForce(_attach.forward * _force);
@@ -198,7 +204,7 @@ public class PlayerScript : MonoBehaviour
         {
             canShootRifle = 1;
             GameObject bullet = Instantiate(_bullet, _attach.position, _attach.rotation);
-            LMGSound.Play();
+            audioSourceLMG.PlayOneShot(LMGSound);
             bullet.GetComponent<BulletScript>().setDamageParams(rifleDamage, damageUpgrade1, damageUpgrade2, damageUpgrade3);
             rb = bullet.GetComponent<Rigidbody>();
             rb.AddForce(_attach.forward * _force);
@@ -261,7 +267,7 @@ public class PlayerScript : MonoBehaviour
                 money += moneyScript.getMoneyValue();
                 _moneyText.text = "Credit : " + money.ToString();
                 Destroy(other.gameObject);
-                MoneyPickUpSound.Play();
+                audioSourceMoney.PlayOneShot(MoneyPickUpSound);
                 //Debug.Log("Money : " + money);
             }
             else if (other.gameObject.tag == "Helmet" || other.gameObject.tag == "Chestplate" || other.gameObject.tag == "Gloves" || other.gameObject.tag == "Boot" || other.gameObject.tag == "Health")
@@ -410,7 +416,7 @@ public class PlayerScript : MonoBehaviour
                         if (getKey() == false)
                         UIManager.GetComponent<UIManager>().Interactive(true, "La porte est barré");
                         else if (getKey() == true)
-                            UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour débarré la porte");
+                            UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour débarrer la porte");
                         break;
                     case "Bed":
                         UIManager.GetComponent<UIManager>().Interactive(true, "Appuyer sur F pour dormir (Quitter la partie)");
