@@ -5,21 +5,31 @@ using UnityEngine.SceneManagement;
 
 public class SceneControl : MonoBehaviour
 {
-    private void Awake()
-    {
-        DontDestroyOnLoad(GameObject.Find("UI"));
-        DontDestroyOnLoad(GameObject.Find("Player"));
-    }
-
     public void NextScene()
     {
         int indexScene = SceneManager.GetActiveScene().buildIndex;
+        if (indexScene == 2) //if on lobby (donc, about to enter game)
+        {
+            DontDestroyOnLoad(GameObject.Find("UI"));
+            DontDestroyOnLoad(GameObject.Find("Player"));
+        }
         SceneManager.LoadScene(indexScene + 1);
    }
 
     public void LoadGame()
     {
-        SceneManager.LoadScene(2);
+        if (GameObject.Find("Player"))
+        {
+            //if player is there, aller prendre le spawnmanager du player à la place
+            Debug.Log("yo1");
+            GameObject.Find("UI").transform.Find("SceneManager").gameObject.GetComponent<SceneControl>().returnToLobby();
+            //returnToLobby();
+        }
+        else
+        {
+            Debug.Log("yo2");
+            SceneManager.LoadScene(2);
+        }
     }
 
     public void returnToLobby()
@@ -30,8 +40,10 @@ public class SceneControl : MonoBehaviour
 
     IEnumerator returnCoroutine()
     {
-        yield return new WaitForSeconds(0.5f);
+        Debug.Log("yo3");
+        yield return new WaitForSeconds(0.3f);
 
+        Debug.Log("yo4");
         GameObject[] player_s = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject go in player_s)
         {
@@ -75,6 +87,10 @@ public class SceneControl : MonoBehaviour
 
     public void LoadMenu()
     {
+        DontDestroyOnLoad(GameObject.Find("UI"));
+        DontDestroyOnLoad(GameObject.Find("Player"));
+        GameObject.Find("Player").GetComponent<PlayerScript>().returned = true;
+        GameObject.Find("UI").GetComponent<IdentifyUI>().returned = true;
         SceneManager.LoadScene(0);
     }
 
