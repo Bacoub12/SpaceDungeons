@@ -1752,6 +1752,14 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1386718399, guid: 77451878cc4b3a04c858500afbb097cf, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386718399, guid: 77451878cc4b3a04c858500afbb097cf, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386718399, guid: 77451878cc4b3a04c858500afbb097cf, type: 3}
       propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 39348643}
@@ -1760,12 +1768,32 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 336339048}
     - target: {fileID: 1386718399, guid: 77451878cc4b3a04c858500afbb097cf, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 2027840599}
+    - target: {fileID: 1386718399, guid: 77451878cc4b3a04c858500afbb097cf, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386718399, guid: 77451878cc4b3a04c858500afbb097cf, type: 3}
       propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadMenu
       objectReference: {fileID: 0}
     - target: {fileID: 1386718399, guid: 77451878cc4b3a04c858500afbb097cf, type: 3}
       propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: CursorUnlock
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386718399, guid: 77451878cc4b3a04c858500afbb097cf, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: StopMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386718399, guid: 77451878cc4b3a04c858500afbb097cf, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: PlayerScript, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386718399, guid: 77451878cc4b3a04c858500afbb097cf, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1422740450, guid: 77451878cc4b3a04c858500afbb097cf, type: 3}
       propertyPath: uiManager
