@@ -13,6 +13,8 @@ public class RandomTerrain : MonoBehaviour
     public GameObject finalExitZone;
     public GameObject playerSpawnLocation;
 
+    public int floor;
+
     private List<string> usedLayoutNames;
     private Vector3 playerSpawnPosition;
     private int nbrReserveForces;
@@ -22,8 +24,10 @@ public class RandomTerrain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        floor = 1;
+
         nbrReserveForces = 0;
-        nbrEnemyTerrains = 1;
+        nbrEnemyTerrains = 9;
         int positionX = 0;
         int rndNombre;
         bool terrainHasBeenUsed;

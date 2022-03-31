@@ -9,7 +9,6 @@ public class ExitZoneScript : MonoBehaviour
     private Transform playerTransform;
     private bool backToLobby;
     private TMP_Text floorText;
-    private int floorNumber;
     private GameObject WinScreen;
 
     // Start is called before the first frame update
@@ -35,12 +34,14 @@ public class ExitZoneScript : MonoBehaviour
                 floorNumber = 0;*/
                 GameObject.Find("UIManager").GetComponent<UIManager>().CursorUnlock();
                 WinScreen.SetActive(true);
+                floorText.text = "Salle : " + 1;
             }
             else
             {
                 playerTransform.position = destination.position;
-                floorNumber++;
-                floorText.text = "Salle : " + floorNumber;
+                RandomTerrain randomTerrain = GameObject.Find("TerrainGenerator").GetComponent<RandomTerrain>();
+                randomTerrain.floor++;
+                floorText.text = "Salle : " + randomTerrain.floor;
             }
         }
     }
@@ -51,7 +52,6 @@ public class ExitZoneScript : MonoBehaviour
         GameObject.Find("UI").GetComponent<IdentifyUI>().returned = true;
         GameObject.Find("SceneManager").GetComponent<SceneControl>().returnToLobby();
         floorText.gameObject.SetActive(false);
-        floorNumber = 0;
     }
 
     public void setDestination(Transform _destination)

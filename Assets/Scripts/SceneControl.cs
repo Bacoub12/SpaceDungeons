@@ -108,6 +108,11 @@ public class SceneControl : MonoBehaviour
             delegate {
                 key.SetActive(false);
             });
+
+        if (GameObject.Find("WinPannel"))
+            GameObject.Find("WinPannel").SetActive(false);
+
+        GameObject.Find("UIManager").GetComponent<UIManager>().CursorLock();
     }
 
     public void LoadMenu()
