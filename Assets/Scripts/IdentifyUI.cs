@@ -7,6 +7,7 @@ public class IdentifyUI : MonoBehaviour
     public bool returned = false;
 
     // Start is called before the first frame update
+    /*
     void Start()
     {
         
@@ -16,5 +17,5 @@ public class IdentifyUI : MonoBehaviour
     void Update()
     {
         
-    }
+    }*/
 }
