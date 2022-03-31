@@ -66,6 +66,7 @@ public class PlayerScript : MonoBehaviour
     bool once = false;
     bool onceAgain = false;
     bool waterRun = false;
+    public bool gunshotsMuted = false;
     public bool onOffSpawn;
     float timer = 0.0f;
 
@@ -204,7 +205,8 @@ public class PlayerScript : MonoBehaviour
     {
         canShootPistol = 1;
         GameObject bullet = Instantiate(_bullet, _attach.position, _attach.rotation);
-        audioSourcePistol.PlayOneShot(PistolSound);
+        if (!gunshotsMuted)
+            audioSourcePistol.PlayOneShot(PistolSound);
         bullet.GetComponent<BulletScript>().setDamageParams(pistolDamage, damageUpgrade1, damageUpgrade2, damageUpgrade3);
         rb = bullet.GetComponent<Rigidbody>();
         rb.AddForce(_attach.forward * _force);
@@ -220,7 +222,8 @@ public class PlayerScript : MonoBehaviour
         {
             canShootRifle = 1;
             GameObject bullet = Instantiate(_bullet, _attach.position, _attach.rotation);
-            audioSourceLMG.PlayOneShot(LMGSound);
+            if (!gunshotsMuted)
+                audioSourceLMG.PlayOneShot(LMGSound);
             bullet.GetComponent<BulletScript>().setDamageParams(rifleDamage, damageUpgrade1, damageUpgrade2, damageUpgrade3);
             rb = bullet.GetComponent<Rigidbody>();
             rb.AddForce(_attach.forward * _force);
@@ -232,7 +235,8 @@ public class PlayerScript : MonoBehaviour
     IEnumerator PumpShotgun()
     {
         canShootShotgun = 1;
-        ShotgunSound.Play();
+        if (!gunshotsMuted)
+            ShotgunSound.Play();
         for (int i = 0; i < 40; i++)
         {
             float randomX = Random.Range(-20f, 20f);

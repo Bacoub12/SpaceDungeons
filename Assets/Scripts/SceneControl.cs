@@ -21,13 +21,10 @@ public class SceneControl : MonoBehaviour
         if (GameObject.Find("Player"))
         {
             //if player is there, aller prendre le spawnmanager du player à la place
-            Debug.Log("yo1");
             GameObject.Find("UI").transform.Find("SceneManager").gameObject.GetComponent<SceneControl>().returnToLobby();
-            //returnToLobby();
         }
         else
         {
-            Debug.Log("yo2");
             SceneManager.LoadScene(2);
         }
     }
@@ -40,10 +37,8 @@ public class SceneControl : MonoBehaviour
 
     IEnumerator returnCoroutine()
     {
-        Debug.Log("yo3");
         yield return new WaitForSeconds(0.3f);
 
-        Debug.Log("yo4");
         GameObject[] player_s = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject go in player_s)
         {
@@ -66,6 +61,8 @@ public class SceneControl : MonoBehaviour
             player.transform.SetPositionAndRotation(tutoSpawn.position, tutoSpawn.rotation);
 
         player.GetComponent<PlayerScript>().checkForUpgradeStation();
+
+        player.GetComponent<PlayerScript>().gunshotsMuted = false;
 
         GameObject[] things = FindObjectsOfType<GameObject>();
         foreach (GameObject go in things)
@@ -97,7 +94,9 @@ public class SceneControl : MonoBehaviour
     {
         DontDestroyOnLoad(GameObject.Find("UI"));
         DontDestroyOnLoad(GameObject.Find("Player"));
-        GameObject.Find("Player").GetComponent<PlayerScript>().returned = true;
+        PlayerScript playerScript = GameObject.Find("Player").GetComponent<PlayerScript>();
+        playerScript.gunshotsMuted = true;
+        playerScript.returned = true;
         GameObject.Find("UI").GetComponent<IdentifyUI>().returned = true;
         SceneManager.LoadScene(0);
     }
