@@ -14,7 +14,7 @@ public class SceneControl : MonoBehaviour
             DontDestroyOnLoad(GameObject.Find("Player"));
         }
         SceneManager.LoadScene(indexScene + 1);
-   }
+    }
 
     public void LoadGame()
     {
