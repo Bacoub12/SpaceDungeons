@@ -51,6 +51,8 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private AudioSource TutorialSound;
     [SerializeField] private AudioSource CombatSound;
     [SerializeField] private AudioSource LobbySound;
+    [SerializeField] private AudioSource DeathSound;
+    [SerializeField] private GameObject crossHair;
     AudioSource audioSourcePistol;
     AudioSource audioSourceLMG;
     AudioSource audioSourceMoney;
@@ -389,6 +391,26 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    public void PlayDeathMusic()
+    {
+        if (TutorialSound.isPlaying)
+        {
+            TutorialSound.Stop();
+        }
+        if (CombatSound.isPlaying)
+        {
+            CombatSound.Stop();
+        }
+        if (LobbySound.isPlaying)
+        {
+            LobbySound.Stop();
+        }
+        if (!DeathSound.isPlaying)
+        {
+            LobbySound.Play();
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Water")
@@ -519,7 +541,13 @@ public class PlayerScript : MonoBehaviour
                     }
                     health = baseHealth;
                     armure = baseArmure;
+                    PlayDeathMusic();
+                    crossHair.SetActive(false);
+                    _healthText.gameObject.SetActive(false);
+                    _armorText.gameObject.SetActive(false);
                     UIManager.GetComponent<UIManager>().DeathScreen(true);
+
+                    dead = false;
 
                 }
             }
