@@ -96,6 +96,8 @@ public class SceneControl : MonoBehaviour
             GameObject.Find("SceneManager").GetComponent<SceneControl>().LoadMenu);
         bed.GetComponent<Interactable>().onInteract.AddListener(
             GameObject.Find("UIManager").GetComponent<UIManager>().CursorUnlock);
+        bed.GetComponent<Interactable>().onInteract.AddListener(
+            player.GetComponent<PlayerScript>().StopMusic);
 
         GameObject key = GameObject.Find("Key");
         key.GetComponent<Interactable>().onInteract.AddListener(
