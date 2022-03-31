@@ -261,15 +261,25 @@ public class enemyBossScript : MonoBehaviour
         }
         Destroy(existingAttackVisual);
 
-        //spawn enemies
-        GameObject dust1 = Instantiate(dashDustParticles, spawnPoint1.position, Quaternion.identity);
-        dust1.transform.Rotate(-90.0f, 0.0f, 0.0f, Space.Self);
-        GameObject spawn1 = Instantiate(spawnedEnemy, spawnPoint1.position, transform.rotation);
-        spawn1.tag = "BossSpawns";
-        GameObject dust2 = Instantiate(dashDustParticles, spawnPoint2.position, Quaternion.identity);
-        dust2.transform.Rotate(-90.0f, 0.0f, 0.0f, Space.Self);
-        GameObject spawn2 = Instantiate(spawnedEnemy, spawnPoint2.position, transform.rotation);
-        spawn2.tag = "BossSpawns";
+        //spawn enemies (if possible)
+
+        NavMeshHit hitMesh;
+        if (NavMesh.SamplePosition(spawnPoint1.position, out hitMesh, 2f, NavMesh.AllAreas))
+        {
+            GameObject dust1 = Instantiate(dashDustParticles, spawnPoint1.position, Quaternion.identity);
+            dust1.transform.Rotate(-90.0f, 0.0f, 0.0f, Space.Self);
+            GameObject spawn1 = Instantiate(spawnedEnemy, spawnPoint1.position, transform.rotation);
+            spawn1.tag = "BossSpawns";
+        }
+
+        NavMeshHit hitMesh2;
+        if (NavMesh.SamplePosition(spawnPoint2.position, out hitMesh2, 2f, NavMesh.AllAreas))
+        {
+            GameObject dust2 = Instantiate(dashDustParticles, spawnPoint2.position, Quaternion.identity);
+            dust2.transform.Rotate(-90.0f, 0.0f, 0.0f, Space.Self);
+            GameObject spawn2 = Instantiate(spawnedEnemy, spawnPoint2.position, transform.rotation);
+            spawn2.tag = "BossSpawns";
+        }
 
         //wait
         agent.SetDestination(transform.position);
