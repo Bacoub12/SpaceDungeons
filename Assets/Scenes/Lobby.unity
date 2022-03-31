@@ -1775,6 +1775,10 @@ PrefabInstance:
       propertyPath: upgradeDeskPanel
       value: 
       objectReference: {fileID: 606833442}
+    - target: {fileID: 656799729123487049, guid: 77451878cc4b3a04c858500afbb097cf, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2775178547921557716, guid: 77451878cc4b3a04c858500afbb097cf, type: 3}
       propertyPath: m_Name
       value: LobbyWithTuto
@@ -1823,6 +1827,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4146087422234239578, guid: 77451878cc4b3a04c858500afbb097cf, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5121815764473967155, guid: 77451878cc4b3a04c858500afbb097cf, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1831,6 +1839,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3b22cce9da015da42b8fca968a39fc7a, type: 2}
+    - target: {fileID: 6397761924517362064, guid: 77451878cc4b3a04c858500afbb097cf, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340347933245096066, guid: 77451878cc4b3a04c858500afbb097cf, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77451878cc4b3a04c858500afbb097cf, type: 3}
 --- !u!4 &939115345 stripped
