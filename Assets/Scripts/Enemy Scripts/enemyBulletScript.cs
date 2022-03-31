@@ -20,7 +20,8 @@ public class enemyBulletScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer != 9 && collision.gameObject.layer != 7 && collision.gameObject.tag != "DoorDetection") //not enemybullet or enemy
+        if (collision.gameObject.layer != 9 && collision.gameObject.layer != 7 
+            && collision.gameObject.tag != "DoorDetection" && collision.gameObject.tag != "Bullet") //not enemybullet or enemy
         {
             Destroy(gameObject);
         }
@@ -28,7 +29,8 @@ public class enemyBulletScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer != 9 && other.gameObject.layer != 7 && other.gameObject.tag != "DoorDetection") //not enemybullet or enemy
+        if (other.gameObject.layer != 9 && other.gameObject.layer != 7 
+            && other.gameObject.tag != "DoorDetection" && other.gameObject.tag != "Bullet") //not enemybullet or enemy
         {
             Destroy(gameObject);
         }
