@@ -64,7 +64,7 @@ public class PlayerScript : MonoBehaviour
     bool once = false;
     bool onceAgain = false;
     bool waterRun = false;
-    bool onOffSpawn;
+    public bool onOffSpawn;
     float timer = 0.0f;
 
     FirstPersonController firstPersonController;
