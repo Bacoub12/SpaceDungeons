@@ -534,14 +534,25 @@ public class PlayerScript : MonoBehaviour
                 {
                     dead = true;
 
-                    onOffSpawn = UpdateSpawn.GetComponent<UpdateSpawn>().getOnOff();
-                    if (onOffSpawn == false)
+                    if (UpdateSpawn != null)
                     {
-                        gameObject.transform.SetPositionAndRotation(TutoSpawn.position, TutoSpawn.rotation);
+                        onOffSpawn = UpdateSpawn.GetComponent<UpdateSpawn>().getOnOff();
+                        if (onOffSpawn == false)
+                        {
+                            gameObject.transform.SetPositionAndRotation(TutoSpawn.position, TutoSpawn.rotation);
+                        }
+                        if (onOffSpawn == true)
+                        {
+                            gameObject.transform.SetPositionAndRotation(LobbySpawn.position, LobbySpawn.rotation);
+                        }
                     }
-                    if (onOffSpawn == true)
+                    else
                     {
-                        gameObject.transform.SetPositionAndRotation(LobbySpawn.position, LobbySpawn.rotation);
+                        //l'envoyer à l'autre scène
+                        returned = true;
+                        GameObject.Find("UI").GetComponent<IdentifyUI>().returned = true;
+
+                        GameObject.Find("SceneManager").GetComponent<SceneControl>().returnToLobby();
                     }
                     health = baseHealth;
                     armure = baseArmure;
