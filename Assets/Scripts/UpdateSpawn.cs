@@ -16,6 +16,7 @@ public class UpdateSpawn : MonoBehaviour
         if (other.gameObject.name == "Player")
         {
             onOff = true;
+            other.gameObject.GetComponent<PlayerScript>().onOffSpawn = true;
         }
     }
 }

@@ -55,8 +55,16 @@ public class SceneControl : MonoBehaviour
                 }
             }
         }
+
         GameObject player = GameObject.Find("Player");
-        player.transform.position = new Vector3(0f, 1.7f, 4f);
+
+        Transform lobbySpawn = GameObject.Find("SpawnDuLobby").transform;
+        Transform tutoSpawn = GameObject.Find("SpawnDuTuto").transform;
+        if (player.GetComponent<PlayerScript>().onOffSpawn)
+            player.transform.SetPositionAndRotation(lobbySpawn.position, lobbySpawn.rotation);
+        else
+            player.transform.SetPositionAndRotation(tutoSpawn.position, tutoSpawn.rotation);
+
         player.GetComponent<PlayerScript>().checkForUpgradeStation();
 
         GameObject[] things = FindObjectsOfType<GameObject>();
