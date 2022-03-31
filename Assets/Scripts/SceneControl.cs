@@ -83,11 +83,21 @@ public class SceneControl : MonoBehaviour
         GameObject.Find("MissionCrate").GetComponent<Interactable>().onInteract.AddListener(
             GameObject.Find("SceneManager").GetComponent<SceneControl>().NextScene);
 
-        GameObject.Find("Bed").GetComponent<Interactable>().onInteract.AddListener(
+        GameObject bed = GameObject.Find("Bed");
+        bed.GetComponent<Interactable>().onInteract.AddListener(
             GameObject.Find("SceneManager").GetComponent<SceneControl>().LoadMenu);
-
-        GameObject.Find("Bed").GetComponent<Interactable>().onInteract.AddListener(
+        bed.GetComponent<Interactable>().onInteract.AddListener(
             GameObject.Find("UIManager").GetComponent<UIManager>().CursorUnlock);
+
+        GameObject key = GameObject.Find("Key");
+        key.GetComponent<Interactable>().onInteract.AddListener(
+            delegate {
+                player.GetComponent<PlayerScript>().setKey(true);
+            });
+        key.GetComponent<Interactable>().onInteract.AddListener(
+            delegate {
+                key.SetActive(false);
+            });
     }
 
     public void LoadMenu()

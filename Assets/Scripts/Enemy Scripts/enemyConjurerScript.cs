@@ -47,9 +47,18 @@ public class enemyConjurerScript : MonoBehaviour
             GameObject[] summoned = GameObject.FindGameObjectsWithTag("Summoned");
             int totalMaxSummons = summoners.Length * maxSpawnsPerSummoner;
 
-            if (summoned.Length < totalMaxSummons)
+            bool possibleSpawnPoint = false;
+            Vector3 spawnPosition = new Vector3(0f, 0f, 0f);
+            NavMeshHit hitMesh;
+            if (NavMesh.SamplePosition(transform.position + (transform.forward * 2f), out hitMesh, 2f, NavMesh.AllAreas))
             {
-                StartCoroutine(summon());
+                possibleSpawnPoint = true;
+                spawnPosition = hitMesh.position;
+            }
+
+            if (summoned.Length < totalMaxSummons && possibleSpawnPoint)
+            {
+                StartCoroutine(summon(spawnPosition));
             }
             else
             {
@@ -147,7 +156,7 @@ public class enemyConjurerScript : MonoBehaviour
         return length;
     }
 
-    IEnumerator summon()
+    IEnumerator summon(Vector3 summonLocation)
     {
         canSummon = false;
         //when this starts, conjurer has reached destination
@@ -160,7 +169,6 @@ public class enemyConjurerScript : MonoBehaviour
 
         //starts conjuring, takes 2 seconds, put an effect where the summoning takes place
         audioSummon.Play();
-        Vector3 summonLocation = transform.position + (transform.forward * 2f);
         existingAttackVisual = Instantiate(summonZone, summonLocation, Quaternion.identity);
         existingParticles = Instantiate(summonParticles, summonLocation, Quaternion.identity);
         existingParticles.transform.Rotate(-90f, 0f, 0f, Space.Self);
