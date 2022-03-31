@@ -415,6 +415,26 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    public void StopMusic()
+    {
+        if (TutorialSound.isPlaying)
+        {
+            TutorialSound.Stop();
+        }
+        if (CombatSound.isPlaying)
+        {
+            CombatSound.Stop();
+        }
+        if (LobbySound.isPlaying)
+        {
+            LobbySound.Stop();
+        }
+        if (DeathSound.isPlaying)
+        {
+            LobbySound.Stop();
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Water")
