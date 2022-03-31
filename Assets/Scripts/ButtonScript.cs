@@ -17,4 +17,9 @@ public class ButtonScript : MonoBehaviour
     {
         mySource.PlayOneShot(click);
     }
+
+    public void getReturnToLobby()
+    {
+        GameObject.Find("ExitZoneFinal(Clone)").GetComponent<ExitZoneScript>().ReturnToLobby();
+    }
 }
