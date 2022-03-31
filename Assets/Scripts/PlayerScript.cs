@@ -357,6 +357,10 @@ public class PlayerScript : MonoBehaviour
         {
             LobbySound.Stop();
         }
+        if (DeathSound.isPlaying)
+        {
+            DeathSound.Stop();
+        }
         if (!TutorialSound.isPlaying)
         {
             TutorialSound.Play();
@@ -373,6 +377,10 @@ public class PlayerScript : MonoBehaviour
         {
             LobbySound.Stop();
         }
+        if (DeathSound.isPlaying)
+        {
+            DeathSound.Stop();
+        }
         if (!CombatSound.isPlaying)
         {
             CombatSound.Play();
@@ -388,6 +396,10 @@ public class PlayerScript : MonoBehaviour
         if (CombatSound.isPlaying)
         {
             CombatSound.Stop();
+        }
+        if (DeathSound.isPlaying)
+        {
+            DeathSound.Stop();
         }
         if (!LobbySound.isPlaying)
         {
@@ -411,7 +423,7 @@ public class PlayerScript : MonoBehaviour
         }
         if (!DeathSound.isPlaying)
         {
-            LobbySound.Play();
+            DeathSound.Play();
         }
     }
 
@@ -431,7 +443,7 @@ public class PlayerScript : MonoBehaviour
         }
         if (DeathSound.isPlaying)
         {
-            LobbySound.Stop();
+            DeathSound.Stop();
         }
     }
 
@@ -554,41 +566,43 @@ public class PlayerScript : MonoBehaviour
                 {
                     dead = true;
 
-                    if (UpdateSpawn != null)
-                    {
-                        onOffSpawn = UpdateSpawn.GetComponent<UpdateSpawn>().getOnOff();
-                        if (onOffSpawn == false)
-                        {
-                            gameObject.transform.SetPositionAndRotation(TutoSpawn.position, TutoSpawn.rotation);
-                        }
-                        if (onOffSpawn == true)
-                        {
-                            gameObject.transform.SetPositionAndRotation(LobbySpawn.position, LobbySpawn.rotation);
-                        }
-                    }
-                    else
-                    {
-                        //l'envoyer à l'autre scène
-                        returned = true;
-                        GameObject.Find("UI").GetComponent<IdentifyUI>().returned = true;
-
-                        GameObject.Find("SceneManager").GetComponent<SceneControl>().returnToLobby();
-                    }
-                    health = baseHealth;
-                    armure = baseArmure;
+                    health = maxHealth;
+                    armure = maxArmure;
                     PlayDeathMusic();
                     crossHair.SetActive(false);
                     _healthText.gameObject.SetActive(false);
                     _armorText.gameObject.SetActive(false);
                     UIManager.GetComponent<UIManager>().DeathScreen(true);
-
-                    dead = false;
-
                 }
             }
             _healthText.text = "Vie : " + health;
             _armorText.text = "Armure : " + armure;
-            Debug.Log("armure: " + armure + ", health: " + health);
+            //Debug.Log("armure: " + armure + ", health: " + health);
+        }
+    }
+
+    public void Respawn()
+    {
+        if (UpdateSpawn != null)
+        {
+            onOffSpawn = UpdateSpawn.GetComponent<UpdateSpawn>().getOnOff();
+            if (onOffSpawn == false)
+            {
+                gameObject.transform.SetPositionAndRotation(TutoSpawn.position, TutoSpawn.rotation);
+            }
+            if (onOffSpawn == true)
+            {
+                gameObject.transform.SetPositionAndRotation(LobbySpawn.position, LobbySpawn.rotation);
+            }
+            dead = false;
+        }
+        else
+        {
+            //l'envoyer à l'autre scène
+            returned = true;
+            GameObject.Find("UI").GetComponent<IdentifyUI>().returned = true;
+
+            GameObject.Find("SceneManager").GetComponent<SceneControl>().returnToLobby();
         }
     }
 
