@@ -47,6 +47,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private AudioSource ShieldCrackSound;
     [SerializeField] private AudioSource ShieldRegenSound;
     [SerializeField] private AudioClip MoneyPickUpSound;
+    [SerializeField] private AudioSource MoneyPickUpSoundSource;
     [SerializeField] private AudioSource TutorialSound;
     [SerializeField] private AudioSource CombatSound;
     [SerializeField] private AudioSource LobbySound;
@@ -61,6 +62,7 @@ public class PlayerScript : MonoBehaviour
     bool key = false;
     bool LeLock = true;
     bool once = false;
+    bool onceAgain = false;
     bool waterRun = false;
     bool onOffSpawn;
     float timer = 0.0f;
@@ -327,48 +329,63 @@ public class PlayerScript : MonoBehaviour
         }
         if (other.gameObject.name == "tutoMusic")
         {
-            if (CombatSound.isPlaying)
-            {
-                CombatSound.Stop();
-            }
-            if (LobbySound.isPlaying)
-            {
-                LobbySound.Stop();
-            }
-            if (!TutorialSound.isPlaying)
-            {
-                TutorialSound.Play();
-            }
+            PlayTutoMusic();
         }
         else if (other.gameObject.name == "combatMusic")
         {
-            if(TutorialSound.isPlaying)
-            {
-                TutorialSound.Stop();
-            }
-            if (LobbySound.isPlaying)
-            {
-                LobbySound.Stop();
-            }
-            if (!CombatSound.isPlaying)
-            {
-                CombatSound.Play();
-            }
+            PlayCombatMusic();
         }
         else if (other.gameObject.name == "LobbyMusic")
         {
-            if (TutorialSound.isPlaying)
-            {
-                TutorialSound.Stop();
-            }
-            if (CombatSound.isPlaying)
-            {
-                CombatSound.Stop();
-            }
-            if (!LobbySound.isPlaying)
-            {
-                LobbySound.Play();
-            }
+            PlayLobbyMusic();
+        }
+    }
+
+    public void PlayTutoMusic()
+    {
+        if (CombatSound.isPlaying)
+        {
+            CombatSound.Stop();
+        }
+        if (LobbySound.isPlaying)
+        {
+            LobbySound.Stop();
+        }
+        if (!TutorialSound.isPlaying)
+        {
+            TutorialSound.Play();
+        }
+    }
+
+    public void PlayCombatMusic()
+    {
+        if (TutorialSound.isPlaying)
+        {
+            TutorialSound.Stop();
+        }
+        if (LobbySound.isPlaying)
+        {
+            LobbySound.Stop();
+        }
+        if (!CombatSound.isPlaying)
+        {
+            CombatSound.Play();
+        }
+    }
+
+    public void PlayLobbyMusic()
+    {
+        if (TutorialSound.isPlaying)
+        {
+            TutorialSound.Stop();
+        }
+        if (CombatSound.isPlaying)
+        {
+            CombatSound.Stop();
+        }
+        if (!LobbySound.isPlaying)
+        {
+            LobbySound.Play();
         }
     }
 
@@ -706,6 +723,11 @@ public class PlayerScript : MonoBehaviour
 
     public void setKey(bool _key)
     {
+        if (!onceAgain)
+        {
+            MoneyPickUpSoundSource.Play();
+            onceAgain = true;
+        }
         key = _key;
     }
 
