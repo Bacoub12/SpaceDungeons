@@ -10,6 +10,7 @@ public class ExitZoneScript : MonoBehaviour
     private bool backToLobby;
     private TMP_Text floorText;
     private GameObject WinScreen;
+    private int floorNumber;
 
     // Start is called before the first frame update
     void Start()

@@ -131,8 +131,8 @@ public class PlayerScript : MonoBehaviour
         poisoned = false;
         dead = false;
 
-        _healthText.text = "Vie : " + health;
-        _armorText.text = "Armure : " + armure;
+        _healthText.text = "Vie : " + health + "/" + maxHealth;
+        _armorText.text = "Armure : " + armure + "/" + maxArmure;
     }
 
     public void checkForUpgradeStation()
@@ -575,8 +575,8 @@ public class PlayerScript : MonoBehaviour
                     UIManager.GetComponent<UIManager>().DeathScreen(true);
                 }
             }
-            _healthText.text = "Vie : " + health;
-            _armorText.text = "Armure : " + armure;
+            _healthText.text = "Vie : " + health + "/" + maxHealth;
+            _armorText.text = "Armure : " + armure + "/" + maxArmure;
             //Debug.Log("armure: " + armure + ", health: " + health);
         }
     }
@@ -660,19 +660,17 @@ public class PlayerScript : MonoBehaviour
         if (healthUpgrade1)
         {
             health = baseHealth + 100;
-            _healthText.text = "Vie : " + health;
         }
         if (healthUpgrade2)
         {
             health += 100;
-            _healthText.text = "Vie : " + health;
         }
         if (healthUpgrade3)
         {
             health += 100;
-            _healthText.text = "Vie : " + health;
         }
         maxHealth = health;
+        _healthText.text = "Vie : " + health + "/" + maxHealth;
         //Debug.Log("new health: " + health);
     }
 
@@ -687,19 +685,17 @@ public class PlayerScript : MonoBehaviour
         if (armureUpgrade1)
         {
             armure = baseArmure + 100;
-            _armorText.text = "Armure : " + armure;
         }
         if (armureUpgrade2)
         {
             armure += 100;
-            _armorText.text = "Armure : " + armure;
         }
         if (armureUpgrade3)
         {
             armure += 100;
-            _armorText.text = "Armure : " + armure;
         }
         maxArmure = armure;
+        _armorText.text = "Armure : " + armure + "/" + maxArmure;
         //Debug.Log("new armure: " + armure);
     }
 
@@ -767,12 +763,12 @@ public class PlayerScript : MonoBehaviour
         if(add > maxHealth)
         {
             health = maxHealth;
-            _healthText.text = "Vie : " + health;
+            _healthText.text = "Vie : " + health + "/" + maxHealth;
         }
         else
         {
             health = add;
-            _healthText.text = "Vie : " + health;
+            _healthText.text = "Vie : " + health + "/" + maxHealth;
         }
         HPRegenSound.Play();
     }
@@ -783,12 +779,12 @@ public class PlayerScript : MonoBehaviour
         if (add > maxArmure)
         {
             armure = maxArmure;
-            _armorText.text = "Armure : " + armure;
+            _armorText.text = "Armure : " + armure + "/" + maxArmure;
         }
         else
         {
             armure = add;
-            _armorText.text = "Armure : " + armure;
+            _armorText.text = "Armure : " + armure + "/" + maxArmure;
         }
         ShieldRegenSound.Play();
     }
