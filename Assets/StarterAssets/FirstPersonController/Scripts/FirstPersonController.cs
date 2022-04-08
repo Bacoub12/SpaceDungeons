@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -141,6 +142,14 @@ namespace StarterAssets
 				if (GrassWalkingSound.isPlaying)
 					GrassWalkingSound.Stop();
 			}
+		}
+
+		public void setSensitivity()
+		{/*
+			GameObject text = GameObject.Find("TextSensibility");
+			Debug.Log("sense " + text.GetComponent<TMP_Text>().text.Trim());
+			RotationSpeed = float.Parse(text.GetComponent<TMP_Text>().text.ToString() + "");
+			CameraRotation();*/
 		}
 
 		private void LateUpdate()
