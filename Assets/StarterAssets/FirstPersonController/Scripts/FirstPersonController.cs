@@ -58,10 +58,11 @@ namespace StarterAssets
 		private float _cinemachineTargetPitch;
 
 		// player
-		private float _speed;
+		public float _speed;
 		private float _rotationVelocity;
 		private float _verticalVelocity;
 		private float _terminalVelocity = 53.0f;
+		public Vector3 motion;
 
 		// timeout deltatime
 		private float _jumpTimeoutDelta;
@@ -228,7 +229,8 @@ namespace StarterAssets
 			}
 
 			// move the player
-			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+			motion = inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime;
+			_controller.Move(motion);
 		}
 
 		private void JumpAndGravity()

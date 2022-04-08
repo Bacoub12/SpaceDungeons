@@ -128,6 +128,12 @@ public class SceneControl : MonoBehaviour
 
     public void LoadSetting()
     {
+        DontDestroyOnLoad(GameObject.Find("UI"));
+        DontDestroyOnLoad(GameObject.Find("Player"));
+        PlayerScript playerScript = GameObject.Find("Player").GetComponent<PlayerScript>();
+        playerScript.gunshotsMuted = true;
+        playerScript.returned = true;
+        GameObject.Find("UI").GetComponent<IdentifyUI>().returned = true;
         SceneManager.LoadScene(1);
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using System.Text.RegularExpressions;
+using StarterAssets;
 
 public class enemyRifleScript : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class enemyRifleScript : MonoBehaviour
     float cooldownLength;
     bool dead;
     bool enemyInSight, alerted;
+    float bulletSpeed = 1000f;
 
     // Start is called before the first frame update
     void Start()
@@ -79,7 +81,7 @@ public class enemyRifleScript : MonoBehaviour
             Vector3 to = target.position + new Vector3(0f, 1f, 0f);
             Vector3 from = shootPoint.position;
             Vector3 direction = (to - from).normalized;
-            Debug.DrawLine(from, to);
+            //Debug.DrawLine(from, to);
 
             if (distance <= agent.stoppingDistance)
             {
@@ -88,7 +90,25 @@ public class enemyRifleScript : MonoBehaviour
 
                 if (canShoot && Vector3.Angle(eye.forward, vectorToEnemy) <= 35f)
                 {
-                    AttackTarget(direction);
+                    //check player position, player velocity, extrapolate to shoot where you will be
+                    //https://www.reddit.com/r/Unity3D/comments/do5ymo/how_to_predict_the_future_position_of_a_moving/
+
+                    Vector3 playerPos = to;
+                    FirstPersonController FPScomp = target.gameObject.GetComponent<FirstPersonController>();
+                    float playerSpeed = FPScomp._speed;
+                    //distance: distance to player
+                    //bulletSpeed: projectile velocity
+
+                    float timeToTarget = distance / bulletSpeed;
+                    Vector3 playerMotion = FPScomp.motion;
+                    Vector3 predictedPlayerPos = playerPos + (playerMotion * timeToTarget * 2500f);
+
+                    Vector3 realDirection = (predictedPlayerPos - from).normalized;
+
+                    if (FPScomp.Grounded)
+                        realDirection = new Vector3(realDirection.x, 0f, realDirection.z);
+
+                    AttackTarget(realDirection);
                     StartCoroutine(shotCooldown());
                 }
             }
@@ -109,7 +129,7 @@ public class enemyRifleScript : MonoBehaviour
         Rigidbody rb = Instantiate(bullet, shootPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
         Instantiate(gunshotDust, shootPoint.position, transform.rotation);
         rb.transform.forward = _direction;
-        rb.AddForce(rb.transform.forward * 1000f);
+        rb.AddForce(rb.transform.forward * bulletSpeed);
     }
 
     IEnumerator shotCooldown()
