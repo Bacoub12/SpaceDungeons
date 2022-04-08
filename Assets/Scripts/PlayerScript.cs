@@ -303,6 +303,7 @@ public class PlayerScript : MonoBehaviour
                 Image theImage = itemObject.transform.GetChild(0).gameObject.GetComponent<Image>();
                 buttonDrop.GetComponent<Button>().onClick.AddListener(delegate { inventoryManager.GetComponent<Inventory>().Drop(theImage); });
                 buttonUse.GetComponent<Button>().onClick.AddListener(delegate { inventoryManager.GetComponent<Inventory>().Use(theImage); });
+                audioSourceMoney.PlayOneShot(MoneyPickUpSound);
                 Destroy(other.gameObject);
             }
         }
