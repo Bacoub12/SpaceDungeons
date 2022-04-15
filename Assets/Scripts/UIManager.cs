@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _escapeMenuPanel;
     [SerializeField] private GameObject _interact;
     [SerializeField] private GameObject _deathPanel;
+    [SerializeField] private GameObject _hitmarker;
     [SerializeField] private Transform _itemSlotContainer;
     [SerializeField] private GameObject _item;
     [SerializeField] private Sprite[] _itemSprite;
@@ -34,6 +35,20 @@ public class UIManager : MonoBehaviour
             CursorLock();
             
         }
+    }
+
+    IEnumerator HitmarkerWait()
+    {
+        _hitmarker.SetActive(true);
+        yield return new WaitForSeconds(0.3f);
+        _hitmarker.SetActive(false);
+    }
+
+    public void Hitmarker()
+    {
+        Debug.Log("lol");
+        StartCoroutine(HitmarkerWait());
+        Debug.Log("lol2");
     }
 
     public void Interactive(bool OnOff, string message)

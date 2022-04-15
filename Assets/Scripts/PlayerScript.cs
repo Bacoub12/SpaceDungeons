@@ -53,6 +53,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private AudioSource LobbySound;
     [SerializeField] private AudioSource DeathSound;
     [SerializeField] private GameObject crossHair;
+    [SerializeField] private AudioClip HitmarkSound;
+
+    AudioSource hitmark;
     AudioSource audioSourcePistol;
     AudioSource audioSourceLMG;
     AudioSource audioSourceMoney;
@@ -91,6 +94,7 @@ public class PlayerScript : MonoBehaviour
 
     private void Start()
     {
+        hitmark = GetComponent<AudioSource>();
         audioSourcePistol = GetComponent<AudioSource>();
         audioSourceLMG = GetComponent<AudioSource>();
         audioSourceMoney = GetComponent<AudioSource>();
@@ -162,6 +166,11 @@ public class PlayerScript : MonoBehaviour
         {
             shoot();
         }
+    }
+
+    public void hitmarkPlayer()
+    {
+        hitmark.PlayOneShot(HitmarkSound,0.3f);
     }
 
     private void shoot()

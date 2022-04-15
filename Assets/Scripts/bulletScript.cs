@@ -5,6 +5,9 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     [SerializeField] private ParticleSystem particules;
+    [SerializeField] GameObject UIManager;
+
+    GameObject Player;
 
     float timeBeforeDestroy = 0.5f;
 
@@ -13,6 +16,8 @@ public class BulletScript : MonoBehaviour
     
     void Start()
     {
+        Player = GameObject.Find("Player");   
+        UIManager = GameObject.Find("UIManager");
         Destroy(gameObject, timeBeforeDestroy);
         baseDamage = 10;
         damageUpgrade1 = false;
@@ -59,6 +64,8 @@ public class BulletScript : MonoBehaviour
 
     public float getTrueDamage()
     {
+        UIManager.GetComponent<UIManager>().Hitmarker();
+        Player.GetComponent<PlayerScript>().hitmarkPlayer();
         return trueDamage;
     }
 }
