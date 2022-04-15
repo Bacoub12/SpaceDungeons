@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using System.Text.RegularExpressions;
+using StarterAssets;
 
 public class enemyIllusionistScript : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class enemyIllusionistScript : MonoBehaviour
     int maxIllusionsPerIllusionist = 4;
     bool dead;
     bool enemyInSight, alerted;
+    float bulletSpeed = 750;
 
     // Start is called before the first frame update
     void Start()
@@ -93,7 +95,22 @@ public class enemyIllusionistScript : MonoBehaviour
 
                 if (canShoot && Vector3.Angle(eye.forward, vectorToEnemy) <= 35f)
                 {
-                    AttackTarget(direction);
+                    Vector3 playerPos = to;
+                    FirstPersonController FPScomp = target.gameObject.GetComponent<FirstPersonController>();
+                    float playerSpeed = FPScomp._speed;
+                    //distance: distance to player
+                    //bulletSpeed: projectile velocity
+
+                    float timeToTarget = distance / bulletSpeed;
+                    Vector3 playerMotion = FPScomp.motion;
+                    Vector3 predictedPlayerPos = playerPos + (playerMotion * timeToTarget * 2500f);
+
+                    Vector3 realDirection = (predictedPlayerPos - from).normalized;
+
+                    if (FPScomp.Grounded)
+                        realDirection = new Vector3(realDirection.x, 0f, realDirection.z);
+
+                    AttackTarget(realDirection);
                     StartCoroutine(shotCooldown());
                 }
 
@@ -127,7 +144,7 @@ public class enemyIllusionistScript : MonoBehaviour
         Rigidbody rb = Instantiate(bullet, shootPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
         Instantiate(gunshotDust, shootPoint.position, transform.rotation);
         rb.transform.forward = _direction;
-        rb.AddForce(rb.transform.forward * 750f);
+        rb.AddForce(rb.transform.forward * bulletSpeed);
     }
 
     private void CreateIllusion()

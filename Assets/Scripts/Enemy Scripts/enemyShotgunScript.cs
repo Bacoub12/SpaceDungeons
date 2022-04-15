@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using System.Text.RegularExpressions;
+using StarterAssets;
 
 public class enemyShotgunScript : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class enemyShotgunScript : MonoBehaviour
     float cooldownLength = 3f;
     bool dead;
     bool enemyInSight, alerted;
+    float bulletSpeed = 500f;
 
     // Start is called before the first frame update
     void Start()
@@ -86,7 +88,22 @@ public class enemyShotgunScript : MonoBehaviour
 
                 if (canShoot && Vector3.Angle(eye.forward, vectorToEnemy) <= 35f)
                 {
-                    AttackTarget(direction);
+                    Vector3 playerPos = to;
+                    FirstPersonController FPScomp = target.gameObject.GetComponent<FirstPersonController>();
+                    float playerSpeed = FPScomp._speed;
+                    //distance: distance to player
+                    //bulletSpeed: projectile velocity
+
+                    float timeToTarget = distance / bulletSpeed;
+                    Vector3 playerMotion = FPScomp.motion;
+                    Vector3 predictedPlayerPos = playerPos + (playerMotion * timeToTarget * 2500f);
+
+                    Vector3 realDirection = (predictedPlayerPos - from).normalized;
+
+                    if (FPScomp.Grounded)
+                        realDirection = new Vector3(realDirection.x, 0f, realDirection.z);
+
+                    AttackTarget(realDirection);
                     StartCoroutine(shotCooldown());
                 }
             }
@@ -112,7 +129,7 @@ public class enemyShotgunScript : MonoBehaviour
             Rigidbody rb = Instantiate(bullet, shootPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
             rb.transform.forward = _direction;
             rb.transform.Rotate(randomX, randomY, randomZ);
-            rb.AddForce(rb.transform.forward * 500f);
+            rb.AddForce(rb.transform.forward * bulletSpeed);
         }
         Instantiate(gunshotDust, shootPoint.position, transform.rotation);
     }
