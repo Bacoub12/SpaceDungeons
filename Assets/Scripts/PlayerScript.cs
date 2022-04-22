@@ -737,8 +737,11 @@ public class PlayerScript : MonoBehaviour
         //Debug.Log(onOffCrouch);
         if (!onOffCrouch)
         {
-            _CharacterController.height = 1.0f;
+            /*_CharacterController.height = 1.0f;
             capsuleCollider.height = 1.0f;
+            firstPersonController.GroundedOffset = -1.0f;
+            onOffCrouch = true;*/
+            StartCoroutine(Start3());
             firstPersonController.GroundedOffset = -1.0f;
             onOffCrouch = true;
         }
@@ -753,7 +756,7 @@ public class PlayerScript : MonoBehaviour
     }
     IEnumerator Start2()
     {
-        for (float f = 1; f <= 2; f += 0.02f)
+        for (float f = 1; f <= 2; f += 0.04f)
         {
             _CharacterController.height = f;
             capsuleCollider.height = f;
@@ -761,6 +764,21 @@ public class PlayerScript : MonoBehaviour
             {
                 _CharacterController.height = 2f;
                 capsuleCollider.height = 2f;
+            }
+            yield return new WaitForSeconds(0.001f);
+        }
+    }
+
+    IEnumerator Start3()
+    {
+        for (float f = 2; f >= 1; f -= 0.04f)
+        {
+            _CharacterController.height = f;
+            capsuleCollider.height = f;
+            if (f >= 1.999)
+            {
+                _CharacterController.height = 1f;
+                capsuleCollider.height = 1f;
             }
             yield return new WaitForSeconds(0.001f);
         }
