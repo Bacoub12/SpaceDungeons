@@ -511,6 +511,7 @@ GameObject:
   - component: {fileID: 5420857361349278248}
   - component: {fileID: 8616685848737228376}
   - component: {fileID: 678993996}
+  - component: {fileID: 1559391629}
   - component: {fileID: 169181207}
   - component: {fileID: 1644351521}
   - component: {fileID: 761411099}
@@ -609,6 +610,7 @@ MonoBehaviour:
   motion: {x: 0, y: 0, z: 0}
   metalWalkingSound: {fileID: 761411105}
   GrassWalkingSound: {fileID: 761411106}
+  onEnemy: 0
 --- !u!114 &1978471637655604388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -797,6 +799,18 @@ MonoBehaviour:
   interactableLayerMask:
     serializedVersion: 2
     m_Bits: 1024
+--- !u!114 &1559391629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff164add332138241817493cc1a4ef37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &169181207
 SphereCollider:
   m_ObjectHideFlags: 0

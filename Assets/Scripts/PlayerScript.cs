@@ -83,12 +83,14 @@ public class PlayerScript : MonoBehaviour
     private Item item;
     private MoneyScript moneyScript;
     private UpgradeDeskScript upgradeDeskScript;
+    private FlingPlayerScript flingPlayerScript;
 
     private float pistolDamage, shotgunDamage, rifleDamage;
     private bool damageUpgrade1, damageUpgrade2, damageUpgrade3;
     private bool healthUpgrade1, healthUpgrade2, healthUpgrade3;
     private bool armureUpgrade1, armureUpgrade2, armureUpgrade3;
     private bool poisoned, dead;
+    private bool recentlyFlung;
 
     //[SerializeField] GameObject whatgun;
 
@@ -110,6 +112,8 @@ public class PlayerScript : MonoBehaviour
         fireAction.Enable();
 
         checkForUpgradeStation();
+
+        flingPlayerScript = gameObject.GetComponent<FlingPlayerScript>();
 
         pistolDamage = 8f;
         shotgunDamage = 2f; //? vu que y'a plus de balles
@@ -134,6 +138,7 @@ public class PlayerScript : MonoBehaviour
 
         poisoned = false;
         dead = false;
+        recentlyFlung = false;
 
         _healthText.text = "Vie : " + health + "/" + maxHealth;
         _armorText.text = "Armure : " + armure + "/" + maxArmure;
@@ -546,6 +551,11 @@ public class PlayerScript : MonoBehaviour
         {
             UIManager.GetComponent<UIManager>().Interactive(false, "");
         }
+
+        if (firstPersonController.onEnemy && recentlyFlung == false)
+        {
+            StartCoroutine(FlingPlayer());
+        }
         
     }
 
@@ -782,6 +792,20 @@ public class PlayerScript : MonoBehaviour
             }
             yield return new WaitForSeconds(0.001f);
         }
+    }
+
+    //check for player standing on enemy. if true, fling backwards
+    IEnumerator FlingPlayer()
+    {
+        //fling player
+        Vector3 flingDirection = new Vector3(Random.Range(-1f, 1f), 1f, Random.Range(-1f, 1f));
+        flingPlayerScript.AddImpact(flingDirection, 60f);
+        Damage(20);
+
+        //cooldown
+        recentlyFlung = true;
+        yield return new WaitForSeconds(0.5f);
+        recentlyFlung = false;
     }
 
 

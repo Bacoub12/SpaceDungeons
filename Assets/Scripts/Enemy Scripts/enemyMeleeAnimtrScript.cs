@@ -133,7 +133,9 @@ public class enemyMeleeAnimtrScript : MonoBehaviour
 
         //deal damage to player if player is still in range
         float distance = Vector3.Distance(target.position, transform.position);
-        if (distance <= agent.stoppingDistance && attackBox.bounds.Contains(target.position))
+        if (distance <= agent.stoppingDistance && (
+            attackBox.bounds.Contains(target.position) || attackBox.bounds.Contains(target.position + new Vector3(0f, 1f, 0f))
+            ))
         {
             target.gameObject.GetComponent<PlayerScript>().Damage(10);
         }

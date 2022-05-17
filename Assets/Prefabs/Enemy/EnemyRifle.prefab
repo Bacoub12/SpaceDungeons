@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9051173183553950877}
   - component: {fileID: 8139797578088731910}
   m_Layer: 7
-  m_Name: EnemyRifle2
+  m_Name: EnemyRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

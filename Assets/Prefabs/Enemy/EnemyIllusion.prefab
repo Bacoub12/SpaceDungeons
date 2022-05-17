@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 2253543917835650581}
   - component: {fileID: 207094027482158332}
   m_Layer: 7
-  m_Name: EnemyIllusion2
+  m_Name: EnemyIllusion
   m_TagString: Illusion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,7 +155,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6289470798875643972}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.5589434, y: 1.6560793, z: 1.8385108}

@@ -34,7 +34,7 @@ public class enemyRifleScript : MonoBehaviour
         dead = false;
         enemyInSight = false;
         alerted = false;
-        cooldownLength = Random.Range(1f, 3f);
+        cooldownLength = Random.Range(1f, 2f);
         transform.position = new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z);
     }
 
@@ -93,16 +93,9 @@ public class enemyRifleScript : MonoBehaviour
                     //check player position, player velocity, extrapolate to shoot where you will be
                     //https://www.reddit.com/r/Unity3D/comments/do5ymo/how_to_predict_the_future_position_of_a_moving/
 
-                    Vector3 playerPos = to;
                     FirstPersonController FPScomp = target.gameObject.GetComponent<FirstPersonController>();
-                    float playerSpeed = FPScomp._speed;
-                    //distance: distance to player
-                    //bulletSpeed: projectile velocity
-
-                    float timeToTarget = distance / bulletSpeed;
                     Vector3 playerMotion = FPScomp.motion;
-                    Vector3 predictedPlayerPos = playerPos + (playerMotion * timeToTarget * 2500f);
-
+                    Vector3 predictedPlayerPos = predictedPosition(to, from, playerMotion * 1000f, bulletSpeed);
                     Vector3 realDirection = (predictedPlayerPos - from).normalized;
 
                     if (FPScomp.Grounded)
@@ -113,6 +106,21 @@ public class enemyRifleScript : MonoBehaviour
                 }
             }
         }
+    }
+
+    private Vector3 predictedPosition(Vector3 targetPosition, Vector3 shooterPosition, Vector3 targetVelocity, float projectileSpeed)
+    {
+        Vector3 displacement = targetPosition - shooterPosition;
+        float targetMoveAngle = Vector3.Angle(-displacement, targetVelocity) * Mathf.Deg2Rad;
+        //if the target is stopping or if it is impossible for the projectile to catch up with the target (Sine Formula)
+        if (targetVelocity.magnitude == 0 || targetVelocity.magnitude > projectileSpeed && Mathf.Sin(targetMoveAngle) / projectileSpeed > Mathf.Cos(targetMoveAngle) / targetVelocity.magnitude)
+        {
+            Debug.Log("Position prediction is not feasible.");
+            return targetPosition;
+        }
+        //also Sine Formula
+        float shootAngle = Mathf.Asin(Mathf.Sin(targetMoveAngle) * targetVelocity.magnitude / projectileSpeed);
+        return targetPosition + targetVelocity * displacement.magnitude / Mathf.Sin(Mathf.PI - targetMoveAngle - shootAngle) * Mathf.Sin(shootAngle) / targetVelocity.magnitude;
     }
 
     private void FaceTarget(Vector3 _direction)

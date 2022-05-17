@@ -80,6 +80,8 @@ namespace StarterAssets
 		[SerializeField] private AudioSource GrassWalkingSound;
 		private bool isMoving;
 		private GameObject lobby;
+		LayerMask enemyMask;
+		public bool onEnemy;
 
 		private void Awake()
 		{
@@ -97,6 +99,7 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+			enemyMask = LayerMask.GetMask("Enemy");
 			try
 			{
 				lobby = GameObject.Find("LobbyWithTuto");
@@ -162,6 +165,25 @@ namespace StarterAssets
 			// set sphere position, with offset
 			Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
 			Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+
+			if (Grounded)
+            {
+				//Debug.Log("ground");
+				onEnemy = false;
+            } 
+			else
+            {
+				if (Physics.CheckSphere(spherePosition, GroundedRadius, enemyMask, QueryTriggerInteraction.Ignore))
+                {
+					//Debug.Log("on enemy");
+					onEnemy = true;
+				}
+				else
+				{
+					//Debug.Log("air");
+					onEnemy = false;
+				}
+            }
 		}
 
 		private void CameraRotation()
