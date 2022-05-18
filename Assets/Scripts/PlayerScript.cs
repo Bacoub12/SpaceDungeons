@@ -620,6 +620,7 @@ public class PlayerScript : MonoBehaviour
         {
             //l'envoyer à l'autre scène
             returned = true;
+            dead = false;
             GameObject.Find("UI").GetComponent<IdentifyUI>().returned = true;
 
             GameObject.Find("SceneManager").GetComponent<SceneControl>().returnToLobby();
@@ -800,7 +801,7 @@ public class PlayerScript : MonoBehaviour
         //fling player
         Vector3 flingDirection = new Vector3(Random.Range(-1f, 1f), 1f, Random.Range(-1f, 1f));
         flingPlayerScript.AddImpact(flingDirection, 60f);
-        Damage(20);
+        Damage(5);
 
         //cooldown
         recentlyFlung = true;

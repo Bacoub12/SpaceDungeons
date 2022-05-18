@@ -46,9 +46,9 @@ public class UIManager : MonoBehaviour
 
     public void Hitmarker()
     {
-        Debug.Log("lol");
+        //Debug.Log("lol");
         StartCoroutine(HitmarkerWait());
-        Debug.Log("lol2");
+        //Debug.Log("lol2");
     }
 
     public void Interactive(bool OnOff, string message)

@@ -5,7 +5,8 @@ using TMPro;
 
 public class UpgradeScript : MonoBehaviour
 {
-    public string title, description;
+    public string id, title, description;
+    public List<string> dependsOn;
     public float price;
     public bool bought;
 }

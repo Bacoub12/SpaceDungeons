@@ -35,9 +35,13 @@ public class UpgradeDeskScript : MonoBehaviour
                 GameObject buttonGameObject = child.gameObject;
                 if (buttonGameObject.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text == upgradeName)
                 {
+                    /*
                     if (eventSystem.currentSelectedGameObject == buttonGameObject)
                         eventSystem.SetSelectedGameObject(null);
                     eventSystem.SetSelectedGameObject(buttonGameObject);
+                    */
+                    if (eventSystem.currentSelectedGameObject == null)
+                        eventSystem.SetSelectedGameObject(buttonGameObject);
                 }
             }
         }
@@ -61,7 +65,7 @@ public class UpgradeDeskScript : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, 2, interactableLayerMask))
                 {
-                    Debug.Log(hit.collider.gameObject.name);
+                    //Debug.Log(hit.collider.gameObject.name);
                     if (hit.collider.gameObject.name == "UpgradeDesk" || hit.collider.gameObject.name == "PodInteraction")
                     {
                         upgradeDeskPanel.SetActive(true);
@@ -78,7 +82,8 @@ public class UpgradeDeskScript : MonoBehaviour
 
                                 buttonGameObject.GetComponent<Button>()
                                     .onClick.AddListener(delegate {
-                                        loadUpgradeInfo(upgradeScript.title, upgradeScript.description, upgradeScript.price, upgradeScript.bought);
+                                        loadUpgradeInfo(upgradeScript.id, upgradeScript.title, upgradeScript.description,
+                                            upgradeScript.dependsOn, upgradeScript.price, upgradeScript.bought);
                                     });
 
                                 if (upgradeScript.bought)
@@ -114,61 +119,6 @@ public class UpgradeDeskScript : MonoBehaviour
                     }
                 }
 
-                /*
-                if (GameObject.Find("UpgradeDesk"))
-                {
-                    GameObject upgradeDesk = GameObject.Find("UpgradeDesk");
-                    if (Vector3.Distance(upgradeDesk.transform.position, GameObject.Find("Player").transform.position) <= 2f)
-                    {
-                        upgradeDeskPanel.SetActive(true);
-                        Time.timeScale = 0;
-                        CursorUnlock();
-                        isActive = true;
-
-                        if (initialized == false)
-                        {
-                            foreach (Transform child in GameObject.Find("ListPanel").transform)
-                            {
-                                GameObject buttonGameObject = child.gameObject;
-                                UpgradeScript upgradeScript = buttonGameObject.GetComponent<UpgradeScript>();
-
-                                buttonGameObject.GetComponent<Button>()
-                                    .onClick.AddListener(delegate {
-                                        loadUpgradeInfo(upgradeScript.title, upgradeScript.description, upgradeScript.price, upgradeScript.bought);
-                                    });
-
-                                if (upgradeScript.bought)
-                                    buttonGameObject.GetComponent<Image>().color = boughtColor;
-                            }
-
-                            GameObject buyButton = GameObject.Find("btBuy");
-                            buyButton.GetComponent<Button>()
-                                    .onClick.AddListener(delegate {
-                                        buyUpgrade();
-                                        updateMoneyVisual();
-                                    });
-
-                            initialized = true;
-                        }
-
-                        updateMoneyVisual();
-
-                        GameObject descPanel = GameObject.Find("DescPanel");
-                        descPanel.transform.GetChild(0).gameObject
-                            .GetComponent<TMP_Text>()
-                            .text = "";
-                        descPanel.transform.GetChild(1).gameObject
-                            .GetComponent<TMP_Text>()
-                            .text = "";
-                        descPanel.transform.GetChild(2).gameObject
-                            .GetComponent<TMP_Text>()
-                            .text = "";
-                        descPanel.transform.GetChild(3).gameObject
-                            .GetComponent<Button>()
-                            .interactable = false;
-                    }
-                }
-                */
             }
         }
     }
@@ -179,7 +129,7 @@ public class UpgradeDeskScript : MonoBehaviour
         moneyText.GetComponent<TMP_Text>().text = "Crédits: " + GameObject.Find("Player").GetComponent<PlayerScript>().money;
     }
 
-    public void loadUpgradeInfo(string title, string description, float price, bool bought)
+    public void loadUpgradeInfo(string id, string title, string description, List<string> dependsOn, float price, bool bought)
     {
         GameObject descPanel = GameObject.Find("DescPanel");
         descPanel.transform.GetChild(0).gameObject
@@ -192,7 +142,39 @@ public class UpgradeDeskScript : MonoBehaviour
             .GetComponent<TMP_Text>()
             .text = "Prix: " + price;
 
-        if (bought)
+        //Debug.Log("now checking " + id);
+
+        bool dependenciesSatisfied = false;
+        List<string> boughtUpgrades = getBoughtUpgrades();
+        //Debug.Log("dependsOn: " + string.Join(", ", dependsOn.ToArray()));
+        //Debug.Log("boughtUpgrades: " + string.Join(", ", boughtUpgrades.ToArray()));
+
+        //check if boughtUpgrades contains all of dependsOn. if so, set dependenciesSatisfied to true
+        if (dependsOn.Count == 0)
+        {
+            dependenciesSatisfied = true;
+        }
+        else
+        {
+            bool dependencyNotFound = false;
+            foreach (string dep_id in dependsOn)
+            {
+                //Debug.Log("checking dependency " + dep_id);
+                if (!boughtUpgrades.Contains(dep_id))
+                {
+                    dependencyNotFound = true;
+                }
+            }
+
+            if (!dependencyNotFound)
+            {
+                //Debug.Log("dependencies found!");
+                dependenciesSatisfied = true;
+            }
+        }
+
+        //Debug.Log("bought: " + bought + ", dependenciesSatisfied: " + dependenciesSatisfied);
+        if (bought || !dependenciesSatisfied)
         {
             descPanel.transform.GetChild(3).gameObject
                 .GetComponent<Button>()
@@ -204,6 +186,24 @@ public class UpgradeDeskScript : MonoBehaviour
                 .GetComponent<Button>()
                 .interactable = true;
         }
+    }
+
+    public List<string> getBoughtUpgrades()
+    {
+        List<string> boughtUpgrades = new List<string>();
+
+        foreach (Transform child in GameObject.Find("ListPanel").transform)
+        {
+            GameObject buttonGameObject = child.gameObject;
+            UpgradeScript upgradeScript = buttonGameObject.GetComponent<UpgradeScript>();
+
+            if (upgradeScript.bought == true)
+            {
+                boughtUpgrades.Add(upgradeScript.id);
+            }
+        }
+
+        return boughtUpgrades;
     }
 
     public void buyUpgrade()

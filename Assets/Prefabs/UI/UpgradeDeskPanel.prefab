@@ -657,8 +657,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0e1933ecf4ef448b39972ee426b0b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: damage3
   title: "D\xE9g\xE2ts III"
   description: "[onomatop\xE9es connotant la douleur]"
+  dependsOn:
+  - damage2
   price: 4000
   bought: 0
 --- !u!1 &2111326994117305260
@@ -795,8 +798,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0e1933ecf4ef448b39972ee426b0b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: armor2
   title: Armure II
   description: Champ de force
+  dependsOn:
+  - armor1
   price: 3000
   bought: 0
 --- !u!1 &2154689026010391487
@@ -1281,8 +1287,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0e1933ecf4ef448b39972ee426b0b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: health2
   title: "Sant\xE9 II"
   description: Squelette d'acier
+  dependsOn:
+  - health1
   price: 3000
   bought: 0
 --- !u!1 &3381093193890649925
@@ -1687,8 +1696,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0e1933ecf4ef448b39972ee426b0b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: armor1
   title: Armure I
   description: "Blindage suppl\xE9mentaire"
+  dependsOn: []
   price: 2000
   bought: 0
 --- !u!1 &4271944150233113887
@@ -1825,8 +1836,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0e1933ecf4ef448b39972ee426b0b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: damage2
   title: "D\xE9g\xE2ts II"
   description: Ouille ouille ouille!
+  dependsOn:
+  - damage1
   price: 3000
   bought: 0
 --- !u!1 &4924835827902047611
@@ -1963,8 +1977,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0e1933ecf4ef448b39972ee426b0b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: health3
   title: "Sant\xE9 III"
   description: Organes de titane
+  dependsOn:
+  - health2
   price: 4000
   bought: 0
 --- !u!1 &5537428357626985616
@@ -2380,7 +2397,6 @@ GameObject:
   - component: {fileID: 5042131296621308511}
   - component: {fileID: 3772512772354108171}
   - component: {fileID: 8557638938321401619}
-  - component: {fileID: 5425152606898076636}
   - component: {fileID: 209743058187328850}
   m_Layer: 5
   m_Name: ListPanel
@@ -2455,18 +2471,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5425152606898076636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6838974122576659323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa57c30b78352584fa03f221ccbb7862, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &209743058187328850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2534,7 +2538,6 @@ GameObject:
   - component: {fileID: 4787275575125916285}
   - component: {fileID: 3532733295670483781}
   - component: {fileID: 3062238486915485133}
-  - component: {fileID: 7633800708253070148}
   - component: {fileID: 4408713360205044220}
   m_Layer: 5
   m_Name: DescPanel
@@ -2604,18 +2607,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7633800708253070148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6903444822953374934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa57c30b78352584fa03f221ccbb7862, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4408713360205044220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3463,8 +3454,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0e1933ecf4ef448b39972ee426b0b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: damage1
   title: "D\xE9g\xE2ts I"
   description: Aie aie aie!
+  dependsOn: []
   price: 2000
   bought: 0
 --- !u!1 &7900894647423087046
@@ -3735,8 +3728,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0e1933ecf4ef448b39972ee426b0b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: health1
   title: "Sant\xE9 I"
   description: Peau de fer
+  dependsOn: []
   price: 2000
   bought: 0
 --- !u!1 &8352087775651646201
@@ -3873,8 +3868,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0e1933ecf4ef448b39972ee426b0b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: armor3
   title: Armure III
   description: "R\xE9flecteur de balles (pas vraiment)"
+  dependsOn:
+  - armor2
   price: 4000
   bought: 0
 --- !u!1 &9076840208643075856
