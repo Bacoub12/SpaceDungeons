@@ -11,6 +11,7 @@ public class EnemySpawnManager : MonoBehaviour
     public GameObject[] chests;
     public GameObject[] armorPieces;
     public GameObject spawnEffect;
+    public GameObject lastArrow;
     public GameObject boss;
 
     private float conjurerSpawnOdds, dashSpawnOdds, illusionistSpawnOdds, 
@@ -51,32 +52,39 @@ public class EnemySpawnManager : MonoBehaviour
     {
         if (everythingSpawned && reserveForcesSet)
         {
+            //if 0 ennemis and a few reserve forces.. nothing happens!
+
             //Debug.Log(getEnemyCount() + " " + enemyReserveForces);
-            if (getEnemyCount() <= 2 && enemyReserveForces > 0)
+            int enemyCount = getEnemyCount();
+            Debug.Log("enemyCount " + enemyCount + " enemyReserveForces " + enemyReserveForces);
+            if (enemyCount <= 2 && enemyCount > 0)
             {
-                GameObject terrain = GameObject.Find(terrainNameString);
-                GameObject enemySpawns = terrain.transform.GetChild(terrain.transform.childCount - 2).gameObject;
-
-                int enemyLayerMask = 1 << 7;
-                int playerLayerMask = 1 << 8; //ou plutot "gun" mais bon c'est équivalent pour nos besoins
-
-                bool spawnCompleted = false;
-                foreach (Transform spawnTransform in enemySpawns.transform)
+                if (enemyReserveForces > 0)
                 {
-                    if (spawnCompleted == false)
+                    spawnReserve();
+                    enemyCount = getEnemyCount();
+                }
+
+                //if 1 enemy left, set arrow on it
+                if (enemyCount == 1 && enemyReserveForces <= 0)
+                {
+                    foreach (GameObject GOinScene in FindObjectsOfType<GameObject>())
                     {
-                        if (!Physics.CheckSphere(spawnTransform.position, 5f, enemyLayerMask) && !Physics.CheckSphere(spawnTransform.position, 10f, playerLayerMask))
+                        if (Regex.IsMatch(GOinScene.name, enemyGameObjectRegex) 
+                            && GOinScene.name != "EnemySpiderNest(Clone)" && GOinScene.name != "EnemyBoss(Clone)")
                         {
-                            spawnEnemyAtPosition(spawnTransform.position);
-                            enemyReserveForces--;
-                            setAllEnemiesOnPlayer();
-                            spawnCompleted = true;
+                            setArrowOnLast(GOinScene);
                         }
                     }
                 }
             }
-            else if (getEnemyCount() <= 0 && enemyReserveForces <= 0)
+            else if (enemyCount <= 0 && enemyReserveForces > 0)
             {
+                spawnReserve();
+            }
+            else if (enemyCount <= 0 && enemyReserveForces <= 0)
+            {
+                Debug.Log("readying next terrain");
                 GameObject.Find("TerrainGenerator").GetComponent<RandomTerrain>()
                     .readyNextTerrain(transform.parent.gameObject);
             }
@@ -98,6 +106,30 @@ public class EnemySpawnManager : MonoBehaviour
         return enemyCount;
     }
 
+    public void spawnReserve()
+    {
+        GameObject terrain = GameObject.Find(terrainNameString);
+        GameObject enemySpawns = terrain.transform.GetChild(terrain.transform.childCount - 2).gameObject;
+
+        int enemyLayerMask = 1 << 7;
+        int playerLayerMask = 1 << 8; //ou plutot "gun" mais bon c'est équivalent pour nos besoins
+
+        bool spawnCompleted = false;
+        foreach (Transform spawnTransform in enemySpawns.transform)
+        {
+            if (spawnCompleted == false)
+            {
+                if (!Physics.CheckSphere(spawnTransform.position, 5f, enemyLayerMask) && !Physics.CheckSphere(spawnTransform.position, 10f, playerLayerMask))
+                {
+                    spawnEnemyAtPosition(spawnTransform.position);
+                    enemyReserveForces--;
+                    setAllEnemiesOnPlayer();
+                    spawnCompleted = true;
+                }
+            }
+        }
+    }
+
     public void setReserveForces(int _enemyBenchedForces)
     {
         enemyReserveForces = _enemyBenchedForces;
@@ -108,29 +140,40 @@ public class EnemySpawnManager : MonoBehaviour
     {
         foreach (GameObject GOinScene in FindObjectsOfType<GameObject>())
         {
-            if (Regex.IsMatch(GOinScene.name, enemyGameObjectRegex))
+            if (Regex.IsMatch(GOinScene.name, enemyGameObjectRegex) && GOinScene.name != "EnemySpiderNest(Clone)")
             {
-                if (GOinScene.name != "EnemySpiderNest(Clone)")
+                GOinScene.GetComponent<NavMeshAgent>()
+                    .SetDestination(GameObject.Find("Player").transform.position);
+                switch (GOinScene.name)
                 {
-                    GOinScene.GetComponent<NavMeshAgent>()
-                        .SetDestination(GameObject.Find("Player").transform.position);
-                    switch (GOinScene.name)
-                    {
-                        case "EnemyBoss(Clone)":
-                        case "EnemyDash(Clone)":
-                            GOinScene.GetComponent<Animator>().SetBool("Walk Forward", true);
-                            break;
-                        case "EnemyMelee(Clone)":
-                            GOinScene.GetComponent<Animation>().Play("Run");
-                            break;
-                        case "EnemySpider(Clone)":
-                            GOinScene.GetComponent<Animator>().SetBool("running", true);
-                            break;
-                        default:
-                            break;
-                    }
+                    case "EnemyBoss(Clone)":
+                    case "EnemyDash(Clone)":
+                        GOinScene.GetComponent<Animator>().SetBool("Walk Forward", true);
+                        break;
+                    case "EnemyMelee(Clone)":
+                        GOinScene.GetComponent<Animation>().Play("Run");
+                        break;
+                    case "EnemySpider(Clone)":
+                        GOinScene.GetComponent<Animator>().SetBool("running", true);
+                        break;
+                    default:
+                        break;
                 }
             }
+        }
+    }
+
+    public void setArrowOnLast(GameObject lastEnemy)
+    {
+        if (lastEnemy.transform.Find("ArrowLastEnemy(Clone)") == null)
+        {
+            GameObject arrow = Instantiate(lastArrow, lastEnemy.transform);
+            Vector3 arrowScale = arrow.transform.localScale;
+            Vector3 enemyScale = lastEnemy.transform.localScale;
+            arrow.transform.localScale = new Vector3(
+                arrowScale.x / enemyScale.x,
+                arrowScale.y / enemyScale.y,
+                arrowScale.z / enemyScale.z);
         }
     }
 

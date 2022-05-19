@@ -61,4 +61,5 @@ MonoBehaviour:
   - {fileID: 3615442222258730677, guid: 6f00bb03c819dbe489836d3443ba9e79, type: 3}
   - {fileID: 3845682195950458517, guid: 3383da805861a3a43bdf309764cf68c9, type: 3}
   spawnEffect: {fileID: 6618263077544960930, guid: 76cc7defed714294088e819e9d817300, type: 3}
+  lastArrow: {fileID: 1095620866488118164, guid: bec88980aec71bc45afe3e7e0abd623c, type: 3}
   boss: {fileID: 7427689569242675024, guid: e5cf729259bf0a14fb23b0468458225a, type: 3}
