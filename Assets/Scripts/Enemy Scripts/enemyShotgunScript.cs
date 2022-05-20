@@ -96,8 +96,10 @@ public class enemyShotgunScript : MonoBehaviour
                     Vector3 predictedPlayerPos = predictedPosition(to, from, playerMotion * 1000f, bulletSpeed);
                     Vector3 realDirection = (predictedPlayerPos - from).normalized;
 
+                    /*
                     if (FPScomp.Grounded)
                         realDirection = new Vector3(realDirection.x, 0f, realDirection.z);
+                    */
 
                     AttackTarget(realDirection);
                     StartCoroutine(shotCooldown());

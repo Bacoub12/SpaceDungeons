@@ -13,7 +13,7 @@ public class BulletScript : MonoBehaviour
 
     private float baseDamage, trueDamage;
     private bool damageUpgrade1, damageUpgrade2, damageUpgrade3;
-    
+
     void Start()
     {
         Player = GameObject.Find("Player");   
@@ -29,6 +29,7 @@ public class BulletScript : MonoBehaviour
     {
         if (other.gameObject.tag != "Player" && other.gameObject.tag != "Gun" && other.gameObject.tag != "Bullet" && other.gameObject.tag != "DoorDetection")
         {
+            //Debug.Log("trigger: " + other.gameObject.name);
             //Debug.Log("tag de  : " + other.gameObject.tag);
             Instantiate(particules, gameObject.transform.position, Quaternion.identity);
             Destroy(gameObject);

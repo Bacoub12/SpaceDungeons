@@ -56,9 +56,22 @@ public class SceneControl : MonoBehaviour
         Transform lobbySpawn = GameObject.Find("SpawnDuLobby").transform;
         Transform tutoSpawn = GameObject.Find("SpawnDuTuto").transform;
         if (player.GetComponent<PlayerScript>().onOffSpawn)
+        {
             player.transform.SetPositionAndRotation(lobbySpawn.position, lobbySpawn.rotation);
+            //if spawning in lobby, destroy tuto enemies and chests
+            foreach (GameObject GOinScene in FindObjectsOfType<GameObject>())
+            {
+                if (GOinScene.layer == 7 ||
+                    GOinScene.name == "ArmorChest" || GOinScene.name == "HealthChest" || GOinScene.name == "MoneyChest")
+                {
+                    Destroy(GOinScene);
+                }
+            }
+        }
         else
+        {
             player.transform.SetPositionAndRotation(tutoSpawn.position, tutoSpawn.rotation);
+        }
 
         player.GetComponent<PlayerScript>().checkForUpgradeStation();
 

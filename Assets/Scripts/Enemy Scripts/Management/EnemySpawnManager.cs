@@ -52,11 +52,8 @@ public class EnemySpawnManager : MonoBehaviour
     {
         if (everythingSpawned && reserveForcesSet)
         {
-            //if 0 ennemis and a few reserve forces.. nothing happens!
-
-            //Debug.Log(getEnemyCount() + " " + enemyReserveForces);
             int enemyCount = getEnemyCount();
-            Debug.Log("enemyCount " + enemyCount + " enemyReserveForces " + enemyReserveForces);
+            //Debug.Log("enemyCount " + enemyCount + " enemyReserveForces " + enemyReserveForces);
             if (enemyCount <= 2 && enemyCount > 0)
             {
                 if (enemyReserveForces > 0)

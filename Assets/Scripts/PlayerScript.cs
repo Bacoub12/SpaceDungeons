@@ -497,7 +497,7 @@ public class PlayerScript : MonoBehaviour
                             UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour ouvrir la porte");
                         else if(getKey() == false && getLeLock() == false)
                         {
-                            UIManager.GetComponent<UIManager>().Interactive(true, "La porte est barré");
+                            UIManager.GetComponent<UIManager>().Interactive(true, "La porte est barrée");
                         }
                         break;
                     case "Door2_low":
@@ -505,7 +505,7 @@ public class PlayerScript : MonoBehaviour
                             UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour ouvrir la porte");
                         else if (getKey() == false && getLeLock() == false)
                         {
-                            UIManager.GetComponent<UIManager>().Interactive(true, "La porte est barré");
+                            UIManager.GetComponent<UIManager>().Interactive(true, "La porte est barrée");
                         }
                         break;
                     case "Key":
@@ -516,7 +516,7 @@ public class PlayerScript : MonoBehaviour
                         break;
                     case "Lock":
                         if (getKey() == false)
-                        UIManager.GetComponent<UIManager>().Interactive(true, "La porte est barré");
+                        UIManager.GetComponent<UIManager>().Interactive(true, "La porte est barrée");
                         else if (getKey() == true)
                             UIManager.GetComponent<UIManager>().Interactive(true, "Appuyez sur F pour débarrer la porte");
                         break;
@@ -614,6 +614,8 @@ public class PlayerScript : MonoBehaviour
             {
                 gameObject.transform.SetPositionAndRotation(LobbySpawn.position, LobbySpawn.rotation);
             }
+            health = maxHealth;
+            armure = maxArmure;
             dead = false;
         }
         else
@@ -724,7 +726,14 @@ public class PlayerScript : MonoBehaviour
     {
         if(interactable == true)
         {
-            interactable.onInteract.Invoke();
+            RaycastHit hit;
+            if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, 2, interactableLayerMask))
+            {
+                if (hit.collider.GetComponent<Interactable>() != false)
+                {
+                    interactable.onInteract.Invoke();
+                }
+            }
         }
         else
         {
