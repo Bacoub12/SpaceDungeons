@@ -130,23 +130,39 @@ public class SceneControl : MonoBehaviour
 
     public void LoadMenu()
     {
-        DontDestroyOnLoad(GameObject.Find("UI"));
-        DontDestroyOnLoad(GameObject.Find("Player"));
-        PlayerScript playerScript = GameObject.Find("Player").GetComponent<PlayerScript>();
-        playerScript.gunshotsMuted = true;
-        playerScript.returned = true;
-        GameObject.Find("UI").GetComponent<IdentifyUI>().returned = true;
+        if (GameObject.Find("UI") != null)
+        {
+            GameObject UI = GameObject.Find("UI");
+            DontDestroyOnLoad(UI);
+            UI.GetComponent<IdentifyUI>().returned = true;
+        }
+        if (GameObject.Find("Player") != null)
+        {
+            GameObject player = GameObject.Find("Player");
+            DontDestroyOnLoad(player);
+            PlayerScript playerScript = player.GetComponent<PlayerScript>();
+            playerScript.gunshotsMuted = true;
+            playerScript.returned = true;
+        }
         SceneManager.LoadScene(0);
     }
 
     public void LoadSetting()
     {
-        DontDestroyOnLoad(GameObject.Find("UI"));
-        DontDestroyOnLoad(GameObject.Find("Player"));
-        PlayerScript playerScript = GameObject.Find("Player").GetComponent<PlayerScript>();
-        playerScript.gunshotsMuted = true;
-        playerScript.returned = true;
-        GameObject.Find("UI").GetComponent<IdentifyUI>().returned = true;
+        if (GameObject.Find("UI") != null)
+        {
+            GameObject UI = GameObject.Find("UI");
+            DontDestroyOnLoad(UI);
+            UI.GetComponent<IdentifyUI>().returned = true;
+        }
+        if (GameObject.Find("Player") != null)
+        {
+            GameObject player = GameObject.Find("Player");
+            DontDestroyOnLoad(player);
+            PlayerScript playerScript = player.GetComponent<PlayerScript>();
+            playerScript.gunshotsMuted = true;
+            playerScript.returned = true;
+        }
         SceneManager.LoadScene(1);
     }
 

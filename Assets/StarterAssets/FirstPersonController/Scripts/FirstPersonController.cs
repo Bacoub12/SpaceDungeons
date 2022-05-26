@@ -108,6 +108,12 @@ namespace StarterAssets
 			{
 				lobby = null;
 			}
+
+			if (!PlayerPrefs.HasKey("sensitivity"))
+			{
+				PlayerPrefs.SetFloat("sensitivity", 1f);
+			}
+			RotationSpeed = PlayerPrefs.GetFloat("sensitivity");
 		}
 
 		private void Update()
