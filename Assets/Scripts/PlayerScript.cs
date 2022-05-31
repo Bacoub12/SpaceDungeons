@@ -91,6 +91,7 @@ public class PlayerScript : MonoBehaviour
     private bool armureUpgrade1, armureUpgrade2, armureUpgrade3;
     private bool poisoned, dead;
     private bool recentlyFlung;
+    private bool switching;
 
     //[SerializeField] GameObject whatgun;
 
@@ -139,6 +140,7 @@ public class PlayerScript : MonoBehaviour
         poisoned = false;
         dead = false;
         recentlyFlung = false;
+        switching = false;
 
         _healthText.text = "Vie : " + health + "/" + maxHealth;
         _armorText.text = "Armure : " + armure + "/" + maxArmure;
@@ -180,45 +182,48 @@ public class PlayerScript : MonoBehaviour
 
     private void shoot()
     {
-        switch (gunId)
+        if (!switching)
         {
-            case 0: //pistol
-                if(gunAnim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("SwitchGun") &&
-                    gunAnim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f){}
-                else
-                {
-                    if (canShootPistol == 0)
-                        StartCoroutine(PistolShot());
-                }
-                break;
+            switch (gunId)
+            {
+                case 0: //pistol
+                    if (gunAnim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("SwitchGun") &&
+                        gunAnim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f) { }
+                    else
+                    {
+                        if (canShootPistol == 0)
+                            StartCoroutine(PistolShot());
+                    }
+                    break;
 
-            case 1: // shotgun
-                if (gunAnim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("SwitchGun") &&
-                    gunAnim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f) { }
-                else
-                {
-                    if (canShootShotgun == 0)
-                        StartCoroutine(PumpShotgun());
-                }
-                break;
+                case 1: // shotgun
+                    if (gunAnim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("SwitchGun") &&
+                        gunAnim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f) { }
+                    else
+                    {
+                        if (canShootShotgun == 0)
+                            StartCoroutine(PumpShotgun());
+                    }
+                    break;
 
-            case 2: // rifle
-                if (gunAnim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("SwitchGun") &&
-                   gunAnim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f) { }
-                else
-                {
-                    autoStop = true;
-                    if (canShootRifle == 0)
-                        StartCoroutine(AutomaticRifle());
-                }
-                break;
+                case 2: // rifle
+                    if (gunAnim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("SwitchGun") &&
+                       gunAnim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f) { }
+                    else
+                    {
+                        autoStop = true;
+                        if (canShootRifle == 0)
+                            StartCoroutine(AutomaticRifle());
+                    }
+                    break;
+            }
         }
     }
 
     IEnumerator PistolShot()
     {
         canShootPistol = 1;
-        GameObject bullet = Instantiate(_bullet, _attach.position, _attach.rotation);
+        GameObject bullet = Instantiate(_bullet, gunAnim.transform.Find("ShootPoint").position, _attach.rotation);
         if (!gunshotsMuted)
             audioSourcePistol.PlayOneShot(PistolSound);
         bullet.GetComponent<BulletScript>().setDamageParams(pistolDamage, damageUpgrade1, damageUpgrade2, damageUpgrade3);
@@ -228,14 +233,12 @@ public class PlayerScript : MonoBehaviour
         canShootPistol = 0;
     }
 
-
-
     IEnumerator AutomaticRifle()
     {
         while (autoStop)
         {
             canShootRifle = 1;
-            GameObject bullet = Instantiate(_bullet, _attach.position, _attach.rotation);
+            GameObject bullet = Instantiate(_bullet, gunAnim.transform.Find("ShootPoint").position, _attach.rotation);
             if (!gunshotsMuted)
                 audioSourceLMG.PlayOneShot(LMGSound);
             bullet.GetComponent<BulletScript>().setDamageParams(rifleDamage, damageUpgrade1, damageUpgrade2, damageUpgrade3);
@@ -256,7 +259,7 @@ public class PlayerScript : MonoBehaviour
             float randomX = Random.Range(-20f, 20f);
             float randomY = Random.Range(-20f, 20f);
             float randomZ = Random.Range(-20f, 20f);
-            GameObject bullet = Instantiate(_bullet, _attach.position, _attach.rotation);
+            GameObject bullet = Instantiate(_bullet, gunAnim.transform.Find("ShootPoint").position, _attach.rotation);
             bullet.GetComponent<BulletScript>().setDamageParams(shotgunDamage, damageUpgrade1, damageUpgrade2, damageUpgrade3);
             rb = bullet.GetComponent<Rigidbody>();
             rb.transform.Rotate(randomX, randomY, randomZ);
@@ -276,21 +279,78 @@ public class PlayerScript : MonoBehaviour
 
     private void OnGun1()
     {
-        gunAnim.GetComponent<Animator>().Play("SwitchGun", -1, 0f);
-        gunId = 0;
+        if (!switching)
+            StartCoroutine(GunSwitch(gunId, 0));
     }
 
     private void OnGun2()
     {
-        gunAnim.GetComponent<Animator>().Play("SwitchGun", -1, 0f);
-        gunId = 1;
+        if (!switching)
+            StartCoroutine(GunSwitch(gunId, 1));
     }
+
     private void OnGun3()
     {
-        gunAnim.GetComponent<Animator>().Play("SwitchGun", -1, 0f);
-        gunId = 2;
+        if (!switching)
+            StartCoroutine(GunSwitch(gunId, 2));
     }
-    
+
+    IEnumerator GunSwitch(int currentGunId, int nextGunId)
+    {
+        switching = true;
+
+        GameObject gunHolder = gameObject.transform.Find("PlayerCameraRoot").Find("Attach").Find("GunHolder").gameObject;
+        GameObject otherGun = gunHolder.transform.GetChild(nextGunId).gameObject;
+
+        //current gun
+        switch (currentGunId)
+        {
+            case 0: //pistol
+                gunAnim.GetComponent<Animator>().Play("SwitchPistol", -1, 0f);
+                break;
+
+            case 1: //shotgun
+                gunAnim.GetComponent<Animator>().Play("SwitchShotgun", -1, 0f);
+                break;
+
+            case 2: //rifle
+                gunAnim.GetComponent<Animator>().Play("SwitchRifle", -1, 0f);
+                break;
+
+            default:
+                break;
+        }
+
+        //gun vers lequel on switch
+        switch (nextGunId)
+        {
+            case 0: //pistol
+                otherGun.GetComponent<Animator>().Play("SwitchPistol", -1, 0f);
+                break;
+
+            case 1: //shotgun
+                otherGun.GetComponent<Animator>().Play("SwitchShotgun", -1, 0f);
+                break;
+
+            case 2: //rifle
+                otherGun.GetComponent<Animator>().Play("SwitchRifle", -1, 0f);
+                break;
+
+            default:
+                break;
+        }
+
+        yield return new WaitForSeconds(0.4f);
+
+        gunAnim.GetComponent<MeshRenderer>().enabled = false;
+        gunAnim = otherGun;
+        gunAnim.GetComponent<MeshRenderer>().enabled = true;
+
+        gunId = nextGunId;
+
+        switching = false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 14)
@@ -761,7 +821,7 @@ public class PlayerScript : MonoBehaviour
             capsuleCollider.height = 1.0f;
             firstPersonController.GroundedOffset = -1.0f;
             onOffCrouch = true;*/
-            StartCoroutine(Start3());
+        StartCoroutine(Start3());
             firstPersonController.GroundedOffset = -1.0f;
             onOffCrouch = true;
         }

@@ -25,6 +25,30 @@ public class BulletScript : MonoBehaviour
         damageUpgrade3 = false;
     }
 
+    void Update()
+    {
+        Vector3 vectorToPlayer = (gameObject.transform.position - Player.transform.position) * -1 + new Vector3(0f, 1f, 0f);
+
+        RaycastHit hit; //= new RaycastHit()
+        if (Physics.Raycast(gameObject.transform.position, vectorToPlayer, out hit))
+        {
+            string tag = hit.collider.gameObject.tag;
+            if (tag == "Player" || tag == "Gun")
+            {
+                //Debug.Log("Found player, name: " + hit.collider.gameObject.name);
+                gameObject.GetComponent<MeshRenderer>().enabled = true;
+            }
+            else
+            {
+                if (tag != "DoorDetection" && tag != "Bullet")
+                {
+                    //Debug.Log("Player not found, name: " + hit.collider.gameObject.name);
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                }
+            }
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag != "Player" && other.gameObject.tag != "Gun" && other.gameObject.tag != "Bullet" && other.gameObject.tag != "DoorDetection")
