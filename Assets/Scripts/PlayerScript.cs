@@ -297,58 +297,61 @@ public class PlayerScript : MonoBehaviour
 
     IEnumerator GunSwitch(int currentGunId, int nextGunId)
     {
-        switching = true;
-
-        GameObject gunHolder = gameObject.transform.Find("PlayerCameraRoot").Find("Attach").Find("GunHolder").gameObject;
-        GameObject otherGun = gunHolder.transform.GetChild(nextGunId).gameObject;
-
-        //current gun
-        switch (currentGunId)
+        if (currentGunId != nextGunId)
         {
-            case 0: //pistol
-                gunAnim.GetComponent<Animator>().Play("SwitchPistol", -1, 0f);
-                break;
+            switching = true;
 
-            case 1: //shotgun
-                gunAnim.GetComponent<Animator>().Play("SwitchShotgun", -1, 0f);
-                break;
+            GameObject gunHolder = gameObject.transform.Find("PlayerCameraRoot").Find("Attach").Find("GunHolder").gameObject;
+            GameObject otherGun = gunHolder.transform.GetChild(nextGunId).gameObject;
 
-            case 2: //rifle
-                gunAnim.GetComponent<Animator>().Play("SwitchRifle", -1, 0f);
-                break;
+            //current gun
+            switch (currentGunId)
+            {
+                case 0: //pistol
+                    gunAnim.GetComponent<Animator>().Play("SwitchPistol", -1, 0f);
+                    break;
 
-            default:
-                break;
+                case 1: //shotgun
+                    gunAnim.GetComponent<Animator>().Play("SwitchShotgun", -1, 0f);
+                    break;
+
+                case 2: //rifle
+                    gunAnim.GetComponent<Animator>().Play("SwitchRifle", -1, 0f);
+                    break;
+
+                default:
+                    break;
+            }
+
+            //gun vers lequel on switch
+            switch (nextGunId)
+            {
+                case 0: //pistol
+                    otherGun.GetComponent<Animator>().Play("SwitchPistol", -1, 0f);
+                    break;
+
+                case 1: //shotgun
+                    otherGun.GetComponent<Animator>().Play("SwitchShotgun", -1, 0f);
+                    break;
+
+                case 2: //rifle
+                    otherGun.GetComponent<Animator>().Play("SwitchRifle", -1, 0f);
+                    break;
+
+                default:
+                    break;
+            }
+
+            yield return new WaitForSeconds(0.4f);
+
+            gunAnim.GetComponent<MeshRenderer>().enabled = false;
+            gunAnim = otherGun;
+            gunAnim.GetComponent<MeshRenderer>().enabled = true;
+
+            gunId = nextGunId;
+
+            switching = false;
         }
-
-        //gun vers lequel on switch
-        switch (nextGunId)
-        {
-            case 0: //pistol
-                otherGun.GetComponent<Animator>().Play("SwitchPistol", -1, 0f);
-                break;
-
-            case 1: //shotgun
-                otherGun.GetComponent<Animator>().Play("SwitchShotgun", -1, 0f);
-                break;
-
-            case 2: //rifle
-                otherGun.GetComponent<Animator>().Play("SwitchRifle", -1, 0f);
-                break;
-
-            default:
-                break;
-        }
-
-        yield return new WaitForSeconds(0.4f);
-
-        gunAnim.GetComponent<MeshRenderer>().enabled = false;
-        gunAnim = otherGun;
-        gunAnim.GetComponent<MeshRenderer>().enabled = true;
-
-        gunId = nextGunId;
-
-        switching = false;
     }
 
     private void OnTriggerEnter(Collider other)
