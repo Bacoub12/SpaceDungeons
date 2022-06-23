@@ -430,6 +430,34 @@ PrefabInstance:
       propertyPath: m_OnDeselect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 761411125}
+    - target: {fileID: 498853597, guid: 08542af90898fa544b73b4e0f66ffd98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 959831915, guid: 08542af90898fa544b73b4e0f66ffd98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258800016, guid: 08542af90898fa544b73b4e0f66ffd98, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258800016, guid: 08542af90898fa544b73b4e0f66ffd98, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258800016, guid: 08542af90898fa544b73b4e0f66ffd98, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 9.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1966080252, guid: 08542af90898fa544b73b4e0f66ffd98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087639821, guid: 08542af90898fa544b73b4e0f66ffd98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 712588733025342753, guid: 08542af90898fa544b73b4e0f66ffd98, type: 3}
       propertyPath: pause
       value: 0
