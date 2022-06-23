@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 5987231029835551776}
   m_Layer: 0
   m_Name: Circle collider 2
-  m_TagString: Untagged
+  m_TagString: DoorDetection
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -690,7 +690,7 @@ GameObject:
   - component: {fileID: 9155062863552225654}
   m_Layer: 0
   m_Name: Circle collider 1
-  m_TagString: Untagged
+  m_TagString: DoorDetection
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1842,7 +1842,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5432042272196385000, guid: 4b2f7bba6b87b6d4e9315f1ae502ff5e, type: 3}
---- !u!64 &8911542978716088794
+--- !u!64 &879263522467832409
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1856,7 +1856,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5432042272196385000, guid: 4b2f7bba6b87b6d4e9315f1ae502ff5e, type: 3}
---- !u!64 &879263522467832409
+--- !u!64 &8911542978716088794
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2868,7 +2868,7 @@ GameObject:
   - component: {fileID: 4989005030216154249}
   m_Layer: 0
   m_Name: Circle collider 5
-  m_TagString: Untagged
+  m_TagString: DoorDetection
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4411,7 +4411,7 @@ Transform:
   m_Father: {fileID: 7849545508381399206}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 52.395, z: 0}
---- !u!64 &8889079832012349856
+--- !u!64 &3102803446408630697
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4425,7 +4425,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5432042272196385000, guid: 4b2f7bba6b87b6d4e9315f1ae502ff5e, type: 3}
---- !u!64 &3102803446408630697
+--- !u!64 &8889079832012349856
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9067,7 +9067,7 @@ GameObject:
   - component: {fileID: 7505973513770525808}
   m_Layer: 0
   m_Name: Circle collider 3
-  m_TagString: Untagged
+  m_TagString: DoorDetection
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10032,7 +10032,7 @@ GameObject:
   - component: {fileID: 8241327402175034068}
   m_Layer: 0
   m_Name: Circle collider 4
-  m_TagString: Untagged
+  m_TagString: DoorDetection
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
