@@ -21,7 +21,7 @@ public class enemyShotgunScript : MonoBehaviour
     bool canShoot;
     float cooldownLength = 3f;
     bool dead;
-    bool enemyInSight, alerted;
+    bool enemyInSight, alerted, calling;
     float bulletSpeed = 500f;
 
     // Start is called before the first frame update
@@ -33,6 +33,7 @@ public class enemyShotgunScript : MonoBehaviour
         dead = false;
         enemyInSight = false;
         alerted = false;
+        calling = false;
         transform.position = new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z);
     }
 
@@ -162,7 +163,7 @@ public class enemyShotgunScript : MonoBehaviour
             if (gameObject.GetComponent<NavMeshAgent>().enabled == true)
             {
                 agent.SetDestination(target.position);
-                callForAid(target.position);
+                StartCoroutine(callForAid(target.position));
 
                 alerted = true;
             }
@@ -188,46 +189,53 @@ public class enemyShotgunScript : MonoBehaviour
         }
     }
 
-    public void callForAid(Vector3 playerPos)
+    IEnumerator callForAid(Vector3 playerPos)
     {
-        string enemyGameObjectRegex = "^Enemy(?!Bullet|SpawnManager)";
-        foreach (GameObject GOinScene in FindObjectsOfType<GameObject>())
+        if (calling == false)
         {
-            if (Regex.IsMatch(GOinScene.name, enemyGameObjectRegex)
-                && Vector3.Distance(gameObject.transform.position, GOinScene.transform.position) <= 10f
-                && GOinScene != gameObject)
+            calling = true;
+            string enemyGameObjectRegex = "^Enemy(?!Bullet|SpawnManager)";
+            foreach (GameObject GOinScene in FindObjectsOfType<GameObject>())
             {
-                switch (GOinScene.name)
+                if (Regex.IsMatch(GOinScene.name, enemyGameObjectRegex)
+                    && Vector3.Distance(gameObject.transform.position, GOinScene.transform.position) <= 10f
+                    && GOinScene != gameObject)
                 {
-                    case "EnemyDash":
-                    case "EnemyDash(Clone)":
-                        GOinScene.GetComponent<Animator>().SetBool("Walk Forward", true);
-                        GOinScene.GetComponent<NavMeshAgent>().SetDestination(playerPos);
-                        break;
-                    case "EnemyIllusionist":
-                    case "EnemyIllusionist(Clone)":
-                        GOinScene.GetComponent<NavMeshAgent>().SetDestination(playerPos);
-                        break;
-                    case "EnemyMelee":
-                    case "EnemyMelee(Clone)":
-                        GOinScene.GetComponent<Animation>().Play("Run");
-                        GOinScene.GetComponent<NavMeshAgent>().SetDestination(playerPos);
-                        break;
-                    case "EnemyRifle":
-                    case "EnemyRifle(Clone)":
-                        GOinScene.GetComponent<NavMeshAgent>().SetDestination(playerPos);
-                        break;
-                    case "EnemyShotgun":
-                    case "EnemyShotgun(Clone)":
-                        GOinScene.GetComponent<NavMeshAgent>().SetDestination(playerPos);
-                        break;
-                    case "EnemySpider":
-                    case "EnemySpider(Clone)":
-                        GOinScene.GetComponent<Animator>().SetBool("running", true);
-                        GOinScene.GetComponent<NavMeshAgent>().SetDestination(playerPos);
-                        break;
+                    switch (GOinScene.name)
+                    {
+                        case "EnemyDash":
+                        case "EnemyDash(Clone)":
+                            GOinScene.GetComponent<Animator>().SetBool("Walk Forward", true);
+                            GOinScene.GetComponent<NavMeshAgent>().SetDestination(playerPos);
+                            break;
+                        case "EnemyIllusionist":
+                        case "EnemyIllusionist(Clone)":
+                            GOinScene.GetComponent<NavMeshAgent>().SetDestination(playerPos);
+                            break;
+                        case "EnemyMelee":
+                        case "EnemyMelee(Clone)":
+                            GOinScene.GetComponent<Animation>().Play("Run");
+                            GOinScene.GetComponent<NavMeshAgent>().SetDestination(playerPos);
+                            break;
+                        case "EnemyRifle":
+                        case "EnemyRifle(Clone)":
+                            GOinScene.GetComponent<NavMeshAgent>().SetDestination(playerPos);
+                            break;
+                        case "EnemyShotgun":
+                        case "EnemyShotgun(Clone)":
+                            GOinScene.GetComponent<NavMeshAgent>().SetDestination(playerPos);
+                            break;
+                        case "EnemySpider":
+                        case "EnemySpider(Clone)":
+                            GOinScene.GetComponent<Animator>().SetBool("running", true);
+                            GOinScene.GetComponent<NavMeshAgent>().SetDestination(playerPos);
+                            break;
+                    }
                 }
             }
+
+            yield return new WaitForSeconds(0.5f);
+            calling = false;
         }
     }
 

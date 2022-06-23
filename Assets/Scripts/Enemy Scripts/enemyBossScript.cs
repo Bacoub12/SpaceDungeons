@@ -30,7 +30,7 @@ public class enemyBossScript : MonoBehaviour
     float dashDistance = 15f;
     float slamDistance = 5f;
     bool dead;
-    bool enemyInSight, alerted;
+    bool enemyInSight, alerted, calling;
     GameObject existingAttackVisual;
 
     // Start is called before the first frame update
@@ -43,6 +43,7 @@ public class enemyBossScript : MonoBehaviour
         dead = false;
         enemyInSight = false;
         alerted = false;
+        calling = false;
     }
 
     // Update is called once per frame
