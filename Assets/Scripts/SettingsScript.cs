@@ -49,4 +49,16 @@ public class SettingsScript : MonoBehaviour
         sensitivitySlider.value = PlayerPrefs.GetFloat("sensitivity");
     }
 
+    public void CloseOptionPanel()
+    {
+        if (GameObject.Find("OptionPanel") != null)
+        {
+            GameObject optPanel = GameObject.Find("OptionPanel");
+            if (optPanel.activeSelf == true)
+            {
+                optPanel.SetActive(false);
+            }
+        }
+    }
+
 }

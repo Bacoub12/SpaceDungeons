@@ -81,6 +81,12 @@ public class UIManager : MonoBehaviour
             case false:
                 _deathPanel = GameObject.Find("DeathPanel");
                 _deathPanel.SetActive(false);
+                GameObject floorText = GameObject.Find("FloorText");
+                if (floorText != null)
+                {
+                    floorText.GetComponent<resetFloorNumberScript>().ResetNumber();
+                    floorText.SetActive(false);
+                }
                 CursorLock();
                 //Time.timeScale = 1;
                 break;

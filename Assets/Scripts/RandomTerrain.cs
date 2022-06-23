@@ -27,7 +27,7 @@ public class RandomTerrain : MonoBehaviour
         floor = 1;
 
         nbrReserveForces = 0;
-        nbrEnemyTerrains = 4; //9 par défaut!!
+        nbrEnemyTerrains = 9; //9 par défaut!!
         int positionX = 0;
         int rndNombre;
         bool terrainHasBeenUsed;
