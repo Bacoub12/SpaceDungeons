@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneControl : MonoBehaviour
 {
+    public GameObject loadPanel;
+
     public void NextScene()
     {
         int indexScene = SceneManager.GetActiveScene().buildIndex;
@@ -12,8 +14,16 @@ public class SceneControl : MonoBehaviour
         {
             DontDestroyOnLoad(GameObject.Find("UI"));
             DontDestroyOnLoad(GameObject.Find("Player"));
+            loadPanel.SetActive(true);
+            SceneManager.sceneLoaded += removeLoadingScreen;
         }
         SceneManager.LoadScene(indexScene + 1);
+    }
+
+    void removeLoadingScreen(Scene scene, LoadSceneMode mode)
+    {
+        loadPanel.SetActive(false);
+        SceneManager.sceneLoaded -= removeLoadingScreen;
     }
 
     public void LoadGame()
